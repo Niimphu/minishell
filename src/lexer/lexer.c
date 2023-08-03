@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/03 15:58:35 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:22:23 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ char *replace_whitespaces(char *str)
 
 void	lexer(t_lexer *input)
 {
+	int i = 0;
+	char **split_str;
+	
 	input->raw_input = replace_whitespaces(input->raw_input);
-	printf("%s\n", input->raw_input);
+	split_str = ft_split(input->raw_input, 26);
+	while (split_str[i])
+	printf("%s\n", split_str[i++]);
 }
