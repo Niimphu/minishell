@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/02 14:30:50 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/03 15:59:59 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ typedef struct	s_envp
 	char **env;
 }				t_envp;
 
+void	lexer(t_lexer *input);
 #endif
