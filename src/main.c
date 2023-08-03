@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/03 14:45:16 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/03 15:51:52 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,13 @@ char *replace_whitespaces(char *str)
 
 char	*read_user_input(void)
 {
-	char *str;
-
-	str = readline("minishell > ");
-	str = replace_whitespaces(str);
-	return (str);
+	return (readline("minishell > "));
 }
 
 
 void	lexer(t_lexer *input)
 {
+	input->raw_input = replace_whitespaces(input->raw_input);
 	printf("%s\n", input->raw_input);
 }
 
