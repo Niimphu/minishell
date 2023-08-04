@@ -24,31 +24,31 @@ OBJ_DIR = build
 
 SRC	=	main.c \
 		lexer/lexer.c \
+		keybinds/keypress.c
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) 
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) $(LIBS)
-	chmod a+x $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(OBJ_DIR)/$(LIBFT) -o $(NAME) $(LIBS)
+	@chmod a+x $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	cd libft && $(MAKE)
-	mv libft/libft.a libft.a
-	
+	@make -sC ./libft
+	@mv libft/libft.a build/libft.a
+
 clean:
-	rm -f $(OBJ_DIR)/*/*.o
-	make clean -C ./libft
+	@find $(OBJ_DIR) -name '*.o' -exec rm -f {} +
+	@make clean -sC ./libft
+	@rm -f build/libft.a
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f $(LIBFT)
-	make fclean -C ./libft
+	@rm -f $(NAME)
 
 re:	fclean all
 
