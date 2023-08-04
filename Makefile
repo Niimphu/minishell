@@ -28,9 +28,21 @@ SRC	=	main.c \
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-all: $(NAME)
+RED = \033[0;31m
+GREEN = \033[0;32m
+BLUE = \033[0;34m
+PURPLE = \033[0;35m
+RESET = \033[0m
 
-$(NAME): $(OBJ) $(LIBFT) 
+all: $(NAME)
+	@if [ -e "$(NAME)" ]; then \
+		echo "$(GREEN)Compilation successful!$(RESET)"; \
+	else \
+		echo "$(RED)Compilation failed :($(RESET)"; \
+	fi
+
+$(NAME): $(OBJ) $(LIBFT)
+	@echo "$(PURPLE)Compiling minishell...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJ) $(OBJ_DIR)/$(LIBFT) -o $(NAME) $(LIBS)
 	@chmod a+x $(NAME)
 
@@ -43,9 +55,11 @@ $(LIBFT):
 	@mv libft/libft.a build/libft.a
 
 clean:
+	@echo "$(BLUE)Cleaning... $(RESET)"
 	@find $(OBJ_DIR) -name '*.o' -exec rm -f {} +
 	@make clean -sC ./libft
 	@rm -f build/libft.a
+	@echo "$(GREEN)Cleaning complete!$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
