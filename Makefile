@@ -59,7 +59,7 @@ clean:
 	@find $(OBJ_DIR) -name '*.o' -exec rm -f {} +
 	@make clean -sC ./libft
 	@rm -f build/libft.a
-	@echo "$(GREEN)Cleaning complete!$(RESET)"
+	@echo "$(GREEN)Cleaning complete!\n$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
