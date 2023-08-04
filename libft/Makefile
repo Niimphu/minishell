@@ -24,8 +24,7 @@ OBJECTS_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJ))
 
 
 $(NAME): $(OBJ)
-	@ar r $(NAME) $(OBJ)
-	@echo '$(NAME) created.'
+	@ar rcs $(NAME) $(OBJ)
 
 
 $(OBJS_DIR)%.o : %.c
@@ -35,9 +34,9 @@ $(OBJS_DIR)%.o : %.c
 all: $(NAME)
 	
 clean:
-	$(RM) $(OBJ)
+	@$(RM) $(OBJ)
 
 fclean: clean 
-		$(RM) $(NAME)
+		@$(RM) $(NAME)
 
 re: fclean all
