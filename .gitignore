@@ -1,4 +1,5 @@
 *.o
+build/libft.a
 minishell
 minishell.dSYM/
 .idea/
