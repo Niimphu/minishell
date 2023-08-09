@@ -14,14 +14,16 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdbool.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <stdbool.h>
+# include <signal.h>
 
 typedef struct	s_lexer
 {
@@ -39,4 +41,7 @@ typedef struct	s_envp
 }				t_envp;
 
 void	lexer(t_lexer *input);
+
+void	check_ctrl_c(void);
+
 #endif

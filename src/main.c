@@ -21,8 +21,10 @@ void	shell_loop(char **envp)
 {
 	t_lexer input;
 	
-	envp = NULL;
-	//scan for input ctrl+c, ctrl +d, ctrl + "\", directions. Up down for history,left/right for curser.
+	if (!envp)
+		return ;
+	check_ctrl_c();
+	//scan for input ctrl+c, ctrl +d, ctrl + "\", directions. Up down for history,left/right for cursor.
 	// readline from input
 	input.raw_input = read_user_input();
 	lexer(&input);
@@ -38,10 +40,11 @@ int	main(int argc, char **argv, char **envp)
 {
 	if (argc > 1)
 	{
-		perror("This programm does not support input");
+		perror("This program does not support input");
 		exit(1);
 	}
-	argv = NULL;
+	if (!argv)
+		return (1);
 	shell_loop(envp);
 	//cleanup after exit of shell_loop;
 	return (0);
