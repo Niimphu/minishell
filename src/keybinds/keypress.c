@@ -12,20 +12,20 @@
 
 #include "../../minishell.h"
 
-void	clear_input(int signum, siginfo_t *info, void *context);
+void	clear_input(int signal_number);
 
-void	check_ctrl_c(void)
+void	await_signals(void)
 {
-	struct sigaction	ctrl_c_pressed;
-
-	ctrl_c_pressed.sa_sigaction = clear_input;
-	ctrl_c_pressed.sa_flags = SA_SIGINFO;
-	sigaction(SIGINT, &ctrl_c_pressed, NULL);
+	signal(SIGINT, clear_input);
+	signal(SIGQUIT, quit);
 }
 
-void	clear_input(int signum __attribute__((unused)),
-	siginfo_t *info __attribute__((unused)), void *context __attribute__((unused)))
+void	clear_input(int signal_number)
 {
-	printf("^C\n");
-
+	if (!signal_number)
+		return ;
+	rl_replace_line("", 0);
+	printf("\n");
+	rl_on_new_line();
+	rl_redisplay();
 }
