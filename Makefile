@@ -14,7 +14,9 @@ NAME = minishell
 
 CC = gcc -Wall -Wextra -Werror -g
 
-LIBS = -lreadline
+LIBS = -Lreadline/lib/ -lreadline -lncurses
+
+HEADERS = -I/readline/include
 
 LIBFT = libft.a
 
@@ -24,7 +26,8 @@ OBJ_DIR = build
 
 SRC	=	main.c \
 		lexer/lexer.c \
-		keybinds/keypress.c
+		keybinds/keypress.c \
+		quit/quit.c
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -48,7 +51,7 @@ $(NAME): $(OBJ) $(LIBFT)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 $(LIBFT):
 	@make -sC ./libft
