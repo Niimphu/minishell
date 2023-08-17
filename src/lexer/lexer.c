@@ -46,6 +46,8 @@ void	lexer(t_lexer *input)
 	i = 0;
 	input->raw_input = replace_whitespaces(input->raw_input);
 	if (!input->raw_input)
+		quit(0);
+	if (!ft_strncmp(input->raw_input, "", 1))
 		return ;
 	split_str = ft_split(input->raw_input, 26);
 	if (!ft_strncmp(split_str[0], "exit", 4))

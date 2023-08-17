@@ -17,7 +17,7 @@ void	clear_input(int signal_number);
 void	await_signals(void)
 {
 	signal(SIGINT, clear_input);
-	signal(SIGQUIT, quit);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	clear_input(int signal_number)

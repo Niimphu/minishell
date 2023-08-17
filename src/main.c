@@ -37,8 +37,10 @@ int	main(int argument_count, char **arguments, char **envp)
 		exit(1);
 	}
 	(void)arguments; //to ignore "unused variable" error
-	await_signals();
-	while (!global_signal_number)
+	while (1)
+	{
+		await_signals();
 		await_input(envp);
+	}
 	return (0);
 }
