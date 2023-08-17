@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include "readline/include/readline/readline.h"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -21,27 +22,30 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <signal.h>
 
-typedef struct	s_lexer
+int	global_signal_number;
+
+typedef struct s_lexer
 {
-	char	*raw_input;
-	char	*cmd;
-	char	*args;
-	char	*token;
-	struct	s_lexer *next;
-	struct	s_lexer *prev;
+	char			*raw_input;
+	char			*cmd;
+	char			*args;
+	char			*token;
+	struct s_lexer	*next;
+	struct s_lexer	*prev;
 }				t_lexer;
 
-typedef struct	s_envp
+typedef struct s_envp
 {
-	char **env;
-}				t_envp;
+	char	**env;
+}			t_envp;
 
 void	lexer(t_lexer *input);
 
-void	check_ctrl_c(void);
+void	await_input(char **envp);
+void	await_signals(void);
+
+void	quit(int exit_number);
 
 #endif
