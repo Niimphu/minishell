@@ -14,22 +14,6 @@
 
 int	g_signal_received;
 
-char	*read_user_input(void)
-{
-	return (readline("minishell > "));
-}
-
-void	await_input(char **envp)
-{
-	t_lexer	input;
-
-	if (!envp)
-		return ;
-	input.raw_input = read_user_input();
-	lexer(&input);
-	free(input.raw_input);
-}
-
 int	main(int argument_count, char **arguments, char **envp)
 {
 	g_signal_received = 0;
