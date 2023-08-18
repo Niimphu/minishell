@@ -24,7 +24,7 @@
 # include <unistd.h>
 # include <signal.h>
 
-int	global_signal_number;
+extern int	g_signal_received;
 
 typedef struct s_lexer
 {

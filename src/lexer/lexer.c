@@ -53,5 +53,5 @@ void	lexer(t_lexer *input)
 	if (!ft_strncmp(split_str[0], "exit", 4))
 		quit(0);
 	while (split_str[i])
-		printf("%s\n", split_str[i++]);
+		printf("Input: %s\n", split_str[i++]);
 }

@@ -12,6 +12,8 @@
 
 #include "../minishell.h"
 
+int	g_signal_received;
+
 char	*read_user_input(void)
 {
 	return (readline("minishell > "));
@@ -30,14 +32,14 @@ void	await_input(char **envp)
 
 int	main(int argument_count, char **arguments, char **envp)
 {
-	global_signal_number = 0;
+	g_signal_received = 0;
 	if (argument_count > 1)
 	{
 		perror("This program does accept arguments\n");
 		exit(1);
 	}
 	(void)arguments; //to ignore "unused variable" error
-	while (1)
+	while (g_signal_received != SIGQUIT)
 	{
 		await_signals();
 		await_input(envp);

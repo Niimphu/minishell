@@ -15,6 +15,6 @@
 //idk what this is doing rn :)))
 void	quit(int exit_number)
 {
-	global_signal_number = exit_number;
+	g_signal_received = exit_number;
 	exit(0);
 }

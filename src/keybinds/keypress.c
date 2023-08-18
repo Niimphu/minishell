@@ -24,6 +24,7 @@ void	clear_input(int signal_number)
 {
 	if (!signal_number)
 		return ;
+	g_signal_received = signal_number;
 	rl_replace_line("", 0);
 	printf("\n");
 	rl_on_new_line();
