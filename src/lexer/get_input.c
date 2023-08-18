@@ -27,5 +27,5 @@ void	await_input(char **envp)
 
 char	*read_user_input(void)
 {
-	return (readline("minishell > "));
+	return (readline("minishell :D > "));
 }
