@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/22 14:50:48 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/22 17:29:57 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,16 +113,6 @@ int	char_count(char *str, char c)
 	return(found);
 }
 
-void	add_new_node(t_lexer **root, t_lexer *new)
-{
-	t_lexer	*current;
-
-	current = *root;
-	while(current->next)
-		current = current->next;
-	current->next = new;
-}
-
 int	count_cmd(char **str)
 {
 	int	i;
@@ -131,56 +121,6 @@ int	count_cmd(char **str)
 	while (str[i] && !check_token(str[i][0]))
 		i++;
 	return (i);
-}
-
-t_lexer	*new_node(char **str)
-{
-	int	i;
-	int cmd_count; 
-	t_lexer	*node;
-
-	i = -1;
-	cmd_count = count_cmd(str);
-	node = malloc(sizeof(t_lexer));
-	node->cmd = malloc(sizeof(char *) * cmd_count + 1);
-	while(++i < cmd_count)
-	{
-		node->cmd[i] = ft_strdup(str[i]);
-		if (node->cmd[i] == NULL)
-			return (NULL);
-	}
-	node->cmd[cmd_count] = NULL;
-	if (str[i] && check_token(str[i][0]))
-	{
-		node->token = ft_strdup(str[i]);
-		if (node->token == NULL)
-			return(NULL);
-	}
-	else
-		node->token = NULL;
-	node->next = NULL;
-	return (node);
-}
-
-t_lexer	*lexer_list_init(char **str)
-{
-	int	i;
-	t_lexer *root;
-	t_lexer *node;
-
-	i = 0;
-	root = new_node(str + i);
-	i += count_cmd(str + i);
-	while(str[i++])
-	{
-		node = new_node(str + i);
-		if (node == NULL)
-			return (NULL);
-		add_new_node(&root, node);
-		i += count_cmd(str + i);
-		
-	}
-	return (root);
 }
 
 void	lexer(t_envp *tools)

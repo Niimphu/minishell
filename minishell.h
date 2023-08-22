@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/22 17:18:48 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/22 17:50:25 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ typedef struct s_envp
 
 t_envp	*create_god_struct(char **envp);
 
+t_lexer	*lexer_list_init(char **str);
 void	lexer(t_envp *tools);
+
+int		count_cmd(char **str);
+int		check_token(char c);
+
 void	expander(t_lexer **root, t_envp *tools);
 
 void	await_input(t_envp *tools);

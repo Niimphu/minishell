@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/08/22 17:13:39 by yiwong           ###   ########.fr        #
+#    Updated: 2023/08/22 17:48:01 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC	=	main.c \
 		lexer/get_input.c \
 		expander/expander.c \
 		init/create_struct.c \
+		list_functions/lexer_list.c \
 		keybinds/keypress.c \
 		quit/quit.c
 
