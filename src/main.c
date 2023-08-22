@@ -49,7 +49,7 @@ int	main(int argument_count, char **arguments, char **envp)
 	while (g_signal_received != SIGQUIT)
 	{
 		await_signals();
-		await_input(envp);
+		await_input(tools);
 	}
 	return (0);
 }

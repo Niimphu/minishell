@@ -183,14 +183,16 @@ t_lexer	*lexer_list_init(char **str)
 	return (root);
 }
 
-void	lexer(t_lexer *input, t_envp *tools)
+void	lexer(t_envp *tools)
 {
-	int i;
-	int j;
-	char **split_str;
+	int		i;
+	int		j;
+	char	**split_str;
+	t_lexer	*input;
 	
 	i = 0;
 	j = 0;
+	input = tools->lexer_struct;
 	input->raw_input = replace_whitespaces(input->raw_input);
 	if (!input->raw_input)
 		quit(0);

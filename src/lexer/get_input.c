@@ -14,14 +14,15 @@
 
 char	*read_user_input(void);
 
-void	await_input(char **envp)
+void	await_input(t_envp *tools)
 {
 	t_lexer	input;
 
-	if (!envp)
+	if (!tools)
 		return ;
 	input.raw_input = read_user_input();
-	lexer(&input);
+	tools->lexer_struct = &input;
+	lexer(tools);
 	free(input.raw_input);
 }
 
