@@ -14,9 +14,9 @@ NAME = minishell
 
 CC = gcc -Wall -Wextra -Werror -g
 
-LIBS = -Lreadline/lib/ -lreadline -lncurses
+LIBS = -L ~/.brew/Cellar/readline/8.2.1/lib -lreadline -lncurses
 
-HEADERS = -I/readline/include
+HEADERS = -I ~/.brew/Cellar/readline/8.2.1/include
 
 LIBFT = libft.a
 
@@ -26,6 +26,7 @@ OBJ_DIR = build
 
 SRC	=	main.c \
 		lexer/lexer.c \
+		lexer/get_input.c \
 		expander/expander.c \
 		keybinds/keypress.c \
 		quit/quit.c

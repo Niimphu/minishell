@@ -14,8 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-# include "readline/include/readline/readline.h"
-
+# include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -41,10 +40,10 @@ typedef struct s_envp
 	t_lexer *lexer_struct;
 }				t_envp;
 
-void	lexer(t_lexer *input, t_envp *tools);
+void	lexer(t_envp *tools);
 void	expander(t_lexer **root, t_envp *tools);
 
-void	await_input(char **envp);
+void	await_input(t_envp *tools);
 void	await_signals(void);
 
 void	quit(int exit_number);
