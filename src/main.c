@@ -6,32 +6,13 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/16 20:50:44 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/22 14:44:17 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*read_user_input(void)
-{
-	return (readline("minishell > "));
-}
-
-void	shell_loop(t_envp *tools)
-{
-	t_lexer input;
-
-	//scan for input ctrl+c, ctrl +d, ctrl + "\", directions. Up down for history,left/right for curser.
-	// readline from input
-	input.raw_input = read_user_input();
-	lexer(&input, tools);
-/* 	parser(line); */	
-		//execute commands (be mindful of built-in functions)
-	//free readline
-	free(input.raw_input);
-	//free arguments
-	//grap exit status from exec
-}
+int	g_signal_received;
 
 t_envp	*init_tools(char **envp)
 {
@@ -53,18 +34,22 @@ t_envp	*init_tools(char **envp)
 	return (ptr);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argument_count, char **arguments, char **envp)
 {
 	t_envp	*tools;
 
+	g_signal_received = 0;
 	tools = init_tools(envp);
-	if (argc > 1)
+	if (argument_count > 1)
 	{
-		perror("This programm does not support input");
+		perror("This program does accept arguments\n");
 		exit(1);
 	}
-	argv = NULL;
-	shell_loop(tools);
-	//cleanup after exit of shell_loop;
+	(void)arguments; //to ignore "unused variable" error
+	while (g_signal_received != SIGQUIT)
+	{
+		await_signals();
+		await_input(envp);
+	}
 	return (0);
 }

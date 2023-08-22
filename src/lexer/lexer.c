@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/16 21:14:31 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/22 14:50:48 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,13 @@ int	check_token(char c)
 		return (1);
 	return (0);
 }
-char *replace_whitespaces(char *str)
+
+char	*replace_whitespaces(char *str)
 {
 	int		i;
 
+	if (!str)
+		return (NULL);
 	i = 0;
 	if (check_quotes(str))
 	{
@@ -189,7 +192,13 @@ void	lexer(t_lexer *input, t_envp *tools)
 	i = 0;
 	j = 0;
 	input->raw_input = replace_whitespaces(input->raw_input);
+	if (!input->raw_input)
+		quit(0);
+	if (!ft_strncmp(input->raw_input, "", 1))
+		return ;
 	split_str = ft_split(input->raw_input, 26);
+	if (!ft_strncmp(split_str[0], "exit", 4))
+		quit(0);
 	input = lexer_list_init(split_str);
 	tools->lexer_struct = input;
 	j = 0;
