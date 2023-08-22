@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/10 17:12:50 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/16 21:14:31 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ int	check_quotes(char *str)
 		return(0);
 }
 
+int	check_token(char c)
+{
+	if (c == '|')
+		return (1);
+	if (c == '>')
+		return (1);
+	if (c == '<')
+		return (1);
+	return (0);
+}
 char *replace_whitespaces(char *str)
 {
 	int		i;
@@ -72,9 +82,7 @@ char *replace_whitespaces(char *str)
 		while(str[i])
 		{
 			if(str[i] == '"' || str[i] == '\'')
-			{
 				i += skip_quotes(str + i);
-			}
 			if (str[i] == ' ' || str[i] == '\t')
 				str[i] = 26;
 			i++;
@@ -117,12 +125,8 @@ int	count_cmd(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i][0] != '|')
-	{
-		printf("str in count cmd is %s\n", str[i]);
+	while (str[i] && !check_token(str[i][0]))
 		i++;
-	}
-	printf("here2\n");
 	return (i);
 }
 
@@ -134,7 +138,6 @@ t_lexer	*new_node(char **str)
 
 	i = -1;
 	cmd_count = count_cmd(str);
-	printf("cmd count =  %d\n", cmd_count);
 	node = malloc(sizeof(t_lexer));
 	node->cmd = malloc(sizeof(char *) * cmd_count + 1);
 	while(++i < cmd_count)
@@ -142,21 +145,16 @@ t_lexer	*new_node(char **str)
 		node->cmd[i] = ft_strdup(str[i]);
 		if (node->cmd[i] == NULL)
 			return (NULL);
-		printf("new_node->cmd[%d] %s\n", i, node->cmd[i]);
 	}
 	node->cmd[cmd_count] = NULL;
-	if (str[i] && str[i][0] == '|')
+	if (str[i] && check_token(str[i][0]))
 	{
 		node->token = ft_strdup(str[i]);
-		printf("token added %s\n", node->token);
 		if (node->token == NULL)
 			return(NULL);
 	}
 	else
-	{
 		node->token = NULL;
-		printf("token added (null)\n");
-	}
 	node->next = NULL;
 	return (node);
 }
@@ -168,29 +166,21 @@ t_lexer	*lexer_list_init(char **str)
 	t_lexer *node;
 
 	i = 0;
-	printf("counting throught split_str[%d] element\n", i);
 	root = new_node(str + i);
-	printf("new node added\n");
-	while(str[i][0] != '|' && str[i])
-		i++;
+	i += count_cmd(str + i);
 	while(str[i++])
 	{
-		printf("counting throught split_str[%d] element\n", i);
-		printf("starting here %s\n", str[i]);
 		node = new_node(str + i);
 		if (node == NULL)
 			return (NULL);
 		add_new_node(&root, node);
-		printf("new node added\n");
-		printf("string before count_cmd %s\n", str[i]);
 		i += count_cmd(str + i);
-		printf("string after count_cmd %s\n", str[i]);
 		
 	}
 	return (root);
 }
 
-void	lexer(t_lexer *input)
+void	lexer(t_lexer *input, t_envp *tools)
 {
 	int i;
 	int j;
@@ -199,12 +189,11 @@ void	lexer(t_lexer *input)
 	i = 0;
 	j = 0;
 	input->raw_input = replace_whitespaces(input->raw_input);
-	printf("raw string is %s\n", input->raw_input);
 	split_str = ft_split(input->raw_input, 26);
-	while (split_str[i])
-		printf("split_str = '%s'\n", split_str[i++]);
 	input = lexer_list_init(split_str);
+	tools->lexer_struct = input;
 	j = 0;
+	expander(&input, tools);
 	printf("*printing created linked list now*\n");
 	while (input)
 	{
@@ -218,5 +207,4 @@ void	lexer(t_lexer *input)
 		j++;
 		input = input->next;
 	}
-	
 }

@@ -6,7 +6,7 @@
 #    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/08/03 16:29:37 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/08/16 21:19:52 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ OBJ_DIR = build
 
 SRC	=	main.c \
 		lexer/lexer.c \
+		expander/expander.c \
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

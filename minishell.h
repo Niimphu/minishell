@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/10 14:04:04 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/17 19:44:51 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ typedef struct	s_lexer
 typedef struct	s_envp
 {
 	char **env;
+	char **sorted_env;
+	t_lexer *lexer_struct;
 }				t_envp;
 
-void	lexer(t_lexer *input);
+void	lexer(t_lexer *input, t_envp *tools);
+void	expander(t_lexer **root, t_envp *tools);
 #endif
