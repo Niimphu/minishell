@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/22 14:41:27 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/08/22 17:18:48 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_envp
 	char **sorted_env;
 	t_lexer *lexer_struct;
 }				t_envp;
+
+t_envp	*create_god_struct(char **envp);
 
 void	lexer(t_envp *tools);
 void	expander(t_lexer **root, t_envp *tools);
