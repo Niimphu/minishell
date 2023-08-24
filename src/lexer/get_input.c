@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:49:16 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/18 14:49:16 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/24 19:00:44 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 static char	*read_user_input(void);
 
-void	await_input(t_envp *tools)
+void	await_input(t_envp *god_struct)
 {
-	t_lexer	input;
+	char	*input;
 
-	if (!tools)
+	if (!god_struct)
 		return ;
-	input.raw_input = read_user_input();
-	tools->lexer_struct = &input;
-	lexer(tools);
-	free(input.raw_input);
+	input = read_user_input();
+	lexer(input, god_struct);
 }
 
 static char	*read_user_input(void)
