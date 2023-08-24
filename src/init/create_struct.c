@@ -30,6 +30,6 @@ t_envp	*create_god_struct(char **envp)
 		god_struct->env[i] = envp[i];
 		i++;
 	}
-	god_struct->lexer_struct = NULL;
+	god_struct->lexer_list = NULL;
 	return (god_struct);
 }

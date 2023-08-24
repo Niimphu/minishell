@@ -6,156 +6,55 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/22 17:29:57 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/24 19:06:03 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "lexer.h"
 
-int	count_quotes(char *str, char qoutes)
+static void	print_lexer_list(t_lexer *lexed_list);
+
+void	lexer(char *input, t_envp *god_struct)
 {
-	int	i;
-	int	found_c;
-
-	i = 0;
-	found_c = 0;
-	while (str[i])
-	{
-		if (str[i] == qoutes)
-			found_c++;
-		i++;
-	}
-	return (found_c);
-}
-
-int skip_quotes(char *str)
-{
-	int	i;
-	char c;
-	
-	i = 1;
-	c = str[0];
-	while(str[i])
-	{
-		if (str[i] == c)
-			return (i);
-		else
-			i++;
-	}
-	perror("Didnt find closing quotes");
-	return (0);
-}
-
-int	check_quotes(char *str)
-{
-	int	double_quotes;
-	int	single_quotes;
-
-	double_quotes = count_quotes(str, '"');
-	single_quotes = count_quotes(str, '\'');
-	if (double_quotes == 0 && single_quotes == 0)
-		return (1);
-	if ((ft_strchr(str, '"') && double_quotes % 2 == 0)
-		|| (ft_strchr(str, '\'') && single_quotes % 2 == 0))
-		return(1);
-	else
-		return(0);
-}
-
-int	check_token(char c)
-{
-	if (c == '|')
-		return (1);
-	if (c == '>')
-		return (1);
-	if (c == '<')
-		return (1);
-	return (0);
-}
-
-char	*replace_whitespaces(char *str)
-{
-	int		i;
-
-	if (!str)
-		return (NULL);
-	i = 0;
-	if (check_quotes(str))
-	{
-		while(str[i])
-		{
-			if(str[i] == '"' || str[i] == '\'')
-				i += skip_quotes(str + i);
-			if (str[i] == ' ' || str[i] == '\t')
-				str[i] = 26;
-			i++;
-		}
-	}
-	else
-		return ("Close your quotes brav");
-	return (str);
-}
-
-int	char_count(char *str, char c)
-{
-	int	i;
-	int	found;
-	i = 0;
-	found = 0;
-	while (str[i])
-	{
-		if (str[i] == '"' || str[i] == '\'')
-			i += skip_quotes(str + i);
-		if (str[i] == c)
-			found++;
-		i++;
-	}
-	return(found);
-}
-
-int	count_cmd(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && !check_token(str[i][0]))
-		i++;
-	return (i);
-}
-
-void	lexer(t_envp *tools)
-{
-	int		i;
-	int		j;
+	t_lexer	*lexed_list;
 	char	**split_str;
-	t_lexer	*input;
-	
-	i = 0;
-	j = 0;
-	input = tools->lexer_struct;
-	input->raw_input = replace_whitespaces(input->raw_input);
-	if (!input->raw_input)
+	char	*temp;
+
+	lexed_list = god_struct->lexer_list;
+	temp = replace_whitespaces(input);
+	free_string(&input);
+	input = temp;
+	if (!input)
 		quit(0);
-	if (!ft_strncmp(input->raw_input, "", 1))
+	if (!ft_strncmp(input, "", 1))
 		return ;
-	split_str = ft_split(input->raw_input, 26);
+	split_str = ft_split(input, 26);
 	if (!ft_strncmp(split_str[0], "exit", 4))
 		quit(0);
-	input = lexer_list_init(split_str);
-	tools->lexer_struct = input;
+	lexed_list = lexer_list_init(split_str);
+	god_struct->lexer_list = lexed_list;
+	expander(&lexed_list, god_struct);
+	print_lexer_list(lexed_list);
+}
+
+static void	print_lexer_list(t_lexer *lexed_list)
+{
+	int	i;
+	int	j;
+
+	printf("\n=== Lexer linked list ===\n");
 	j = 0;
-	expander(&input, tools);
-	printf("*printing created linked list now*\n");
-	while (input)
+	while (lexed_list)
 	{
 		i = 0;
-		while (input->cmd[i])
+		while (lexed_list->cmd[i])
 		{
-			printf("cmd[%d] of %d note is : %s\n", i, j, input->cmd[i]);
+			printf("cmd[%d] of node %d is : %s\n", i, j, lexed_list->cmd[i]);
 			i++;
 		}
-		printf("token of %d note is : %s\n", j ,  input->token);
+		printf("token of node %d is : %s\n", j, lexed_list->token);
 		j++;
-		input = input->next;
+		lexed_list = lexed_list->next;
 	}
+	printf("===    End of list    ===\n\n");
 }
