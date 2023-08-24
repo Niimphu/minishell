@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-char	*read_user_input(void);
+static char	*read_user_input(void);
 
 void	await_input(t_envp *tools)
 {
@@ -26,7 +26,7 @@ void	await_input(t_envp *tools)
 	free(input.raw_input);
 }
 
-char	*read_user_input(void)
+static char	*read_user_input(void)
 {
 	return (readline("minishell :D > "));
 }
