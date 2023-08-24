@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/22 17:18:56 by yiwong           ###   ########.fr       */
+/*   Created: 2023/08/24 19:07:11 by yiwong            #+#    #+#             */
+/*   Updated: 2023/08/24 19:07:11 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int	g_signal_received;
-
-int	main(int argument_count, char **arguments, char **envp)
+void	free_string(char **string)
 {
-	t_envp	*tools;
+	free(*string);
+	*string = NULL;
+}
 
-	g_signal_received = 0;
-	tools = create_god_struct(envp);
-	if (argument_count > 1)
+void	free_string_array(char ***array)
+{
+	int	i;
+
+	i = 0;
+	while ((*array)[i])
 	{
-		perror("This program does accept arguments\n");
-		exit(1);
+		free_string(&(*array)[i]);
+		i++;
 	}
-	(void)arguments;
-	while (g_signal_received != SIGQUIT)
-	{
-		await_signals();
-		await_input(tools);
-	}
-	return (0);
+	free(*array);
+	*array = NULL;
 }
