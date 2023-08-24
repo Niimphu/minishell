@@ -27,17 +27,17 @@ extern int	g_signal_received;
 
 typedef struct s_lexer
 {
-	char	*raw_input;
-	char	**cmd;
-	char	*token;
+	char			*raw_input;
+	char			**cmd;
+	char			*token;
 	struct s_lexer	*next;
 }				t_lexer;
 
 typedef struct s_envp
 {
-	char **env;
-	char **sorted_env;
-	t_lexer *lexer_struct;
+	char	**env;
+	char	**sorted_env;
+	t_lexer	*lexer_struct;
 }				t_envp;
 
 t_envp	*create_god_struct(char **envp);
