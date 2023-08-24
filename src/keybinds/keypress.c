@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-void	clear_input(int signal_number);
+static void	clear_input(int signal_number);
 
 void	await_signals(void)
 {
@@ -20,7 +20,7 @@ void	await_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	clear_input(int signal_number)
+static void	clear_input(int signal_number)
 {
 	if (!signal_number)
 		return ;
