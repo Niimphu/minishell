@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/24 19:06:03 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/25 15:14:21 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ void	lexer(char *input, t_envp *god_struct)
 {
 	t_lexer	*lexed_list;
 	char	**split_str;
-	char	*temp;
 
-	lexed_list = god_struct->lexer_list;
-	temp = replace_whitespaces(input);
-	free_string(&input);
-	input = temp;
+	input = replace_whitespaces(input);
+	printf("input line: %s\n===============\n", input);
 	if (!input)
 		quit(0);
 	if (!ft_strncmp(input, "", 1))
@@ -34,7 +31,8 @@ void	lexer(char *input, t_envp *god_struct)
 	lexed_list = lexer_list_init(split_str);
 	god_struct->lexer_list = lexed_list;
 	expander(&lexed_list, god_struct);
-	print_lexer_list(lexed_list);
+	print_lexer_list(god_struct->lexer_list);
+	god_struct->lexer_list = NULL;
 }
 
 static void	print_lexer_list(t_lexer *lexed_list)
@@ -52,7 +50,7 @@ static void	print_lexer_list(t_lexer *lexed_list)
 			printf("cmd[%d] of node %d is : %s\n", i, j, lexed_list->cmd[i]);
 			i++;
 		}
-		printf("token of node %d is : %s\n", j, lexed_list->token);
+		printf("command line operator of node %d is : %s\n", j, lexed_list->operator);
 		j++;
 		lexed_list = lexed_list->next;
 	}
