@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/24 19:04:09 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/25 15:15:59 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ extern int	g_signal_received;
 
 typedef struct s_lexer
 {
-	char			*raw_input;
 	char			**cmd;
-	char			*token;
+	char			*operator;
 	struct s_lexer	*next;
 }				t_lexer;
 
@@ -46,7 +45,7 @@ t_lexer	*lexer_list_init(char **str);
 void	lexer(char *input_string, t_envp *god_struct);
 
 int		count_cmd(char **str);
-int		check_token(char c);
+int		contains_operator(char c);
 
 void	expander(t_lexer **root, t_envp *tools);
 
