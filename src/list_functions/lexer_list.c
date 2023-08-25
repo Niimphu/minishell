@@ -6,32 +6,75 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/22 17:50:09 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/25 19:40:32 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+// t_lexer	*create_lexer_list(char **split_string)
+// {
+
+// 	t_list	*lexer_list;
+// 	t_lexer	*lexer_node;
+
+// 	if (!contains_operator(split_string))
+// 	{
+// 		lexer_list = ft_lstnew((void *)new_lexer_node());
+// 		lexer_list->(t_lexer *)content->cmd = split_string;
+// 		return (lexer_list);
+// 	}
+// 	lexer_node = new_lexer_node();
+// 	if (!lexer_node)
+// 		return (NULL);
+// 	lexer_list = ft_lstnew((void *)lexer_node);
+// 	split_string += count_cmd(split_string);
+// 	if (!*split_string)
+// 		return (lexer_list);
+// 	populate_node(split_string);
+// }
+
+// t_lexer	*new_lexer_node(void)
+// {
+// 	t_lexer	*lexer_node;
+
+// 	lexer_node = ft_calloc(1, sizeof(t_lexer));
+// 	if (!lexer_node)
+// 		return (NULL);
+// 	lexer_node->cmd = NULL;
+// 	lexer_node->operator = NULL;
+// 	return (lexer_node);
+// }
+
+// t_lexer	*populate_node(t_lexer *node, char **array)
+// {
+	
+// }
+
+
+
+
+
 
 static t_lexer	*new_node(char **str);
 static void		add_new_node(t_lexer **root, t_lexer *new);
 
 t_lexer	*lexer_list_init(char **str)
 {
-	int	i;
-	t_lexer *root;
-	t_lexer *node;
+	int		i;
+	t_lexer	*root;
+	t_lexer	*node;
 
 	i = 0;
 	root = new_node(str + i);
 	i += count_cmd(str + i);
-	while(str[i++])
+	while (str[i++])
 	{
 		node = new_node(str + i);
 		if (node == NULL)
 			return (NULL);
 		add_new_node(&root, node);
 		i += count_cmd(str + i);
-		
 	}
 	return (root);
 }
@@ -69,14 +112,14 @@ static t_lexer	*new_node(char **input)
 	node->cmd = save_command_args(cmd_count, input);
 	i = count_cmd(node->cmd);
 	node->cmd[cmd_count] = NULL;
-	if (input[i] && check_token(input[i][0]))
+	if (input[i] && contains_operator(input[i][0]))
 	{
-		node->token = ft_strdup(input[i]);
-		if (node->token == NULL)
+		node->operator = ft_strdup(input[i]);
+		if (node->operator == NULL)
 			return(NULL);
 	}
 	else
-		node->token = NULL;
+		node->operator = NULL;
 	node->next = NULL;
 	return (node);
 }
