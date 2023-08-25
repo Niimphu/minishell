@@ -6,13 +6,13 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/08/24 19:10:17 by yiwong           ###   ########.fr        #
+#    Updated: 2023/08/24 20:33:30 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc -Wall -Wextra -Werror -g
+CC = gcc -Wall -Wextra -Werror -g #-fsanitize=address
 
 LIBS = -L ~/.brew/Cellar/readline/8.2.1/lib -lreadline -lncurses
 
