@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/25 15:15:59 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/26 18:40:39 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	expander(t_lexer **root, t_envp *tools);
 
 void	await_input(t_envp *tools);
 void	await_signals(void);
+
+int		get_array_size(char **array);
+int		ends_with_operator(char **array);
 
 void	free_string(char **string);
 

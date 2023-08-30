@@ -6,52 +6,53 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/25 19:40:32 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/28 13:39:09 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// t_lexer	*create_lexer_list(char **split_string)
-// {
+t_lexer	*create_lexer_list(char **split_string)
+{
+	t_list	*lexer_list;
+	t_lexer	*lexer_node;
+	int		operator_i;
 
-// 	t_list	*lexer_list;
-// 	t_lexer	*lexer_node;
-
-// 	if (!contains_operator(split_string))
-// 	{
-// 		lexer_list = ft_lstnew((void *)new_lexer_node());
-// 		lexer_list->(t_lexer *)content->cmd = split_string;
-// 		return (lexer_list);
-// 	}
-// 	lexer_node = new_lexer_node();
-// 	if (!lexer_node)
-// 		return (NULL);
-// 	lexer_list = ft_lstnew((void *)lexer_node);
-// 	split_string += count_cmd(split_string);
-// 	if (!*split_string)
-// 		return (lexer_list);
-// 	populate_node(split_string);
-// }
-
-// t_lexer	*new_lexer_node(void)
-// {
-// 	t_lexer	*lexer_node;
-
-// 	lexer_node = ft_calloc(1, sizeof(t_lexer));
-// 	if (!lexer_node)
-// 		return (NULL);
-// 	lexer_node->cmd = NULL;
-// 	lexer_node->operator = NULL;
-// 	return (lexer_node);
-// }
-
-// t_lexer	*populate_node(t_lexer *node, char **array)
-// {
+	lexer_list = ft_lstnew((void *)lexer_node);
+	if (!lexer_list)
+		return (NULL);
+	lexer_node = new_lexer_node(split_string);
+	if (!lexer_node)
+		return (free(lexer_list), NULL);
 	
-// }
+	split_string += count_cmd(split_string);
+	if (!*split_string)
+		return (lexer_list);
+	populate_node(split_string);
+}
 
+t_lexer	*new_lexer_node(char **array)
+{
+	t_lexer	*lexer_node;
 
+	lexer_node = ft_calloc(1, sizeof(t_lexer));
+	if (!lexer_node)
+		return (NULL);
+	lexer_node->operator = NULL;
+	if (!contains_operator())
+	lexer_node->cmd = NULL;
+	return (lexer_node);
+}
+
+t_lexer	*populate_node(t_lexer *node, char **array)
+{
+	
+}
+
+char **get_cmd_array(char **cmd_array)
+{
+	
+}
 
 
 

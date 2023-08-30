@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/08/24 20:33:30 by yiwong           ###   ########.fr        #
+#    Updated: 2023/08/26 18:16:16 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,10 @@ SRC	=	main.c \
 		lexer/get_input.c \
 		lexer/lexer_utils.c \
 		lexer/lexer_utils_count.c \
+		lexer/lexer_list.c \
 		expander/expander.c \
-		list_functions/lexer_list.c \
 		keybinds/keypress.c \
+		utils/counters.c \
 		free/free_char.c \
 		quit/quit.c
 
