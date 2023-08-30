@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/22 17:29:57 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/30 16:07:02 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int	count_cmd(char **str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] && !check_token(str[i][0]))
 		i++;
 	return (i);
@@ -145,7 +147,7 @@ void	lexer(t_envp *tools)
 	tools->lexer_struct = input;
 	j = 0;
 	expander(&input, tools);
-	printf("*printing created linked list now*\n");
+/* 	printf("*printing created linked list now*\n");
 	while (input)
 	{
 		i = 0;
@@ -157,5 +159,5 @@ void	lexer(t_envp *tools)
 		printf("token of %d note is : %s\n", j ,  input->token);
 		j++;
 		input = input->next;
-	}
+	} */
 }

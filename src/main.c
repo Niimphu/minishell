@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/22 17:18:56 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/30 15:50:22 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argument_count, char **arguments, char **envp)
 	tools = create_god_struct(envp);
 	if (argument_count > 1)
 	{
-		perror("This program does accept arguments\n");
+		perror("This program does not accept arguments\n");
 		exit(1);
 	}
 	(void)arguments; //to ignore "unused variable" error

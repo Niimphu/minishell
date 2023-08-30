@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_struct.c                                    :+:      :+:    :+:   */
+/*   unset_build_in.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 16:54:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/29 20:29:19 by Kekuhne          ###   ########.fr       */
+/*   Created: 2023/08/30 16:35:44 by Kekuhne           #+#    #+#             */
+/*   Updated: 2023/08/30 17:25:49 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_envp	*create_god_struct(char **envp)
+int	unset_build_in(t_envp *tools, char **cmd)
 {
-	int		i;
-	t_envp	*god_struct;
+	int	i;
 
 	i = 0;
-	while (envp[i])
+	if (!cmd[1])
+		return (1);
+	while (tools->env[i] && ft_strncmp(cmd[1], tools->env[i]
+			, ft_strlen(cmd[1])))
 		i++;
-	god_struct = malloc(sizeof(t_envp));
-	if (!god_struct)
-		return (NULL);
-	god_struct->env = malloc(sizeof(char *) * (i + 1));
-	if (!god_struct->env)
-		return (NULL);
-	i = 0;
-	while (envp[i])
+	while (tools->env[i])
 	{
-		god_struct->env[i] = ft_strdup(envp[i]);
-		if (!god_struct->env[i])
-			perror("upsi no envp!");
+		if (tools->env[i + 1])
+			tools->env[i] = ft_strdup(tools->env[i + 1]);
 		i++;
 	}
-	god_struct->env[i] = NULL;
-	god_struct->lexer_struct = NULL;
-	return (god_struct);
+	tools->env[i - 1] = NULL;
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/22 17:50:09 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/08/30 15:44:13 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**save_command_args(int cmd_count, char **input)
 	char	**command_array;
 	int		i;
 
-	command_array = malloc(sizeof(char *) * cmd_count + 1);
+	command_array = malloc(sizeof(char *) * (cmd_count + 1));
 	if (!command_array)
 		return (NULL);
 	i = 0;
@@ -67,7 +67,7 @@ static t_lexer	*new_node(char **input)
 		return (NULL);
 
 	node->cmd = save_command_args(cmd_count, input);
-	i = count_cmd(node->cmd);
+	i = cmd_count;
 	node->cmd[cmd_count] = NULL;
 	if (input[i] && check_token(input[i][0]))
 	{

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
+#    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/08/22 17:48:01 by yiwong           ###   ########.fr        #
+#    Updated: 2023/08/30 16:48:12 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,12 @@ SRC	=	main.c \
 		init/create_struct.c \
 		list_functions/lexer_list.c \
 		keybinds/keypress.c \
-		quit/quit.c
+		quit/quit.c \
+		buildin/cd_build_in.c \
+		buildin/echo_build_in.c \
+		buildin/export_build_in.c \
+		buildin/pwd_build_in.c \
+		buildin/unset_build_in.c \
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
