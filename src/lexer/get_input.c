@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:49:16 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/24 19:00:44 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/02 16:50:19 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,9 @@ void	await_input(t_envp *god_struct)
 
 static char	*read_user_input(void)
 {
-	return (readline("minishell :D > "));
+	char *input;
+
+	input = readline(" minishell :D > ");
+	add_history(input);
+	return (input);
 }

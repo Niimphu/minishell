@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   pwd_build_in.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 20:17:10 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/30 17:47:07 by Kekuhne          ###   ########.fr       */
+/*   Created: 2023/08/30 16:23:50 by Kekuhne           #+#    #+#             */
+/*   Updated: 2023/08/30 16:36:53 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//idk what this is doing rn :)))
-void	quit(int exit_number)
+int	pwd_build_in(t_envp *tools)
 {
-	g_signal_received = exit_number;
-	exit(0);
+	int	i;
+
+	i = 0;
+	while (tools->env[i])
+	{
+		if (!strncmp(tools->env[i], "PWD=", 4))
+		{
+			printf("%s\n", tools->env[i] + 4);
+			break ;
+		}
+		i++;
+	}
+	return (0);
 }

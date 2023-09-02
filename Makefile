@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/08/26 18:16:16 by yiwong           ###   ########.fr        #
+#    Updated: 2023/09/02 16:55:04 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,12 @@ SRC	=	main.c \
 		keybinds/keypress.c \
 		utils/counters.c \
 		free/free_char.c \
-		quit/quit.c
+		quit/quit.c \
+		buildin/cd_build_in.c \
+		buildin/echo_build_in.c \
+		buildin/export_build_in.c \
+		buildin/pwd_build_in.c \
+		buildin/unset_build_in.c \
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

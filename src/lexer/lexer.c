@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/25 15:14:21 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/02 16:57:05 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	lexer(char *input, t_envp *god_struct)
 		quit(0);
 	lexed_list = create_lexer_list(split_str);
 	god_struct->lexer_list = lexed_list;
-//	expander(&lexed_list, god_struct);
+	expander(&lexed_list, god_struct);
 	print_lexer_list(god_struct->lexer_list);
 	god_struct->lexer_list = NULL;
 }
