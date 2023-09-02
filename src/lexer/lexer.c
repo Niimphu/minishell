@@ -12,11 +12,11 @@
 
 #include "lexer.h"
 
-static void	print_lexer_list(t_lexer *lexed_list);
+static void	print_lexer_list(t_list *lexed_list);
 
 void	lexer(char *input, t_envp *god_struct)
 {
-	t_lexer	*lexed_list;
+	t_list	*lexed_list;
 	char	**split_str;
 
 	input = replace_whitespaces(input);
@@ -28,29 +28,31 @@ void	lexer(char *input, t_envp *god_struct)
 	split_str = ft_split(input, 26);
 	if (!ft_strncmp(split_str[0], "exit", 4))
 		quit(0);
-	lexed_list = lexer_list_init(split_str);
+	lexed_list = create_lexer_list(split_str);
 	god_struct->lexer_list = lexed_list;
-	expander(&lexed_list, god_struct);
+//	expander(&lexed_list, god_struct);
 	print_lexer_list(god_struct->lexer_list);
 	god_struct->lexer_list = NULL;
 }
 
-static void	print_lexer_list(t_lexer *lexed_list)
+static void	print_lexer_list(t_list *lexed_list)
 {
-	int	i;
-	int	j;
+	t_lexer	*node;
+	int		i;
+	int		j;
 
 	printf("\n=== Lexer linked list ===\n");
 	j = 0;
 	while (lexed_list)
 	{
 		i = 0;
-		while (lexed_list->cmd[i])
+		node = (t_lexer *)lexed_list->content;
+		while (node->cmd[i])
 		{
-			printf("cmd[%d] of node %d is : %s\n", i, j, lexed_list->cmd[i]);
+			printf("cmd[%d] of node %d is : %s\n", i, j, node->cmd[i]);
 			i++;
 		}
-		printf("command line operator of node %d is : %s\n", j, lexed_list->operator);
+		printf("command line operator of node %d is : %s\n", j, node->operator);
 		j++;
 		lexed_list = lexed_list->next;
 	}

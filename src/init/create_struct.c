@@ -18,12 +18,15 @@ t_envp	*create_god_struct(char **envp)
 	t_envp	*god_struct;
 
 	i = 0;
-	god_struct = ft_calloc(1, sizeof(t_envp));
+	while (envp[i])
+		i++;
+	god_struct = malloc(sizeof(t_envp));
 	if (!god_struct)
 		return (NULL);
-	god_struct->env = ft_calloc(count_cmd(envp) + 1, sizeof(char *));
+	god_struct->env = malloc(sizeof(char *) * (i + 1));
 	if (!god_struct->env)
 		return (NULL);
+	i = 0;
 	while (envp[i])
 	{
 		god_struct->env[i] = ft_strdup(envp[i]);
@@ -31,6 +34,7 @@ t_envp	*create_god_struct(char **envp)
 			perror("upsi no envp!");
 		i++;
 	}
+	god_struct->env[i] = NULL;
 	god_struct->lexer_list = NULL;
 	return (god_struct);
 }

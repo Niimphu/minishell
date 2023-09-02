@@ -36,12 +36,13 @@ typedef struct s_envp
 {
 	char	**env;
 	char	**sorted_env;
-	t_lexer	*lexer_list;
+	t_list	*lexer_list;
 }				t_envp;
 
 t_envp	*create_god_struct(char **envp);
 
-t_lexer	*lexer_list_init(char **str);
+//t_lexer	*lexer_list_init(char **str);
+t_list	*create_lexer_list(char **split_string);
 void	lexer(char *input_string, t_envp *god_struct);
 
 int		count_cmd(char **str);
