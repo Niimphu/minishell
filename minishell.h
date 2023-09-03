@@ -46,9 +46,6 @@ void	await_signals(void);
 t_list	*create_parser_list(char **split_string);
 void	parse(char *input_string, t_god *god_struct);
 
-int		contains_operator(char c);
-int		ends_with_operator(char **array);
-
 void	expander(t_list **root, t_god *tools);
 
 int		get_array_size(char **array);
