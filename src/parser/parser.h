@@ -18,5 +18,7 @@
 char	*lex(char *str);
 
 int		count_quotes(char *str, char quotes);
+int		next_command(char **str);
+int		next_operator(char **str);
 
 #endif
