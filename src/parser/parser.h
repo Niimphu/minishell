@@ -20,5 +20,7 @@ char	*lex(char *str);
 int		count_quotes(char *str, char quotes);
 int		next_command(char **str);
 int		next_operator(char **str);
+int		contains_operator(char c);
+int		ends_with_operator(char **array);
 
 #endif

@@ -45,6 +45,16 @@ int	next_operator(char **str)
 	return (i);
 }
 
+int	ends_with_operator(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i + 1])
+		i++;
+	return (contains_operator(*array[i]));
+}
+
 int	count_quotes(char *str, char quotes)
 {
 	int	i;

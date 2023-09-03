@@ -11,13 +11,3 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-int	ends_with_operator(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i + 1])
-		i++;
-	return (contains_operator(*array[i]));
-}
