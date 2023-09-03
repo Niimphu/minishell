@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:31:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 14:21:59 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:09:58 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-// static int	check_quotes(char *str);
 static int	skip_quotes(char *str);
 
 char	*replace_whitespaces(char *str)
@@ -22,8 +21,6 @@ char	*replace_whitespaces(char *str)
 	if (!str)
 		return (NULL);
 	i = 0;
-	// if (!check_quotes(str))
-	// 	return ("Close your quotes brav");
 	while (str[i])
 	{
 		if (str[i] == '"' || str[i] == '\'')
@@ -72,19 +69,3 @@ int	contains_operator(char c)
 		return (1);
 	return (0);
 }
-
-//test failed: grep "don't" '"' ""
-// static int	check_quotes(char *str)
-// {
-// 	int	double_quotes;
-// 	int	single_quotes;
-
-// 	double_quotes = count_quotes(str, '"');
-// 	single_quotes = count_quotes(str, '\'');
-// 	if (!double_quotes && !single_quotes)
-// 		return (1);
-// 	if (double_quotes % 2 == 0 && single_quotes % 2 == 0)
-// 		return (1);
-// 	else
-// 		return (0);
-// }

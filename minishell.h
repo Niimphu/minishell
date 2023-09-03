@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/02 16:57:46 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/02 17:23:55 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,29 @@ typedef struct	s_envp
 
 t_envp	*create_god_struct(char **envp);
 
+void	await_input(t_envp *tools);
+void	await_signals(void);
+
 t_list	*create_lexer_list(char **split_string);
 void	lexer(char *input_string, t_envp *god_struct);
 
 int		count_cmd(char **str);
 int		contains_operator(char c);
+int		ends_with_operator(char **array);
 
 void	expander(t_list **root, t_envp *tools);
-t_envp	*create_god_struct(char **envp);
-void	await_input(t_envp *tools);
-void	await_signals(void);
 
 int		get_array_size(char **array);
-int		ends_with_operator(char **array);
 
 void	free_string(char **string);
 
 void	quit(int exit_number);
-int	count_cmd(char **str);
-int	check_token(char c);
-
 
 char	*get_var(char *var, t_envp *tools);
-int	env_build_in(t_envp *tools);
-int	export_build_in(t_envp *tools, char **cmd);
-int	echo_build_in(char **cmd, t_envp *tools);
-int	unset_build_in(t_envp *tools, char **cmd);
-int	pwd_build_in(t_envp *tools);
-int	cd_build_in(char *dir, t_envp *tool);
+int		env_build_in(t_envp *tools);
+int		export_build_in(t_envp *tools, char **cmd);
+int		echo_build_in(char **cmd, t_envp *tools);
+int		unset_build_in(t_envp *tools, char **cmd);
+int		pwd_build_in(t_envp *tools);
+int		cd_build_in(char *dir, t_envp *tool);
 #endif
