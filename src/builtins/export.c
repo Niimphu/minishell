@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_build_in.c                                  :+:      :+:    :+:   */
+/*   export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:32:33 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/30 16:38:07 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:23:18 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	env_build_in(t_envp *tools)
+int	env(t_god *tools)
 {
 	int		i;
-	t_envp	*ptr;
+	t_god	*ptr;
 
 	i = 0;
 	ptr = tools;
@@ -24,11 +24,11 @@ int	env_build_in(t_envp *tools)
 	return (0);
 }
 
-static void	print_sorted_envp(t_envp *tools)
+static void	print_sorted_envp(t_god *tools)
 {
 	int		i;
 	int		j;
-	t_envp	*ptr;
+	t_god	*ptr;
 
 	i = 0;
 	ptr = tools;
@@ -42,7 +42,7 @@ static void	print_sorted_envp(t_envp *tools)
 	}
 }
 
-static char	**new_env(t_envp *tools, char *cmd)
+static char	**new_env(t_god *tools, char *cmd)
 {
 	int		i;
 	char	**new_env;
@@ -70,7 +70,7 @@ static char	**new_env(t_envp *tools, char *cmd)
 	return (new_env);
 }
 
-int	export_build_in(t_envp *tools, char **cmd)
+int	export(t_god *tools, char **cmd)
 {
 	int		i;
 

@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/02 17:23:55 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 16:24:09 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,33 @@
 
 int	g_signal_received;
 
-typedef struct	s_lexer
+typedef struct	s_parser
 {
 	char			**cmd;
 	char			*operator;
-	struct s_lexer	*next;
-}				t_lexer;
+	struct s_parser	*next;
+}				t_parser;
 
-typedef struct	s_envp
+typedef struct	s_god
 {
 	char	**env;
 	char	**sorted_env;
-	t_list	*lexer_list;
-}				t_envp;
+	t_list	*parser_list;
+}				t_god;
 
-t_envp	*create_god_struct(char **envp);
+t_god	*create_god_struct(char **envp);
 
-void	await_input(t_envp *tools);
+void	await_input(t_god *tools);
 void	await_signals(void);
 
-t_list	*create_lexer_list(char **split_string);
-void	lexer(char *input_string, t_envp *god_struct);
+t_list	*create_parser_list(char **split_string);
+void	parse(char *input_string, t_god *god_struct);
 
 int		count_cmd(char **str);
 int		contains_operator(char c);
 int		ends_with_operator(char **array);
 
-void	expander(t_list **root, t_envp *tools);
+void	expander(t_list **root, t_god *tools);
 
 int		get_array_size(char **array);
 
@@ -59,11 +59,11 @@ void	free_string(char **string);
 
 void	quit(int exit_number);
 
-char	*get_var(char *var, t_envp *tools);
-int		env_build_in(t_envp *tools);
-int		export_build_in(t_envp *tools, char **cmd);
-int		echo_build_in(char **cmd, t_envp *tools);
-int		unset_build_in(t_envp *tools, char **cmd);
-int		pwd_build_in(t_envp *tools);
-int		cd_build_in(char *dir, t_envp *tool);
+char	*get_var(char *var, t_god *tools);
+int		env(t_god *tools);
+int		export(t_god *tools, char **cmd);
+int		echo(char **cmd, t_god *tools);
+int		unset(t_god *tools, char **cmd);
+int		pwd(t_god *tools);
+int		cd(char *dir, t_god *tool);
 #endif

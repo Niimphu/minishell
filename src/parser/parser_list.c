@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_list.c                                       :+:      :+:    :+:   */
+/*   parser_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,43 +12,43 @@
 
 #include "../../minishell.h"
 
-static t_lexer	*new_lexer_node(char **array);
-static t_lexer	*fill_node(t_lexer *node, char **array);
+static t_parser	*new_parser_node(char **array);
+static t_parser	*fill_node(t_parser *node, char **array);
 
-t_list	*create_lexer_list(char **split_string)
+t_list	*create_parser_list(char **split_string)
 {
-	t_list	*lexer_list;
-	t_lexer	*new_node;
+	t_list	*parser_list;
+	t_parser	*new_node;
 	char	*array_start;
 
 	array_start = *split_string;
-	new_node = new_lexer_node(split_string);
-	lexer_list = ft_lstnew(new_node);
+	new_node = new_parser_node(split_string);
+	parser_list = ft_lstnew(new_node);
 	split_string += count_cmd(split_string);
 	while (*split_string)
 	{
-		new_node = new_lexer_node(split_string);
-		ft_lstadd_back(&lexer_list, ft_lstnew(new_node));
+		new_node = new_parser_node(split_string);
+		ft_lstadd_back(&parser_list, ft_lstnew(new_node));
 		split_string += count_cmd(split_string);
 	}
 	free(array_start);
-	return (lexer_list);
+	return (parser_list);
 }
 
-static t_lexer	*new_lexer_node(char **array)
+static t_parser	*new_parser_node(char **array)
 {
-	t_lexer	*lexer_node;
+	t_parser	*parser_node;
 
-	lexer_node = ft_calloc(1, sizeof(t_lexer));
-	if (!lexer_node)
+	parser_node = ft_calloc(1, sizeof(t_parser));
+	if (!parser_node)
 		return (NULL);
-	lexer_node->cmd = NULL;
-	lexer_node->operator = NULL;
-	fill_node(lexer_node, array);
-	return (lexer_node);
+	parser_node->cmd = NULL;
+	parser_node->operator = NULL;
+	fill_node(parser_node, array);
+	return (parser_node);
 }
 
-static t_lexer	*fill_node(t_lexer *node, char **array)
+static t_parser	*fill_node(t_parser *node, char **array)
 {
 	int		i;
 	int		cmd_count;

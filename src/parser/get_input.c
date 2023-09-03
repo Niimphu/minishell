@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/24 19:58:52 by yiwong           ###   ########.fr       */
+/*   Created: 2023/08/18 14:49:16 by yiwong            #+#    #+#             */
+/*   Updated: 2023/09/03 16:26:27 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
 
-# include "../../minishell.h"
+#include "../../minishell.h"
 
-char	*replace_whitespaces(char *str);
+static char	*read_user_input(void);
 
-int		count_quotes(char *str, char quotes);
+void	await_input(t_god *god_struct)
+{
+	char	*input;
 
-#endif
+	if (!god_struct)
+		return ;
+	input = read_user_input();
+	parse(input, god_struct);
+}
+
+static char	*read_user_input(void)
+{
+	char	*input;
+
+	input = readline(" minishelf > ");
+	add_history(input);
+	return (input);
+}

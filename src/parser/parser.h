@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_build_in.c                                     :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 16:23:50 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/30 16:36:53 by Kekuhne          ###   ########.fr       */
+/*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
+/*   Updated: 2023/09/03 16:14:55 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-int	pwd_build_in(t_envp *tools)
-{
-	int	i;
+# include "../../minishell.h"
 
-	i = 0;
-	while (tools->env[i])
-	{
-		if (!strncmp(tools->env[i], "PWD=", 4))
-		{
-			printf("%s\n", tools->env[i] + 4);
-			break ;
-		}
-		i++;
-	}
-	return (0);
-}
+char	*lex(char *str);
+
+int		count_quotes(char *str, char quotes);
+
+#endif

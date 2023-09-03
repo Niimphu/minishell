@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset_build_in.c                                   :+:      :+:    :+:   */
+/*   pwd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 16:35:44 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/30 17:25:49 by Kekuhne          ###   ########.fr       */
+/*   Created: 2023/08/30 16:23:50 by Kekuhne           #+#    #+#             */
+/*   Updated: 2023/09/03 16:23:18 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	unset_build_in(t_envp *tools, char **cmd)
+int	pwd(t_god *tools)
 {
 	int	i;
 
 	i = 0;
-	if (!cmd[1])
-		return (1);
-	while (tools->env[i] && ft_strncmp(cmd[1], tools->env[i]
-			, ft_strlen(cmd[1])))
-		i++;
 	while (tools->env[i])
 	{
-		if (tools->env[i + 1])
-			tools->env[i] = ft_strdup(tools->env[i + 1]);
+		if (!strncmp(tools->env[i], "PWD=", 4))
+		{
+			printf("%s\n", tools->env[i] + 4);
+			break ;
+		}
 		i++;
 	}
-	tools->env[i - 1] = NULL;
 	return (0);
 }

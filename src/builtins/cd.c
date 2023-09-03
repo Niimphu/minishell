@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_build_in.c                                      :+:      :+:    :+:   */
+/*   cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/30 17:19:34 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:23:18 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //bug cd should take you home
 
-static int	update_old_pwd(t_envp *tools, char *dir)
+static int	update_old_pwd(t_god *tools, char *dir)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ static int	update_old_pwd(t_envp *tools, char *dir)
 	return (0);
 }
 
-static int	update_pwd(t_envp *tools)
+static int	update_pwd(t_god *tools)
 {
 	int		i;
 	char	*dir;
@@ -63,7 +63,7 @@ static int	update_pwd(t_envp *tools)
 	return (0);
 }
 
-int	cd_build_in(char *dir, t_envp *tool)
+int	cd(char *dir, t_god *tool)
 {
 	char	*old_dir;
 

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_build_in.c                                    :+:      :+:    :+:   */
+/*   echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/02 19:45:17 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/03 16:23:18 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*get_var(char *var, t_envp *tools)
+char	*get_var(char *var, t_god *tools)
 {
 	int		i;
 	char	*new_var;
@@ -36,7 +36,7 @@ char	*get_var(char *var, t_envp *tools)
 	return (new_var);
 }
 
-int	echo_build_in(char **cmd, t_envp *tools)
+int	echo(char **cmd, t_god *tools)
 {
 	int	i;
 	int	new_line_flag;

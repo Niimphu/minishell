@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 18:31:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 16:09:58 by yiwong           ###   ########.fr       */
+/*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
+/*   Updated: 2023/09/03 16:17:54 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "parser.h"
 
 static int	skip_quotes(char *str);
 
-char	*replace_whitespaces(char *str)
+char	*lex(char *str)
 {
 	int		i;
 
@@ -56,16 +56,5 @@ static int	skip_quotes(char *str)
 			i++;
 	}
 	perror("Unclosed quotes found");
-	return (0);
-}
-
-int	contains_operator(char c)
-{
-	if (c == '|')
-		return (1);
-	if (c == '>')
-		return (1);
-	if (c == '<')
-		return (1);
 	return (0);
 }

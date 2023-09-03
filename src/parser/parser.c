@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/03 16:05:39 by Kekuhne          ###   ########.fr       */
+/*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
+/*   Updated: 2023/09/03 16:25:53 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "parser.h"
+
 // check for double or beginning operator
 // handle oe or more heredoc
 // input output files
 // git branch -a 
-/* static void	print_lexer_list(t_list *lexed_list); */
 
-void	lexer(char *input, t_envp *god_struct)
+/* static void	print_parser_list(t_list *parsed_list); */
+
+void	parse(char *input, t_god *god_struct)
 {
-	t_list	*lexed_list;
+	t_list	*parsed_list;
 	char	**split_str;
 
-	input = replace_whitespaces(input);
+	input = lex(input);
 	if (!input)
 	{
 		free(input);
@@ -33,25 +35,25 @@ void	lexer(char *input, t_envp *god_struct)
 	split_str = ft_split(input, 26);
 	if (!ft_strncmp(split_str[0], "exit", 4))
 		quit(0);
-	lexed_list = create_lexer_list(split_str);
-	god_struct->lexer_list = lexed_list;
-	expander(&lexed_list, god_struct);
-	/* print_lexer_list(god_struct->lexer_list); */
-	god_struct->lexer_list = NULL;
+	parsed_list = create_parser_list(split_str);
+	god_struct->parser_list = parsed_list;
+	expander(&parsed_list, god_struct);
+	/* print_parser_list(god_struct->parser_list); */
+	god_struct->parser_list = NULL;
 }
 
-/* static void	print_lexer_list(t_list *lexed_list)
+/* static void	print_parser_list(t_list *parsed_list)
 {
-	t_lexer	*node;
+	t_parser	*node;
 	int		i;
 	int		j;
 
 	printf("\n=== Lexer linked list ===\n");
 	j = 0;
-	while (lexed_list)
+	while (parsed_list)
 	{
 		i = 0;
-		node = (t_lexer *)lexed_list->content;
+		node = (t_parser *)parsed_list->content;
 		while (node->cmd[i])
 		{
 			printf("cmd[%d] of node %d is : %s\n", i, j, node->cmd[i]);
@@ -59,7 +61,7 @@ void	lexer(char *input, t_envp *god_struct)
 		}
 		printf("command line operator of node %d is : %s\n", j, node->operator);
 		j++;
-		lexed_list = lexed_list->next;
+		parsed_list = parsed_list->next;
 	}
 	printf("===    End of list    ===\n\n");
 }

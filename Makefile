@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/02 16:55:04 by yiwong           ###   ########.fr        #
+#    Updated: 2023/09/03 16:25:26 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,21 +26,21 @@ OBJ_DIR = build
 
 SRC	=	main.c \
 		init/create_struct.c \
-		lexer/lexer.c \
-		lexer/get_input.c \
-		lexer/lexer_utils.c \
-		lexer/lexer_utils_count.c \
-		lexer/lexer_list.c \
+		parser/lexer.c \
+		parser/parser.c \
+		parser/get_input.c \
+		parser/parser_utils.c \
+		parser/parser_list.c \
 		expander/expander.c \
 		keybinds/keypress.c \
 		utils/counters.c \
 		free/free_char.c \
 		quit/quit.c \
-		buildin/cd_build_in.c \
-		buildin/echo_build_in.c \
-		buildin/export_build_in.c \
-		buildin/pwd_build_in.c \
-		buildin/unset_build_in.c \
+		builtins/cd.c \
+		builtins/echo.c \
+		builtins/export.c \
+		builtins/pwd.c \
+		builtins/unset.c \
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

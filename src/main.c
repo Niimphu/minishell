@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/02 16:54:51 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 16:23:18 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_signal_received;
 
 int	main(int argument_count, char **arguments, char **envp)
 {
-	t_envp	*god_struct;
+	t_god	*god_struct;
 
 	g_signal_received = 0;
 	god_struct = create_god_struct(envp);
