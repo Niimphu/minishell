@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 16:40:23 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 19:45:06 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse(char *input, t_god *god_struct)
 	parsed_list = create_parser_list(split_str);
 	god_struct->parser_list = parsed_list;
 	expander(&parsed_list, god_struct);
-//	print_parser_list(god_struct->parser_list);
+	print_parser_list(god_struct->parser_list);
 	god_struct->parser_list = NULL;
 }
 
