@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "parser.h"
 
 static t_parser	*new_parser_node(char **array);
 static t_parser	*fill_node(t_parser *node, char **array);
