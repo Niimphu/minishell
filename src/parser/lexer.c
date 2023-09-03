@@ -29,8 +29,6 @@ char	*lex(char *str)
 			str[i] = 26;
 		i++;
 	}
-	if (!str[i])
-		return (NULL);
 	return (str);
 }
 
