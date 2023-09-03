@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/02 17:47:27 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 19:39:05 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ t_list	*create_parser_list(char **split_string)
 {
 	t_list		*parser_list;
 	t_parser	*new_node;
-	char		*array_start;
+	char		**array_start;
 
-	array_start = *split_string;
+	array_start = split_string;
 	new_node = new_parser_node(split_string);
 	parser_list = ft_lstnew(new_node);
-	split_string += count_cmd(split_string);
+	split_string += (next_command(split_string));
 	while (*split_string)
 	{
 		new_node = new_parser_node(split_string);
 		ft_lstadd_back(&parser_list, ft_lstnew(new_node));
-		split_string += count_cmd(split_string);
+		split_string += (next_command(split_string));
 	}
-	free_string_array(array_start);
+	free_string_array(&array_start);
 	return (parser_list);
 }
 
@@ -54,7 +54,7 @@ static t_parser	*fill_node(t_parser *node, char **array)
 	int		cmd_count;
 
 	i = 0;
-	cmd_count = count_cmd(array);
+	cmd_count = next_command(array);
 	node->cmd = ft_calloc(cmd_count + 1, sizeof(char *));
 	if (!node->cmd)
 		return (NULL);
