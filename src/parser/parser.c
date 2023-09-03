@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 16:25:53 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 16:40:23 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	parse(char *input, t_god *god_struct)
 
 	input = lex(input);
 	if (!input)
-	{
-		free(input);
-		
-	}
+		return ;
 	if (!ft_strncmp(input, "", 1))
 		return ;
 	split_str = ft_split(input, 26);
