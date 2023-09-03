@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/03 16:24:09 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 19:38:56 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	await_signals(void);
 t_list	*create_parser_list(char **split_string);
 void	parse(char *input_string, t_god *god_struct);
 
-int		count_cmd(char **str);
+int		next_command(char **str);
 int		contains_operator(char c);
 int		ends_with_operator(char **array);
 
@@ -67,4 +67,7 @@ int		echo(char **cmd, t_god *tools);
 int		unset(t_god *tools, char **cmd);
 int		pwd(t_god *tools);
 int		cd(char *dir, t_god *tool);
+
+void	print_parser_list(t_list *parsed_list);
+
 #endif

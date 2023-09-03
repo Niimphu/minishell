@@ -17,8 +17,6 @@
 // input output files
 // git branch -a 
 
-/* static void	print_parser_list(t_list *parsed_list); */
-
 void	parse(char *input, t_god *god_struct)
 {
 	t_list	*parsed_list;
@@ -35,15 +33,15 @@ void	parse(char *input, t_god *god_struct)
 	parsed_list = create_parser_list(split_str);
 	god_struct->parser_list = parsed_list;
 	expander(&parsed_list, god_struct);
-	/* print_parser_list(god_struct->parser_list); */
+//	print_parser_list(god_struct->parser_list);
 	god_struct->parser_list = NULL;
 }
 
-/* static void	print_parser_list(t_list *parsed_list)
+void	print_parser_list(t_list *parsed_list)
 {
 	t_parser	*node;
-	int		i;
-	int		j;
+	int			i;
+	int			j;
 
 	printf("\n=== Lexer linked list ===\n");
 	j = 0;
@@ -62,4 +60,3 @@ void	parse(char *input, t_god *god_struct)
 	}
 	printf("===    End of list    ===\n\n");
 }
- */

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:31:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 16:18:17 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 19:38:56 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ int	contains_operator(char c)
 	return (0);
 }
 
-int	count_cmd(char **str)
+int	next_command(char **str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i] && !contains_operator(str[i][0]))
+		i++;
+	if (str[i])
 		i++;
 	return (i);
 }
