@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 19:44:07 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 19:51:31 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ static t_parser	*new_parser_node(char **array)
 static t_parser	*fill_node(t_parser *node, char **array)
 {
 	int		i;
-	int		cmd_count;
+	int		command_count;
 
 	i = 0;
-	cmd_count = next_command(array);
-	node->cmd = ft_calloc(cmd_count + 1, sizeof(char *));
+	command_count = next_operator(array);
+	node->cmd = ft_calloc(command_count + 1, sizeof(char *));
 	if (!node->cmd)
 		return (NULL);
-	while (i < cmd_count)
+	while (i < command_count)
 	{
 		node->cmd[i] = ft_strdup(array[i]);
 		i++;

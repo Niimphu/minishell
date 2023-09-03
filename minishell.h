@@ -48,6 +48,7 @@ t_list	*create_parser_list(char **split_string);
 void	parse(char *input_string, t_god *god_struct);
 
 int		next_command(char **str);
+int		next_operator(char **str);
 int		contains_operator(char c);
 int		ends_with_operator(char **array);
 
