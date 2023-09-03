@@ -29,7 +29,6 @@ typedef struct s_parser
 {
 	char			**cmd;
 	char			*operator;
-	struct s_parser	*next;
 }				t_parser;
 
 typedef struct s_god
