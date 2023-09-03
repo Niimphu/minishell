@@ -25,14 +25,14 @@
 
 int	g_signal_received;
 
-typedef struct	s_parser
+typedef struct s_parser
 {
 	char			**cmd;
 	char			*operator;
 	struct s_parser	*next;
 }				t_parser;
 
-typedef struct	s_god
+typedef struct s_god
 {
 	char	**env;
 	char	**sorted_env;
@@ -56,6 +56,7 @@ void	expander(t_list **root, t_god *tools);
 int		get_array_size(char **array);
 
 void	free_string(char **string);
+void	free_string_array(char ***array);
 
 void	quit(int exit_number);
 

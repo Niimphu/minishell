@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_list.c                                       :+:      :+:    :+:   */
+/*   parser_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,9 +17,9 @@ static t_parser	*fill_node(t_parser *node, char **array);
 
 t_list	*create_parser_list(char **split_string)
 {
-	t_list	*parser_list;
+	t_list		*parser_list;
 	t_parser	*new_node;
-	char	*array_start;
+	char		*array_start;
 
 	array_start = *split_string;
 	new_node = new_parser_node(split_string);
@@ -31,7 +31,7 @@ t_list	*create_parser_list(char **split_string)
 		ft_lstadd_back(&parser_list, ft_lstnew(new_node));
 		split_string += count_cmd(split_string);
 	}
-	free(array_start);
+	free_string_array(array_start);
 	return (parser_list);
 }
 
