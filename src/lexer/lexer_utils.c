@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:31:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/25 15:15:59 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 14:21:59 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ char	*replace_whitespaces(char *str)
 			str[i] = 26;
 		i++;
 	}
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != 26)
+			break ;
+		i++;
+	}
+	if (!str[i])
+		return (NULL);
 	return (str);
 }
 

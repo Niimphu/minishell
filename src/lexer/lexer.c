@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/02 16:57:05 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 16:05:39 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-static void	print_lexer_list(t_list *lexed_list);
+// check for double or beginning operator
+// handle oe or more heredoc
+// input output files
+// git branch -a 
+/* static void	print_lexer_list(t_list *lexed_list); */
 
 void	lexer(char *input, t_envp *god_struct)
 {
@@ -20,9 +23,11 @@ void	lexer(char *input, t_envp *god_struct)
 	char	**split_str;
 
 	input = replace_whitespaces(input);
-	printf("input line: %s\n===============\n", input);
 	if (!input)
-		quit(0);
+	{
+		free(input);
+		
+	}
 	if (!ft_strncmp(input, "", 1))
 		return ;
 	split_str = ft_split(input, 26);
@@ -31,11 +36,11 @@ void	lexer(char *input, t_envp *god_struct)
 	lexed_list = create_lexer_list(split_str);
 	god_struct->lexer_list = lexed_list;
 	expander(&lexed_list, god_struct);
-	print_lexer_list(god_struct->lexer_list);
+	/* print_lexer_list(god_struct->lexer_list); */
 	god_struct->lexer_list = NULL;
 }
 
-static void	print_lexer_list(t_list *lexed_list)
+/* static void	print_lexer_list(t_list *lexed_list)
 {
 	t_lexer	*node;
 	int		i;
@@ -58,3 +63,4 @@ static void	print_lexer_list(t_list *lexed_list)
 	}
 	printf("===    End of list    ===\n\n");
 }
+ */

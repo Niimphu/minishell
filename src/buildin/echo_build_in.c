@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/08/30 16:45:15 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/02 19:45:17 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ char	*get_var(char *var, t_envp *tools)
 	char	*new_var;
 
 	i = 0;
+	
+	if (!var)
+		return ("\n");
 	new_var = ft_strtrim(var, "\"\'$");
 	free(var);
 	while (tools->env[i])
@@ -40,7 +43,7 @@ int	echo_build_in(char **cmd, t_envp *tools)
 
 	i = 1;
 	new_line_flag = 0;
-	while (!ft_strncmp(cmd[i], "-n", ft_strlen(cmd[i])))
+	while (cmd[i] && !ft_strncmp(cmd[i], "-n", ft_strlen(cmd[i])))
 	{
 		new_line_flag = 1;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/08/30 15:44:13 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/03 15:58:13 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static t_lexer	*new_node(char **str);
 static void		add_new_node(t_lexer **root, t_lexer *new);
+
 
 t_lexer	*lexer_list_init(char **str)
 {
