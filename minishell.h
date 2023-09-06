@@ -34,7 +34,6 @@ typedef struct s_parser
 typedef struct s_god
 {
 	char	**env;
-	char	**sorted_env;
 	t_list	*parser_list;
 }				t_god;
 
