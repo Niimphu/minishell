@@ -12,4 +12,10 @@
 
 #include "../../minishell.h"
 
-bool	is_syntax_valid()
+bool	is_syntax_valid(char *input)
+{
+	if (input)
+		return (true);
+	perror("syntax error: ");
+	return (false);
+}

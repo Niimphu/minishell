@@ -16,6 +16,7 @@
 # include "../../minishell.h"
 
 char	*lex(char *str);
+bool	is_syntax_valid(char *input);
 
 int		count_quotes(char *str, char quotes);
 int		next_command(char **str);

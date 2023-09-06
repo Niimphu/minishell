@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 19:45:06 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:02:03 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	parse(char *input, t_god *god_struct)
 	t_list	*parsed_list;
 	char	**split_str;
 
+	if (!is_syntax_valid(input))
+		return ;
 	input = lex(input);
 	if (!input)
 		return ;
@@ -43,7 +45,7 @@ void	print_parser_list(t_list *parsed_list)
 	int			i;
 	int			j;
 
-	printf("\n=== Lexer linked list ===\n");
+	printf("\n=== Parser linked list ===\n");
 	j = 0;
 	while (parsed_list)
 	{
@@ -58,5 +60,5 @@ void	print_parser_list(t_list *parsed_list)
 		j++;
 		parsed_list = parsed_list->next;
 	}
-	printf("===    End of list    ===\n\n");
+	printf("===    End of list     ===\n\n");
 }
