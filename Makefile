@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/03 16:25:26 by yiwong           ###   ########.fr        #
+#    Updated: 2023/09/06 14:55:00 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC	=	main.c \
 		expander/expander.c \
 		keybinds/keypress.c \
 		utils/counters.c \
+		utils/env_utils.c \
 		free/free_char.c \
 		quit/quit.c \
 		builtins/cd.c \

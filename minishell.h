@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/03 19:38:56 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/06 14:50:29 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	free_string_array(char ***array);
 void	quit(int exit_number);
 
 char	*get_var(char *var, t_god *tools);
+
 int		env(t_god *tools);
 int		export(t_god *tools, char **cmd);
 int		echo(char **cmd, t_god *tools);

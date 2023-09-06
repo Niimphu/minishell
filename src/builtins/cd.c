@@ -12,9 +12,9 @@
 
 #include "../../minishell.h"
 
-//bug cd should take you home
+//kinda ghetto pls fix
 
-static int	update_old_pwd(t_god *tools, char *dir)
+static int	update_old_pwd(t_god *god_struct, char *dir)
 {
 	int	i;
 
@@ -22,11 +22,11 @@ static int	update_old_pwd(t_god *tools, char *dir)
 	dir = ft_strjoin("OLDPWD=", dir);
 	if (!dir)
 		return (1);
-	while (tools->env[i])
+	while (god_struct->env[i])
 	{
-		if (!strncmp(tools->env[i], "OLDPWD=", 7))
+		if (!strncmp(god_struct->env[i], "OLDPWD=", 7))
 		{
-			tools->env[i] = ft_strdup(dir);
+			god_struct->env[i] = ft_strdup(dir);
 			break ;
 		}
 		i++;
@@ -35,7 +35,7 @@ static int	update_old_pwd(t_god *tools, char *dir)
 	return (0);
 }
 
-static int	update_pwd(t_god *tools)
+static int	update_pwd(t_god *god_struct)
 {
 	int		i;
 	char	*dir;
@@ -50,11 +50,11 @@ static int	update_pwd(t_god *tools)
 	dir = ft_strjoin("PWD=", dir);
 	if (!dir)
 		return (1);
-	while (tools->env[i])
+	while (god_struct->env[i])
 	{
-		if (!strncmp(tools->env[i], "PWD=", 4))
+		if (!strncmp(god_struct->env[i], "PWD=", 4))
 		{
-			tools->env[i] = ft_strdup(dir);
+			god_struct->env[i] = ft_strdup(dir);
 			break ;
 		}
 		i++;
@@ -63,21 +63,28 @@ static int	update_pwd(t_god *tools)
 	return (0);
 }
 
-int	cd(char *dir, t_god *tool)
+int	cd(char *dir, t_god *god_struct)
 {
 	char	*old_dir;
+	bool	free_dir;
+	int		return_value;
 
 	old_dir = getcwd(NULL, 1024);
-	if (!old_dir || update_old_pwd(tool, old_dir))
+	free_dir = false;
+	return_value = 0;
+	if (!dir)
 	{
-		perror("cd");
-		return (1);
+		dir = get_var(ft_strdup("$HOME"), god_struct);
+		free_dir = true;
 	}
-	if (chdir(dir) == -1 || update_pwd(tool))
+	if (!old_dir || update_old_pwd(god_struct, old_dir)
+		|| chdir(dir) == -1 || update_pwd(god_struct))
 	{
-		perror("cd");
-		return (1);
+		perror(ft_strcat("cd: ", dir));
+		return_value = 1;
 	}
 	free(old_dir);
-	return (0);
+	if (free_dir)
+		free_string(&dir);
+	return (return_value);
 }
