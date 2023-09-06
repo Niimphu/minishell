@@ -6,21 +6,17 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:31:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 19:38:56 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/06 18:57:49 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	contains_operator(char c)
+bool	contains_operator(char c)
 {
-	if (c == '|')
-		return (1);
-	if (c == '>')
-		return (1);
-	if (c == '<')
-		return (1);
-	return (0);
+	if (c == '|' || c == '>' || c == '<')
+		return (true);
+	return (false);
 }
 
 int	next_command(char **str)
@@ -45,7 +41,7 @@ int	next_operator(char **str)
 	return (i);
 }
 
-int	ends_with_operator(char **array)
+bool	ends_with_operator(char **array)
 {
 	int	i;
 
