@@ -23,12 +23,18 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
+# define PIPE 1
+# define INPUT 2
+# define OUTPUT 3
+# define HEREDOC 4
+# define APPEND 5
+
 int	g_signal_received;
 
 typedef struct s_parser
 {
-	char			**cmd;
-	char			*operator;
+	char	**cmd;
+	int		operator;
 }				t_parser;
 
 typedef struct s_god

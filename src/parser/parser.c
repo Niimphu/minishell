@@ -56,7 +56,8 @@ void	print_parser_list(t_list *parsed_list)
 			printf("cmd[%d] of node %d is : %s\n", i, j, node->cmd[i]);
 			i++;
 		}
-		printf("command line operator of node %d is : %s\n", j, node->operator);
+		printf("command line operator ID of node %d is: %i\n",
+			j, node->operator);
 		j++;
 		parsed_list = parsed_list->next;
 	}

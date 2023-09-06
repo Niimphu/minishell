@@ -27,6 +27,7 @@ OBJ_DIR = build
 SRC	=	main.c \
 		init/create_struct.c \
 		parser/lexer.c \
+		parser/check_syntax.c \
 		parser/parser.c \
 		parser/get_input.c \
 		parser/parser_utils.c \

@@ -18,7 +18,6 @@ char	*get_var(char *var, t_god *tools)
 	char	*new_var;
 
 	i = 0;
-	
 	if (!var)
 		return ("\n");
 	new_var = ft_strtrim(var, "\"\'$");
