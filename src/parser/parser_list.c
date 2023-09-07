@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 19:51:31 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/06 22:57:02 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ static int	get_operator_id(char *operator_string)
 	if (!ft_strncmp(">>", operator_string, 3))
 		return (APPEND);
 	else
-		return (-1);
+		return (BAD_OPERATOR);
 }

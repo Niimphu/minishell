@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/06 14:50:29 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/06 23:07:21 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
+# define BAD_OPERATOR -1
 # define PIPE 1
 # define INPUT 2
 # define OUTPUT 3
