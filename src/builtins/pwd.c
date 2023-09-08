@@ -12,19 +12,13 @@
 
 #include "../../minishell.h"
 
-int	pwd(t_god *tools)
+int	pwd(t_god *god_struct)
 {
-	int	i;
+	char	*path;
 
-	i = 0;
-	while (tools->env[i])
-	{
-		if (!strncmp(tools->env[i], "PWD=", 4))
-		{
-			printf("%s\n", tools->env[i] + 4);
-			break ;
-		}
-		i++;
-	}
+	path = get_env_var("PWD=", god_struct->env, TRIM);
+	if (!path)
+		return (1);
+	printf("%s\n", path);
 	return (0);
 }
