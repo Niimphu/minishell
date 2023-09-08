@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:41:11 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/08 15:17:59 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/08 15:42:26 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ void	free_parser_list(t_list *parsed_list)
 		free(current);
 		current = NULL;
 	}
+}
+
+void	free_node(void *node)
+{
+	t_parser *parser_node;
+	
+	parser_node = (t_parser *)node;
+	free_string_array(&parser_node->cmd);
 }
 
 void	free_god_struct(t_god **god_struct)
