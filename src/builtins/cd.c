@@ -16,8 +16,8 @@
 
 static int	update_old_pwd(t_god *god_struct, char *old_dir)
 {
-	int	i;
-	char *	dir;
+	char	*dir;
+	int		i;
 
 	i = 0;
 	dir = ft_strjoin("OLDPWD=", old_dir);
@@ -29,7 +29,7 @@ static int	update_old_pwd(t_god *god_struct, char *old_dir)
 		if (!strncmp(god_struct->env[i], "OLDPWD=", 7))
 		{
 			free_string(&god_struct->env[i]);
-			god_struct->env[i] =dir;
+			god_struct->env[i] = dir;
 		}
 		i++;
 	}
