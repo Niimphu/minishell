@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:41:11 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/08 15:48:34 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/08 15:51:12 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_parser_list(t_list *parsed_list)
 	}
 }
 
-void	free_node(void *node)
+void	free_parser_node(void *node)
 {
 	t_parser *parser_node;
 	
