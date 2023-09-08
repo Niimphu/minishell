@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/03 16:40:07 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/03 20:31:18 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ char	*lex(char *str)
 			str[i] = 26;
 		i++;
 	}
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != 26)
-			break ;
-		i++;
-	}
-	if (!str[i])
-		return (NULL);
 	return (str);
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
+#    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/03 16:25:26 by yiwong           ###   ########.fr        #
+#    Updated: 2023/09/07 17:41:57 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,14 @@ SRC	=	main.c \
 		keybinds/keypress.c \
 		utils/counters.c \
 		free/free_char.c \
+		free/free_structs.c \
 		quit/quit.c \
 		builtins/cd.c \
 		builtins/echo.c \
 		builtins/export.c \
 		builtins/pwd.c \
 		builtins/unset.c \
+		builtins/exit.c \
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

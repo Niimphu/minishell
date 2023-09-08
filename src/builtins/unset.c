@@ -28,6 +28,6 @@ int	unset(t_god *tools, char **cmd)
 			tools->env[i] = ft_strdup(tools->env[i + 1]);
 		i++;
 	}
-	tools->env[i - 1] = NULL;
+	free_string(&tools->env[i - 1]);
 	return (0);
 }

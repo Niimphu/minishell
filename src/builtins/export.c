@@ -12,26 +12,26 @@
 
 #include "../../minishell.h"
 
-int	env(t_god *tools)
+int	env(t_god *god_struct)
 {
 	int		i;
 	t_god	*ptr;
 
 	i = 0;
-	ptr = tools;
+	ptr = god_struct;
 	while (ptr->env[i])
 		printf("%s\n", ptr->env[i++]);
 	return (0);
 }
 
-static void	print_sorted_envp(t_god *tools)
+static void	print_sorted_envp(t_god *god_struct)
 {
 	int		i;
 	int		j;
 	t_god	*ptr;
 
 	i = 0;
-	ptr = tools;
+	ptr = god_struct;
 	while (i <= 255)
 	{
 		j = -1;
@@ -42,46 +42,42 @@ static void	print_sorted_envp(t_god *tools)
 	}
 }
 
-static char	**new_env(t_god *tools, char *cmd)
+static char	**new_env(t_god *god_struct, char *cmd)
 {
 	int		i;
 	char	**new_env;
 
 	i = 0;
-	while (tools->env[i])
+	while (god_struct->env[i])
 		i++;
 	new_env = malloc(sizeof(char *) * (i + 2));
 	if (!new_env)
 		return (NULL);
 	i = 0;
-	while (tools->env[i])
+	while (god_struct->env[i])
 	{
-		new_env[i] = ft_strdup(tools->env[i]);
+		new_env[i] = ft_strdup(god_struct->env[i]);
 		if (!new_env[i])
 			return (NULL);
-		free(tools->env[i]);
 		i++;
 	}
 	new_env[i] = ft_strdup(cmd);
 	if (!new_env[i])
 		return (NULL);
-	free(tools->env);
+	free_string_array(&god_struct->env);
 	new_env[++i] = NULL;
 	return (new_env);
 }
 
-int	export(t_god *tools, char **cmd)
+int	export(t_god *god_struct, char **cmd)
 {
-	int		i;
-
-	i = 0;
 	if (!cmd[1])
 	{
-		print_sorted_envp(tools);
+		print_sorted_envp(god_struct);
 		return (0);
 	}
-	tools->env = new_env(tools, cmd[1]);
-	if (!tools->env)
+	god_struct->env = new_env(god_struct, cmd[1]);
+	if (!god_struct->env)
 		return (1);
 	return (0);
 }

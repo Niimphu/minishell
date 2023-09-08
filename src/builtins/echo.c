@@ -12,31 +12,33 @@
 
 #include "../../minishell.h"
 
-char	*get_var(char *var, t_god *tools)
+char	*get_var(char *var, t_god *god_struct)
 {
 	int		i;
 	char	*new_var;
+	char	*tmp;
 
 	i = 0;
-	
 	if (!var)
 		return ("\n");
 	new_var = ft_strtrim(var, "\"\'$");
-	free(var);
-	while (tools->env[i])
+	free_string(&var);
+	while (god_struct->env[i])
 	{
-		if (!ft_strncmp(new_var, tools->env[i], ft_strlen(new_var)))
+		if (!ft_strncmp(new_var, god_struct->env[i], ft_strlen(new_var)))
 		{
-			new_var = ft_strdup(tools->env[i] + (ft_strlen(new_var) + 1));
-			if (!new_var)
-				return (NULL);
+			tmp = ft_strdup(god_struct->env[i] + (ft_strlen(new_var) + 1));
+			if (!tmp)
+				return (free(new_var), NULL);
+			free_string(&new_var);
+			new_var = tmp;
 		}
 		i++;
 	}
 	return (new_var);
 }
 
-int	echo(char **cmd, t_god *tools)
+int	echo(char **cmd, t_god *god_struct)
 {
 	int	i;
 	int	new_line_flag;
@@ -53,7 +55,7 @@ int	echo(char **cmd, t_god *tools)
 		if (ft_strchr(cmd[i], '$') && !ft_strchr(cmd[i], '\'')
 			&& ft_strlen(cmd[i]) > 1)
 		{
-			cmd[i] = get_var(cmd[i], tools);
+			cmd[i] = get_var(cmd[i], god_struct);
 			if (!cmd[i])
 				return (1);
 		}

@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:30:29 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/07/30 12:13:55 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/04 16:52:18 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ char	*ft_strjoin_gnl(char *dest, char *src)
 char	*cleanup(char *str)
 {
 	int		i;
-	int		j;
 	char	*new_str;
 
 	i = 0;
-	j = 0;
 	while (str[i] != '\n' && str[i])
 		i++;
 	if (str[i] == '\n')
@@ -58,10 +56,8 @@ char	*cleanup(char *str)
 
 char	*cpy_str(char *src)
 {
-	int		i;
 	int		len;
 
-	i = 0;
 	len = 0;
 	if (src[0] == '\0')
 		return (NULL);

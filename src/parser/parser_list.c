@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/03 19:51:31 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/07 17:30:44 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_list	*create_parser_list(char **split_string)
 	t_list		*parser_list;
 	t_parser	*new_node;
 	char		**array_start;
-
+	
+	parser_list = NULL;
 	array_start = split_string;
 	new_node = new_parser_node(split_string);
 	parser_list = ft_lstnew(new_node);
@@ -28,6 +29,11 @@ t_list	*create_parser_list(char **split_string)
 	while (*split_string)
 	{
 		new_node = new_parser_node(split_string);
+		if (!new_node)
+		{
+			free_string_array(&array_start);
+			return (NULL);
+		}
 		ft_lstadd_back(&parser_list, ft_lstnew(new_node));
 		split_string += (next_command(split_string));
 	}
