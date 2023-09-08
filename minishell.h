@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/08 15:51:20 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/08 18:15:18 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define OUTPUT 3
 # define HEREDOC 4
 # define APPEND 5
+
+# define TRIM 7
 
 int	g_signal_received;
 
@@ -57,14 +59,16 @@ void	parse(char *input_string, t_god *god_struct);
 void	expander(t_list **root, t_god *god_struct);
 
 int		get_array_size(char **array);
+char	*get_env_var(char *var, char **env, int trim);
 
 char	*get_var(char *var, t_god *tools);
 int		env(t_god *tgod_struct);
 int		export(t_god *god_struct, char **cmd);
 int		echo(char **cmd, t_god *tools);
 int		unset(t_god *tools, char **cmd);
-int		pwd(t_god *tools);
+int		pwd(t_god *god_struct);
 int		cd(char *dir, t_god *god_struct);
+
 int		exit_minishell(t_god *god_struct);
 
 void	free_god_struct(t_god **root);
