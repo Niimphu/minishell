@@ -34,7 +34,7 @@ t_god	*create_god_struct(char **envp)
 			perror("upsi no envp!");
 		i++;
 	}
-	increment_shell_level(envp);
+	increment_shell_level(god_struct->env);
 	god_struct->env[i] = NULL;
 	god_struct->parser_list = NULL;
 	return (god_struct);
