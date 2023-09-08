@@ -27,7 +27,6 @@ void	await_input(t_god *god_struct)
 	if (!is_syntax_valid(god_struct->parser_list))
 		write(2, "syntax error: unexpected token\n", 35);
 	free_string(&input);
-	// free_parser_list(god_struct->parser_list);
 	ft_lstclear(&god_struct->parser_list, free_parser_node);
 }
 

@@ -21,7 +21,7 @@ t_list	*create_parser_list(char **split_string)
 	t_list		*parser_list;
 	t_parser	*new_node;
 	char		**array_start;
-	
+
 	parser_list = NULL;
 	array_start = split_string;
 	new_node = new_parser_node(split_string);

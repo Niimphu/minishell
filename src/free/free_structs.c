@@ -16,9 +16,7 @@ void	free_parser_list(t_list *parsed_list)
 {
 	t_list		*current;
 	t_parser	*node;
-	int			i;
 
-	i = 0;
 	while (parsed_list)
 	{
 		node = (t_parser *)parsed_list->content;
@@ -33,8 +31,8 @@ void	free_parser_list(t_list *parsed_list)
 
 void	free_parser_node(void *node)
 {
-	t_parser *parser_node;
-	
+	t_parser	*parser_node;
+
 	parser_node = (t_parser *)node;
 	free_string_array(&parser_node->cmd);
 	free(node);
