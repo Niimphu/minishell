@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parser_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/07 17:30:44 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:06:40 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "parser.h"
 
 static t_parser	*new_parser_node(char **array);
 static t_parser	*fill_node(t_parser *node, char **array);
+static int		get_operator_id(char *operator_string);
 
 t_list	*create_parser_list(char **split_string)
 {
@@ -49,7 +50,7 @@ static t_parser	*new_parser_node(char **array)
 	if (!parser_node)
 		return (NULL);
 	parser_node->cmd = NULL;
-	parser_node->operator = NULL;
+	parser_node->operator = 0;
 	fill_node(parser_node, array);
 	return (parser_node);
 }
@@ -71,6 +72,22 @@ static t_parser	*fill_node(t_parser *node, char **array)
 	}
 	node->cmd[i] = NULL;
 	if (array[i])
-		node->operator = ft_strdup(array[i]);
+		node->operator = get_operator_id(array[i]);
 	return (node);
+}
+
+static int	get_operator_id(char *operator_string)
+{
+	if (!ft_strncmp("|", operator_string, 2))
+		return (PIPE);
+	if (!ft_strncmp("<", operator_string, 2))
+		return (INPUT);
+	if (!ft_strncmp(">", operator_string, 2))
+		return (OUTPUT);
+	if (!ft_strncmp("<<", operator_string, 3))
+		return (HEREDOC);
+	if (!ft_strncmp(">>", operator_string, 3))
+		return (APPEND);
+	else
+		return (BAD_OPERATOR);
 }

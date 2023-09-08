@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:41:11 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/08 14:59:20 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:17:59 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	free_parser_list(t_list *parsed_list)
 		node = (t_parser *)parsed_list->content;
 		current = parsed_list;
 		free_string_array(&node->cmd);
-		if (node->operator)
-			free_string(&node->operator);
 		free(parsed_list->content);
 		parsed_list = parsed_list->next;
 		free(current);

@@ -1,42 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                    :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/03 16:23:18 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/08 15:19:23 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-char	*get_var(char *var, t_god *god_struct)
-{
-	int		i;
-	char	*new_var;
-	char	*tmp;
-
-	i = 0;
-	if (!var)
-		return ("\n");
-	new_var = ft_strtrim(var, "\"\'$");
-	free_string(&var);
-	while (god_struct->env[i])
-	{
-		if (!ft_strncmp(new_var, god_struct->env[i], ft_strlen(new_var)))
-		{
-			tmp = ft_strdup(god_struct->env[i] + (ft_strlen(new_var) + 1));
-			if (!tmp)
-				return (free(new_var), NULL);
-			free_string(&new_var);
-			new_var = tmp;
-		}
-		i++;
-	}
-	return (new_var);
-}
 
 int	echo(char **cmd, t_god *god_struct)
 {

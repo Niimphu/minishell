@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/07 21:16:51 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:17:35 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,19 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
+# define BAD_OPERATOR -1
+# define PIPE 1
+# define INPUT 2
+# define OUTPUT 3
+# define HEREDOC 4
+# define APPEND 5
+
 int	g_signal_received;
 
 typedef struct s_parser
 {
-	char			**cmd;
-	char			*operator;
-	struct s_parser	*next;
+	char	**cmd;
+	int		operator;
 }				t_parser;
 
 typedef struct s_god
@@ -40,6 +46,7 @@ typedef struct s_god
 }				t_god;
 
 t_god	*create_god_struct(char **envp);
+int		increment_shell_level(char **env);
 
 void	await_signals(void);	
 void	await_input(t_god *tools);
@@ -47,15 +54,9 @@ void	await_input(t_god *tools);
 t_list	*create_parser_list(char **split_string);
 void	parse(char *input_string, t_god *god_struct);
 
-
-int		next_command(char **str);
-int		next_operator(char **str);
-int		contains_operator(char c);
-int		ends_with_operator(char **array);
-void	expander(t_list **root, t_god *tools);
+void	expander(t_list **root, t_god *god_struct);
 
 int		get_array_size(char **array);
-
 
 char	*get_var(char *var, t_god *tools);
 int		env(t_god *tgod_struct);

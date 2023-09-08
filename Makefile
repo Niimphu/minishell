@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
+#    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/07 17:41:57 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/09/08 15:19:05 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ OBJ_DIR = build
 
 SRC	=	main.c \
 		init/create_struct.c \
+		init/shell_level.c \
 		parser/lexer.c \
+		parser/check_syntax.c \
 		parser/parser.c \
 		parser/get_input.c \
 		parser/parser_utils.c \
@@ -34,6 +36,7 @@ SRC	=	main.c \
 		expander/expander.c \
 		keybinds/keypress.c \
 		utils/counters.c \
+		utils/env_utils.c \
 		free/free_char.c \
 		free/free_structs.c \
 		quit/quit.c \

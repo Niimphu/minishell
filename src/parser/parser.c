@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/06 22:46:10 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:07:49 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "parser.h"
 
@@ -40,7 +41,7 @@ void	print_parser_list(t_list *parsed_list)
 	int			i;
 	int			j;
 
-	printf("\n=== Lexer linked list ===\n");
+	printf("\n=== Parser linked list ===\n");
 	j = 0;
 	while (parsed_list)
 	{
@@ -51,9 +52,10 @@ void	print_parser_list(t_list *parsed_list)
 			printf("cmd[%d] of node %d is : %s\n", i, j, node->cmd[i]);
 			i++;
 		}
-		printf("command line operator of node %d is : %s\n", j, node->operator);
+		printf("command line operator ID of node %d is: %i\n",
+			j, node->operator);
 		j++;
 		parsed_list = parsed_list->next;
 	}
-	printf("===    End of list    ===\n\n");
+	printf("===    End of list     ===\n\n");
 }
