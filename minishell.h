@@ -37,8 +37,10 @@ int	g_signal_received;
 
 typedef struct s_parser
 {
+	int		index;
 	char	**cmd;
 	int		operator;
+	int		fd;
 	bool	outfile;
 }				t_parser;
 
@@ -46,7 +48,15 @@ typedef struct s_god
 {
 	char	**env;
 	t_list	*parser_list;
+	t_list	*heredoc_names;
 }				t_god;
+
+typedef struct s_file
+{
+	int		index;
+	char	*filename;
+	bool	temp;
+}				t_file;
 
 t_god	*create_god_struct(char **envp);
 int		increment_shell_level(char **env);
@@ -55,7 +65,7 @@ void	await_signals(void);
 void	await_input(t_god *tools);
 
 t_list	*create_parser_list(char **split_string);
-void	parse(char *input_string, t_god *god_struct);
+int		parse(char *input_string, t_god *god_struct);
 
 void	expander(t_list **root, t_god *god_struct);
 
@@ -73,11 +83,13 @@ int		cd(char *dir, t_god *god_struct);
 int		exit_minishell(t_god *god_struct);
 
 void	free_god_struct(t_god **root);
-void	free_parser_list(t_list *parsed_list);
 void	free_string(char **string);
 void	free_string_array(char ***array);
 void	free_parser_node(void *node);
+void	free_file_node(void *node);
+void	close_fd(int *fd);
 
 void	print_parser_list(t_list *parsed_list);
+void	print_heredoc_list(t_list *heredocs);
 
 #endif

@@ -60,12 +60,14 @@ SRC	=	main.c \
 		parser/get_input.c \
 		parser/parser_utils.c \
 		parser/parser_list.c \
+		file_managers/heredoc.c \
 		expander/expander.c \
 		keybinds/keypress.c \
 		utils/counters.c \
 		utils/env_utils.c \
 		free/free_char.c \
 		free/free_structs.c \
+		free/free_fd.c \
 		quit/quit.c \
 		builtins/cd.c \
 		builtins/echo.c \
