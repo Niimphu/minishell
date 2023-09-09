@@ -31,7 +31,7 @@
 # define HEREDOC 4
 # define APPEND 5
 
-# define TRIM 7
+# define TRIM 6
 
 int	g_signal_received;
 
@@ -39,6 +39,7 @@ typedef struct s_parser
 {
 	char	**cmd;
 	int		operator;
+	bool	outfile;
 }				t_parser;
 
 typedef struct s_god

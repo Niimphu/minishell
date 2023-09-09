@@ -15,6 +15,7 @@
 static t_parser	*new_parser_node(char **array);
 static t_parser	*fill_node(t_parser *node, char **array);
 static int		get_operator_id(char *operator_string);
+static void		set_outfile(t_list *parser_list);
 
 t_list	*create_parser_list(char **split_string)
 {
@@ -36,6 +37,7 @@ t_list	*create_parser_list(char **split_string)
 			return (NULL);
 		}
 		ft_lstadd_back(&parser_list, ft_lstnew(new_node));
+		set_outfile(parser_list);
 		split_string += (next_command(split_string));
 	}
 	free_string_array(&array_start);
@@ -51,6 +53,7 @@ static t_parser	*new_parser_node(char **array)
 		return (NULL);
 	parser_node->cmd = NULL;
 	parser_node->operator = 0;
+	parser_node->outfile = false;
 	fill_node(parser_node, array);
 	return (parser_node);
 }
@@ -90,4 +93,19 @@ static int	get_operator_id(char *operator_string)
 		return (APPEND);
 	else
 		return (BAD_OPERATOR);
+}
+
+static void	set_outfile(t_list *parser_list)
+{
+	t_parser	*node;
+	bool		redirect_out;
+
+	redirect_out = false;
+	while (parser_list)
+	{
+		node = parser_list->content;
+		node->outfile = redirect_out;
+		redirect_out = (node->operator == OUTPUT || node->operator == APPEND);
+		parser_list = parser_list->next;
+	}
 }

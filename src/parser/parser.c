@@ -40,7 +40,7 @@ void	print_parser_list(t_list *parsed_list)
 	int			i;
 	int			j;
 
-	printf("\n=== Parser linked list ===\n");
+	printf("\n=== Parser linked list ===\n\n");
 	j = 0;
 	while (parsed_list)
 	{
@@ -53,6 +53,7 @@ void	print_parser_list(t_list *parsed_list)
 		}
 		printf("command line operator ID of node %d is: %i\n",
 			j, node->operator);
+		printf("this node is%s an outfile\n\n", node->outfile ? "" : " not");
 		j++;
 		parsed_list = parsed_list->next;
 	}
