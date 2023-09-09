@@ -15,6 +15,7 @@
 int	increment_shell_level(char **env)
 {
 	char	*level;
+	char	*temp;
 	int		shell_level;
 	int		i;
 
@@ -28,6 +29,8 @@ int	increment_shell_level(char **env)
 	if (!env[i])
 		return (-1);
 	free(env[i]);
-	env[i] = ft_strjoin("SHLVL=", ft_itoa(shell_level));
+	temp = ft_itoa(shell_level);
+	env[i] = ft_strjoin("SHLVL=", temp);
+	free_string(&temp);
 	return (0);
 }
