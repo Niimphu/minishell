@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:19:48 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/08 15:05:50 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/10 23:20:43 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	increment_shell_level(char **env)
 		return (1);
 	shell_level = ft_atoi(level) + 1;
 	i = 0;
-	while (strncmp("SHLVL=", env[i], 6))
+	while (ft_strncmp("SHLVL=", env[i], 6))
 		i++;
 	if (!env[i])
 		return (-1);
