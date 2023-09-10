@@ -19,13 +19,13 @@ int	main(int argument_count, char **arguments, char **envp)
 	t_god	*god_struct;
 
 	(void)arguments;
-	g_signal_received = 0;
-	god_struct = create_god_struct(envp);
 	if (argument_count > 1)
 	{
 		perror("This program does not accept arguments\n");
 		exit(1);
 	}
+	g_signal_received = 0;
+	god_struct = create_god_struct(envp);
 	while (g_signal_received != SIGQUIT)
 	{
 		await_signals();
