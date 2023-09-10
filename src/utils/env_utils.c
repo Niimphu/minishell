@@ -21,7 +21,7 @@ char	*get_env_var(char *var, char **env, int trim)
 		trim = (int)ft_strlen(var);
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], var, ft_strlen(var)))
+		if (!ft_strncmp(env[i], var, trim))
 			return (env[i] + trim);
 		i++;
 	}
