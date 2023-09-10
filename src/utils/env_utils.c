@@ -18,10 +18,10 @@ char	*get_env_var(char *var, char **env, int trim)
 
 	i = 0;
 	if (trim)
-		trim = ft_strlen(var);
+		trim = (int)ft_strlen(var);
 	while (env[i])
 	{
-		if (!strncmp(env[i], var, ft_strlen(var)))
+		if (!ft_strncmp(env[i], var, ft_strlen(var)))
 			return (env[i] + trim);
 		i++;
 	}
