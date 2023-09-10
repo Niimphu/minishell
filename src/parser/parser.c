@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/08 15:07:49 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:51:27 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ int	parse(char *input, t_god *god_struct)
 	t_list	*parsed_list;
 	char	**split_str;
 
-	input = lex(input);
-	if (!input || !*input)
-		return (-1);
-	split_str = ft_split(input, 26);
+	split_str = lex(input);
 	parsed_list = create_parser_list(split_str);
 	god_struct->parser_list = parsed_list;
 	expander(&parsed_list, god_struct);
