@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/08 18:15:18 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/10 19:39:33 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,23 @@
 # include <stdbool.h>
 
 # define BAD_OPERATOR -1
-# define PIPE 1
-# define INPUT 2
-# define OUTPUT 3
-# define HEREDOC 4
-# define APPEND 5
+# define CMD 1
+# define ARG 2
+# define PIPE 3
+# define INPUT 4
+# define OUTPUT 5
+# define HEREDOC 6
+# define APPEND 7
 
-# define TRIM 6
+# define TRIM 9
 
 int	g_signal_received;
+
+typedef struct s_lexer
+{
+	char	*string;
+	int		token;
+}				t_lexer;
 
 typedef struct s_parser
 {
@@ -47,6 +55,7 @@ typedef struct s_parser
 typedef struct s_god
 {
 	char	**env;
+	t_list	*lexer_list;
 	t_list	*parser_list;
 	t_list	*heredoc_names;
 }				t_god;
