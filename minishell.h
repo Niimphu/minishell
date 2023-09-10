@@ -27,13 +27,15 @@
 # define BAD_OPERATOR -1
 # define CMD 1
 # define ARG 2
-# define PIPE 3
-# define INPUT 4
-# define OUTPUT 5
-# define HEREDOC 6
-# define APPEND 7
+# define FILE 3
+# define PIPE 4
+# define INPUT 5
+# define OUTPUT 6
+# define HEREDOC 7
+# define DELIMITER 8
+# define APPEND 9
 
-# define TRIM 9
+# define TRIM 10
 
 int	g_signal_received;
 
@@ -91,13 +93,17 @@ int		cd(char *dir, t_god *god_struct);
 
 int		exit_minishell(t_god *god_struct);
 
-void	free_god_struct(t_god **root);
 void	free_string(char **string);
 void	free_string_array(char ***array);
+
+void	free_god_struct(t_god **root);
+void	free_lexer_node(void *node);
 void	free_parser_node(void *node);
 void	free_file_node(void *node);
+
 void	close_fd(int *fd);
 
+void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
 void	print_heredoc_list(t_list *heredocs);
 
