@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/08 15:18:35 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/10 23:20:43 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	update_old_pwd(t_god *god_struct, char *old_dir)
 	free_string(&old_dir);
 	while (god_struct->env[i])
 	{
-		if (!strncmp(god_struct->env[i], "OLDPWD=", 7))
+		if (!ft_strncmp(god_struct->env[i], "OLDPWD=", 7))
 		{
 			free_string(&god_struct->env[i]);
 			god_struct->env[i] = dir;
@@ -53,7 +53,7 @@ static int	update_pwd(t_god *god_struct)
 		return (1);
 	while (god_struct->env[i])
 	{
-		if (!strncmp(god_struct->env[i], "PWD=", 4))
+		if (!ft_strncmp(god_struct->env[i], "PWD=", 4))
 		{
 			free_string(&god_struct->env[i]);
 			god_struct->env[i] = dir;
