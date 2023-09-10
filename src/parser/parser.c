@@ -56,6 +56,7 @@ char	*get_token_string(int id)
 		return ("delimiter");
 	if (id == APPEND)
 		return ("append out redirection");
+	return (NULL);
 }
 
 void	print_lexer_list(t_list *lexer_list)
@@ -67,7 +68,7 @@ void	print_lexer_list(t_list *lexer_list)
 	{
 		node = (t_lexer *)lexer_list->content;
 		printf("String: %s\n", node->string);
-		printf("Token: %s\n", get_token_string(node->token));
+		printf("Token: %s\n\n", get_token_string(node->token));
 		lexer_list = lexer_list->next;
 	}
 	printf("\n===    End of list    ===\n\n");
