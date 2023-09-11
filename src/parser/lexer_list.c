@@ -37,7 +37,7 @@ static t_lexer	*new_node(char *string)
 	static bool	file_expected = false;
 	static bool	delimiter_expected = false;
 
-	lexer_node = ft_calloc(1, sizeof(lexer_node));
+	lexer_node = ft_calloc(1, sizeof(t_lexer));
 	if (!lexer_node)
 		return (NULL);
 	lexer_node->string = ft_strdup(string);
