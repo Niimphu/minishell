@@ -12,6 +12,16 @@
 
 #include "../../minishell.h"
 
+void	free_lexer_node(void *node)
+{
+	t_lexer	*lexer_node;
+
+	lexer_node = (t_lexer *)node;
+	free_string(&lexer_node->string);
+	free(node);
+	node = NULL;
+}
+
 void	free_parser_node(void *node)
 {
 	t_parser	*parser_node;

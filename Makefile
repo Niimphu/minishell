@@ -55,6 +55,7 @@ SRC	=	main.c \
 		init/create_struct.c \
 		init/shell_level.c \
 		parser/lexer.c \
+		parser/lexer_list.c \
 		parser/check_syntax.c \
 		parser/parser.c \
 		parser/get_input.c \

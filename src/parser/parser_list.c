@@ -14,7 +14,6 @@
 
 static t_parser	*new_parser_node(char **array);
 static t_parser	*fill_node(t_parser *node, char **array);
-static int		get_operator_id(char *operator_string);
 static void		finish_list(t_list *parser_list);
 
 t_list	*create_parser_list(char **split_string)
@@ -78,22 +77,6 @@ static t_parser	*fill_node(t_parser *node, char **array)
 	if (array[i])
 		node->operator = get_operator_id(array[i]);
 	return (node);
-}
-
-static int	get_operator_id(char *operator_string)
-{
-	if (!ft_strncmp("|", operator_string, 2))
-		return (PIPE);
-	if (!ft_strncmp("<", operator_string, 2))
-		return (INPUT);
-	if (!ft_strncmp(">", operator_string, 2))
-		return (OUTPUT);
-	if (!ft_strncmp("<<", operator_string, 3))
-		return (HEREDOC);
-	if (!ft_strncmp(">>", operator_string, 3))
-		return (APPEND);
-	else
-		return (BAD_OPERATOR);
 }
 
 static void	finish_list(t_list *parser_list)
