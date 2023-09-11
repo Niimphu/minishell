@@ -6,7 +6,7 @@
 #    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/11 14:25:16 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/09/11 15:14:57 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,11 +55,8 @@ SRC	=	main.c \
 		init/create_struct.c \
 		init/shell_level.c \
 		parser/lexer.c \
-<<<<<<< HEAD
 		parser/lexer_utils.c \
-=======
 		parser/lexer_list.c \
->>>>>>> master
 		parser/check_syntax.c \
 		parser/parser.c \
 		parser/get_input.c \
