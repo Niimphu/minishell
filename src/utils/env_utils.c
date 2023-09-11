@@ -12,6 +12,22 @@
 
 #include "../../minishell.h"
 
+char	*get_env_var(char *var, char **env, int trim)
+{
+	int	i;
+
+	i = 0;
+	if (trim)
+		trim = (int)ft_strlen(var);
+	while (env[i])
+	{
+		if (!ft_strncmp(env[i], var, trim))
+			return (env[i] + trim);
+		i++;
+	}
+	return (NULL);
+}
+
 char	*get_var(char *var, t_god *god_struct)
 {
 	int		i;

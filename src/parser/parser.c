@@ -6,7 +6,11 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/11 14:24:29 by Kekuhne          ###   ########.fr       */
+=======
+/*   Updated: 2023/09/11 15:09:40 by Kekuhne          ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +23,10 @@
 
 int	parse(char *input, t_god *god_struct)
 {
-	t_list	*parsed_list;
 	char	**split_str;
 
 	split_str = lex(input);
+<<<<<<< HEAD
 	parsed_list = create_parser_list(split_str);
 	god_struct->parser_list = parsed_list;
 	expander(&parsed_list, god_struct);
@@ -30,6 +34,58 @@ int	parse(char *input, t_god *god_struct)
 	print_parser_list(god_struct->parser_list);
 	print_heredoc_list(god_struct->heredoc_names);
 	return (0);
+=======
+	if (!split_str || !*split_str)
+		return (-1);
+	split_str = ft_split(input, 26);
+	god_struct->lexer_list = create_lexer_list(split_str);
+	print_lexer_list(god_struct->lexer_list);
+	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
+//	god_struct->parser_list = create_parser_list(split_str);
+//	expander(&parsed_list, god_struct);
+//	create_docs(parsed_list, god_struct);
+//	print_parser_list(god_struct->parser_list);
+//	print_heredoc_list(god_struct->heredoc_names);
+	return (0);
+}
+
+char	*get_token_string(int id)
+{
+	if (id == CMD)
+		return ("command");
+	if (id == ARG)
+		return ("argument");
+	if (id == FILE)
+		return ("file");
+	if (id == PIPE)
+		return ("pipe");
+	if (id == INPUT)
+		return ("in redirection");
+	if (id == OUTPUT)
+		return ("out redirection");
+	if (id == HEREDOC)
+		return ("heredoc");
+	if (id == DELIMITER)
+		return ("delimiter");
+	if (id == APPEND)
+		return ("append out redirection");
+	return (NULL);
+}
+
+void	print_lexer_list(t_list *lexer_list)
+{
+	t_lexer	*node;
+
+	printf("\n=== Lexer linked list ===\n\n");
+	while (lexer_list)
+	{
+		node = (t_lexer *)lexer_list->content;
+		printf("String: %s\n", node->string);
+		printf("Token: %s\n\n", get_token_string(node->token));
+		lexer_list = lexer_list->next;
+	}
+	printf("\n===    End of list    ===\n\n");
+>>>>>>> master
 }
 
 void	print_parser_list(t_list *parsed_list)
@@ -52,7 +108,10 @@ void	print_parser_list(t_list *parsed_list)
 		printf("command line operator ID of node %d is: %i\n",
 			j, node->operator);
 		printf("fd for this node is %i\n", node->fd);
+<<<<<<< HEAD
 		printf("this node is%s an outfile\n\n", node->outfile ? "" : " not");
+=======
+>>>>>>> master
 		j++;
 		parsed_list = parsed_list->next;
 	}

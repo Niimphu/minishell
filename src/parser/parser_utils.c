@@ -41,28 +41,44 @@ int	next_operator(char **str)
 	return (i);
 }
 
-bool	ends_with_operator(char **array)
+int	get_operator_id(char *operator_string)
 {
-	int	i;
-
-	i = 0;
-	while (array[i + 1])
-		i++;
-	return (contains_operator(*array[i]));
+	if (!ft_strncmp("|", operator_string, 2))
+		return (PIPE);
+	if (!ft_strncmp("<", operator_string, 2))
+		return (INPUT);
+	if (!ft_strncmp(">", operator_string, 2))
+		return (OUTPUT);
+	if (!ft_strncmp("<<", operator_string, 3))
+		return (HEREDOC);
+	if (!ft_strncmp(">>", operator_string, 3))
+		return (APPEND);
+	else
+		return (BAD_OPERATOR);
 }
 
-int	count_quotes(char *str, char quotes)
-{
-	int	i;
-	int	quote_count;
+//bool	ends_with_operator(char **array)
+//{
+//	int	i;
+//
+//	i = 0;
+//	while (array[i + 1])
+//		i++;
+//	return (contains_operator(*array[i]));
+//}
 
-	i = 0;
-	quote_count = 0;
-	while (str[i])
-	{
-		if (str[i] == quotes)
-			quote_count++;
-		i++;
-	}
-	return (quote_count);
-}
+//int	count_quotes(char *str, char quotes)
+//{
+//	int	i;
+//	int	quote_count;
+//
+//	i = 0;
+//	quote_count = 0;
+//	while (str[i])
+//	{
+//		if (str[i] == quotes)
+//			quote_count++;
+//		i++;
+//	}
+//	return (quote_count);
+//}

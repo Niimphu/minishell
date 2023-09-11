@@ -14,14 +14,14 @@
 
 static t_parser	*new_parser_node(char **array);
 static t_parser	*fill_node(t_parser *node, char **array);
-static int		get_operator_id(char *operator_string);
+static void		finish_list(t_list *parser_list);
 
 t_list	*create_parser_list(char **split_string)
 {
 	t_list		*parser_list;
 	t_parser	*new_node;
 	char		**array_start;
-	
+
 	parser_list = NULL;
 	array_start = split_string;
 	new_node = new_parser_node(split_string);
@@ -36,6 +36,7 @@ t_list	*create_parser_list(char **split_string)
 			return (NULL);
 		}
 		ft_lstadd_back(&parser_list, ft_lstnew(new_node));
+		finish_list(parser_list);
 		split_string += (next_command(split_string));
 	}
 	free_string_array(&array_start);
@@ -51,6 +52,8 @@ static t_parser	*new_parser_node(char **array)
 		return (NULL);
 	parser_node->cmd = NULL;
 	parser_node->operator = 0;
+	parser_node->fd = -1;
+	parser_node->outfile = false;
 	fill_node(parser_node, array);
 	return (parser_node);
 }
@@ -76,18 +79,20 @@ static t_parser	*fill_node(t_parser *node, char **array)
 	return (node);
 }
 
-static int	get_operator_id(char *operator_string)
+static void	finish_list(t_list *parser_list)
 {
-	if (!ft_strncmp("|", operator_string, 2))
-		return (PIPE);
-	if (!ft_strncmp("<", operator_string, 2))
-		return (INPUT);
-	if (!ft_strncmp(">", operator_string, 2))
-		return (OUTPUT);
-	if (!ft_strncmp("<<", operator_string, 3))
-		return (HEREDOC);
-	if (!ft_strncmp(">>", operator_string, 3))
-		return (APPEND);
-	else
-		return (BAD_OPERATOR);
+	t_parser	*node;
+	bool		redirect_out;
+	int			i;
+
+	i = 0;
+	redirect_out = false;
+	while (parser_list)
+	{
+		node = parser_list->content;
+		node->outfile = redirect_out;
+		redirect_out = (node->operator == OUTPUT || node->operator == APPEND);
+		node->index = i++;
+		parser_list = parser_list->next;
+	}
 }

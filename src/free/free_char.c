@@ -25,7 +25,6 @@ void	free_string_array(char ***array)
 	i = 0;
 	while ((*array)[i] != NULL)
 	{
-		// printf("freeing %s\n", (*array)[i]);
 		free_string(&(*array)[i]);
 		i++;
 	}

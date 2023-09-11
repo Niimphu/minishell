@@ -12,42 +12,48 @@
 
 #include "../../minishell.h"
 
-void	free_parser_list(t_list *parsed_list)
+void	free_lexer_node(void *node)
 {
-	t_list		*current;
-	t_parser	*node;
-	int			i;
+	t_lexer	*lexer_node;
 
-	i = 0;
-	while (parsed_list)
-	{
-		node = (t_parser *)parsed_list->content;
-		current = parsed_list;
-		free_string_array(&node->cmd);
-		free(parsed_list->content);
-		parsed_list = parsed_list->next;
-		free(current);
-		current = NULL;
-	}
-}
-
-void	free_parser_node(void *node)
-{
-	t_parser *parser_node;
-	
-	parser_node = (t_parser *)node;
-	free_string_array(&parser_node->cmd);
+	lexer_node = (t_lexer *)node;
+	free_string(&lexer_node->string);
 	free(node);
 	node = NULL;
 }
 
-void	free_god_struct(t_god **god_struct)
+void	free_parser_node(void *node)
 {
-	t_god	*ptr;
+	t_parser	*parser_node;
 
-	ptr = *(god_struct);
-	free_string_array(&ptr->env);
-	free_parser_list(ptr->parser_list);
-	free(ptr);
-	*god_struct = NULL;
+	parser_node = (t_parser *)node;
+	free_string_array(&parser_node->cmd);
+	close_fd(&parser_node->fd);
+	free(node);
+	node = NULL;
+}
+
+void	free_file_node(void *node)
+{
+	t_file	*file_node;
+
+	file_node = (t_file *)node;
+	if (file_node->temp)
+		unlink(file_node->filename);
+	free_string(&file_node->filename);
+	free(node);
+	node = NULL;
+}
+
+void	free_god_struct(t_god **ptr)
+{
+	t_god	*god_struct;
+
+	god_struct = *(ptr);
+	free_string_array(&god_struct->env);
+	ft_lstclear(&god_struct->parser_list, free_parser_node);
+	ft_lstclear(&god_struct->heredoc_names, free_file_node);
+	free(god_struct);
+	god_struct = NULL;
+	*ptr = NULL;
 }

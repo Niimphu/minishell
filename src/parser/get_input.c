@@ -23,12 +23,14 @@ void	await_input(t_god *god_struct)
 	input = read_user_input();
 	if (!input)
 		exit(0);
-	parse(input, god_struct);
+	if (parse(input, god_struct) == -1)
+	{
+		free_string(&input);
+		return ;
+	}
 	if (!is_syntax_valid(god_struct->parser_list))
 		write(2, "syntax error: unexpected token\n", 35);
 	free_string(&input);
-	// free_parser_list(god_struct->parser_list);
-	ft_lstclear(&god_struct->parser_list, free_parser_node);
 }
 
 static char	*read_user_input(void)
