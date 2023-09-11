@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   counters.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:02:36 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/11 14:25:47 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:24:05 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ int	count_operators(char *str, char c)
 	i = 0;
 	while (str[i] == c)
 	{
-		if (str[i] != c)
+		if (str[i++] != c)
 			break ;
-		i++;
 	}
 	return (i);
 }

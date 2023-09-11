@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:49:16 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/11 17:23:06 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:31:56 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	await_input(t_god *god_struct)
 	if (parse(input, god_struct) == -1)
 		return ;
 	if (!is_syntax_valid(god_struct->parser_list))
-		write(2, "syntax error: unexpected token\n", 35);
+		write(2, "syntax error: unexpected token\n", 32);
 }
 
 static char	*read_user_input(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/11 17:23:19 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:29:16 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	**lex(char *input)
 static	char	**split_input(char *input)
 {
 	int		i;
+	int		operator_count;
 	char	*tmp;
 	char	**split_str;
 
@@ -46,10 +47,11 @@ static	char	**split_input(char *input)
 	{
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
+			operator_count = count_operators(input + i, input[i]);
 			tmp = insert_sub(input, i);
 			free_string(&input);
 			input = tmp;
-			i += count_operators(input + i, input[i]);
+			i += operator_count;
 		}
 		i++;
 	}
