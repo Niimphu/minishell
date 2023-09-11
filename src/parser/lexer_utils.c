@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   counters.c                                         :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/26 18:02:36 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/11 14:25:47 by Kekuhne          ###   ########.fr       */
+/*   Created: 2023/09/11 13:48:27 by Kekuhne           #+#    #+#             */
+/*   Updated: 2023/09/11 14:26:11 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	get_array_size(char **array)
+char	get_operator(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
+	if (ft_strchr(str, '|'))
+		return ('|');
+	else if (ft_strchr(str, '<'))
+		return ('<');
+	else if (ft_strchr(str, '>'))
+		return ('>');
+	else
+		return (0);
 }
 
-int	count_operators(char *str, char c)
+int	skip_quotes(char *str)
 {
 	int		i;
+	char	c;
 
-	i = 0;
-	while (str[i] == c)
+	i = 1;
+	c = str[0];
+	while (str[i])
 	{
-		if (str[i] != c)
-			break ;
-		i++;
+		if (str[i] == c)
+			return (i);
+		else
+			i++;
 	}
-	return (i);
+	perror("Unclosed quotes found");
+	return (0);
 }

@@ -6,46 +6,80 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/03 20:31:18 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/11 14:22:19 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	skip_quotes(char *str);
+static char		*insert_sub(char *input, int pos);
+static char		**split_input(char *input);
 
-char	*lex(char *str)
+char	**lex(char *input)
 {
+	char	**split_str;
 	int		i;
 
-	if (!str)
+	if (!input)
 		return (NULL);
 	i = 0;
-	while (str[i])
+	while (input[i])
 	{
-		if (str[i] == '"' || str[i] == '\'')
-			i += skip_quotes(str + i);
-		if (str[i] == ' ' || str[i] == '\t')
-			str[i] = 26;
+		if (input[i] == '"' || input[i] == '\'')
+			i += skip_quotes(input + i);
+		if (input[i] == ' ' || input[i] == '\t')
+			input[i] = 26;
 		i++;
 	}
-	return (str);
+	split_str = split_input(input);
+	return (split_str);
 }
 
-static int	skip_quotes(char *str)
+
+static	char	**split_input(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
+		{
+			input = insert_sub(input, i);
+			i += count_operators(input + i, input[i]);
+		}
+		i++;
+	}
+	return (ft_split(input, 26));
+}
+
+char	*insert_sub(char *input, int pos)
 {
 	int		i;
-	char	c;
+	char	*str;
 
-	i = 1;
-	c = str[0];
-	while (str[i])
+	i = 0;
+	str = ft_calloc(sizeof(char), (ft_strlen(input) + 3));
+	if (str)
 	{
-		if (str[i] == c)
-			return (i);
-		else
+		while (i < pos)
+		{
+			str[i] = input[i];
 			i++;
+		}
+		str[i++] = 26;
+		while (input[i - 1] == input[pos])
+		{
+			str[i] = input[i - 1];
+			i++;
+		}
+		str[i++] = 26;
+		while (input[i - 2])
+		{
+			str[i] = input[i - 2];
+			i++;
+		}
+		str[i] = '\0';
 	}
-	perror("Unclosed quotes found");
-	return (0);
+	return (str);
 }

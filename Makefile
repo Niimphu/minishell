@@ -3,12 +3,37 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
+#    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/08 15:22:45 by yiwong           ###   ########.fr        #
+#    Updated: 2023/09/11 14:25:16 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+define SHELF
+==========================================================================
+\033[0;33m
+       ||.--.    .-._                        .----.             ||
+       |||==|____| |H|___            .---.___|""""|_____.--.___ ||
+       |||  |====| | |xxx|_          |+++|=-=|_  _|-=+=-|==|---|||
+       |||==|    | | |   | \         |   |   |_\/_|Kevin|  | ^ |||
+       |||  |LMAO| | |   |\ \   .--. |   |=-=|_/\_|-=&=-|  | ^ |||
+       |||  |    | | |   |_\ \_( oo )|   |   |    |Yison|  | ^ |||
+       |||==|====| |H|xxx|  \ \ |''| |+++|=-=|""""|-=+=-|==|---|||
+       ||`--^----'-^-^---'   `-' ""  '---^---^----^-----^--^---^||
+       ||-------------------------------------------------------||
+       ||_______________________________________________________||\033[0m
+	                _       _      __         ______
+	     ____ ___  (_)___  (_)____/ /_  ___  / / __/
+	    / __ `__ \/ / __ \/ / ___/ __ \/ _ \/ / /_
+	   / / / / / / / / / / (__  ) / / /  __/ / __/
+	  /_/ /_/ /_/_/_/ /_/_/____/_/ /_/\___/_/_/
+
+==========================================================================
+
+endef
+
+export SHELF
 
 NAME = minishell
 
@@ -30,17 +55,20 @@ SRC	=	main.c \
 		init/create_struct.c \
 		init/shell_level.c \
 		parser/lexer.c \
+		parser/lexer_utils.c \
 		parser/check_syntax.c \
 		parser/parser.c \
 		parser/get_input.c \
 		parser/parser_utils.c \
 		parser/parser_list.c \
+		file_managers/heredoc.c \
 		expander/expander.c \
 		keybinds/keypress.c \
 		utils/counters.c \
 		utils/env_utils.c \
 		free/free_char.c \
 		free/free_structs.c \
+		free/free_fd.c \
 		quit/quit.c \
 		builtins/cd.c \
 		builtins/echo.c \
@@ -65,7 +93,9 @@ all: $(NAME)
 	fi
 
 $(NAME): $(OBJ) $(LIBFT)
-	@echo "$(PURPLE)Compiling minishell...$(RESET)"
+	clear
+	@echo "$$SHELF"
+	@echo "$(PURPLE)Compiling minishelf...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJ) $(OBJ_DIR)/$(LIBFT) -o $(NAME) $(LIBS)
 	@chmod a+x $(NAME)
 

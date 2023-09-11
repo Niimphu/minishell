@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/06 18:13:44 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/11 14:23:26 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	expander(t_list **root, t_god *god_struct)
 {
-	int		i;
-	t_list	*ptr;
+	int			i;
+	t_list		*ptr;
 	t_parser	*node;
 
 	ptr = *root;
@@ -29,7 +29,7 @@ void	expander(t_list **root, t_god *god_struct)
 		{
 			if (node->cmd[i][0] == '$' && ft_strlen(node->cmd[i]) > 1)
 				node->cmd[i] = get_var(node->cmd[i], god_struct);
-			if (!ft_strncmp(node->cmd[i], "export", 6 ))
+			if (!ft_strncmp(node->cmd[i], "export", 6))
 				export(god_struct, node->cmd);
 			if (!ft_strncmp(node->cmd[i], "unset", 5))
 				unset(god_struct, node->cmd);
