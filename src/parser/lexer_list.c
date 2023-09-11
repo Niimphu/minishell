@@ -50,7 +50,7 @@ static t_lexer	*new_node(char *string)
 	else if (lexer_node->token == HEREDOC || lexer_node->token == DELIMITER)
 		delimiter_expected = !delimiter_expected;
 	else if (lexer_node->token == INPUT || lexer_node->token == OUTPUT
-		|| lexer_node->token == HEREDOC || lexer_node->token == APPEND)
+		|| lexer_node->token == APPEND)
 		file_expected = true;
 	else if (lexer_node->token == FILE)
 		file_expected = false;
@@ -67,10 +67,7 @@ static t_lexer	*tokenize(t_lexer *node, bool block_has_command,
 	else if (delimiter_expected)
 		node->token = DELIMITER;
 	else if (!block_has_command)
-	{
 		node->token = CMD;
-		block_has_command = true;
-	}
 	else
 		node->token = ARG;
 	return (node);

@@ -30,7 +30,6 @@ int	main(int argument_count, char **arguments, char **envp)
 	{
 		await_signals();
 		await_input(god_struct);
-		ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 //		ft_lstclear(&god_struct->parser_list, free_parser_node);
 //		ft_lstclear(&god_struct->heredoc_names, free_file_node);
 	}
