@@ -47,9 +47,9 @@ static	char	**split_input(char *input)
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			tmp = insert_sub(input, i);
+			free_string(&input);
 			input = tmp;
 			i += count_operators(input + i, input[i]);
-			free_string(&tmp);
 		}
 		i++;
 	}
