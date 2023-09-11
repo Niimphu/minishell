@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/11 15:13:37 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/11 17:23:19 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,26 @@ char	**lex(char *input)
 	return (split_str);
 }
 
-
 static	char	**split_input(char *input)
 {
-	int	i;
+	int		i;
+	char	*tmp;
+	char	**split_str;
 
 	i = 0;
 	while (input[i])
 	{
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
-			input = insert_sub(input, i);
+			tmp = insert_sub(input, i);
+			input = tmp;
 			i += count_operators(input + i, input[i]);
+			free_string(&tmp);
 		}
 		i++;
 	}
-	return (ft_split(input, 26));
+	split_str = ft_split(input, 26);
+	return (free_string(&input), split_str);
 }
 
 char	*insert_sub(char *input, int pos)
@@ -83,4 +87,3 @@ char	*insert_sub(char *input, int pos)
 	}
 	return (str);
 }
-

@@ -6,11 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/09/11 14:31:22 by Kekuhne          ###   ########.fr       */
-=======
-/*   Updated: 2023/09/10 19:39:33 by yiwong           ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2023/09/11 16:52:28 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +36,6 @@
 # define APPEND 9
 
 # define TRIM 10
-
-# define TRIM 6
 
 int	g_signal_received;
 
@@ -88,10 +82,7 @@ void	expander(t_list **root, t_god *god_struct);
 
 int		get_array_size(char **array);
 char	*get_env_var(char *var, char **env, int trim);
-<<<<<<< HEAD
 int		count_operators(char *str, char c);
-=======
->>>>>>> master
 
 char	*get_var(char *var, t_god *tools);
 int		env(t_god *tgod_struct);
@@ -103,21 +94,13 @@ int		cd(char *dir, t_god *god_struct);
 
 int		exit_minishell(t_god *god_struct);
 
-<<<<<<< HEAD
 void	free_god_struct(t_god **root);
-=======
->>>>>>> master
 void	free_string(char **string);
 void	free_string_array(char ***array);
-
-void	free_god_struct(t_god **root);
 void	free_lexer_node(void *node);
 void	free_parser_node(void *node);
 void	free_file_node(void *node);
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 void	close_fd(int *fd);
 
 void	print_lexer_list(t_list *lexer_list);

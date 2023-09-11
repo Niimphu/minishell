@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/10 23:20:43 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:23:51 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	cd(char *dir, t_god *god_struct)
 		return (1);
 	}
 	old_dir = getcwd(NULL, 1024);
-	if (!old_dir || update_old_pwd(god_struct, old_dir) 
+	if (!old_dir || update_old_pwd(god_struct, old_dir)
 		|| chdir(dir) == -1 || update_pwd(god_struct))
 	{
 		perror("cd");
