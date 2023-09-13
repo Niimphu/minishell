@@ -19,14 +19,21 @@ char	**lex(char *input)
 {
 	char	**split_str;
 	int		i;
+	int		next_quote;
 
 	if (!input)
 		return (NULL);
 	i = 0;
+	next_quote = 0;
 	while (input[i])
 	{
 		if (input[i] == '"' || input[i] == '\'')
-			i += skip_quotes(input + i);
+		{
+			next_quote = skip_quotes(input + i);
+			i += next_quote;
+		}
+		if (next_quote < 0)
+			return (NULL);
 		if (input[i] == ' ' || input[i] == '\t')
 			input[i] = 26;
 		i++;

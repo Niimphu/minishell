@@ -38,6 +38,8 @@ int	skip_quotes(char *str)
 		else
 			i++;
 	}
-	perror("Unclosed quotes found");
-	return (0);
+	write(2, "Unclosed quotes found: ", 23);
+	write(2, &c, 1);
+	write(2, "\n", 1);
+	return (-1);
 }
