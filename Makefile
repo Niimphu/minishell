@@ -6,7 +6,7 @@
 #    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/11 15:14:57 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/09/13 16:46:48 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC	=	main.c \
 		free/free_structs.c \
 		free/free_fd.c \
 		quit/quit.c \
+		executer/execute_builtins.c \
 		builtins/cd.c \
 		builtins/echo.c \
 		builtins/export.c \

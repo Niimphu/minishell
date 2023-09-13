@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/11 16:52:28 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:16:18 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,23 @@ void	await_input(t_god *tools);
 t_list	*create_parser_list(char **split_string);
 int		parse(char *input_string, t_god *god_struct);
 
-void	expander(t_list **root, t_god *god_struct);
+char	**expander(char **split_str, t_god *god_struct);
 
 int		get_array_size(char **array);
 char	*get_env_var(char *var, char **env, int trim);
 int		count_operators(char *str, char c);
 
-char	*get_var(char *var, t_god *tools);
-int		env(t_god *tgod_struct);
-int		export(t_god *god_struct, char **cmd);
-int		echo(char **cmd, t_god *tools);
-int		unset(t_god *tools, char **cmd);
-int		pwd(t_god *god_struct);
-int		cd(char *dir, t_god *god_struct);
+int		execute_builtins(char **cmd, int fd_out, t_god *god_struct);
 
-int		exit_minishell(t_god *god_struct);
+char	*get_var(char *var, t_god *tools);
+int		env(int fd_out, t_god *god_struct);
+int		export(char **cmd, int fd_out, t_god *god_struct);
+int		echo(char **cmd,int fd_out, t_god *tools);
+int		unset(char **cmd, t_god *god_struct);
+int		pwd(int fd_out, t_god *god_struct);
+int		cd(char *dir, t_god *god_struct);
+void	exit_minishell(t_god *god_struct);
+
 
 void	free_god_struct(t_god **root);
 void	free_string(char **string);

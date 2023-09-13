@@ -6,45 +6,72 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/11 14:23:26 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/13 20:40:48 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	expander(t_list **root, t_god *god_struct)
-{
-	int			i;
-	t_list		*ptr;
-	t_parser	*node;
+char	*expand_var(char *str, t_god *god_struct);
+char	*set_var(char *str, t_god *god_struct, int n);
+char	*insert_sub(char *str);
+int		strlen_to_char(char *str, char c);
 
-	ptr = *root;
-	while (ptr)
+char	**expander(char **split_str, t_god *god_struct)
+{
+	int	i;
+	
+	i = 0;
+	while (split_str[i])
 	{
-		i = 0;
-		node = (t_parser *)ptr->content;
-		if (!node->cmd)
-			return ;
-		while (node->cmd[i])
-		{
-			if (node->cmd[i][0] == '$' && ft_strlen(node->cmd[i]) > 1)
-				node->cmd[i] = get_var(node->cmd[i], god_struct);
-			if (!ft_strncmp(node->cmd[i], "export", 6))
-				export(god_struct, node->cmd);
-			if (!ft_strncmp(node->cmd[i], "unset", 5))
-				unset(god_struct, node->cmd);
-			if (!ft_strncmp(node->cmd[i], "cd", 2))
-				cd(node->cmd[1], god_struct);
-			if (!ft_strncmp(node->cmd[i], "pwd", 3))
-				pwd(god_struct);
-			if (!ft_strncmp(node->cmd[i], "env", 3))
-				env(god_struct);
-			if (!ft_strncmp(node->cmd[i], "echo", 4))
-				echo(node->cmd, god_struct);
-			if (!ft_strncmp(node->cmd[i], "exit", 4))
-				exit_minishell(god_struct);
-			i++;
-		}
-		ptr = ptr->next;
+		if (ft_strchr(split_str[i], '$'))
+			split_str[i] = expand_var(split_str[i], god_struct);
+		i++;
 	}
+	return (split_str);
+}
+
+int	strlen_to_char(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != c)
+		i++;
+	printf("first '=' in str: %s is %d\n", str, i);
+	return (i);
+}
+
+char	*expand_var(char *str, t_god *god_struct)
+{
+	int		i;
+
+	i = 0;
+	while (god_struct->env[i])
+	{
+		if (ft_strnstr(god_struct->env[i], str, strlen_to_char(god_struct->env[i], '=')))
+			str = set_var(str, god_struct, count_char(str, '$'));
+		i++;
+	}
+	return (str);
+}
+
+char	*set_var(char *str, t_god *god_struct, int n)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+	char	*var;
+
+	i = 0;
+	while (n > 0)
+	{
+		i = strlen_to_char(str, '$');
+		tmp = ft_substr(str, 0, i);
+		var = get_var(str + i, god_struct);
+		tmp = ft_strjoin(tmp, var);
+		free (var);
+		n--;
+	}
+	return (free(str), tmp);
 }

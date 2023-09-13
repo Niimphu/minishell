@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/11 18:29:16 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/13 17:41:00 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 static char		*insert_sub(char *input, int pos);
-static char		**split_input(char *input);
+static char		**split_input(char *input, t_god *);
 
-char	**lex(char *input)
+char	**lex(char *input, t_god *god_struct)
 {
 	char	**split_str;
 	int		i;
@@ -31,11 +31,11 @@ char	**lex(char *input)
 			input[i] = 26;
 		i++;
 	}
-	split_str = split_input(input);
+	split_str = split_input(input, god_struct);
 	return (split_str);
 }
 
-static	char	**split_input(char *input)
+static	char	**split_input(char *input, t_god *god_struct)
 {
 	int		i;
 	int		operator_count;
@@ -55,7 +55,7 @@ static	char	**split_input(char *input)
 		}
 		i++;
 	}
-	split_str = ft_split(input, 26);
+	split_str = expander(ft_split(input, 26), god_struct);
 	return (free_string(&input), split_str);
 }
 

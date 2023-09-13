@@ -6,20 +6,13 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 13:30:06 by kekuhne           #+#    #+#             */
-/*   Updated: 2023/05/22 17:52:04 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:22:01 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(char *str)
+int	ft_isalnum(char c)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] < 65 || str[i] > 90) && (str[i] < 97 || str[i] > 122))
-			return (0);
-		i++;
-	}
+	if ((c < 65 || c > 90) && (c < 97 || c > 122))
+		return (0);
 	return (1);
 }

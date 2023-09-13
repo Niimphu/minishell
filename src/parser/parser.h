@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/11 16:51:12 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/13 17:44:56 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../../minishell.h"
 
-char	**lex(char *input);
+char	**lex(char *input, t_god *god_struct);
 bool	is_syntax_valid(t_list *parsed_list);
 
 t_list	*create_lexer_list(char **input_array);

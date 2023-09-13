@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/11 14:23:04 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:55:17 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 //to many lines
 
-int	echo(char **cmd, t_god *god_struct)
+int	echo(char **cmd, int fd_out, t_god *god_struct)
 {
 	int	i;
 	int	new_line_flag;
 
 	i = 1;
 	new_line_flag = 0;
+	printf("in echo\n");
 	while (cmd[i] && !ft_strncmp(cmd[i], "-n", ft_strlen(cmd[i])))
 	{
 		new_line_flag = 1;
@@ -37,9 +38,9 @@ int	echo(char **cmd, t_god *god_struct)
 		}
 		else
 			cmd[i] = ft_strtrim(cmd[i], "\"\'");
-		printf("%s ", cmd[i++]);
+		ft_putstr_fd(cmd[i++], fd_out);
 	}
 	if (new_line_flag == 0 || !cmd[1])
-		printf("\n");
+		ft_putstr_fd("\n", fd_out);
 	return (0);
 }

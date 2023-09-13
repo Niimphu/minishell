@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:06:05 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/09 16:58:18 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/13 15:57:17 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@
 
 #include "../../minishell.h"
 
-int	unset(t_god *tools, char **cmd)
+int	unset(char **cmd, t_god *god_struct)
 {
 	int	i;
 
 	i = 0;
 	if (!cmd[1])
 		return (1);
-	while (tools->env[i] && ft_strncmp(cmd[1], tools->env[i]
+	while (god_struct->env[i] && ft_strncmp(cmd[1], god_struct->env[i]
 			, ft_strlen(cmd[1])))
 		i++;
-	while (tools->env[i])
+	while (god_struct->env[i])
 	{
-		if (tools->env[i + 1])
-			tools->env[i] = ft_strdup(tools->env[i + 1]);
+		if (god_struct->env[i + 1])
+			god_struct->env[i] = ft_strdup(god_struct->env[i + 1]);
 		i++;
 	}
-	free_string(&tools->env[i - 1]);
+	free_string(&god_struct->env[i - 1]);
 	return (0);
 }
