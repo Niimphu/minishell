@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/11 16:51:12 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/14 18:13:39 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 char	**lex(char *input);
 bool	is_syntax_valid(t_list *parsed_list);
+char	*invalid_syntax(t_list *lexer_list);
 
 t_list	*create_lexer_list(char **input_array);
 void	create_docs(t_list *parser_list, t_god *god_struct);

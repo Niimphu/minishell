@@ -25,7 +25,12 @@ int	parse(char *input, t_god *god_struct)
 	if (!split_str || !*split_str)
 		return (-1);
 	god_struct->lexer_list = create_lexer_list(split_str);
-	print_lexer_list(god_struct->lexer_list);
+	if (invalid_syntax(god_struct->lexer_list))
+		printf("minishelf: syntax error near unexpected token \'%c\'\n",
+			*invalid_syntax(god_struct->lexer_list));
+	else
+		print_lexer_list(god_struct->lexer_list);
+
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 //	god_struct->parser_list = create_parser_list(split_str);
 //	expander(&parsed_list, god_struct);

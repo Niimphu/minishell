@@ -6,11 +6,20 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/08 15:06:40 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/14 18:13:39 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+//t_list	*create_parser_list(t_list *lexer_list)
+//{
+//	t_list		*parser_list;
+//	t_parser	*new_node;
+//
+//	if (!check_syntax())
+//}
+
 
 static t_parser	*new_parser_node(char **array);
 static t_parser	*fill_node(t_parser *node, char **array);
