@@ -6,16 +6,15 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/13 20:40:48 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 13:07:17 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 char	*expand_var(char *str, t_god *god_struct);
-char	*set_var(char *str, t_god *god_struct, int n);
-char	*insert_sub(char *str);
-int		strlen_to_char(char *str, char c);
+char	*join_split(char **split, t_god *god_struct);
+char	*wow_much_function_name(char *str);
 
 char	**expander(char **split_str, t_god *god_struct)
 {
@@ -31,47 +30,79 @@ char	**expander(char **split_str, t_god *god_struct)
 	return (split_str);
 }
 
-int	strlen_to_char(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != c)
-		i++;
-	printf("first '=' in str: %s is %d\n", str, i);
-	return (i);
-}
-
 char	*expand_var(char *str, t_god *god_struct)
 {
 	int		i;
-
+	int		var_count;
+	char	*tmp;
+	char	**split_str;
+	
 	i = 0;
-	while (god_struct->env[i])
+	str = wow_much_function_name(str);
+	while (str[i])
 	{
-		if (ft_strnstr(god_struct->env[i], str, strlen_to_char(god_struct->env[i], '=')))
-			str = set_var(str, god_struct, count_char(str, '$'));
+		if (str[i] == '$')
+		{
+			var_count = count_operators(str + i, str[i]);
+			tmp = insert_sub(str, i);
+			free_string(&str);
+			str = tmp;
+			i += var_count;
+		}
 		i++;
 	}
+	split_str = ft_split(str, 26);
+	if (split_str)
+		str = join_split(split_str, god_struct);
 	return (str);
 }
 
-char	*set_var(char *str, t_god *god_struct, int n)
+char	*wow_much_function_name(char *str)
 {
-	int		i;
-	int		j;
-	char	*tmp;
-	char	*var;
+	int	i;
+	int	var_count;
 
 	i = 0;
-	while (n > 0)
+	printf("Start: wow str = %s\n", str);
+	var_count = count_char(str, '$');
+	while (var_count--)
 	{
-		i = strlen_to_char(str, '$');
-		tmp = ft_substr(str, 0, i);
-		var = get_var(str + i, god_struct);
-		tmp = ft_strjoin(tmp, var);
-		free (var);
-		n--;
+		while (str[i] && str[i] != '$')
+			i++;
+		if (str[i] == '$')
+		{
+			i++;
+			printf("after $ is found %c\n", str[i]);
+			while(str[i] && ft_isalnum(str[i]))
+				i++;
+			printf("insert sub here %c\n", str[i]);
+			if (str[i])
+				str = insert_sub(str, i);
+		}
 	}
-	return (free(str), tmp);
+	printf("END: wow str = %s\n", str);
+	return (str);
+}
+
+char	*join_split(char **split, t_god *god_struct)
+{
+	int	i;
+	char *str;
+	
+	i = 0;
+	str = "\0";
+	while (split[i])
+	{
+		if (split[i] && !ft_strcmp(split[i], "$"))
+		{
+			i++;
+			split[i] = get_var(split[i], god_struct);
+			printf("split is %s\n", split[i]);
+		}
+		str = ft_strjoin(str, split[i]);
+		if (!str)
+			return (free_string_array(&split), NULL);
+		i++;
+	}
+	return (str);
 }

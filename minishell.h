@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/13 20:16:18 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/14 18:18:11 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,14 @@ char	**expander(char **split_str, t_god *god_struct);
 int		get_array_size(char **array);
 char	*get_env_var(char *var, char **env, int trim);
 int		count_operators(char *str, char c);
+int		count_char(char *str, char c);
 
 int		execute_builtins(char **cmd, int fd_out, t_god *god_struct);
 
 char	*get_var(char *var, t_god *tools);
 int		env(int fd_out, t_god *god_struct);
 int		export(char **cmd, int fd_out, t_god *god_struct);
-int		echo(char **cmd,int fd_out, t_god *tools);
+int		echo(char **cmd,int fd_out);
 int		unset(char **cmd, t_god *god_struct);
 int		pwd(int fd_out, t_god *god_struct);
 int		cd(char *dir, t_god *god_struct);
@@ -108,5 +109,6 @@ void	close_fd(int *fd);
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
 void	print_heredoc_list(t_list *heredocs);
+char	*insert_sub(char *input, int pos);
 
 #endif

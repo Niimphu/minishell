@@ -6,13 +6,13 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/13 17:41:00 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:39:45 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static char		*insert_sub(char *input, int pos);
+char		*insert_sub(char *input, int pos);
 static char		**split_input(char *input, t_god *);
 
 char	**lex(char *input, t_god *god_struct)

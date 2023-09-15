@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:33:44 by kekuhne           #+#    #+#             */
-/*   Updated: 2023/07/30 12:14:19 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:52:39 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-int		ft_isalnum(char *str);
+int		ft_isalnum(char c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(char *str);

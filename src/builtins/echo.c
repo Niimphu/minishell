@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/13 16:55:17 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/14 16:14:12 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 //to many lines
 
-int	echo(char **cmd, int fd_out, t_god *god_struct)
+int	echo(char **cmd, int fd_out)
 {
 	int	i;
 	int	new_line_flag;
 
 	i = 1;
 	new_line_flag = 0;
-	printf("in echo\n");
 	while (cmd[i] && !ft_strncmp(cmd[i], "-n", ft_strlen(cmd[i])))
 	{
 		new_line_flag = 1;
@@ -29,7 +28,7 @@ int	echo(char **cmd, int fd_out, t_god *god_struct)
 	}
 	while (cmd[i])
 	{
-		if (ft_strchr(cmd[i], '$') && !ft_strchr(cmd[i], '\'')
+		/* if (ft_strchr(cmd[i], '$') && !ft_strchr(cmd[i], '\'')
 			&& ft_strlen(cmd[i]) > 1)
 		{
 			cmd[i] = get_var(cmd[i], god_struct);
@@ -37,7 +36,7 @@ int	echo(char **cmd, int fd_out, t_god *god_struct)
 				return (1);
 		}
 		else
-			cmd[i] = ft_strtrim(cmd[i], "\"\'");
+			cmd[i] = ft_strtrim(cmd[i], "\"\'"); */
 		ft_putstr_fd(cmd[i++], fd_out);
 	}
 	if (new_line_flag == 0 || !cmd[1])
