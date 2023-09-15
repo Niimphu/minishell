@@ -22,7 +22,7 @@ int	get_array_size(char **array)
 	return (i);
 }
 
-int	count_operators(char *str, char c)
+int	count_operators(const char *str, char c)
 {
 	int		i;
 

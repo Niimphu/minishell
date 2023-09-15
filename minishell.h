@@ -82,7 +82,7 @@ void	expander(t_list **root, t_god *god_struct);
 
 int		get_array_size(char **array);
 char	*get_env_var(char *var, char **env, int trim);
-int		count_operators(char *str, char c);
+int		count_operators(const char *str, char c);
 
 char	*get_var(char *var, t_god *tools);
 int		env(t_god *tgod_struct);
