@@ -16,7 +16,7 @@
 # include "../../minishell.h"
 
 char	**lex(char *input);
-bool	is_syntax_valid(t_list *parsed_list);
+//bool	is_syntax_valid(t_list *parsed_list);
 char	*invalid_syntax(t_list *lexer_list);
 
 t_list	*create_lexer_list(char **input_array);
@@ -30,7 +30,6 @@ bool	contains_operator(char c);
 //bool	ends_with_operator(char **array);
 //int		count_quotes(char *str, char quotes);
 
-char	get_operator(char *str);
-int		skip_quotes(char *str);
+int		skip_quotes(const char *str);
 
 #endif

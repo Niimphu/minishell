@@ -12,19 +12,7 @@
 
 #include "../../minishell.h"
 
-char	get_operator(char *str)
-{
-	if (ft_strchr(str, '|'))
-		return ('|');
-	else if (ft_strchr(str, '<'))
-		return ('<');
-	else if (ft_strchr(str, '>'))
-		return ('>');
-	else
-		return (0);
-}
-
-int	skip_quotes(char *str)
+int	skip_quotes(const char *str)
 {
 	int		i;
 	char	c;

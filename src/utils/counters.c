@@ -12,15 +12,15 @@
 
 #include "../../minishell.h"
 
-int	get_array_size(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
-}
+//int	get_array_size(char **array)
+//{
+//	int	i;
+//
+//	i = 0;
+//	while (array[i])
+//		i++;
+//	return (i);
+//}
 
 int	count_operators(const char *str, char c)
 {
