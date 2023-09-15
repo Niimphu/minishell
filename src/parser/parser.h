@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/14 18:13:39 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/15 18:49:41 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../../minishell.h"
 
-char	**lex(char *input);
+char	**lex(char *input, t_god *god_struct);
 //bool	is_syntax_valid(t_list *parsed_list);
 char	*invalid_syntax(t_list *lexer_list);
 

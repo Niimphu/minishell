@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/11 16:52:28 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 19:55:32 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,25 @@ typedef struct s_lexer
 
 typedef struct s_parser
 {
-	int		index;
+//	int		index;
+//	char	**cmd;
+//	int		operator;
+//	int		fd;
+//	bool	outfile;
 	char	**cmd;
-	int		operator;
-	int		fd;
-	bool	outfile;
+	t_list	*files;
+	bool	builtin;
+
 }				t_parser;
+
+typedef struct s_file
+{
+	int		fd;
+	int		operator; //MACRO: INPUT OUTPUT APPEND HEREDOC
+	char	*filename;
+	bool	heredoc;
+	char	*delimiter;
+}				t_file;
 
 typedef struct s_god
 {
@@ -62,12 +75,7 @@ typedef struct s_god
 	t_list	*heredoc_names;
 }				t_god;
 
-typedef struct s_file
-{
-	int		index;
-	char	*filename;
-	bool	temp;
-}				t_file;
+# include "src/parser/parser.h"
 
 t_god	*create_god_struct(char **envp);
 int		increment_shell_level(char **env);
@@ -78,21 +86,24 @@ void	await_input(t_god *tools);
 //t_list	*create_parser_list(char **split_string);
 int		parse(char *input_string, t_god *god_struct);
 
-void	expander(t_list **root, t_god *god_struct);
+char	**expander(char **split_str, t_god *god_struct);
 
 //int		get_array_size(char **array);
 char	*get_env_var(char *var, char **env, int trim);
 int		count_operators(const char *str, char c);
+int		count_char(char *str, char c);
+
+int		execute_builtins(char **cmd, int fd_out, t_god *god_struct);
 
 char	*get_var(char *var, t_god *tools);
-int		env(t_god *tgod_struct);
-int		export(t_god *god_struct, char **cmd);
-int		echo(char **cmd, t_god *tools);
-int		unset(t_god *tools, char **cmd);
-int		pwd(t_god *god_struct);
+int		env(int fd_out, t_god *god_struct);
+int		export(char **cmd, int fd_out, t_god *god_struct);
+int		echo(char **cmd, int fd_out);
+int		unset(char **cmd, t_god *god_struct);
+int		pwd(int fd_out, t_god *god_struct);
 int		cd(char *dir, t_god *god_struct);
+void	exit_minishell(t_god *god_struct);
 
-int		exit_minishell(t_god *god_struct);
 
 void	free_god_struct(t_god **root);
 void	free_string(char **string);
@@ -104,7 +115,8 @@ void	free_file_node(void *node);
 void	close_fd(int *fd);
 
 void	print_lexer_list(t_list *lexer_list);
-void	print_parser_list(t_list *parsed_list);
-void	print_heredoc_list(t_list *heredocs);
+// void	print_parser_list(t_list *parsed_list);
+// void	print_heredoc_list(t_list *heredocs);
+char	*insert_sub(char *input, int pos);
 
 #endif

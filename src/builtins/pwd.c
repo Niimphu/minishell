@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:27:54 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/09 16:58:12 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/14 16:50:08 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 
 #include "../../minishell.h"
 
-int	pwd(t_god *god_struct)
+int	pwd(int fd_out, t_god *god_struct)
 {
 	char	*path;
 
 	path = get_env_var("PWD=", god_struct->env, TRIM);
 	if (!path)
 		return (1);
-	printf("%s\n", path);
+	ft_putstr_fd(path, fd_out);
 	return (0);
 }
