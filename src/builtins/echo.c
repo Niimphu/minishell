@@ -38,8 +38,8 @@ int	echo(char **cmd, int fd_out)
 		else
 			cmd[i] = ft_strtrim(cmd[i], "\"\'"); */
 		ft_putstr_fd(cmd[i++], fd_out);
-		if (new_line_flag == 0 || !cmd[1])
-			ft_putstr_fd("\n", fd_out);
 	}
+	if (new_line_flag == 0 || !cmd[1])
+		ft_putstr_fd("\n", fd_out);
 	return (0);
 }

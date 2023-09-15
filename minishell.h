@@ -84,7 +84,7 @@ char	**expander(char **split_str, t_god *god_struct);
 
 int		get_array_size(char **array);
 char	*get_env_var(char *var, char **env, int trim);
-int		count_operators(char *str, char c);
+int		count_operators(const char *str, char c);
 int		count_char(char *str, char c);
 
 int		execute_builtins(char **cmd, int fd_out, t_god *god_struct);
@@ -92,7 +92,7 @@ int		execute_builtins(char **cmd, int fd_out, t_god *god_struct);
 char	*get_var(char *var, t_god *tools);
 int		env(int fd_out, t_god *god_struct);
 int		export(char **cmd, int fd_out, t_god *god_struct);
-int		echo(char **cmd,int fd_out);
+int		echo(char **cmd, int fd_out);
 int		unset(char **cmd, t_god *god_struct);
 int		pwd(int fd_out, t_god *god_struct);
 int		cd(char *dir, t_god *god_struct);
