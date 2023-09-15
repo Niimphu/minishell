@@ -75,12 +75,12 @@ int		increment_shell_level(char **env);
 void	await_signals(void);
 void	await_input(t_god *tools);
 
-t_list	*create_parser_list(char **split_string);
+//t_list	*create_parser_list(char **split_string);
 int		parse(char *input_string, t_god *god_struct);
 
 void	expander(t_list **root, t_god *god_struct);
 
-int		get_array_size(char **array);
+//int		get_array_size(char **array);
 char	*get_env_var(char *var, char **env, int trim);
 int		count_operators(const char *str, char c);
 
