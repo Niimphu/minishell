@@ -6,54 +6,116 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:27:32 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/06 23:44:18 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/14 18:16:20 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "parser.h"
 
-static bool	ends_with_operator(t_list *parsed_list);
-static bool	is_node_valid(t_parser *node);
-static bool	consecutive_heredocs(bool is_prev_heredoc, t_parser *node);
+static bool	is_bad_operator(char *string);
+static bool	bad(char *node_string, bool word_expected, int operator_count);
+static bool	starts_or_ends_with_pipe(t_list *lexer_list);
 
-bool	is_syntax_valid(t_list *parsed_list)
+char	*invalid_syntax(t_list *lexer_list)
 {
-	bool	is_previous_heredoc;
+	t_lexer	*node;
+	int		operator_count;
+	bool	word_expected;
 
-	is_previous_heredoc = false;
-	if (!parsed_list)
-		return (true);
-	if (ends_with_operator(parsed_list))
-		return (false);
-	while (parsed_list)
+	operator_count = 0;
+	word_expected = false;
+	if (starts_or_ends_with_pipe(lexer_list))
+		return ("|");
+	while (lexer_list)
 	{
-		if (!is_node_valid(parsed_list->content)
-			|| consecutive_heredocs(is_previous_heredoc, parsed_list->content))
-			return (false);
-		is_previous_heredoc
-			= ((t_parser *)(parsed_list->content))->operator == HEREDOC;
-		parsed_list = parsed_list->next;
+		node = (t_lexer *)lexer_list->content;
+		if (get_operator_id(node->string) > 4)
+			operator_count++;
+		else
+			operator_count = 0;
+		if (bad(node->string, word_expected, operator_count))
+			return (node->string);
+		else if (word_expected || get_operator_id(node->string) > 5)
+			word_expected = !word_expected;
+		if (!lexer_list->next && word_expected)
+			return (node->string);
+		lexer_list = lexer_list->next;
 	}
-	return (true);
+	return (NULL);
 }
 
-static bool	ends_with_operator(t_list *parsed_list)
+static bool	bad(char *node_string, bool word_expected, int operator_count)
 {
-	while (parsed_list->next)
-		parsed_list = parsed_list->next;
-	if (((t_parser *)parsed_list->content)->operator)
+	if (is_bad_operator(node_string)
+		|| (word_expected && get_operator_id(node_string) > 4)
+		|| (operator_count >= 2 && get_operator_id(node_string) == PIPE)
+		|| operator_count >= 3)
 		return (true);
 	return (false);
 }
 
-static bool	is_node_valid(t_parser *node)
+static bool	is_bad_operator(char *string)
 {
-	if (node->operator == BAD_OPERATOR || !*node->cmd)
+	if (*string != '|' && *string != '<' && *string != '>')
 		return (false);
-	return (true);
+	if (get_operator_id(string) < 1)
+		return (true);
+	return (false);
 }
 
-static bool	consecutive_heredocs(bool is_prev_heredoc, t_parser *node)
+static bool	starts_or_ends_with_pipe(t_list *lexer_list)
 {
-	return (is_prev_heredoc && (node->operator == HEREDOC));
+	if (((t_lexer *)lexer_list->content)->token == PIPE)
+		return (true);
+	while (lexer_list->next)
+		lexer_list = lexer_list->next;
+	if (((t_lexer *)lexer_list->content)->token == PIPE)
+		return (true);
+	return (false);
 }
+//
+//static bool	ends_with_operator(t_list *parsed_list);
+//static bool	is_node_valid(t_parser *node);
+//static bool	consecutive_heredocs(bool is_prev_heredoc, t_parser *node);
+//
+//bool	is_syntax_valid(t_list *parsed_list)
+//{
+//	bool	is_previous_heredoc;
+//
+//	is_previous_heredoc = false;
+//	if (!parsed_list)
+//		return (true);
+//	if (ends_with_operator(parsed_list))
+//		return (false);
+//	while (parsed_list)
+//	{
+//		if (!is_node_valid(parsed_list->content)
+//			|| consecutive_heredocs(is_previous_heredoc, parsed_list->content))
+//			return (false);
+//		is_previous_heredoc
+//			= ((t_parser *)(parsed_list->content))->operator == HEREDOC;
+//		parsed_list = parsed_list->next;
+//	}
+//	return (true);
+//}
+//
+//static bool	ends_with_operator(t_list *parsed_list)
+//{
+//	while (parsed_list->next)
+//		parsed_list = parsed_list->next;
+//	if (((t_parser *)parsed_list->content)->operator)
+//		return (true);
+//	return (false);
+//}
+//
+//static bool	is_node_valid(t_parser *node)
+//{
+//	if (node->operator == BAD_OPERATOR || !*node->cmd)
+//		return (false);
+//	return (true);
+//}
+//
+//static bool	consecutive_heredocs(bool is_prev_heredoc, t_parser *node)
+//{
+//	return (is_prev_heredoc && (node->operator == HEREDOC));
+//}

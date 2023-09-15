@@ -12,19 +12,7 @@
 
 #include "../../minishell.h"
 
-char	get_operator(char *str)
-{
-	if (ft_strchr(str, '|'))
-		return ('|');
-	else if (ft_strchr(str, '<'))
-		return ('<');
-	else if (ft_strchr(str, '>'))
-		return ('>');
-	else
-		return (0);
-}
-
-int	skip_quotes(char *str)
+int	skip_quotes(const char *str)
 {
 	int		i;
 	char	c;
@@ -38,6 +26,8 @@ int	skip_quotes(char *str)
 		else
 			i++;
 	}
-	perror("Unclosed quotes found");
-	return (0);
+	write(2, "Unclosed quotes found: ", 23);
+	write(2, &c, 1);
+	write(2, "\n", 1);
+	return (-1);
 }

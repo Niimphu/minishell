@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/14 16:47:11 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 18:49:41 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "../../minishell.h"
 
 char	**lex(char *input, t_god *god_struct);
-bool	is_syntax_valid(t_list *parsed_list);
+//bool	is_syntax_valid(t_list *parsed_list);
+char	*invalid_syntax(t_list *lexer_list);
 
 t_list	*create_lexer_list(char **input_array);
 void	create_docs(t_list *parser_list, t_god *god_struct);
@@ -29,7 +30,6 @@ bool	contains_operator(char c);
 //bool	ends_with_operator(char **array);
 //int		count_quotes(char *str, char quotes);
 
-char	get_operator(char *str);
-int		skip_quotes(char *str);
+int		skip_quotes(const char *str);
 
 #endif

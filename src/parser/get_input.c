@@ -23,10 +23,7 @@ void	await_input(t_god *god_struct)
 	input = read_user_input();
 	if (!input)
 		exit(0);
-	if (parse(input, god_struct) == -1)
-		return ;
-	if (!is_syntax_valid(god_struct->parser_list))
-		write(2, "syntax error: unexpected token\n", 32);
+	parse(input, god_struct);
 }
 
 static char	*read_user_input(void)

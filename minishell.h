@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/15 13:50:45 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 18:50:47 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 # define CMD 1
 # define ARG 2
 # define FILE 3
-# define PIPE 4
-# define INPUT 5
-# define OUTPUT 6
-# define HEREDOC 7
-# define DELIMITER 8
+# define DELIMITER 4
+# define PIPE 5
+# define INPUT 6
+# define OUTPUT 7
+# define HEREDOC 8
 # define APPEND 9
 
 # define TRIM 10
@@ -74,7 +74,7 @@ typedef struct s_file
 t_god	*create_god_struct(char **envp);
 int		increment_shell_level(char **env);
 
-void	await_signals(void);	
+void	await_signals(void);
 void	await_input(t_god *tools);
 
 t_list	*create_parser_list(char **split_string);
