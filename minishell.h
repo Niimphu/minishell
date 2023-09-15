@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/14 18:18:11 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 13:50:45 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_file
 	char	*filename;
 	bool	temp;
 }				t_file;
+
+# include "src/parser/parser.h"
 
 t_god	*create_god_struct(char **envp);
 int		increment_shell_level(char **env);

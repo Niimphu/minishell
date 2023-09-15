@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/15 13:07:17 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:42:51 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ char	*wow_much_function_name(char *str);
 
 char	**expander(char **split_str, t_god *god_struct)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 	
 	i = 0;
 	while (split_str[i])
 	{
 		if (ft_strchr(split_str[i], '$'))
-			split_str[i] = expand_var(split_str[i], god_struct);
+		{
+			tmp = expand_var(split_str[i], god_struct);
+			split_str[i] = tmp;
+		}
 		i++;
 	}
 	return (split_str);
@@ -38,10 +42,13 @@ char	*expand_var(char *str, t_god *god_struct)
 	char	**split_str;
 	
 	i = 0;
-	str = wow_much_function_name(str);
+	tmp = wow_much_function_name(str);
+	str = tmp;
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i] && str[i] == '\'')
+			i += skip_quotes(str);
+		if (str[i] && str[i] == '$')
 		{
 			var_count = count_operators(str + i, str[i]);
 			tmp = insert_sub(str, i);
@@ -53,56 +60,64 @@ char	*expand_var(char *str, t_god *god_struct)
 	}
 	split_str = ft_split(str, 26);
 	if (split_str)
+	{
+		free_string(&str);
 		str = join_split(split_str, god_struct);
+	}
 	return (str);
 }
 
 char	*wow_much_function_name(char *str)
 {
 	int	i;
+	char *tmp;
 	int	var_count;
 
 	i = 0;
-	printf("Start: wow str = %s\n", str);
 	var_count = count_char(str, '$');
-	while (var_count--)
+	while (str[i] && var_count--)
 	{
 		while (str[i] && str[i] != '$')
 			i++;
-		if (str[i] == '$')
+		if (str[i] && str[i] == '$')
 		{
 			i++;
-			printf("after $ is found %c\n", str[i]);
 			while(str[i] && ft_isalnum(str[i]))
 				i++;
-			printf("insert sub here %c\n", str[i]);
 			if (str[i])
-				str = insert_sub(str, i);
+			{
+				tmp = insert_sub(str, i);
+				free_string(&str);
+				str = tmp;
+			}
 		}
 	}
-	printf("END: wow str = %s\n", str);
 	return (str);
 }
 
 char	*join_split(char **split, t_god *god_struct)
 {
 	int	i;
+	char *tmp;
 	char *str;
 	
 	i = 0;
-	str = "\0";
+	str = ft_strdup("");
+	if (!str)
+		return (free(str), NULL);
 	while (split[i])
 	{
 		if (split[i] && !ft_strcmp(split[i], "$"))
 		{
 			i++;
 			split[i] = get_var(split[i], god_struct);
-			printf("split is %s\n", split[i]);
 		}
-		str = ft_strjoin(str, split[i]);
-		if (!str)
+		tmp = ft_strjoin(str, split[i]);
+		if (!tmp)
 			return (free_string_array(&split), NULL);
+		free_string(&str);
+		str = tmp;
 		i++;
 	}
-	return (str);
+	return (free_string_array(&split), str);
 }

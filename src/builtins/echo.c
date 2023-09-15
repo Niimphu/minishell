@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/14 16:14:12 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 13:46:30 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	echo(char **cmd, int fd_out)
 		else
 			cmd[i] = ft_strtrim(cmd[i], "\"\'"); */
 		ft_putstr_fd(cmd[i++], fd_out);
+		if (new_line_flag == 0 || !cmd[1])
+			ft_putstr_fd("\n", fd_out);
 	}
-	if (new_line_flag == 0 || !cmd[1])
-		ft_putstr_fd("\n", fd_out);
 	return (0);
 }
