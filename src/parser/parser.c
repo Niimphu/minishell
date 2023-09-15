@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/13 17:38:55 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 18:40:20 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	parse(char *input, t_god *god_struct)
 	if (!split_str || !*split_str)
 		return (-1);
 		//just for testing
-	execute_builtins(split_str , 1, god_struct);
+	execute_builtins(split_str, 1, god_struct);
 	god_struct->lexer_list = create_lexer_list(split_str);
 	print_lexer_list(god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);

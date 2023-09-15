@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:02:36 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/13 20:40:42 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 18:41:16 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	count_operators(char *str, char c)
 	return (i);
 }
 
-int count_char(char *str, char c)
+int	count_char(char *str, char c)
 {
 	int	i;
 	int	found;
-	
+
 	i = 0;
 	found = 0;
 	while (str[i])
