@@ -53,6 +53,7 @@ typedef struct s_parser
 //	int		fd;
 //	bool	outfile;
 	char	**cmd;
+	t_list	*cmd_list;
 	t_list	*files;
 	bool	builtin;
 

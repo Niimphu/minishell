@@ -6,20 +6,56 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/14 18:13:39 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/15 20:04:58 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_list	*create_parser_list(t_list *lexer_list)
+static t_parser	*create_new_node(bool *new_node_time);
+
+t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list)
 {
 	t_list		*parser_list;
-	t_parser	*new_node;
+	t_lexer		*lexer_node;
+	t_parser	*parser_node;
+	bool		new_node_time;
 
-
+	new_node_time = false;
+	while (lexer_list)
+	{
+		lexer_node = (t_lexer *)lexer_list->content;
+		if (new_node_time)
+			parser_node = create_new_node(&new_node_time);
+		if (lexer_node->token > 5)
+			file_away(parser_node->files, lexer_node,
+				lexer_list->next->content);
+		else if (lexer_node->token == PIPE)
+			new_node_time = true;
+		else if (lexer_node->token == CMD)
+			parser_node->cmd_list = ft_lstnew(lexer_node->string);
+		else if (lexer_node->token == ARG)
+			ft_lstadd_back(&parser_node->cmd_list,
+				ft_lstnew(lexer_node->string));
+		lexer_list = lexer_list->next;
+	}
+	return (parser_list);
 }
 
+static t_parser	*create_new_node(bool *new_node_time)
+{
+	t_parser	*new_node;
+
+	new_node = ft_calloc(sizeof(t_parser), 1);
+	if (!new_node)
+		return (NULL);
+	new_node->cmd = NULL;
+	new_node->cmd_list = NULL;
+	new_node->files = NULL;
+	new_node->builtin = false;
+	new_node_time = false;
+	return (new_node);
+}
 
 //static t_parser	*new_parser_node(char **array);
 //static t_parser	*fill_node(t_parser *node, char **array);
