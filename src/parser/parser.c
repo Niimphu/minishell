@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/15 18:40:20 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 19:55:24 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,43 +80,43 @@ void	print_lexer_list(t_list *lexer_list)
 	printf("\n===    End of list    ===\n\n");
 }
 
-void	print_parser_list(t_list *parsed_list)
-{
-	t_parser	*node;
-	int			i;
-	int			j;
+// void	print_parser_list(t_list *parsed_list)
+// {
+// 	t_parser	*node;
+// 	int			i;
+// 	int			j;
 
-	printf("\n=== Parser linked list ===\n\n");
-	j = 0;
-	while (parsed_list)
-	{
-		i = 0;
-		node = (t_parser *)parsed_list->content;
-		while (node->cmd[i])
-		{
-			printf("cmd[%d] of node %d is : %s\n", i, node->index, node->cmd[i]);
-			i++;
-		}
-		printf("command line operator ID of node %d is: %i\n",
-			j, node->operator);
-		printf("fd for this node is %i\n", node->fd);
-		j++;
-		parsed_list = parsed_list->next;
-	}
-	printf("===    End of list     ===\n\n");
-}
+// 	printf("\n=== Parser linked list ===\n\n");
+// 	j = 0;
+// 	while (parsed_list)
+// 	{
+// 		i = 0;
+// 		node = (t_parser *)parsed_list->content;
+// 		while (node->cmd[i])
+// 		{
+// 			printf("cmd[%d] of node %d is : %s\n", i, node->index, node->cmd[i]);
+// 			i++;
+// 		}
+// 		printf("command line operator ID of node %d is: %i\n",
+// 			j, node->operator);
+// 		printf("fd for this node is %i\n", node->fd);
+// 		j++;
+// 		parsed_list = parsed_list->next;
+// 	}
+// 	printf("===    End of list     ===\n\n");
+// }
 
-void	print_heredoc_list(t_list *heredocs)
-{
-	t_file	*node;
+// void	print_heredoc_list(t_list *heredocs)
+// {
+// 	t_file	*node;
 
-	printf("\n\n=== Heredoc linked list ===\n\n");
-	while (heredocs)
-	{
-		node = (t_file *)heredocs->content;
-		printf("heredoc name: %s\n", node->filename);
-		printf("index: %i\n\n", node->index);
-		heredocs = heredocs->next;
-	}
-	printf("===    End of list     ===\n\n");
-}
+// 	printf("\n\n=== Heredoc linked list ===\n\n");
+// 	while (heredocs)
+// 	{
+// 		node = (t_file *)heredocs->content;
+// 		printf("heredoc name: %s\n", node->filename);
+// 		printf("index: %i\n\n", node->index);
+// 		heredocs = heredocs->next;
+// 	}
+// 	printf("===    End of list     ===\n\n");
+// }

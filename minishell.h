@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/15 18:50:47 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/15 19:55:32 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,25 @@ typedef struct s_lexer
 
 typedef struct s_parser
 {
-	int		index;
+//	int		index;
+//	char	**cmd;
+//	int		operator;
+//	int		fd;
+//	bool	outfile;
 	char	**cmd;
-	int		operator;
-	int		fd;
-	bool	outfile;
+	t_list	*files;
+	bool	builtin;
+
 }				t_parser;
+
+typedef struct s_file
+{
+	int		fd;
+	int		operator; //MACRO: INPUT OUTPUT APPEND HEREDOC
+	char	*filename;
+	bool	heredoc;
+	char	*delimiter;
+}				t_file;
 
 typedef struct s_god
 {
@@ -61,13 +74,6 @@ typedef struct s_god
 	t_list	*parser_list;
 	t_list	*heredoc_names;
 }				t_god;
-
-typedef struct s_file
-{
-	int		index;
-	char	*filename;
-	bool	temp;
-}				t_file;
 
 # include "src/parser/parser.h"
 
@@ -109,8 +115,8 @@ void	free_file_node(void *node);
 void	close_fd(int *fd);
 
 void	print_lexer_list(t_list *lexer_list);
-void	print_parser_list(t_list *parsed_list);
-void	print_heredoc_list(t_list *heredocs);
+// void	print_parser_list(t_list *parsed_list);
+// void	print_heredoc_list(t_list *heredocs);
 char	*insert_sub(char *input, int pos);
 
 #endif
