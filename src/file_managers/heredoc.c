@@ -20,7 +20,6 @@ void	file_away(t_list *files, t_lexer *operator, t_lexer *word)
 	(void)word;
 }
 
-
 // static t_list	*make_another_stinkin_heredoc(t_parser *node, t_list *list);
 // t_file			*new_file_node(char *filename, int index, bool is_heredoc);
 

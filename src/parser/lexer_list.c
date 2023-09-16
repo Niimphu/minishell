@@ -15,8 +15,6 @@
 static t_lexer	*new_node(char *string, bool reset);
 static t_lexer	*tokenize(t_lexer *node, bool block_has_command,
 					bool file_expected, bool delimiter_expected);
-//static void		reset_bool(bool *block_has_command, bool *file_expected,
-//					bool *delimiter_expected);
 
 t_list	*create_lexer_list(char **input_array)
 {
@@ -80,11 +78,3 @@ static t_lexer	*tokenize(t_lexer *node, bool block_has_command,
 		node->token = ARG;
 	return (node);
 }
-
-//static void	reset_bool(bool *block_has_command, bool *file_expected,
-//	bool *delimiter_expected)
-//{
-//	block_has_command = false;
-//	file_expected = false;
-//	delimiter_expected = false;
-//}
