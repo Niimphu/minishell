@@ -25,5 +25,6 @@ void	file_away(t_list *files, t_lexer *operator, t_lexer *word);
 int		get_operator_id(char *operator_string);
 
 int		skip_quotes(const char *str);
+char	*insert_sub(char *input, int pos);
 
 #endif

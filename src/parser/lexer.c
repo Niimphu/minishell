@@ -12,7 +12,6 @@
 
 #include "parser.h"
 
-char		*insert_sub(char *input, int pos);
 static char	**split_input(char *input, t_god *god_struct);
 
 char	**lex(char *input, t_god *god_struct)
