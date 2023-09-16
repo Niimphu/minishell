@@ -6,13 +6,19 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:33:56 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/15 19:58:41 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/16 18:27:10 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// files(parser->files, t_lexer *operator node, word node)
+void	file_away(t_list *files, t_lexer *operator, t_lexer *word)
+{
+	printf("Dummy function\n");
+	(void)files;
+	(void)operator;
+	(void)word;
+}
 
 
 // static t_list	*make_another_stinkin_heredoc(t_parser *node, t_list *list);

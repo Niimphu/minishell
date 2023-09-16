@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/15 18:49:41 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/16 18:27:39 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*invalid_syntax(t_list *lexer_list);
 
 t_list	*create_lexer_list(char **input_array);
 void	create_docs(t_list *parser_list, t_god *god_struct);
+void	file_away(t_list *files, t_lexer *operator, t_lexer *word);
 
 int		get_operator_id(char *operator_string);
 

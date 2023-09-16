@@ -27,8 +27,8 @@ void	free_parser_node(void *node)
 	t_parser	*parser_node;
 
 	parser_node = (t_parser *)node;
-	free_string_array(&parser_node->cmd);
-	close_fd(&parser_node->fd);
+//	free_string_array(&parser_node->cmd);
+	ft_lstclear(&(parser_node->cmd_list), free);
 	free(node);
 	node = NULL;
 }
@@ -38,7 +38,7 @@ void	free_file_node(void *node)
 	t_file	*file_node;
 
 	file_node = (t_file *)node;
-	if (file_node->temp)
+	if (file_node->heredoc)
 		unlink(file_node->filename);
 	free_string(&file_node->filename);
 	free(node);

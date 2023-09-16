@@ -24,7 +24,6 @@ int	parse(char *input, t_god *god_struct)
 	split_str = lex(input, god_struct);
 	if (!split_str || !*split_str)
 		return (-1);
-		//just for testing
 	execute_builtins(split_str, 1, god_struct);
 	god_struct->lexer_list = create_lexer_list(split_str);
 	if (invalid_syntax(god_struct->lexer_list))
@@ -32,12 +31,13 @@ int	parse(char *input, t_god *god_struct)
 			*invalid_syntax(god_struct->lexer_list));
 	else
 		print_lexer_list(god_struct->lexer_list);
-
+	god_struct->parser_list
+		= create_parser_list(god_struct, god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
-//	god_struct->parser_list = create_parser_list(split_str);
 //	expander(&parsed_list, god_struct);
 //	create_docs(parsed_list, god_struct);
-//	print_parser_list(god_struct->parser_list);
+	print_parser_list(god_struct->parser_list);
+	ft_lstclear(&god_struct->parser_list, free_parser_node);
 //	print_heredoc_list(god_struct->heredoc_names);
 	return (0);
 }
@@ -77,34 +77,40 @@ void	print_lexer_list(t_list *lexer_list)
 		printf("Token: %s\n\n", get_token_string(node->token));
 		lexer_list = lexer_list->next;
 	}
-	printf("\n===    End of list    ===\n\n");
+	printf("===    End of list    ===\n\n");
 }
 
-// void	print_parser_list(t_list *parsed_list)
-// {
-// 	t_parser	*node;
-// 	int			i;
-// 	int			j;
+void	print_parser_list(t_list *parsed_list)
+{
+	t_parser	*node;
+	t_list		*file_node;
+	t_list		*cmds;
 
-// 	printf("\n=== Parser linked list ===\n\n");
-// 	j = 0;
-// 	while (parsed_list)
-// 	{
-// 		i = 0;
-// 		node = (t_parser *)parsed_list->content;
-// 		while (node->cmd[i])
-// 		{
-// 			printf("cmd[%d] of node %d is : %s\n", i, node->index, node->cmd[i]);
-// 			i++;
-// 		}
-// 		printf("command line operator ID of node %d is: %i\n",
-// 			j, node->operator);
-// 		printf("fd for this node is %i\n", node->fd);
-// 		j++;
-// 		parsed_list = parsed_list->next;
-// 	}
-// 	printf("===    End of list     ===\n\n");
-// }
+	printf("\n=== Parser linked list ===\n\n");
+	while (parsed_list)
+	{
+		node = (t_parser *)parsed_list->content;
+		cmds = node->cmd_list;
+		file_node = node->files;
+		printf("Executable commands: ");
+		while (cmds)
+		{
+			printf("%s ", (char *)(cmds->content));
+			cmds = cmds->next;
+		}
+		printf("\n");
+		printf("Files: ");
+		while (file_node)
+		{
+			printf("%s %s ", ((t_file *)(file_node->content))->filename,
+				get_token_string(((t_file *)(file_node->content))->operator));
+			file_node = file_node->next;
+		}
+		printf("\n\n");
+		parsed_list = parsed_list->next;
+	}
+	printf("===    End of list     ===\n\n");
+}
 
 // void	print_heredoc_list(t_list *heredocs)
 // {

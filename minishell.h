@@ -76,7 +76,10 @@ typedef struct s_god
 	t_list	*heredoc_names;
 }				t_god;
 
-# include "src/parser/parser.h"
+//do #include "parser.h" from relevant files
+// because parser.h includes this header file already
+
+//# include "src/parser/parser.h"
 
 t_god	*create_god_struct(char **envp);
 int		increment_shell_level(char **env);
@@ -85,6 +88,7 @@ void	await_signals(void);
 void	await_input(t_god *tools);
 
 //t_list	*create_parser_list(char **split_string);
+t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list);
 int		parse(char *input_string, t_god *god_struct);
 
 char	**expander(char **split_str, t_god *god_struct);
@@ -116,7 +120,7 @@ void	free_file_node(void *node);
 void	close_fd(int *fd);
 
 void	print_lexer_list(t_list *lexer_list);
-// void	print_parser_list(t_list *parsed_list);
+ void	print_parser_list(t_list *parsed_list);
 // void	print_heredoc_list(t_list *heredocs);
 char	*insert_sub(char *input, int pos);
 
