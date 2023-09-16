@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../parser/parser.h"
 
 char	*expand_var(char *str, t_god *god_struct);
 char	*join_split(char **split, t_god *god_struct);

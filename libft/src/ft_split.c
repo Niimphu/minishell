@@ -128,5 +128,10 @@ char	**ft_split(const char *s, char c)
 		ft_free(split, 0);
 		return (NULL);
 	}
+	if (!split[0])
+	{
+		free(split);
+		split = NULL;
+	}
 	return (split);
 }

@@ -21,8 +21,11 @@ char	**lex(char *input, t_god *god_struct)
 	int		i;
 	int		next_quote;
 
-	if (!input)
+	if (!*input)
+	{
+		free_string(&input);
 		return (NULL);
+	}
 	i = 0;
 	next_quote = 0;
 	while (input[i])
@@ -64,8 +67,12 @@ static	char	**split_input(char *input, t_god *god_struct)
 		}
 		i++;
 	}
-	split_str = expander(ft_split(input, 26), god_struct);
-	return (free_string(&input), split_str);
+	split_str = ft_split(input, 26);
+	free_string(&input);
+	if (!split_str)
+		return (NULL);
+	split_str = expander(split_str, god_struct);
+	return (split_str);
 }
 
 char	*insert_sub(char *input, int pos)
