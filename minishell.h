@@ -47,11 +47,6 @@ typedef struct s_lexer
 
 typedef struct s_parser
 {
-//	int		index;
-//	char	**cmd;
-//	int		operator;
-//	int		fd;
-//	bool	outfile;
 	char	**cmd;
 	t_list	*cmd_list;
 	t_list	*files;
@@ -62,7 +57,7 @@ typedef struct s_parser
 typedef struct s_file
 {
 	int		fd;
-	int		operator; //MACRO: INPUT OUTPUT APPEND HEREDOC
+	int		operator;
 	char	*filename;
 	bool	heredoc;
 	char	*delimiter;
@@ -87,7 +82,6 @@ int		increment_shell_level(char **env);
 void	await_signals(void);
 void	await_input(t_god *tools);
 
-//t_list	*create_parser_list(char **split_string);
 t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list);
 int		parse(char *input_string, t_god *god_struct);
 
@@ -122,6 +116,5 @@ void	close_fd(int *fd);
 void	print_lexer_list(t_list *lexer_list);
  void	print_parser_list(t_list *parsed_list);
 // void	print_heredoc_list(t_list *heredocs);
-char	*insert_sub(char *input, int pos);
 
 #endif

@@ -16,7 +16,6 @@
 # include "../../minishell.h"
 
 char	**lex(char *input, t_god *god_struct);
-//bool	is_syntax_valid(t_list *parsed_list);
 char	*invalid_syntax(t_list *lexer_list);
 
 t_list	*create_lexer_list(char **input_array);
@@ -24,12 +23,6 @@ void	create_docs(t_list *parser_list, t_god *god_struct);
 void	file_away(t_list *files, t_lexer *operator, t_lexer *word);
 
 int		get_operator_id(char *operator_string);
-
-int		next_command(char **str);
-int		next_operator(char **str);
-bool	contains_operator(char c);
-//bool	ends_with_operator(char **array);
-//int		count_quotes(char *str, char quotes);
 
 int		skip_quotes(const char *str);
 

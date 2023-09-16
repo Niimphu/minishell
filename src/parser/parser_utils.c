@@ -19,28 +19,6 @@ bool	contains_operator(char c)
 	return (false);
 }
 
-int	next_command(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && !contains_operator(str[i][0]))
-		i++;
-	if (str[i])
-		i++;
-	return (i);
-}
-
-int	next_operator(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && !contains_operator(str[i][0]))
-		i++;
-	return (i);
-}
-
 int	get_operator_id(char *operator_string)
 {
 	if (!ft_strncmp("|", operator_string, 2))
@@ -56,29 +34,3 @@ int	get_operator_id(char *operator_string)
 	else
 		return (BAD_OPERATOR);
 }
-
-//bool	ends_with_operator(char **array)
-//{
-//	int	i;
-//
-//	i = 0;
-//	while (array[i + 1])
-//		i++;
-//	return (contains_operator(*array[i]));
-//}
-
-//int	count_quotes(char *str, char quotes)
-//{
-//	int	i;
-//	int	quote_count;
-//
-//	i = 0;
-//	quote_count = 0;
-//	while (str[i])
-//	{
-//		if (str[i] == quotes)
-//			quote_count++;
-//		i++;
-//	}
-//	return (quote_count);
-//}
