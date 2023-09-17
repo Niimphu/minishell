@@ -13,7 +13,7 @@
 #include "parser.h"
 
 static t_lexer	*new_node(char *string, bool reset);
-static t_lexer	*tokenize(t_lexer *node, int expected_token,
+static void		tokenize(t_lexer *node, int expected_token,
 					bool block_has_cmd);
 static int		get_expected_token(int token, bool block_has_cmd);
 static bool		update_cmd_tracker(int token, bool block_has_cmd);
@@ -47,13 +47,13 @@ static t_lexer	*new_node(char *string, bool reset)
 	if (!lexer_node)
 		return (NULL);
 	lexer_node->string = ft_strdup(string);
-	lexer_node = tokenize(lexer_node, expected_token, block_has_cmd);
+	tokenize(lexer_node, expected_token, block_has_cmd);
 	block_has_cmd = update_cmd_tracker(lexer_node->token, block_has_cmd);
 	expected_token = get_expected_token(lexer_node->token, block_has_cmd);
 	return (lexer_node);
 }
 
-static t_lexer	*tokenize(t_lexer *node, int expected_token, bool block_has_cmd)
+static void	tokenize(t_lexer *node, int expected_token, bool block_has_cmd)
 {
 	if (get_operator_id(node->string) > 4)
 		node->token = get_operator_id(node->string);
@@ -65,7 +65,6 @@ static t_lexer	*tokenize(t_lexer *node, int expected_token, bool block_has_cmd)
 		node->token = ARG;
 	else
 		node->token = CMD;
-	return (node);
 }
 
 static int	get_expected_token(int token, bool block_has_cmd)
