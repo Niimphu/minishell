@@ -29,8 +29,11 @@ t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list)
 		if (!parser_node)
 			return (NULL);
 		if (lexer_node->token > 5)
+		{
 			file_away(parser_node->files, lexer_node,
 				(lexer_list->next->content));
+			lexer_list = lexer_list->next;
+		}
 		else if (lexer_node->token == CMD)
 			parser_node->cmd_list = ft_lstnew(ft_strdup(lexer_node->string));
 		else if (lexer_node->token == ARG)
