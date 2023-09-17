@@ -15,6 +15,8 @@
 
 # include "../../minishell.h"
 
+# define SKIP 1
+
 char	**lex(char *input, t_god *god_struct);
 char	*invalid_syntax(t_list *lexer_list);
 
