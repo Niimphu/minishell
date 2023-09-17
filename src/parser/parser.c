@@ -32,7 +32,7 @@ int	parse(char *input, t_god *god_struct)
 	else
 		print_lexer_list(god_struct->lexer_list);
 	god_struct->parser_list
-		= create_parser_list(god_struct, god_struct->lexer_list);
+		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 //	expander(&parsed_list, god_struct);
 //	create_docs(parsed_list, god_struct);
@@ -84,20 +84,17 @@ void	print_parser_list(t_list *parsed_list)
 {
 	t_parser	*node;
 	t_list		*file_node;
-	t_list		*cmds;
+	int			i;
 
 	printf("\n=== Parser linked list ===\n\n");
 	while (parsed_list)
 	{
+		i = 0;
 		node = (t_parser *)parsed_list->content;
-		cmds = node->cmd_list;
 		file_node = node->files;
 		printf("Executable commands: ");
-		while (cmds)
-		{
-			printf("%s ", (char *)(cmds->content));
-			cmds = cmds->next;
-		}
+		while (node->cmd_array[i])
+			printf("%s ", node->cmd_array[i++]);
 		printf("\n");
 		printf("Files: ");
 		while (file_node)

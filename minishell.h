@@ -47,11 +47,11 @@ typedef struct s_lexer
 
 typedef struct s_parser
 {
-	char	**cmd;
+	char	*cmd;
+	char	**cmd_array;
 	t_list	*cmd_list;
 	t_list	*files;
 	bool	builtin;
-
 }				t_parser;
 
 typedef struct s_file
@@ -82,7 +82,7 @@ int		increment_shell_level(char **env);
 void	await_signals(void);
 void	await_input(t_god *tools);
 
-t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list);
+t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list);
 int		parse(char *input_string, t_god *god_struct);
 
 char	**expander(char **split_str, t_god *god_struct);
@@ -102,7 +102,6 @@ int		unset(char **cmd, t_god *god_struct);
 int		pwd(int fd_out, t_god *god_struct);
 int		cd(char *dir, t_god *god_struct);
 void	exit_minishell(t_god *god_struct);
-
 
 void	free_god_struct(t_god **root);
 void	free_string(char **string);

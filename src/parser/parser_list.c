@@ -17,7 +17,7 @@ static int		save_words(t_parser *parser_node, t_list *lexer);
 static t_list	*add_node_to_parser_list(t_list *parser_list,
 					t_parser *parser_node);
 
-t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list)
+t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 {
 	t_lexer		*lexer_node;
 	t_parser	*parser_node;
@@ -35,15 +35,15 @@ t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list)
 			lexer_list = lexer_list->next;
 		if (new_node_time)
 		{
-			god_struct->parser_list
-				= add_node_to_parser_list(god_struct->parser_list, parser_node);
+			parser_list = add_node_to_parser_list(parser_list, parser_node);
 			new_node_time = false;
 		}
-		if (lexer_node->token == PIPE)
+		if (lexer_node->token == PIPE || !lexer_list->next)
 			new_node_time = true;
 		lexer_list = lexer_list->next;
 	}
-	return (god_struct->parser_list);
+	convert_commands(parser_list);
+	return (parser_list);
 }
 
 static t_list	*add_node_to_parser_list(t_list *parser_list,

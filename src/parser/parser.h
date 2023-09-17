@@ -23,6 +23,7 @@ char	*invalid_syntax(t_list *lexer_list);
 t_list	*create_lexer_list(char **input_array);
 void	create_docs(t_list *parser_list, t_god *god_struct);
 void	file_away(t_list *files, t_lexer *operator, t_lexer *word);
+t_list	*convert_commands(t_list *parser_list);
 
 int		get_operator_id(char *operator_string);
 

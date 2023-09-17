@@ -62,6 +62,7 @@ SRC	=	main.c \
 		parser/get_input.c \
 		parser/parser_utils.c \
 		parser/parser_list.c \
+		parser/parser_list_utils.c \
 		file_managers/heredoc.c \
 		expander/expander.c \
 		keybinds/keypress.c \
