@@ -13,6 +13,7 @@
 #include "../../minishell.h"
 
 static char	**list_to_array(t_list *list);
+static int	check_builtin(char *cmd);
 
 void	convert_commands(t_list *parser_list)
 {
@@ -25,6 +26,7 @@ void	convert_commands(t_list *parser_list)
 		ft_lstclear(&node->cmd_list, free);
 		node->cmd_list = NULL;
 		node->cmd = *(node->cmd_array);
+		node->builtin = check_builtin(node->cmd);
 		parser_list = parser_list->next;
 	}
 }
@@ -54,4 +56,23 @@ static char	**list_to_array(t_list *list)
 		temp = temp->next;
 	}
 	return (cmd_array);
+}
+
+static int	check_builtin(char *cmd)
+{
+	if (!ft_strncmp(cmd, "echo", 45))
+		return (ECHO);
+	if (!ft_strncmp(cmd, "cd", 3))
+		return (CD);
+	if (!ft_strncmp(cmd, "pwd", 4))
+		return (PWD);
+	if (!ft_strncmp(cmd, "export", 7))
+		return (EXPORT);
+	if (!ft_strncmp(cmd, "unset", 6))
+		return (UNSET);
+	if (!ft_strncmp(cmd, "env", 4))
+		return (ENV);
+	if (!ft_strncmp(cmd, "exit", 5))
+		return (EXIT);
+	return (0);
 }

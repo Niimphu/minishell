@@ -103,6 +103,8 @@ void	print_parser_list(t_list *parsed_list)
 				get_token_string(((t_file *)(file_node->content))->operator));
 			file_node = file_node->next;
 		}
+		printf("\n");
+		printf("Is%sa built-in\n", node->builtin > 0 ? " " : " not ");
 		printf("\n\n");
 		parsed_list = parsed_list->next;
 	}
