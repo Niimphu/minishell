@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/17 14:57:54 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/18 19:31:53 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	save_words(t_parser *parser_node, t_list *lexer_list)
 	if (current->token > 5)
 	{
 		next = (t_lexer *)(lexer_list->next->content);
-		file_away(&parser_node->files, current, next);
+		file_away(&parser_node->files, next, &lexer_list);
 		return (SKIP);
 	}
 	else if (current->token == CMD)

@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:51:46 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/18 15:59:30 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/18 19:36:23 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,47 @@ t_file	*create_new_file_node(void);
 char	*create_heredoc(void);
 int		heredoc(char *file_name, char *limiter);
 
-void	file_away(t_list **files, t_lexer *operator, t_lexer *word)
+void	file_away(t_list **files,t_lexer *word, t_list **lexer_list)
 {
+	t_lexer	*lexer_token;
 	t_list	*ptr;
 	t_file	*node;
 
-	ptr = ft_calloc(sizeof(t_list), 1);
-	node = create_new_file_node();
-	if (!node)
-		return ;
-	node->operator = operator->token;
-	if (node->operator > 5 && node->operator != 8)
-		node->filename = word->string;
-	if (node->operator == 8)
+	int i = 0;
+	ptr = *(lexer_list);
+	ptr = 
+	while(ptr)
 	{
-		node->heredoc = true;
-		node->filename = create_heredoc();
-		node->delimiter = word->string;
+		lexer_token = (t_lexer *)(ptr->content);
+		printf("%s\n", lexer_token->string);
+		if (lexer_token->token == 5)
+			break ;
+		if (lexer_token->token > 5)
+		{
+			node = create_new_file_node();
+			printf("created node\n");
+			node->operator = lexer_token->token;
+				if (!node)
+					return ;
+			printf("node operator %d\n", node->operator);
+			if (node->operator > 5 && node->operator != 8)
+			{
+				node->filename = word->string;
+				printf("node filename %s\n", node->filename);
+				
+			}
+			if (node->operator == 8)
+			{
+				node->heredoc = true;
+				node->filename = create_heredoc();
+				node->delimiter = lexer_token->string;
+			}
+			printf("test\n");
+			ft_lstadd_back(files, ft_lstnew(node));
+		}
+		printf("here %d\n", i++);
+		ptr = ptr->next->next;
 	}
-	ptr->content = node;
-	*(files) = ptr;
 }
 
 t_file	*create_new_file_node(void)

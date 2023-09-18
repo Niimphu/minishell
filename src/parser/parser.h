@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/17 14:58:50 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/18 19:32:09 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*invalid_syntax(t_list *lexer_list);
 
 t_list	*create_lexer_list(char **input_array);
 t_list	*convert_commands(t_list *parser_list);
-void	file_away(t_list **files, t_lexer *operator, t_lexer *word);
+void	file_away(t_list **files, t_lexer *word, t_list **lexer_list);
 
 int		get_operator_id(char *operator_string);
 
