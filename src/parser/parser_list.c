@@ -33,14 +33,6 @@ t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 			return (NULL);
 		if (save_words(parser_node, lexer_list) == SKIP)
 			lexer_list = lexer_list->next;
-//		if (lexer_node->token > 5)
-//			file_away(&parser_node->files, lexer_node,
-//				(lexer_list->next->content));
-//		else if (lexer_node->token == CMD)
-//			parser_node->cmd_list = ft_lstnew(ft_strdup(lexer_node->string));
-//		else if (lexer_node->token == ARG)
-//			ft_lstadd_back(&parser_node->cmd_list,
-//				ft_lstnew(ft_strdup(lexer_node->string)));
 		if (new_node_time)
 		{
 			parser_list = add_node_to_parser_list(parser_list, parser_node);
