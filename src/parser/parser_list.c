@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/15 20:04:58 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/17 14:57:54 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list)
 		if (!parser_node)
 			return (NULL);
 		if (lexer_node->token > 5)
-			file_away(parser_node->files, lexer_node,
+			file_away(&parser_node->files, lexer_node,
 				(lexer_list->next->content));
 		else if (lexer_node->token == CMD)
 			parser_node->cmd_list = ft_lstnew(ft_strdup(lexer_node->string));

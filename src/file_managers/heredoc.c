@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:33:56 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/16 18:27:10 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/17 14:19:25 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	file_away(t_list *files, t_lexer *operator, t_lexer *word)
-{
-	printf("Dummy function\n");
-	(void)files;
-	(void)operator;
-	(void)word;
-}
 
 // static t_list	*make_another_stinkin_heredoc(t_parser *node, t_list *list);
 // t_file			*new_file_node(char *filename, int index, bool is_heredoc);

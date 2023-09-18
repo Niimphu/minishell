@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/15 19:55:24 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/17 18:25:56 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	parse(char *input, t_god *god_struct)
 		print_lexer_list(god_struct->lexer_list);
 	god_struct->parser_list
 		= create_parser_list(god_struct, god_struct->lexer_list);
-	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 //	expander(&parsed_list, god_struct);
 //	create_docs(parsed_list, god_struct);
 	print_parser_list(god_struct->parser_list);
+	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 	ft_lstclear(&god_struct->parser_list, free_parser_node);
 //	print_heredoc_list(god_struct->heredoc_names);
 	return (0);
@@ -102,8 +102,8 @@ void	print_parser_list(t_list *parsed_list)
 		printf("Files: ");
 		while (file_node)
 		{
-			printf("%s %s ", ((t_file *)(file_node->content))->filename,
-				get_token_string(((t_file *)(file_node->content))->operator));
+			printf("%s %s Heredoc Bool %d Delimiter : %s", ((t_file *)(file_node->content))->filename,
+				get_token_string(((t_file *)(file_node->content))->operator), ((t_file *)(file_node->content))->heredoc,((t_file *)(file_node->content))->delimiter);
 			file_node = file_node->next;
 		}
 		printf("\n\n");

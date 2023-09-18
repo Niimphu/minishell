@@ -6,7 +6,7 @@
 #    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/13 16:46:48 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/09/17 14:34:09 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRC	=	main.c \
 		parser/parser_utils.c \
 		parser/parser_list.c \
 		file_managers/heredoc.c \
+		file_managers/file_list.c \
 		expander/expander.c \
 		keybinds/keypress.c \
 		utils/counters.c \
