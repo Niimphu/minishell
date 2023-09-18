@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/18 19:31:53 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/18 22:02:30 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ static t_list	*add_node_to_parser_list(t_list *parser_list,
 
 t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 {
+	t_list		*files;
 	t_lexer		*lexer_node;
 	t_parser	*parser_node;
 	bool		new_node_time;
 
 	new_node_time = true;
+	files = lexer_list;
 	while (lexer_list)
 	{
 		lexer_node = (t_lexer *)lexer_list->content;
@@ -31,17 +33,19 @@ t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 			parser_node = create_new_node();
 		if (!parser_node)
 			return (NULL);
-		if (save_words(parser_node, lexer_list) == SKIP)
-			lexer_list = lexer_list->next;
+		save_words(parser_node, lexer_list);
 		if (new_node_time)
 		{
 			parser_list = add_node_to_parser_list(parser_list, parser_node);
 			new_node_time = false;
 		}
 		if (lexer_node->token == PIPE || !lexer_list->next)
+		{
 			new_node_time = true;
+		}
 		lexer_list = lexer_list->next;
 	}
+	create_file_list(parser_list, files);
 	convert_commands(parser_list);
 	return (parser_list);
 }
@@ -73,16 +77,10 @@ static t_parser	*create_new_node(void)
 static int	save_words(t_parser *parser_node, t_list *lexer_list)
 {
 	t_lexer	*current;
-	t_lexer	*next;
 
 	current = (t_lexer *)(lexer_list->content);
-	if (current->token > 5)
-	{
-		next = (t_lexer *)(lexer_list->next->content);
-		file_away(&parser_node->files, next, &lexer_list);
-		return (SKIP);
-	}
-	else if (current->token == CMD)
+	
+	if (current->token == CMD)
 		parser_node->cmd_list = ft_lstnew(ft_strdup(current->string));
 	else if (current->token == ARG)
 		ft_lstadd_back(&parser_node->cmd_list,

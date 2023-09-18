@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:51:46 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/18 19:36:23 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/18 22:35:04 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,72 @@
 
 t_file	*create_new_file_node(void);
 char	*create_heredoc(void);
-int		heredoc(char *file_name, char *limiter);
+/* int		heredoc(char *file_name, char *limiter); */
+t_file	*file_away(t_lexer *current, t_lexer *next);
 
-void	file_away(t_list **files,t_lexer *word, t_list **lexer_list)
+void	printf_files(t_list *files)
 {
-	t_lexer	*lexer_token;
-	t_list	*ptr;
-	t_file	*node;
+	t_file		*ptr;
 
-	int i = 0;
-	ptr = *(lexer_list);
-	ptr = 
-	while(ptr)
+	while(files)
 	{
-		lexer_token = (t_lexer *)(ptr->content);
-		printf("%s\n", lexer_token->string);
-		if (lexer_token->token == 5)
-			break ;
-		if (lexer_token->token > 5)
-		{
-			node = create_new_file_node();
-			printf("created node\n");
-			node->operator = lexer_token->token;
-				if (!node)
-					return ;
-			printf("node operator %d\n", node->operator);
-			if (node->operator > 5 && node->operator != 8)
-			{
-				node->filename = word->string;
-				printf("node filename %s\n", node->filename);
-				
-			}
-			if (node->operator == 8)
-			{
-				node->heredoc = true;
-				node->filename = create_heredoc();
-				node->delimiter = lexer_token->string;
-			}
-			printf("test\n");
-			ft_lstadd_back(files, ft_lstnew(node));
-		}
-		printf("here %d\n", i++);
-		ptr = ptr->next->next;
+		ptr = ((t_file *)(files->content));
+		printf("filename is %s\n", ptr->filename);
+		files = files->next;
 	}
+}
+
+void	create_file_list(t_list *parser_list, t_list *lexer_list)
+{
+	t_parser	*parser_node;
+	t_lexer		*current;
+	t_lexer		*next;
+
+	parser_node = (t_parser *)(parser_list->content);
+	while (lexer_list->next)
+	{
+		current = (t_lexer *)(lexer_list->content);
+		next = (t_lexer *)(lexer_list->next->content);
+		if (current->token == 5)
+			parser_node = (t_parser *)(parser_list->next->content);
+		if (current->token > 5)
+		{
+			if (!parser_node->files)
+			{
+				printf("first file node\n");
+				parser_node->files = ft_lstnew(file_away(current, next));
+				lexer_list = lexer_list->next;
+			}
+			else
+			{
+				printf("adding file node\n");
+				ft_lstadd_back(&parser_node->files, ft_lstnew(file_away(current, next)));
+				lexer_list = lexer_list->next;
+			}
+			printf_files(parser_node->files);
+		}
+		printf("found %s\n", current->string);
+		lexer_list = lexer_list->next;
+	}
+}
+
+t_file	*file_away(t_lexer *current, t_lexer *next)
+{
+	t_file	*node;
+	
+	node = create_new_file_node();
+	if (current->token > 5 && current->token != 8)
+	{
+		node->filename = next->string;
+		node->operator = current->token;
+	}
+	if (current->token == 8)
+	{
+		node->filename = create_heredoc();
+		node->delimiter = current->string;
+		node->heredoc = true;
+	}
+	return (node);
 }
 
 t_file	*create_new_file_node(void)
@@ -96,6 +119,7 @@ char	*create_heredoc(void)
 	return (filename);
 }
 
+/* 
 int	heredoc(char *file_name, char *limiter)
 {
 	int		fd;
@@ -118,4 +142,4 @@ int	heredoc(char *file_name, char *limiter)
 	}
 	close(fd);
 	return (fd);
-}
+} */

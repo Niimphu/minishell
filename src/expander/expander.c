@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/15 18:32:08 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/18 19:41:31 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 char	*expand_var(char *str, t_god *god_struct);
 char	*join_split(char **split, t_god *god_struct);
 char	*wow_much_function_name(char *str);
+
+// "'$HOME'"
+// trim quotes
 
 char	**expander(char **split_str, t_god *god_struct)
 {
