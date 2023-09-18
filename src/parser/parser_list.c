@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/15 20:04:58 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/17 14:57:54 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 			return (NULL);
 		if (save_words(parser_node, lexer_list) == SKIP)
 			lexer_list = lexer_list->next;
+//		if (lexer_node->token > 5)
+//			file_away(&parser_node->files, lexer_node,
+//				(lexer_list->next->content));
+//		else if (lexer_node->token == CMD)
+//			parser_node->cmd_list = ft_lstnew(ft_strdup(lexer_node->string));
+//		else if (lexer_node->token == ARG)
+//			ft_lstadd_back(&parser_node->cmd_list,
+//				ft_lstnew(ft_strdup(lexer_node->string)));
 		if (new_node_time)
 		{
 			parser_list = add_node_to_parser_list(parser_list, parser_node);
@@ -79,7 +87,7 @@ static int	save_words(t_parser *parser_node, t_list *lexer_list)
 	if (current->token > 5)
 	{
 		next = (t_lexer *)(lexer_list->next->content);
-		file_away(parser_node->files, current, next);
+		file_away(&parser_node->files, current, next);
 		return (SKIP);
 	}
 	else if (current->token == CMD)

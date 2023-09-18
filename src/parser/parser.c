@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/15 19:55:24 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/17 18:25:56 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse(char *input, t_god *god_struct)
 	split_str = lex(input, god_struct);
 	if (!split_str || !*split_str)
 		return (-1);
-	execute_builtins(split_str, 1, god_struct);
+//	execute_builtins(split_str, 1, god_struct);
 	god_struct->lexer_list = create_lexer_list(split_str);
 	if (invalid_syntax(god_struct->lexer_list))
 		printf("minishelf: syntax error near unexpected token \'%c\'\n",
@@ -37,6 +37,7 @@ int	parse(char *input, t_god *god_struct)
 //	expander(&parsed_list, god_struct);
 //	create_docs(parsed_list, god_struct);
 	print_parser_list(god_struct->parser_list);
+	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 	ft_lstclear(&god_struct->parser_list, free_parser_node);
 //	print_heredoc_list(god_struct->heredoc_names);
 	return (0);
@@ -99,8 +100,8 @@ void	print_parser_list(t_list *parsed_list)
 		printf("Files: ");
 		while (file_node)
 		{
-			printf("%s %s ", ((t_file *)(file_node->content))->filename,
-				get_token_string(((t_file *)(file_node->content))->operator));
+			printf("<Filename: %s Direction: %s Heredoc? %s Delimiter : %s>  ", ((t_file *)(file_node->content))->filename,
+				get_token_string(((t_file *)(file_node->content))->operator), ((t_file *)(file_node->content))->heredoc ? "yes" : "no",((t_file *)(file_node->content))->delimiter);
 			file_node = file_node->next;
 		}
 		printf("\n");
