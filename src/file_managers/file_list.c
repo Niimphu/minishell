@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:51:46 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/17 20:52:07 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/18 15:59:30 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,24 @@ t_file	*create_new_file_node(void);
 char	*create_heredoc(void);
 int		heredoc(char *file_name, char *limiter);
 
-void file_away(t_list **files, t_lexer *operator, t_lexer *word)
+void	file_away(t_list **files, t_lexer *operator, t_lexer *word)
 {
 	t_list	*ptr;
-    t_file	*node;
+	t_file	*node;
 
 	ptr = ft_calloc(sizeof(t_list), 1);
 	node = create_new_file_node();
-    if (!node)
-        return;
-    node->operator = operator->token;
-    if (node->operator > 5 && node->operator != 8)
-        node->filename = word->string;
-    if (node->operator == 8)
-    {
-        node->heredoc = true;
+	if (!node)
+		return ;
+	node->operator = operator->token;
+	if (node->operator > 5 && node->operator != 8)
+		node->filename = word->string;
+	if (node->operator == 8)
+	{
+		node->heredoc = true;
 		node->filename = create_heredoc();
-        node->delimiter = word->string;
-		/* node->fd = heredoc(node->filename, node->delimiter); */
-    }
+		node->delimiter = word->string;
+	}
 	ptr->content = node;
 	*(files) = ptr;
 }
@@ -60,7 +59,7 @@ char	*create_heredoc(void)
 	char		*filename;
 	char		*temp;
 	int			file_exists;
-	
+
 	id = 0;
 	file_exists = 0;
 	filename = NULL;
@@ -83,7 +82,7 @@ int	heredoc(char *file_name, char *limiter)
 
 	input = NULL;
 	printf("%s\n", file_name);
-	fd = open(file_name , O_RDWR | O_CREAT, 0666);
+	fd = open(file_name, O_RDWR | O_CREAT, 0666);
 	while (fd != -1)
 	{
 		input = get_next_line(STDIN_FILENO);
@@ -97,6 +96,5 @@ int	heredoc(char *file_name, char *limiter)
 		free_string(&input);
 	}
 	close(fd);
-	fd = open(file_name , O_RDONLY, 0666);
 	return (fd);
 }
