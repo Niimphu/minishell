@@ -37,6 +37,14 @@
 
 # define TRIM 10
 
+# define ECHO 11
+# define CD 12
+# define PWD 13
+# define EXPORT 14
+# define UNSET 15
+# define ENV 16
+# define EXIT 17
+
 int	g_signal_received;
 
 typedef struct s_lexer
@@ -47,11 +55,11 @@ typedef struct s_lexer
 
 typedef struct s_parser
 {
-	char	**cmd;
+	char	*cmd;
+	char	**cmd_array;
 	t_list	*cmd_list;
 	t_list	*files;
-	bool	builtin;
-
+	int		builtin;
 }				t_parser;
 
 typedef struct s_file
@@ -82,7 +90,7 @@ int		increment_shell_level(char **env);
 void	await_signals(void);
 void	await_input(t_god *tools);
 
-t_list	*create_parser_list(t_god *god_struct, t_list *lexer_list);
+t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list);
 int		parse(char *input_string, t_god *god_struct);
 
 char	**expander(char **split_str, t_god *god_struct);

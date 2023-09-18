@@ -27,8 +27,7 @@ void	free_parser_node(void *node)
 	t_parser	*parser_node;
 
 	parser_node = (t_parser *)node;
-//	free_string_array(&parser_node->cmd);
-	ft_lstclear(&(parser_node->cmd_list), free);
+	free_string_array(&parser_node->cmd_array);
 	ft_lstclear(&(parser_node->files), free_file_node);
 	free(node);
 	node = NULL;

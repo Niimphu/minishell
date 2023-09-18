@@ -6,15 +6,17 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:53:31 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/14 18:13:39 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/17 17:28:28 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 static t_lexer	*new_node(char *string, bool reset);
-static t_lexer	*tokenize(t_lexer *node, bool block_has_command,
-					bool file_expected, bool delimiter_expected);
+static void		tokenize(t_lexer *node, int expected_token,
+					bool block_has_cmd);
+static int		get_expected_token(int token, bool block_has_cmd);
+static bool		update_cmd_tracker(int token, bool block_has_cmd);
 
 t_list	*create_lexer_list(char **input_array)
 {
@@ -33,48 +35,56 @@ t_list	*create_lexer_list(char **input_array)
 static t_lexer	*new_node(char *string, bool reset)
 {
 	t_lexer		*lexer_node;
-	static bool	block_has_command = false;
-	static bool	file_expected = false;
-	static bool	delimiter_expected = false;
+	static int	expected_token = 0;
+	static bool	block_has_cmd = false;
 
 	if (reset)
 	{
-		block_has_command = false;
-		file_expected = false;
-		delimiter_expected = false;
+		expected_token = 0;
+		block_has_cmd = false;
 	}
 	lexer_node = ft_calloc(1, sizeof(t_lexer));
 	if (!lexer_node)
 		return (NULL);
 	lexer_node->string = ft_strdup(string);
-	lexer_node = tokenize(lexer_node, block_has_command,
-			file_expected, delimiter_expected);
-	if (lexer_node->token == PIPE)
-		block_has_command = false;
-	else if (lexer_node->token == CMD)
-		block_has_command = true;
-	else if (lexer_node->token == HEREDOC || lexer_node->token == DELIMITER)
-		delimiter_expected = !delimiter_expected;
-	else if (lexer_node->token == INPUT || lexer_node->token == OUTPUT
-		|| lexer_node->token == APPEND)
-		file_expected = true;
-	else if (lexer_node->token == FILE)
-		file_expected = false;
+	tokenize(lexer_node, expected_token, block_has_cmd);
+	block_has_cmd = update_cmd_tracker(lexer_node->token, block_has_cmd);
+	expected_token = get_expected_token(lexer_node->token, block_has_cmd);
 	return (lexer_node);
 }
 
-static t_lexer	*tokenize(t_lexer *node, bool block_has_command,
-		bool file_expected, bool delimiter_expected)
+static void	tokenize(t_lexer *node, int expected_token, bool block_has_cmd)
 {
 	if (get_operator_id(node->string) > 4)
 		node->token = get_operator_id(node->string);
-	else if (file_expected)
+	else if (expected_token == FILE)
 		node->token = FILE;
-	else if (delimiter_expected)
+	else if (expected_token == DELIMITER)
 		node->token = DELIMITER;
-	else if (!block_has_command)
-		node->token = CMD;
-	else
+	else if (block_has_cmd)
 		node->token = ARG;
-	return (node);
+	else
+		node->token = CMD;
+}
+
+static int	get_expected_token(int token, bool block_has_cmd)
+{
+	if (token == PIPE || token == DELIMITER || token == FILE)
+		return (0);
+	else if (token == HEREDOC)
+		return (DELIMITER);
+	else if (token == INPUT || token == OUTPUT || token == APPEND)
+		return (FILE);
+	else if (block_has_cmd)
+		return (ARG);
+	return (0);
+}
+
+static bool	update_cmd_tracker(int token, bool block_has_cmd)
+{
+	if (token == PIPE)
+		return (false);
+	else if (token == CMD)
+		return (true);
+	return (block_has_cmd);
 }

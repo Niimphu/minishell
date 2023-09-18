@@ -39,11 +39,15 @@ NAME = minishell
 
 CC = gcc -Wall -Wextra -Werror
 CC += -g -O0
-# CC += -fsanitize=address
+#CC += -fsanitize=address
 
 LIBS = -L ~/.brew/Cellar/readline/8.2.1/lib -lreadline -lncurses
 
 HEADERS = -I ~/.brew/Cellar/readline/8.2.1/include
+
+#LIBS = -L /usr/local/Cellar/readline/8.2.1/lib -lreadline -lncurses
+#
+#HEADERS = -I /usr/local/Cellar/readline/8.2.1/include
 
 LIBFT = libft.a
 
@@ -62,6 +66,7 @@ SRC	=	main.c \
 		parser/get_input.c \
 		parser/parser_utils.c \
 		parser/parser_list.c \
+		parser/parser_list_utils.c \
 		file_managers/heredoc.c \
 		file_managers/file_list.c \
 		expander/expander.c \

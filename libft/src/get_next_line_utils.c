@@ -49,22 +49,22 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	return (len);
 }
 
-char	*ft_strdup(const char *s)
-{
-	size_t	i;
-	size_t	len;
-	char	*ptr;
-
-	i = 0;
-	len = ft_strlen(s) + 1;
-	ptr = (char *)malloc(sizeof(char) * len);
-	if (ptr == NULL)
-		return (NULL);
-	while (*s != '\0')
-		ptr[i++] = *s++;
-	ptr[i] = '\0';
-	return (ptr);
-}
+//char	*ft_strdup(const char *s)
+//{
+//	size_t	i;
+//	size_t	len;
+//	char	*ptr;
+//
+//	i = 0;
+//	len = ft_strlen(s) + 1;
+//	ptr = (char *)malloc(sizeof(char) * len);
+//	if (ptr == NULL)
+//		return (NULL);
+//	while (*s != '\0')
+//		ptr[i++] = *s++;
+//	ptr[i] = '\0';
+//	return (ptr);
+//}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

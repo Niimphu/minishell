@@ -21,10 +21,7 @@ char	**lex(char *input, t_god *god_struct)
 	int		next_quote;
 
 	if (!*input)
-	{
-		free_string(&input);
-		return (NULL);
-	}
+		return (free_string(&input), NULL);
 	i = 0;
 	next_quote = 0;
 	while (input[i])
@@ -70,8 +67,7 @@ static	char	**split_input(char *input, t_god *god_struct)
 	free_string(&input);
 	if (!split_str)
 		return (NULL);
-	split_str = expander(split_str, god_struct);
-	return (split_str);
+	return (expander(split_str, god_struct));
 }
 
 char	*insert_sub(char *input, int pos)
