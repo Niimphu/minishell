@@ -45,6 +45,10 @@ LIBS = -L ~/.brew/Cellar/readline/8.2.1/lib -lreadline -lncurses
 
 HEADERS = -I ~/.brew/Cellar/readline/8.2.1/include
 
+#LIBS = -L /usr/local/Cellar/readline/8.2.1/lib -lreadline -lncurses
+#
+#HEADERS = -I /usr/local/Cellar/readline/8.2.1/include
+
 LIBFT = libft.a
 
 SRC_DIR = src
