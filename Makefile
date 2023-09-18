@@ -39,7 +39,7 @@ NAME = minishell
 
 CC = gcc -Wall -Wextra -Werror
 CC += -g -O0
- CC += -fsanitize=address
+#CC += -fsanitize=address
 
 LIBS = -L ~/.brew/Cellar/readline/8.2.1/lib -lreadline -lncurses
 
