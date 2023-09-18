@@ -60,6 +60,8 @@ static char	**list_to_array(t_list *list)
 
 static int	check_builtin(char *cmd)
 {
+	if (!cmd || !*cmd)
+		return (0);
 	if (!ft_strncmp(cmd, "echo", 45))
 		return (ECHO);
 	if (!ft_strncmp(cmd, "cd", 3))
