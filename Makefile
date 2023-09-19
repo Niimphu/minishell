@@ -76,7 +76,6 @@ SRC	=	main.c \
 		free/free_char.c \
 		free/free_structs.c \
 		free/free_fd.c \
-		quit/quit.c \
 		executer/execute_builtins.c \
 		builtins/cd.c \
 		builtins/echo.c \
