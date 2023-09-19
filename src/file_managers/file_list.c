@@ -6,14 +6,14 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:51:46 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/19 19:57:04 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/19 20:17:26 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser/parser.h"
 
 t_file	*create_new_file_node(void);
-char	*create_heredoc();
+char	*create_heredoc(void);
 t_file	*file_away(t_lexer *current, t_lexer *next);
 
 t_list	*create_file_list(t_list *parser_list, t_list *lexer_list)
@@ -34,15 +34,10 @@ t_list	*create_file_list(t_list *parser_list, t_list *lexer_list)
 			if (current->token > 5)
 			{
 				if (!parser_node->files)
-				{
 					parser_node->files = ft_lstnew(file_away(current, next));
-					lexer_list = lexer_list->next;
-				}
 				else
-				{
-					ft_lstadd_back(&parser_node->files, ft_lstnew(file_away(current, next)));
-					lexer_list = lexer_list->next;
-				}
+					ft_lstadd_back(&parser_node->files,
+						ft_lstnew(file_away(current, next)));
 			}
 		}
 		lexer_list = lexer_list->next;
@@ -53,7 +48,7 @@ t_list	*create_file_list(t_list *parser_list, t_list *lexer_list)
 t_file	*file_away(t_lexer *current, t_lexer *next)
 {
 	t_file	*node;
-	
+
 	node = create_new_file_node();
 	if (current->token > 5 && current->token != HEREDOC)
 	{
@@ -84,12 +79,12 @@ t_file	*create_new_file_node(void)
 	return (new_node);
 }
 
-char	*create_heredoc()
+char	*create_heredoc(void)
 {
 	static int	id;
-	char	*filename;
-	char	*temp;
-	int		file_exists;
+	char		*filename;
+	char		*temp;
+	int			file_exists;
 
 	if (!id)
 		id = 0;
