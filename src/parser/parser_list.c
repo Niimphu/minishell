@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:27:51 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/18 22:02:30 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/19 18:46:58 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 		}
 		lexer_list = lexer_list->next;
 	}
-	create_file_list(parser_list, files);
+	parser_list = create_file_list(parser_list, files);
 	convert_commands(parser_list);
 	return (parser_list);
 }

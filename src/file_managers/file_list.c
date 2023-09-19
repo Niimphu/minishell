@@ -6,61 +6,48 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:51:46 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/18 22:35:04 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/19 19:57:04 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser/parser.h"
 
 t_file	*create_new_file_node(void);
-char	*create_heredoc(void);
-/* int		heredoc(char *file_name, char *limiter); */
+char	*create_heredoc();
 t_file	*file_away(t_lexer *current, t_lexer *next);
 
-void	printf_files(t_list *files)
-{
-	t_file		*ptr;
-
-	while(files)
-	{
-		ptr = ((t_file *)(files->content));
-		printf("filename is %s\n", ptr->filename);
-		files = files->next;
-	}
-}
-
-void	create_file_list(t_list *parser_list, t_list *lexer_list)
+t_list	*create_file_list(t_list *parser_list, t_list *lexer_list)
 {
 	t_parser	*parser_node;
 	t_lexer		*current;
 	t_lexer		*next;
 
 	parser_node = (t_parser *)(parser_list->content);
-	while (lexer_list->next)
+	while (lexer_list)
 	{
 		current = (t_lexer *)(lexer_list->content);
-		next = (t_lexer *)(lexer_list->next->content);
-		if (current->token == 5)
-			parser_node = (t_parser *)(parser_list->next->content);
-		if (current->token > 5)
+		if (current->token >= 5)
 		{
-			if (!parser_node->files)
+			next = (t_lexer *)(lexer_list->next->content);
+			if (current->token == 5)
+				parser_node = (t_parser *)(parser_list->next->content);
+			if (current->token > 5)
 			{
-				printf("first file node\n");
-				parser_node->files = ft_lstnew(file_away(current, next));
-				lexer_list = lexer_list->next;
+				if (!parser_node->files)
+				{
+					parser_node->files = ft_lstnew(file_away(current, next));
+					lexer_list = lexer_list->next;
+				}
+				else
+				{
+					ft_lstadd_back(&parser_node->files, ft_lstnew(file_away(current, next)));
+					lexer_list = lexer_list->next;
+				}
 			}
-			else
-			{
-				printf("adding file node\n");
-				ft_lstadd_back(&parser_node->files, ft_lstnew(file_away(current, next)));
-				lexer_list = lexer_list->next;
-			}
-			printf_files(parser_node->files);
 		}
-		printf("found %s\n", current->string);
 		lexer_list = lexer_list->next;
 	}
+	return (parser_list);
 }
 
 t_file	*file_away(t_lexer *current, t_lexer *next)
@@ -68,15 +55,15 @@ t_file	*file_away(t_lexer *current, t_lexer *next)
 	t_file	*node;
 	
 	node = create_new_file_node();
-	if (current->token > 5 && current->token != 8)
+	if (current->token > 5 && current->token != HEREDOC)
 	{
-		node->filename = next->string;
+		node->filename = ft_strdup(next->string);
 		node->operator = current->token;
 	}
-	if (current->token == 8)
+	if (current->token == HEREDOC)
 	{
-		node->filename = create_heredoc();
-		node->delimiter = current->string;
+		node->filename = ft_strdup(create_heredoc());
+		node->delimiter = ft_strdup(next->string);
 		node->heredoc = true;
 	}
 	return (node);
@@ -97,14 +84,15 @@ t_file	*create_new_file_node(void)
 	return (new_node);
 }
 
-char	*create_heredoc(void)
+char	*create_heredoc()
 {
 	static int	id;
-	char		*filename;
-	char		*temp;
-	int			file_exists;
+	char	*filename;
+	char	*temp;
+	int		file_exists;
 
-	id = 0;
+	if (!id)
+		id = 0;
 	file_exists = 0;
 	filename = NULL;
 	while (!file_exists)

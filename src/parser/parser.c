@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/18 22:00:10 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/19 18:54:03 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	print_lexer_list(t_list *lexer_list)
 void	print_parser_list(t_list *parsed_list)
 {
 	t_parser	*node;
-	t_list		*file_node;
+	t_list		*file_list;
+	t_file		*file_node;
 	int			i;
 
 	printf("\n=== Parser linked list ===\n\n");
@@ -96,17 +97,20 @@ void	print_parser_list(t_list *parsed_list)
 	{
 		i = 0;
 		node = (t_parser *)parsed_list->content;
-		file_node = node->files;
+		file_list = node->files;
 		printf("Executable commands: ");
 		while (node->cmd_array[i])
 			printf("%s ", node->cmd_array[i++]);
 		printf("\n");
-		printf("Files: ");
-		while (file_node)
+		printf("======Files======\n");
+		while (file_list)
 		{
-			printf("<Filename: %s Direction: %s Heredoc? %s Delimiter : %s>  ", ((t_file *)(file_node->content))->filename,
-				get_token_string(((t_file *)(file_node->content))->operator), ((t_file *)(file_node->content))->heredoc ? "yes" : "no",((t_file *)(file_node->content))->delimiter);
-			file_node = file_node->next;
+			file_node = (t_file *)(file_list->content);
+			printf("<Filename: %s Direction: %s Heredoc? %s Delimiter : %s>  ", file_node->filename,
+				get_token_string(file_node->operator), file_node->heredoc ? "yes" : "no", file_node->delimiter);
+			if (file_list->next)
+				printf("\n ===Next file_list_node===\n");
+			file_list = file_list->next;
 		}
 		printf("\n");
 		printf("Is%sa built-in\n", node->builtin > 0 ? " " : " not ");
