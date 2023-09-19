@@ -19,13 +19,11 @@ static t_list	*add_node_to_parser_list(t_list *parser_list,
 
 t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 {
-	t_list		*files;
 	t_lexer		*lexer_node;
 	t_parser	*parser_node;
 	bool		new_node_time;
 
 	new_node_time = true;
-	files = lexer_list;
 	while (lexer_list)
 	{
 		lexer_node = (t_lexer *)lexer_list->content;
@@ -43,7 +41,6 @@ t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 			new_node_time = true;
 		lexer_list = lexer_list->next;
 	}
-//	parser_list = create_file_list(parser_list, files);
 	convert_commands(parser_list);
 	return (parser_list);
 }
