@@ -80,7 +80,6 @@ static int	save_words(t_parser *parser_node, t_list *lexer_list)
 		ft_lstadd_back(&parser_node->cmd_list,
 			ft_lstnew(ft_strdup(current->string)));
 	else if (current->token > 5)
-		parser_node
-			= file_away(parser_node, current, lexer_list->next->content);
+		file_away(parser_node, current, lexer_list->next->content);
 	return (0);
 }
