@@ -39,10 +39,8 @@ void	free_file_node(void *node)
 
 	file_node = (t_file *)node;
 	if (file_node->heredoc)
-	{
 		unlink(file_node->filename);
-		free_string(&file_node->filename);
-	}
+	free_string(&file_node->filename);
 	free(node);
 	node = NULL;
 }
