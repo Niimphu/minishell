@@ -40,12 +40,10 @@ t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list)
 			new_node_time = false;
 		}
 		if (lexer_node->token == PIPE || !lexer_list->next)
-		{
 			new_node_time = true;
-		}
 		lexer_list = lexer_list->next;
 	}
-	parser_list = create_file_list(parser_list, files);
+//	parser_list = create_file_list(parser_list, files);
 	convert_commands(parser_list);
 	return (parser_list);
 }
@@ -79,11 +77,13 @@ static int	save_words(t_parser *parser_node, t_list *lexer_list)
 	t_lexer	*current;
 
 	current = (t_lexer *)(lexer_list->content);
-	
 	if (current->token == CMD)
 		parser_node->cmd_list = ft_lstnew(ft_strdup(current->string));
 	else if (current->token == ARG)
 		ft_lstadd_back(&parser_node->cmd_list,
 			ft_lstnew(ft_strdup(current->string)));
+	else if (current->token > 5)
+		parser_node
+			= file_away(parser_node, current, lexer_list->next->content);
 	return (0);
 }

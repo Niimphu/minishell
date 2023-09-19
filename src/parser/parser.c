@@ -106,13 +106,13 @@ void	print_parser_list(t_list *parsed_list)
 		while (file_list)
 		{
 			file_node = (t_file *)(file_list->content);
-			printf("<Filename: %s Direction: %s Heredoc? %s Delimiter : %s>  ", file_node->filename,
+			printf("Filename: %s\nDirection: %s\nHeredoc? %s\nDelimiter: %s\n", file_node->filename,
 				get_token_string(file_node->operator), file_node->heredoc ? "yes" : "no", file_node->delimiter);
 			if (file_list->next)
-				printf("\n ===Next file_list_node===\n");
+				printf("===Next file_list_node===\n");
 			file_list = file_list->next;
 		}
-		printf("\n");
+		printf("===End of files list===\n");
 		printf("Is%sa built-in\n", node->builtin > 0 ? " " : " not ");
 		printf("\n\n");
 		parsed_list = parsed_list->next;
