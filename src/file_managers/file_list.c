@@ -56,7 +56,7 @@ t_parser	*file_away(t_parser *parser_node, t_lexer *current, t_lexer *next)
 	}
 	if (current->token == HEREDOC)
 	{
-		node->filename = ft_strdup(create_heredoc());
+		node->filename = create_heredoc();
 		node->delimiter = ft_strdup(next->string);
 		node->heredoc = true;
 	}
