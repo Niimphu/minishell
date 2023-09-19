@@ -24,10 +24,7 @@ void	await_input(t_god *god_struct)
 	if (input)
 		parse(input, god_struct);
 	else
-	{
-		free_god_struct(&god_struct);
-		exit (0);
-	}
+		exit_minishell(god_struct);
 }
 
 static char	*read_user_input(void)
