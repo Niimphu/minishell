@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/19 18:54:03 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:53:51 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ int	parse(char *input, t_god *god_struct)
 		ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 		return (-1);
 	}
-	else
-		print_lexer_list(god_struct->lexer_list);
+	/* else
+		print_lexer_list(god_struct->lexer_list); */
 	god_struct->parser_list
 		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
-//	expander(&parsed_list, god_struct);
 //	create_docs(parsed_list, god_struct);
 	print_parser_list(god_struct->parser_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);

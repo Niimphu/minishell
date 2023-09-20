@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/18 19:41:31 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/20 18:52:14 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*expand_var(char *str, t_god *god_struct);
 char	*join_split(char **split, t_god *god_struct);
 char	*wow_much_function_name(char *str);
-
+int		expansion_needed(char *str);
 // "'$HOME'"
 // trim quotes
 
@@ -27,7 +27,7 @@ char	**expander(char **split_str, t_god *god_struct)
 	i = 0;
 	while (split_str[i])
 	{
-		if (ft_strchr(split_str[i], '$'))
+		if (expansion_needed(split_str[i]))
 		{
 			tmp = expand_var(split_str[i], god_struct);
 			split_str[i] = tmp;
@@ -35,6 +35,31 @@ char	**expander(char **split_str, t_god *god_struct)
 		i++;
 	}
 	return (split_str);
+}
+
+int	expansion_needed(char *str)
+{
+	int		i;
+	char	quote_char;
+	int		var_i;
+
+	i = 0;
+	var_i = first_index_of(str + i, '$');
+	while (str[i] && var_i != 0)
+	{
+		var_i = first_index_of(str + i, '$');
+		if (str[i] == '\'' || str[i] == '"')
+		{
+			quote_char = str[i];
+			if (quote_char == '"')
+				i += skip_quotes(str + i);
+			if(quote_char == '\'' && (var_i > first_index_of(str + i, quote_char)
+				&& var_i < second_index_of(str + i, quote_char)))
+				return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
 char	*expand_var(char *str, t_god *god_struct)
@@ -49,8 +74,6 @@ char	*expand_var(char *str, t_god *god_struct)
 	str = tmp;
 	while (str[i])
 	{
-		if (str[i] && str[i] == '\'')
-			i += skip_quotes(str);
 		if (str[i] && str[i] == '$')
 		{
 			var_count = count_operators(str + i, str[i]);
@@ -62,12 +85,9 @@ char	*expand_var(char *str, t_god *god_struct)
 		i++;
 	}
 	split_str = ft_split(str, 26);
-	if (split_str)
-	{
-		free_string(&str);
-		str = join_split(split_str, god_struct);
-	}
-	return (str);
+	if (!split_str)
+		return (free_string(&str), NULL);
+	return (free_string(&str), join_split(split_str, god_struct));
 }
 
 char	*wow_much_function_name(char *str)
