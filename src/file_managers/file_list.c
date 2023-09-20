@@ -29,7 +29,7 @@ t_parser	*file_away(t_parser *parser_node, t_lexer *current, t_lexer *next)
 	{
 		node->filename = create_heredoc();
 		node->delimiter = ft_strdup(next->string);
-		node->heredoc = true;
+		node->operator = HEREDOC;
 	}
 	if (!parser_node->files)
 		parser_node->files = ft_lstnew(node);
@@ -48,7 +48,6 @@ static t_file	*create_new_file_node(void)
 	new_node->delimiter = NULL;
 	new_node->fd = 0;
 	new_node->filename = NULL;
-	new_node->heredoc = false;
 	new_node->operator = -1;
 	return (new_node);
 }
