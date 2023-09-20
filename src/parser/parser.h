@@ -32,6 +32,7 @@ char		*insert_sub(char *input, int pos);
 
 int			first_index_of(char *str, char c);
 int			second_index_of(char *str, char c);
-char	*insert_sub_right(char *input, int pos);
-char	*insert_sub_left(char *input, int pos);
+char		*insert_sub_right(char *input, int pos);
+char		*insert_sub_left(char *input, int pos);
+
 #endif
