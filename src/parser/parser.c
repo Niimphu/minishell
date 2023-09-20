@@ -12,11 +12,6 @@
 
 #include "parser.h"
 
-// check for double or beginning operator
-// handle oe or more heredoc
-// input output files
-// git branch -a 
-
 int	parse(char *input, t_god *god_struct)
 {
 	char	**split_str;
@@ -24,7 +19,6 @@ int	parse(char *input, t_god *god_struct)
 	split_str = lex(input, god_struct);
 	if (!split_str || !*split_str)
 		return (-1);
-//	execute_builtins(split_str, 1, god_struct);
 	god_struct->lexer_list = create_lexer_list(split_str);
 	if (invalid_syntax(god_struct->lexer_list))
 	{
@@ -38,11 +32,9 @@ int	parse(char *input, t_god *god_struct)
 	god_struct->parser_list
 		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
-//	create_docs(parsed_list, god_struct);
 	print_parser_list(god_struct->parser_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 	ft_lstclear(&god_struct->parser_list, free_parser_node);
-//	print_heredoc_list(god_struct->heredoc_names);
 	return (0);
 }
 
@@ -118,18 +110,3 @@ void	print_parser_list(t_list *parsed_list)
 	}
 	printf("===    End of list     ===\n\n");
 }
-
-// void	print_heredoc_list(t_list *heredocs)
-// {
-// 	t_file	*node;
-
-// 	printf("\n\n=== Heredoc linked list ===\n\n");
-// 	while (heredocs)
-// 	{
-// 		node = (t_file *)heredocs->content;
-// 		printf("heredoc name: %s\n", node->filename);
-// 		printf("index: %i\n\n", node->index);
-// 		heredocs = heredocs->next;
-// 	}
-// 	printf("===    End of list     ===\n\n");
-// }

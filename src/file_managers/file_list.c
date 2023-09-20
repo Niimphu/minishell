@@ -12,37 +12,8 @@
 
 #include "../parser/parser.h"
 
-t_file	*create_new_file_node(void);
-char	*create_heredoc(void);
-
-//t_list	*create_file_list(t_list *parser_list, t_list *lexer_list)
-//{
-//	t_parser	*parser_node;
-//	t_lexer		*current;
-//	t_lexer		*next;
-//
-//	parser_node = (t_parser *)(parser_list->content);
-//	while (lexer_list)
-//	{
-//		current = (t_lexer *)(lexer_list->content);
-//		if (current->token >= 5)
-//		{
-//			next = (t_lexer *)(lexer_list->next->content);
-//			if (current->token == 5)
-//				parser_node = (t_parser *)(parser_list->next->content);
-//			if (current->token > 5)
-//			{
-//				if (!parser_node->files)
-//					parser_node->files = ft_lstnew(file_away(current, next));
-//				else
-//					ft_lstadd_back(&parser_node->files,
-//						ft_lstnew(file_away(current, next)));
-//			}
-//		}
-//		lexer_list = lexer_list->next;
-//	}
-//	return (parser_list);
-//}
+static t_file	*create_new_file_node(void);
+static char		*create_heredoc(void);
 
 t_parser	*file_away(t_parser *parser_node, t_lexer *current, t_lexer *next)
 {
@@ -67,7 +38,7 @@ t_parser	*file_away(t_parser *parser_node, t_lexer *current, t_lexer *next)
 	return (parser_node);
 }
 
-t_file	*create_new_file_node(void)
+static t_file	*create_new_file_node(void)
 {
 	t_file	*new_node;
 
@@ -82,7 +53,7 @@ t_file	*create_new_file_node(void)
 	return (new_node);
 }
 
-char	*create_heredoc(void)
+static char	*create_heredoc(void)
 {
 	static int	id;
 	char		*filename;
