@@ -29,7 +29,6 @@ int			get_operator_id(char *operator_string);
 int			skip_quotes(const char *str);
 char		*insert_sub(char *input, int pos);
 
-
 int			first_index_of(char *str, char c);
 int			second_index_of(char *str, char c);
 char		*insert_sub_right(char *input, int pos);

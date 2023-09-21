@@ -56,6 +56,7 @@ SRC_DIR = src
 OBJ_DIR = build
 
 SRC	=	main.c \
+		get_input.c \
 		init/create_struct.c \
 		init/shell_level.c \
 		parser/lexer.c \
@@ -63,10 +64,12 @@ SRC	=	main.c \
 		parser/lexer_list.c \
 		parser/check_syntax.c \
 		parser/parser.c \
-		parser/get_input.c \
 		parser/parser_utils.c \
 		parser/parser_list.c \
 		parser/parser_list_utils.c \
+		executer/execute.c \
+		executer/execute_utils.c \
+		executer/execute_builtins.c \
 		file_managers/heredoc.c \
 		file_managers/file_list.c \
 		expander/expander.c \
@@ -75,8 +78,6 @@ SRC	=	main.c \
 		utils/env_utils.c \
 		free/free_char.c \
 		free/free_structs.c \
-		free/free_fd.c \
-		executer/execute_builtins.c \
 		builtins/cd.c \
 		builtins/echo.c \
 		builtins/export.c \

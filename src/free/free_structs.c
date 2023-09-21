@@ -38,11 +38,12 @@ void	free_file_node(void *node)
 	t_file	*file_node;
 
 	file_node = (t_file *)node;
-	if (file_node->heredoc)
+	if (file_node->operator == HEREDOC)
 	{
 		free_string(&file_node->delimiter);
 		unlink(file_node->filename);
 	}
+	file_node->fd = close_fd(file_node->fd);
 	free_string(&file_node->filename);
 	free(node);
 	node = NULL;
@@ -58,4 +59,11 @@ void	free_god_struct(t_god **ptr)
 	free(god_struct);
 	god_struct = NULL;
 	*ptr = NULL;
+}
+
+int	close_fd(int fd)
+{
+	if (fd > 0)
+		close(fd);
+	return (-1);
 }

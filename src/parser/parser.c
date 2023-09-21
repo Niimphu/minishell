@@ -27,14 +27,10 @@ int	parse(char *input, t_god *god_struct)
 		ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 		return (-1);
 	}
-	/* else
-		print_lexer_list(god_struct->lexer_list); */
 	god_struct->parser_list
 		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 	print_parser_list(god_struct->parser_list);
-	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
-	ft_lstclear(&god_struct->parser_list, free_parser_node);
 	return (0);
 }
 
@@ -97,8 +93,8 @@ void	print_parser_list(t_list *parsed_list)
 		while (file_list)
 		{
 			file_node = (t_file *)(file_list->content);
-			printf("Filename: %s\nDirection: %s\nHeredoc? %s\nDelimiter: %s\n", file_node->filename,
-				get_token_string(file_node->operator), file_node->heredoc ? "yes" : "no", file_node->delimiter);
+			printf("Filename: %s\nDirection: %s\nDelimiter: %s\n", file_node->filename,
+				get_token_string(file_node->operator), file_node->delimiter);
 			if (file_list->next)
 				printf("===Next file_list_node===\n");
 			file_list = file_list->next;

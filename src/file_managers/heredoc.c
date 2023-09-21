@@ -12,61 +12,26 @@
 
 #include "../../minishell.h"
 
-// static t_list	*make_another_stinkin_heredoc(t_parser *node, t_list *list);
-// t_file			*new_file_node(char *filename, int index, bool is_heredoc);
+int	heredoc(char *file_name, char *limiter)
+{
+	int		fd;
+	char	*input;
 
-// void	create_docs(t_list *parser_list, t_god *god_struct)
-// {
-// 	t_parser	*node;
-
-// 	while (parser_list)
-// 	{
-// 		node = parser_list->content;
-// 		if (node->operator == HEREDOC)
-// 			god_struct->heredoc_names
-// 				= make_another_stinkin_heredoc(node, god_struct->heredoc_names);
-// 		parser_list = parser_list->next;
-// 	}
-// 	return ;
-// }
-
-// static t_list	*make_another_stinkin_heredoc(t_parser *node, t_list *list)
-// {
-// 	int		id;
-// 	char	*filename;
-// 	char	*temp;
-// 	int		file_exists;
-
-// 	file_exists = 0;
-// 	id = 0;
-// 	filename = NULL;
-// 	while (!file_exists)
-// 	{
-// 		free_string(&filename);
-// 		temp = ft_itoa(id);
-// 		filename = ft_strjoin("heredoc", temp);
-// 		free_string(&temp);
-// 		file_exists = access(filename, F_OK);
-// 		id++;
-// 	}
-// 	node->fd = open(filename, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-// 	if (!list)
-// 		list = ft_lstnew(new_file_node(filename, node->index, true));
-// 	else
-// 		ft_lstadd_back(&list,
-// 			ft_lstnew(new_file_node(filename, node->index, true)));
-// 	return (list);
-// }
-
-// t_file	*new_file_node(char *filename, int index, bool is_heredoc)
-// {
-// 	t_file	*file_node;
-
-// 	file_node = ft_calloc(1, sizeof(t_file));
-// 	if (!file_node)
-// 		return (NULL);
-// 	file_node->index = index;
-// 	file_node->filename = filename;
-// 	file_node->temp = is_heredoc;
-// 	return (file_node);
-// }
+	input = NULL;
+	fd = open(file_name, O_RDWR | O_CREAT, 0666);
+	while (fd != -1)
+	{
+		input = get_next_line(STDIN_FILENO);
+		if (ft_strncmp(input, limiter, ft_strlen(input) - 1) == 0
+			&& ft_strlen(input) == ft_strlen(limiter) + 1)
+		{
+			free_string(&input);
+			break ;
+		}
+		write(fd, input, ft_strlen(input));
+		free_string(&input);
+	}
+	close_fd(fd);
+	fd = open(file_name, O_RDWR | O_CREAT, 0666);
+	return (fd);
+}

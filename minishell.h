@@ -67,7 +67,6 @@ typedef struct s_file
 	int		fd;
 	int		operator;
 	char	*filename;
-	bool	heredoc;
 	char	*delimiter;
 }				t_file;
 
@@ -79,28 +78,24 @@ typedef struct s_god
 	t_list	*heredoc_names;
 }				t_god;
 
-//do #include "parser.h" from relevant files
-// because parser.h includes this header file already
-
-//# include "src/parser/parser.h"
-
 t_god	*create_god_struct(char **envp);
 int		increment_shell_level(char **env);
 
 void	await_signals(void);
 void	await_input(t_god *tools);
 
-t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list);
 int		parse(char *input_string, t_god *god_struct);
-
+t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list);
 char	**expander(char **split_str, t_god *god_struct);
 
-//int		get_array_size(char **array);
+int		execute(t_god *god_struct, t_list *parser_list);
+
 char	*get_env_var(char *var, char **env, int trim);
 int		count_operators(const char *str, char c);
 int		count_char(char *str, char c);
 
 int		execute_builtins(char **cmd, int fd_out, t_god *god_struct);
+int		heredoc(char *file_name, char *limiter);
 
 char	*get_var(char *var, t_god *tools);
 int		env(int fd_out, t_god *god_struct);
@@ -118,7 +113,7 @@ void	free_lexer_node(void *node);
 void	free_parser_node(void *node);
 void	free_file_node(void *node);
 
-void	close_fd(int *fd);
+int		close_fd(int fd);
 
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);

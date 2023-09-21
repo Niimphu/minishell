@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_fd.c                                          :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 21:28:55 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/09 21:28:55 by yiwong           ###   ########.fr       */
+/*   Created: 2023/09/20 19:37:25 by yiwong            #+#    #+#             */
+/*   Updated: 2023/09/20 19:37:25 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-void	close_fd(int *fd)
-{
-	if (*fd == -1)
-		return ;
-	if (close(*fd) == -1)
-		perror("close");
-	*fd = -1;
-}
+# include "../../minishell.h"
+
+
+
+#endif
