@@ -12,13 +12,6 @@
 
 #include "parser.h"
 
-bool	contains_operator(char c)
-{
-	if (c == '|' || c == '>' || c == '<')
-		return (true);
-	return (false);
-}
-
 int	get_operator_id(char *operator_string)
 {
 	if (!ft_strncmp("|", operator_string, 2))
