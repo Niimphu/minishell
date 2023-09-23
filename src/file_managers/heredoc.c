@@ -29,7 +29,7 @@ int	heredoc(char *file_name, char *delimiter)
 		if (ft_strncmp(input, delimiter, ft_strlen(delimiter) + 1))
 			write(fd, input, ft_strlen(input));
 		free_string(&input);
-		input = readline(" > ");
+		input = readline("> ");
 	}
 	close_fd(fd);
 	fd = open(file_name, O_RDWR | O_CREAT, 0666);
