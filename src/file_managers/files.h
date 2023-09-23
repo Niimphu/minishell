@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_char.c                                        :+:      :+:    :+:   */
+/*   files.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 19:07:11 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/08 15:20:14 by yiwong           ###   ########.fr       */
+/*   Created: 2023/09/24 00:08:11 by yiwong            #+#    #+#             */
+/*   Updated: 2023/09/24 00:08:11 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#ifndef FILES_H
+# define FILES_H
 
-void	free_string(char **string)
-{
-	free(*string);
-	*string = NULL;
-}
+# include "../../minishell.h"
 
-void	free_string_array(char ***array)
-{
-	int	i;
+void	open_heredocs(t_list *parsed_list);
+void	open_files(t_list *parsed_list);
 
-	i = 0;
-	while ((*array)[i] != NULL)
-	{
-		free_string(&(*array)[i]);
-		i++;
-	}
-	free(*array);
-	*array = NULL;
-}
+#endif

@@ -70,12 +70,21 @@ typedef struct s_file
 	char	*delimiter;
 }				t_file;
 
+typedef struct s_exec
+{
+	int		fd_in;
+	int		fd_out;
+	int		pipe_fd[2];
+	char	*cmd;
+	char	**cmd_array;
+}				t_exec;
+
 typedef struct s_god
 {
 	char	**env;
 	t_list	*lexer_list;
 	t_list	*parser_list;
-	t_list	*heredoc_names;
+	int		block_count;
 }				t_god;
 
 t_god	*create_god_struct(char **envp);
@@ -95,7 +104,6 @@ int		count_operators(const char *str, char c);
 int		count_char(char *str, char c);
 
 int		execute_builtins(char **cmd, int fd_out, t_god *god_struct);
-int		heredoc(char *file_name, char *limiter);
 
 char	*get_var(char *var, t_god *tools);
 int		env(int fd_out, t_god *god_struct);

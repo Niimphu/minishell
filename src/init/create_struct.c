@@ -37,6 +37,5 @@ t_god	*create_god_struct(char **envp)
 	increment_shell_level(god_struct->env);
 	god_struct->env[i] = NULL;
 	god_struct->parser_list = NULL;
-	god_struct->heredoc_names = NULL;
 	return (god_struct);
 }

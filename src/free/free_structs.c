@@ -60,10 +60,3 @@ void	free_god_struct(t_god **ptr)
 	god_struct = NULL;
 	*ptr = NULL;
 }
-
-int	close_fd(int fd)
-{
-	if (fd > 0)
-		close(fd);
-	return (-1);
-}

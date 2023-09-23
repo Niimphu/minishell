@@ -29,8 +29,9 @@ int	parse(char *input, t_god *god_struct)
 	}
 	god_struct->parser_list
 		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
+	god_struct->block_count = ft_lstsize(god_struct->parser_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
-	print_parser_list(god_struct->parser_list);
+//	print_parser_list(god_struct->parser_list);
 	return (0);
 }
 

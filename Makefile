@@ -70,13 +70,14 @@ SRC	=	main.c \
 		executer/execute.c \
 		executer/execute_utils.c \
 		executer/execute_builtins.c \
+		file_managers/files.c \
 		file_managers/heredoc.c \
 		file_managers/file_list.c \
 		expander/expander.c \
 		keybinds/keypress.c \
 		utils/counters.c \
 		utils/env_utils.c \
-		free/free_char.c \
+		free/free.c \
 		free/free_structs.c \
 		builtins/cd.c \
 		builtins/echo.c \

@@ -1,19 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   free.c.....                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 19:37:25 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/20 19:37:25 by yiwong           ###   ########.fr       */
+/*   Created: 2023/08/24 19:07:11 by yiwong            #+#    #+#             */
+/*   Updated: 2023/09/24 00:25:45 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
+#include "../../minishell.h"
 
-# include "../file_managers/files.h"
+void	free_string(char **string)
+{
+	free(*string);
+	*string = NULL;
+}
 
+void	free_string_array(char ***array)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while ((*array)[i] != NULL)
+	{
+		free_string(&(*array)[i]);
+		i++;
+	}
+	free(*array);
+	*array = NULL;
+}
+
+int	close_fd(int fd)
+{
+	if (fd > 0)
+		close(fd);
+	return (-1);
+}
