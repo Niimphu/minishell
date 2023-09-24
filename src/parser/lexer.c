@@ -24,7 +24,6 @@ char	**lex(char *input, t_god *god_struct)
 	if (!*input)
 		return (NULL);
 	i = 0;
-	next_quote = 0;
 	while (input[i])
 	{
 		if (input[i] == '\'' || input[i] == '"')
@@ -113,14 +112,15 @@ char	*insert_sub_quote(char *input, char c, int pos)
 	while (input[j])
 	{
 		if (input[j] == c && i >= pos)
+		{
 			if (++found < 3)
 			{
 				str[i++] = input[j++];
 				if (found == 2)
 					str[i++] = 26;
 			}
+		}
 		str[i++] = input[j++];
 	}
-	str[i] = '\0';
 	return (str);
 }
