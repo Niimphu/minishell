@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/20 18:52:14 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/23 22:02:59 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ char	*expand_var(char *str, t_god *god_struct);
 char	*join_split(char **split, t_god *god_struct);
 char	*wow_much_function_name(char *str);
 int		expansion_needed(char *str);
-// "'$HOME'"
-// trim quotes
+char	*trim_qoutes(char **str);
 
 char	**expander(char **split_str, t_god *god_struct)
 {
@@ -27,39 +26,16 @@ char	**expander(char **split_str, t_god *god_struct)
 	i = 0;
 	while (split_str[i])
 	{
-		if (expansion_needed(split_str[i]))
+		printf("%s\n", split_str[i]);
+		if (expansion_needed(split_str[i]) )
 		{
 			tmp = expand_var(split_str[i], god_struct);
 			split_str[i] = tmp;
 		}
+		trim_qoutes(&split_str[i]);
 		i++;
 	}
 	return (split_str);
-}
-
-int	expansion_needed(char *str)
-{
-	int		i;
-	char	quote_char;
-	int		var_i;
-
-	i = 0;
-	var_i = first_index_of(str + i, '$');
-	while (str[i] && var_i != 0)
-	{
-		var_i = first_index_of(str + i, '$');
-		if (str[i] == '\'' || str[i] == '"')
-		{
-			quote_char = str[i];
-			if (quote_char == '"')
-				i += skip_quotes(str + i);
-			if(quote_char == '\'' && (var_i > first_index_of(str + i, quote_char)
-				&& var_i < second_index_of(str + i, quote_char)))
-				return (0);
-		}
-		i++;
-	}
-	return (1);
 }
 
 char	*expand_var(char *str, t_god *god_struct)
@@ -143,4 +119,45 @@ char	*join_split(char **split, t_god *god_struct)
 		i++;
 	}
 	return (free_string_array(&split), str);
+}
+
+int	expansion_needed(char *str)
+{
+	int i;
+
+	i = 0;
+	if (!ft_strchr(str, '$'))
+		i = 0;
+	else if (ft_strchr(str, '$') && !ft_strchr(str, '\''))
+		i = 1;
+	else if (ft_strchr(str, '$') && ft_strchr(str, '\''))
+	{
+		if (ft_strchr(str, '"'))
+		{
+			if (first_index_of(str, '"') < first_index_of(str, '\'')
+				&& second_index_of(str, '"') > second_index_of(str, '\''))
+				i = 1;
+		}
+	}
+	return (i);
+}
+
+char *trim_qoutes(char **str)
+{
+	char	*c;
+	char	*tmp;
+
+	tmp = NULL;
+	c = ft_substr(*str, 0, 1);
+	if (!c)
+		return (NULL);
+	if (c[0] == '\'' || c[0] == '"')
+	{
+		tmp = ft_strtrim(*str, c);
+		if (!tmp)
+			return (NULL);
+		free_string(str);
+		*str = tmp;
+	}
+	return (free_string(&c), *str);
 }
