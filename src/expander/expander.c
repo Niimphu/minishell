@@ -27,7 +27,7 @@ char	**expander(char **split_str, t_god *god_struct)
 	while (split_str[i])
 	{
 		printf("%s\n", split_str[i]);
-		if (expansion_needed(split_str[i]) )
+		if (expansion_needed(split_str[i]))
 		{
 			tmp = expand_var(split_str[i], god_struct);
 			split_str[i] = tmp;
@@ -123,7 +123,7 @@ char	*join_split(char **split, t_god *god_struct)
 
 int	expansion_needed(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!ft_strchr(str, '$'))
@@ -142,7 +142,7 @@ int	expansion_needed(char *str)
 	return (i);
 }
 
-char *trim_qoutes(char **str)
+char	*trim_qoutes(char **str)
 {
 	char	*c;
 	char	*tmp;
