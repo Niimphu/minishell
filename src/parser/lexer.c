@@ -6,39 +6,42 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/20 19:24:26 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/23 22:39:24 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 static char	**split_input(char *input, t_god *god_struct);
+char		*insert_sub_quote(char *input, char c, int pos);
 
 char	**lex(char *input, t_god *god_struct)
 {
-	char	**split_str;
 	int		i;
+	char	*tmp;
 	int		next_quote;
 
 	if (!*input)
-		return (free_string(&input), NULL);
+		return (NULL);
 	i = 0;
 	next_quote = 0;
 	while (input[i])
 	{
-		if (input[i] == '"' || input[i] == '\'')
+		if (input[i] == '\'' || input[i] == '"')
 		{
+			tmp = insert_sub_quote(input, input[i], i);
+			free_string(&input);
+			input = tmp;
 			next_quote = skip_quotes(input + i);
+			if (next_quote == -1)
+				return (free_string(&input), NULL);
 			i += next_quote;
 		}
-		if (next_quote < 0)
-			return (NULL);
 		if (input[i] == ' ' || input[i] == '\t')
 			input[i] = 26;
 		i++;
 	}
-	split_str = split_input(input, god_struct);
-	return (split_str);
+	return (split_input(input, god_struct));
 }
 
 static	char	**split_input(char *input, t_god *god_struct)
@@ -51,8 +54,6 @@ static	char	**split_input(char *input, t_god *god_struct)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '"' || input[i] == '\'')
-			i += skip_quotes(input + i);
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			operator_count = count_operators(input + i, input[i]);
@@ -77,24 +78,49 @@ char	*insert_sub(char *input, int pos)
 
 	i = 0;
 	str = ft_calloc(sizeof(char), (ft_strlen(input) + 3));
+	if (str)
+	{
+		while (i < pos)
+		{
+			str[i] = input[i];
+			i++;
+		}
+		str[i++] = 26;
+		while (input[i - 1] == input[pos])
+		{
+			str[i] = input[i - 1];
+			i++;
+		}
+		str[i++] = 26;
+		ft_strlcpy(&str[i], &input[i - 2], ft_strlen(&input[i - 2]) + 1);
+	}
+	return (str);
+}
+
+char	*insert_sub_quote(char *input, char c, int pos)
+{
+	int		i;
+	int		j;
+	int		found;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	found = 0;
+	str = ft_calloc(sizeof(char), ft_strlen(input) + 3);
 	if (!str)
 		return (NULL);
-	while (i < pos)
+	while (input[j])
 	{
-		str[i] = input[i];
-		i++;
+		if (input[j] == c && i >= pos)
+			if (++found < 3)
+			{
+				str[i++] = input[j++];
+				if (found == 2)
+					str[i++] = 26;
+			}
+		str[i++] = input[j++];
 	}
-	str[i++] = 26;
-	while (input[i - 1] == input[pos])
-	{
-		str[i] = input[i - 1];
-		i++;
-	}
-	str[i++] = 26;
-	while (input[i - 2])
-	{
-		str[i] = input[i - 2];
-		i++;
-	}
+	str[i] = '\0';
 	return (str);
 }

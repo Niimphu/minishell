@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:49:16 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/13 17:00:16 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/23 20:28:46 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	await_input(t_god *god_struct)
 		return ;
 	input = read_user_input();
 	if (input)
-		parse(input, god_struct);
+	{
+		if (parse(input, god_struct) == -1)
+			await_input(god_struct);
+	}
 	else
 		exit_minishell(god_struct);
 }
