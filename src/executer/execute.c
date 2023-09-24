@@ -43,4 +43,3 @@ static int	fork_this(t_god *god_struct, t_parser *parser_node,
 	(void)last;
 	return (0);
 }
-
