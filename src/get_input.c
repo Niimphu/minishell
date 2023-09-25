@@ -28,7 +28,7 @@ void	await_input(t_god *god_struct)
 	}
 	else
 		exit_minishell(god_struct);
-	execute(god_struct, god_struct->parser_list);
+//	execute(god_struct, god_struct->parser_list);
 	ft_lstclear(&god_struct->parser_list, free_parser_node);
 }
 
