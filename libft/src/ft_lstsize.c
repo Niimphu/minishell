@@ -14,17 +14,16 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	int		count;
 
-	i = 0;
 	if (!lst)
 		return (0);
-	if (lst->next == NULL)
-		return (1);
-	while (lst->next != NULL)
+	count = 0;
+	while (lst)
 	{
-		lst = lst->next;
-		i++;
+		lst = lst -> next;
+		count++;
 	}
-	return (i);
+	printf("n %i\n", count);
+	return (count);
 }
