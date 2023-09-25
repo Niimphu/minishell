@@ -21,13 +21,10 @@ void	await_input(t_god *god_struct)
 	if (!god_struct)
 		return ;
 	input = read_user_input();
-	if (input)
-	{
-		if (parse(input, god_struct) == -1)
-			await_input(god_struct);
-	}
-	else
+	if (!input)
 		exit_minishell(god_struct);
+	if (parse(input, god_struct) == -1)
+		return ;
 //	execute(god_struct, god_struct->parser_list);
 	ft_lstclear(&god_struct->parser_list, free_parser_node);
 }
