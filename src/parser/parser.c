@@ -29,9 +29,9 @@ int	parse(char *input, t_god *god_struct)
 	}
 	god_struct->parser_list
 		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
-	god_struct->block_count = ft_lstsize(god_struct->parser_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 	print_parser_list(god_struct->parser_list);
+	god_struct->block_count = ft_lstsize(god_struct->parser_list);
 	return (0);
 }
 
@@ -103,7 +103,8 @@ void	print_parser_list(t_list *parsed_list)
 		printf("===End of files list===\n");
 		printf("Is%sa built-in\n", node->builtin > 0 ? " " : " not ");
 		printf("\n\n");
+		if (!parsed_list->next)
+			printf("===    End of list     ===\n\n");
 		parsed_list = parsed_list->next;
 	}
-	printf("===    End of list     ===\n\n");
 }
