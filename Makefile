@@ -74,6 +74,7 @@ SRC	=	main.c \
 		file_managers/heredoc.c \
 		file_managers/file_list.c \
 		expander/expander.c \
+		expander/expander_utils.c \
 		keybinds/keypress.c \
 		utils/counters.c \
 		utils/env_utils.c \
