@@ -15,5 +15,6 @@
 
 # include "../file_managers/files.h"
 
+t_list	*create_execution_list(t_list *parser_list);
 
 #endif
