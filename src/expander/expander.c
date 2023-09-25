@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/23 22:02:59 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/25 17:56:46 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*expand_var(char *str, t_god *god_struct)
 	int		var_count;
 	char	*tmp;
 	char	**split_str;
+	char	*expanded;
 
 	i = 0;
 	tmp = wow_much_function_name(str);
@@ -63,7 +64,8 @@ char	*expand_var(char *str, t_god *god_struct)
 	split_str = ft_split(str, 26);
 	if (!split_str)
 		return (free_string(&str), NULL);
-	return (free_string(&str), join_split(split_str, god_struct));
+	expanded = join_split(split_str, god_struct);
+	return (free_string(&str), expanded);
 }
 
 char	*wow_much_function_name(char *str)
@@ -111,11 +113,14 @@ char	*join_split(char **split, t_god *god_struct)
 			i++;
 			split[i] = get_var(split[i], god_struct);
 		}
-		tmp = ft_strjoin(str, split[i]);
-		if (!tmp)
-			return (free_string_array(&split), NULL);
-		free_string(&str);
-		str = tmp;
+		if (split[i])
+		{
+			tmp = ft_strjoin(str, split[i]);
+			if (!tmp)
+				return (free_string_array(&split), NULL);
+			free_string(&str);
+			str = tmp;	
+		}
 		i++;
 	}
 	return (free_string_array(&split), str);
