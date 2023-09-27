@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "expander.h"
+
 char	*wow_much_function_name(char *str)
 {
 	int		i;
@@ -90,7 +91,7 @@ int	expansion_needed(char *str)
 	return (i);
 }
 
-char	*trim_qoutes(char **str)
+char	*trim_quotes(char **str)
 {
 	char	*c;
 	char	*tmp;

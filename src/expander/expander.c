@@ -28,7 +28,7 @@ char	**expander(char **split_str, t_god *god_struct)
 			tmp = expand_var(split_str[i], god_struct);
 			split_str[i] = tmp;
 		}
-		trim_qoutes(&split_str[i]);
+		trim_quotes(&split_str[i]);
 		i++;
 	}
 	return (split_str);
