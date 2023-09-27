@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "expander.h"
-
 char	*wow_much_function_name(char *str)
 {
 	int		i;
@@ -57,11 +56,14 @@ char	*join_split(char **split, t_god *god_struct)
 			i++;
 			split[i] = get_var(split[i], god_struct);
 		}
-		tmp = ft_strjoin(str, split[i]);
-		if (!tmp)
-			return (free_string_array(&split), NULL);
-		free_string(&str);
-		str = tmp;
+		if (split[i])
+		{
+			tmp = ft_strjoin(str, split[i]);
+			if (!tmp)
+				return (free_string_array(&split), NULL);
+			free_string(&str);
+			str = tmp;
+		}
 		i++;
 	}
 	return (free_string_array(&split), str);

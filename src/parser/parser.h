@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/23 22:03:17 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/25 17:23:56 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,5 @@ int			get_operator_id(char *operator_string);
 
 int			skip_quotes(const char *str);
 char		*insert_sub(char *input, int pos);
-
-int			first_index_of(char *str, char c);
-int			second_index_of(char *str, char c);
 
 #endif
