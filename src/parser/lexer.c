@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/23 22:39:24 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/25 21:05:13 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ char	*insert_sub_quote(char *input, char c, int pos)
 		{
 			if (++found < 3)
 			{
+				if (found == 1)
+					str[i++] = 26;
 				str[i++] = input[j++];
 				if (found == 2)
 					str[i++] = 26;
@@ -122,5 +124,6 @@ char	*insert_sub_quote(char *input, char c, int pos)
 		}
 		str[i++] = input[j++];
 	}
+	/* printf("i = %d str = %s\n", i, str); */
 	return (str);
 }

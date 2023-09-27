@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/18 15:55:53 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/25 17:24:08 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,4 +126,6 @@ int		close_fd(int fd);
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
 // void	print_heredoc_list(t_list *heredocs);
+int			first_index_of(char *str, char c);
+int			second_index_of(char *str, char c);
 #endif
