@@ -77,6 +77,7 @@ typedef struct s_exec
 	int		pipe_fd[2];
 	char	*cmd;
 	char	**cmd_array;
+	char	*path;
 }				t_exec;
 
 typedef struct s_god
@@ -84,6 +85,7 @@ typedef struct s_god
 	char	**env;
 	t_list	*lexer_list;
 	t_list	*parser_list;
+	t_list	*exec_list;
 	int		block_count;
 }				t_god;
 

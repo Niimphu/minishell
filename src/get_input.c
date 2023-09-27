@@ -27,6 +27,7 @@ void	await_input(t_god *god_struct)
 		return ;
 	execute(god_struct, god_struct->parser_list);
 	ft_lstclear(&god_struct->parser_list, free_parser_node);
+	ft_lstclear(&god_struct->exec_list, free);
 }
 
 static char	*read_user_input(void)

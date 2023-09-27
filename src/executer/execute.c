@@ -12,33 +12,33 @@
 
 #include "execution.h"
 
-static int	fork_this(t_god *god_struct, t_parser *parser_node,
+static int	fork_this(t_god *god_struct, t_exec *exec_node,
 				bool first, bool last);
 
 int	execute(t_god *god_struct, t_list *parser_list)
 {
-	t_parser	*parser_node;
+	t_exec		*exec_node;
 	int			i;
 
-	(void)god_struct;
 	i = 0;
 	open_heredocs(parser_list);
 	open_files(parser_list);
+	god_struct->exec_list = create_execution_list(parser_list);
 	while (++i <= god_struct->block_count)
 	{
-		parser_node = parser_list->content;
-		fork_this(god_struct, parser_node,
+		exec_node = god_struct->exec_list->content;
+		fork_this(god_struct, exec_node,
 			i == 0, i == god_struct->block_count);
 		parser_list = parser_list->next;
 	}
 	return (0);
 }
 
-static int	fork_this(t_god *god_struct, t_parser *parser_node,
+static int	fork_this(t_god *god_struct, t_exec *exec_node,
 				bool first, bool last)
 {
 	(void)god_struct;
-	(void)parser_node;
+	(void)exec_node;
 	(void)first;
 	(void)last;
 	return (0);

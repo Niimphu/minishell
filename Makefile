@@ -68,6 +68,7 @@ SRC	=	main.c \
 		parser/parser_list.c \
 		parser/parser_list_utils.c \
 		executer/execute.c \
+		executer/execute_list.c \
 		executer/execute_utils.c \
 		executer/execute_builtins.c \
 		file_managers/files.c \

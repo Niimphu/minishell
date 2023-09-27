@@ -13,6 +13,7 @@
 #include "execution.h"
 
 static t_exec	*new_node(t_parser *parser_node);
+static t_exec	*get_redirection_fds(t_exec *exec_node, t_list *files);
 
 t_list	*create_execution_list(t_list *parser_list)
 {
@@ -45,5 +46,28 @@ static t_exec	*new_node(t_parser *parser_node)
 	exec_node->fd_out = -1;
 	exec_node->pipe_fd[0] = -1;
 	exec_node->pipe_fd[1] = -1;
+	get_redirection_fds(exec_node, parser_node->files);
+	return (exec_node);
+}
+
+static t_exec	*get_redirection_fds(t_exec *exec_node, t_list *files)
+{
+	t_file	*file_node;
+
+	while (files)
+	{
+		file_node = (t_file *)files->content;
+		if (file_node->operator == INPUT || file_node->operator == HEREDOC)
+		{
+			close_fd(exec_node->fd_in);
+			exec_node->fd_in = file_node->fd;
+		}
+		if (file_node->operator == OUTPUT || file_node->operator == APPEND)
+		{
+			close_fd(exec_node->fd_out);
+			exec_node->fd_out = file_node->fd;
+		}
+		files = files->next;
+	}
 	return (exec_node);
 }
