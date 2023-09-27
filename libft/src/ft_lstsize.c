@@ -24,6 +24,5 @@ int	ft_lstsize(t_list *lst)
 		lst = lst -> next;
 		count++;
 	}
-	printf("n %i\n", count);
 	return (count);
 }
