@@ -116,18 +116,21 @@ int		pwd(int fd_out, t_god *god_struct);
 int		cd(char *dir, t_god *god_struct);
 void	exit_minishell(t_god *god_struct);
 
-void	free_god_struct(t_god **root);
 void	free_string(char **string);
 void	free_string_array(char ***array);
+
+void	free_god_struct(t_god **root);
 void	free_lexer_node(void *node);
 void	free_parser_node(void *node);
 void	free_file_node(void *node);
+void	free_exec_node(void *node);
 
 int		close_fd(int fd);
 
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
 // void	print_heredoc_list(t_list *heredocs);
-int			first_index_of(char *str, char c);
-int			second_index_of(char *str, char c);
+int		first_index_of(char *str, char c);
+int		second_index_of(char *str, char c);
+
 #endif

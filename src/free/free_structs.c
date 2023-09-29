@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   free_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:41:11 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/17 18:54:16 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/28 12:45:50 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	free_god_struct(t_god **ptr)
+{
+	t_god	*god_struct;
+
+	god_struct = *(ptr);
+	free_string_array(&god_struct->env);
+	ft_lstclear(&god_struct->parser_list, free_parser_node);
+	free(god_struct);
+	god_struct = NULL;
+	*ptr = NULL;
+}
 
 void	free_lexer_node(void *node)
 {
@@ -49,14 +61,12 @@ void	free_file_node(void *node)
 	node = NULL;
 }
 
-void	free_god_struct(t_god **ptr)
+void	free_exec_node(void *node)
 {
-	t_god	*god_struct;
+	t_exec	*exec_node;
 
-	god_struct = *(ptr);
-	free_string_array(&god_struct->env);
-	ft_lstclear(&god_struct->parser_list, free_parser_node);
-	free(god_struct);
-	god_struct = NULL;
-	*ptr = NULL;
+	exec_node = (t_exec *)node;
+	free_string(&exec_node->path);
+	free(node);
+	node = NULL;
 }
