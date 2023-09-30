@@ -5,3 +5,5 @@ minishell.dSYM/
 .idea/
 .vscode/
 test
+in
+out

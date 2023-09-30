@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/25 20:35:51 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/09/30 13:10:23 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	**expander(char **split_str, t_god *god_struct)
 	i = 0;
 	while (split_str[i])
 	{
-		printf("%s\n", split_str[i]);
 		if (expansion_needed(split_str[i]))
 		{
 			tmp = expand_var(split_str[i], god_struct);
