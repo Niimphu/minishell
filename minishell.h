@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/30 13:05:29 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/30 14:37:43 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_file
 
 typedef struct s_exec
 {
+	int		pid;
 	int		fd_in;
 	int		fd_out;
 	int		pipe_fd[2];
