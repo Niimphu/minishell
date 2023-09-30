@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:33:52 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/23 18:33:52 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/09/30 13:51:33 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static t_exec	*new_node(t_parser *parser_node)
 	exec_node->fd_out = -1;
 	exec_node->pipe_fd[0] = -1;
 	exec_node->pipe_fd[1] = -1;
+	exec_node->path = NULL;
 	get_redirection_fds(exec_node, parser_node->files);
 	return (exec_node);
 }
