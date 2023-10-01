@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:38:42 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/30 14:10:52 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/01 12:43:43 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,18 @@ static char	*create_path(char *cmd, char *path)
 		return (NULL);
 	free(temp);
 	return (ret);
+}
+
+int	close_all_pipes(t_list *exec_list)
+{
+	t_exec *exec_node;
+
+	while (exec_list)
+	{
+		exec_node = (t_exec *)exec_list->content;
+		exec_node->pipe_fd[READ] = close_fd(exec_node->pipe_fd[READ]);
+		exec_node->pipe_fd[WRITE] = close_fd(exec_node->pipe_fd[WRITE]);
+		exec_list = exec_list->next;
+	}
+	return (0);
 }

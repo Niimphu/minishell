@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
+#    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/09/17 14:34:09 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/10/01 12:14:17 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ NAME = minishell
 
 CC = gcc -Wall -Wextra -Werror
 CC += -g -O0
-#CC += -fsanitize=address
+CC += -fsanitize=address
 
 LIBS = -L ~/.brew/Cellar/readline/8.2.1/lib -lreadline -lncurses
 
