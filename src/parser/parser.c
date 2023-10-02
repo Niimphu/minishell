@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/30 13:23:20 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/02 17:47:20 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	parse(char *input, t_god *god_struct)
 	god_struct->parser_list
 		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
-	// print_parser_list(god_struct->parser_list);
 	god_struct->block_count = ft_lstsize(god_struct->parser_list);
 	return (0);
 }

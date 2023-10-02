@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/01 12:43:47 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/02 18:18:44 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node)
 {
 	exec_node->pid = fork();
 	if (exec_node->pid < 0)
-		return (perror("fork 🍴:"), 0);	if (exec_node->pid == 0)
+		return (perror("fork 🍴:"), 0);
+	if (exec_node->pid == 0)
 		make_a_child_____process(god_struct, exec_node);
 	return (0);
 }
@@ -71,7 +72,7 @@ static int	wait_all(t_list *exec_list)
 {
 	int		status;
 	int		error;
-	t_exec *node;
+	t_exec	*node;
 
 	status = 0;
 	error = 0;
@@ -89,7 +90,7 @@ static int	wait_all(t_list *exec_list)
 void	print_exec_list(t_list *exec_list)
 {
 	t_exec	*node;
-	int			i;
+	int		i;
 
 	printf("\n\n=== Executor linked list ===\n\n");
 	while (exec_list)
