@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/02 18:18:44 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/02 18:28:18 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ static int	wait_all(t_list *exec_list)
 		waitpid(node->pid, &status, 0);
 		if (WIFEXITED(status))
 			error = WEXITSTATUS(status);
+		if (error == 127)
+			command_not_found(node->cmd);
 		exec_list = exec_list->next;
 	}
 	return (error);

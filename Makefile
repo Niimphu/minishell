@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/10/01 12:14:17 by yiwong           ###   ########.fr        #
+#    Updated: 2023/10/02 18:28:32 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC	=	main.c \
 		executer/execute_list.c \
 		executer/execute_utils.c \
 		executer/execute_builtins.c \
+		executer/error.c \
 		file_managers/files.c \
 		file_managers/heredoc.c \
 		file_managers/file_list.c \
