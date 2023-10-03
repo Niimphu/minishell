@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/03 12:19:55 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/03 12:31:10 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int	wait_all(t_list *exec_list)
 void	print_exec_list(t_list *exec_list)
 {
 	t_exec	*node;
-	int			i;
+	int		i;
 
 	printf("\n\n=== Executor linked list ===\n\n");
 	while (exec_list)
