@@ -115,7 +115,7 @@ int		execute_builtins(char **cmd, t_god *god_struct);
 
 char	*get_var(char *var, t_god *tools);
 int		env(t_god *god_struct);
-int		export(char **cmd,t_god *god_struct);
+int		export(char **cmd, t_god *god_struct);
 int		echo(char **cmd);
 int		unset(char **cmd, t_god *god_struct);
 int		pwd(t_god *god_struct);

@@ -83,7 +83,7 @@ int	expansion_needed(char *str)
 	{
 		if (first_index_of(str, '"') < first_index_of(str, '\'')
 			&& second_index_of(str, '"') > second_index_of(str, '\''))
-		i = 1;
+			i = 1;
 	}
 	return (i);
 }
