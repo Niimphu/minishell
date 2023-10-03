@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/30 13:10:23 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:59:05 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static char	*expand_var(char *str, t_god *god_struct)
 	int		var_count;
 	char	*tmp;
 	char	**split_str;
-	char	*expanded;
 
 	i = 0;
 	tmp = wow_much_function_name(str);
@@ -59,6 +58,5 @@ static char	*expand_var(char *str, t_god *god_struct)
 	split_str = ft_split(str, 26);
 	if (!split_str)
 		return (free_string(&str), NULL);
-	expanded = join_split(split_str, god_struct);
-	return (free_string(&str), expanded);
+	return (free_string(&str), join_split(split_str, god_struct));
 }

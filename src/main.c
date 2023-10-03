@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/07 17:39:51 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/01 18:14:13 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	g_signal_received;
 
 int	main(int argument_count, char **arguments, char **envp)
 {
+	int		ret;
 	t_god	*god_struct;
 
 	(void)arguments;
@@ -31,7 +32,8 @@ int	main(int argument_count, char **arguments, char **envp)
 		await_signals();
 		await_input(god_struct);
 	}
+	ret = god_struct->exit;
 	free_god_struct(&god_struct);
 	clear_history();
-	return (0);
+	return (ret);
 }

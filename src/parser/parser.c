@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/30 13:23:20 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/03 12:20:47 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parse(char *input, t_god *god_struct)
 	god_struct->parser_list
 		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);
-	// print_parser_list(god_struct->parser_list);
+	/* print_parser_list(god_struct->parser_list); */
 	god_struct->block_count = ft_lstsize(god_struct->parser_list);
 	return (0);
 }
@@ -57,7 +57,7 @@ char	*get_token_string(int id)
 		return ("append out redirection");
 	return (NULL);
 }
-
+/* 
 void	print_lexer_list(t_list *lexer_list)
 {
 	t_lexer	*node;
@@ -108,3 +108,4 @@ void	print_parser_list(t_list *parsed_list)
 		parsed_list = parsed_list->next;
 	}
 }
+ */

@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-int	env(int fd_out, t_god *god_struct)
+int	env(t_god *god_struct)
 {
 	int		i;
 	t_god	*ptr;
@@ -23,13 +23,13 @@ int	env(int fd_out, t_god *god_struct)
 	ptr = god_struct;
 	while (ptr->env[i])
 	{
-		ft_putstr_fd(ptr->env[i++], fd_out);
-		ft_putstr_fd("\n", fd_out);
+		ft_putstr_fd(ptr->env[i++], STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	}
 	return (0);
 }
 
-static void	print_sorted_envp(int fd_out, t_god *god_struct)
+static void	print_sorted_envp(t_god *god_struct)
 {
 	int		i;
 	int		j;
@@ -44,8 +44,8 @@ static void	print_sorted_envp(int fd_out, t_god *god_struct)
 		{
 			if (i == ptr->env[j][0])
 			{
-				ft_putstr_fd(ptr->env[j], fd_out);
-				ft_putstr_fd("\n", fd_out);
+				ft_putstr_fd(ptr->env[j], STDOUT_FILENO);
+				ft_putstr_fd("\n", STDOUT_FILENO);
 			}
 		}
 		i++;
@@ -79,11 +79,11 @@ static char	**new_env(t_god *god_struct, char *cmd)
 	return (new_env);
 }
 
-int	export(char **cmd, int fd_out, t_god *god_struct)
+int	export(char **cmd, t_god *god_struct)
 {
 	if (!cmd[1])
 	{
-		print_sorted_envp(fd_out, god_struct);
+		print_sorted_envp(god_struct);
 		return (0);
 	}
 	god_struct->env = new_env(god_struct, cmd[1]);

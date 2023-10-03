@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/01 12:43:47 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/03 12:19:55 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,22 @@ int	execute(t_god *god_struct, t_list *parser_list)
 	while (++i <= god_struct->block_count)
 	{
 		exec_node = exec_list->content;
+		if (exec_node->builtin > 14)
+			execute_builtins(exec_node->cmd_array, god_struct);
 		fork_this_shit_im_out(god_struct, exec_node);
 		exec_list = exec_list->next;
 	}
 	close_all_pipes(god_struct->exec_list);
 	error = wait_all(god_struct->exec_list);
-	return (0);
+	return (error);
 }
 
 static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node)
 {
 	exec_node->pid = fork();
 	if (exec_node->pid < 0)
-		return (perror("fork 🍴:"), 0);	if (exec_node->pid == 0)
+		return (perror("fork 🍴:"), 0);
+	if (exec_node->pid == 0)
 		make_a_child_____process(god_struct, exec_node);
 	return (0);
 }
@@ -62,6 +65,8 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 		dup2(exec_node->fd_out, STDOUT_FILENO);
 	exec_node->pipe_fd[WRITE] = close_fd(exec_node->pipe_fd[WRITE]);
 	close_all_pipes(god_struct->exec_list);
+	if (exec_node->builtin > 10 && exec_node->builtin < 15)
+		exit (execute_builtins(exec_node->cmd_array, god_struct));
 	if (execve(exec_node->path, exec_node->cmd_array, god_struct->env) == -1)
 		exit(2);
 	exit(0);
@@ -71,7 +76,7 @@ static int	wait_all(t_list *exec_list)
 {
 	int		status;
 	int		error;
-	t_exec *node;
+	t_exec	*node;
 
 	status = 0;
 	error = 0;
@@ -85,7 +90,7 @@ static int	wait_all(t_list *exec_list)
 	}
 	return (error);
 }
-
+/* 
 void	print_exec_list(t_list *exec_list)
 {
 	t_exec	*node;
@@ -110,3 +115,4 @@ void	print_exec_list(t_list *exec_list)
 		exec_list = exec_list->next;
 	}
 }
+ */

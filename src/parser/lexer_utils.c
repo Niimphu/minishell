@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:48:27 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/23 22:04:28 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/01 19:31:27 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	skip_quotes(const char *str)
 	int		i;
 	char	c;
 
-	i = 1;
+	i = 0;
 	c = str[0];
 	while (str[i])
 	{
-		if (str[i] == c)
+		if (str[i++] == c)
 			return (i);
 		else
 			i++;

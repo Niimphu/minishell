@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/30 14:37:43 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/03 11:33:35 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@
 # define TRIM 10
 
 # define ECHO 11
-# define CD 12
-# define PWD 13
-# define EXPORT 14
-# define UNSET 15
-# define ENV 16
+# define PWD 12
+# define EXPORT 13
+# define ENV 14
+# define CD 15
+# define UNSET 16
 # define EXIT 17
 
 # define READ 0
@@ -81,6 +81,7 @@ typedef struct s_exec
 	int		pipe_fd[2];
 	char	*cmd;
 	char	**cmd_array;
+	int		builtin;
 	char	*path;
 }				t_exec;
 
@@ -91,6 +92,7 @@ typedef struct s_god
 	t_list	*parser_list;
 	t_list	*exec_list;
 	int		block_count;
+	int		exit;
 }				t_god;
 
 t_god	*create_god_struct(char **envp);
@@ -109,14 +111,14 @@ char	*get_env_var(char *var, char **env, int trim);
 int		count_operators(const char *str, char c);
 int		count_char(char *str, char c);
 
-int		execute_builtins(char **cmd, int fd_out, t_god *god_struct);
+int		execute_builtins(char **cmd, t_god *god_struct);
 
 char	*get_var(char *var, t_god *tools);
-int		env(int fd_out, t_god *god_struct);
-int		export(char **cmd, int fd_out, t_god *god_struct);
-int		echo(char **cmd, int fd_out);
+int		env(t_god *god_struct);
+int		export(char **cmd,t_god *god_struct);
+int		echo(char **cmd);
 int		unset(char **cmd, t_god *god_struct);
-int		pwd(int fd_out, t_god *god_struct);
+int		pwd(t_god *god_struct);
 int		cd(char *dir, t_god *god_struct);
 void	exit_minishell(t_god *god_struct);
 

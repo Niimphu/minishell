@@ -6,13 +6,13 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/23 22:05:38 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/03 10:47:24 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	echo(char **cmd, int fd_out)
+int	echo(char **cmd)
 {
 	int	i;
 	int	new_line_flag;
@@ -25,8 +25,8 @@ int	echo(char **cmd, int fd_out)
 		i++;
 	}
 	while (cmd[i])
-		ft_putstr_fd(cmd[i++], fd_out);
+		ft_putstr_fd(cmd[i++], STDOUT_FILENO);
 	if (new_line_flag == 0 || !cmd[1])
-		ft_putstr_fd("\n", fd_out);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }

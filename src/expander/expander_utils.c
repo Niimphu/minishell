@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/25 17:36:44 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:59:38 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,9 @@ int	expansion_needed(char *str)
 		i = 1;
 	else if (ft_strchr(str, '$') && ft_strchr(str, '\''))
 	{
-		if (ft_strchr(str, '"'))
-		{
-			if (first_index_of(str, '"') < first_index_of(str, '\'')
-				&& second_index_of(str, '"') > second_index_of(str, '\''))
-				i = 1;
-		}
+		if (first_index_of(str, '"') < first_index_of(str, '\'')
+			&& second_index_of(str, '"') > second_index_of(str, '\''))
+		i = 1;
 	}
 	return (i);
 }

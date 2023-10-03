@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:38:42 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/01 12:43:43 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/03 12:26:50 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	pipe_up(t_list *exec_list)
 
 	previous_pipe_read = -1;
 	while (exec_list)
-	{	
+	{
 		exec_node = (t_exec *)exec_list->content;
 		if (exec_list->next && pipe(exec_node->pipe_fd) == -1)
 			return (1);
@@ -84,7 +84,7 @@ static char	*create_path(char *cmd, char *path)
 
 int	close_all_pipes(t_list *exec_list)
 {
-	t_exec *exec_node;
+	t_exec	*exec_node;
 
 	while (exec_list)
 	{

@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:33:52 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/30 13:51:33 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/01 18:07:50 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static t_exec	*new_node(t_parser *parser_node)
 		return (NULL);
 	exec_node->cmd_array = parser_node->cmd_array;
 	exec_node->cmd = exec_node->cmd_array[0];
+	exec_node->builtin = parser_node->builtin;
 	exec_node->fd_in = -1;
 	exec_node->fd_out = -1;
 	exec_node->pipe_fd[0] = -1;
