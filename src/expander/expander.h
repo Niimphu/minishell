@@ -18,7 +18,7 @@
 
 char	*join_split(char **split, t_god *god_struct);
 char	*wow_much_function_name(char *str);
-int		expansion_needed(char *str);
+bool	expansion_needed(char *str);
 char	*trim_quotes(char **str);
 
 #endif

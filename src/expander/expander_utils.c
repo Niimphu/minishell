@@ -70,22 +70,19 @@ char	*join_split(char **split, t_god *god_struct)
 	return (free_string_array(&split), str);
 }
 
-int	expansion_needed(char *str)
+bool	expansion_needed(char *str)
 {
-	int	i;
-
-	i = 0;
 	if (!ft_strchr(str, '$'))
-		i = 0;
+		return (false);
 	else if (ft_strchr(str, '$') && !ft_strchr(str, '\''))
-		i = 1;
+		return (true);
 	else if (ft_strchr(str, '$') && ft_strchr(str, '\''))
 	{
 		if (first_index_of(str, '"') < first_index_of(str, '\'')
 			&& second_index_of(str, '"') > second_index_of(str, '\''))
-			i = 1;
+			return (true);
 	}
-	return (i);
+	return (false);
 }
 
 char	*trim_quotes(char **str)
