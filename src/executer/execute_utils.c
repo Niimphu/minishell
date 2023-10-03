@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:38:42 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/03 12:30:56 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/03 15:01:17 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ static char	*create_path(char *cmd, char *path)
 	if (!temp)
 		return (NULL);
 	ret = ft_strjoin(temp, cmd);
+	free_string(&temp);
 	if (!ret)
 		return (NULL);
-	free(temp);
 	return (ret);
 }
 
