@@ -24,6 +24,7 @@ int	parse(char *input, t_god *god_struct)
 	{
 		printf("minishelf: syntax error near unexpected token \'%c\'\n",
 			*invalid_syntax(god_struct->lexer_list));
+		god_struct->exit_status = 258;
 		ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 		return (-1);
 	}
