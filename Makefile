@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
+#    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/10/01 16:36:50 by Kekuhne          ###   ########.fr        #
-=======
-#    Updated: 2023/10/02 18:28:32 by yiwong           ###   ########.fr        #
->>>>>>> exec
+#    Updated: 2023/10/03 14:54:31 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
