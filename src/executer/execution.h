@@ -22,6 +22,7 @@ char	*find_exec(t_exec *node, char **env);
 int		close_all_pipes(t_list *exec_list);
 
 void	command_not_found(char *cmd);
+bool	is_dir(t_exec *node);
 
 void	print_exec_list(t_list *exec_list);
 

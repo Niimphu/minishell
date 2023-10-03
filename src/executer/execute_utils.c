@@ -46,11 +46,8 @@ char	*find_exec(t_exec *node, char **env)
 {
 	char		*path;
 	char		**env_paths;
-	struct stat	st;
 	int			i;
 
-	if (stat(node->cmd, &st) == 0 && S_ISDIR(st.st_mode))
-		return (NULL);
 	if (access(node->cmd, X_OK) == 0)
 		return (ft_strdup(node->cmd));
 	i = 0;
@@ -67,6 +64,15 @@ char	*find_exec(t_exec *node, char **env)
 	}
 	free_string_array(&env_paths);
 	return (NULL);
+}
+
+bool	is_dir(t_exec *node)
+{
+	struct stat	st;
+
+	if (stat(node->cmd, &st) == 0 && S_ISDIR(st.st_mode))
+		return (true);
+	return (false);
 }
 
 static char	*create_path(char *cmd, char *path)

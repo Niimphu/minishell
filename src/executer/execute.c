@@ -56,6 +56,8 @@ static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node)
 static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 {
 	exec_node->path = find_exec(exec_node, god_struct->env);
+	if (is_dir(exec_node))
+		exit(126);
 	if (!exec_node->path)
 		exit(127);
 	if (exec_node->fd_in != -1)
@@ -86,13 +88,14 @@ static int	wait_all(t_list *exec_list)
 		waitpid(node->pid, &status, 0);
 		if (WIFEXITED(status))
 			error = WEXITSTATUS(status);
-		if (error == 127)
+		if (error == 126 || error == 127)
 			command_not_found(node->cmd);
 		exec_list = exec_list->next;
 	}
 	return (error);
 }
-/* 
+
+/*
 void	print_exec_list(t_list *exec_list)
 {
 	t_exec	*node;
