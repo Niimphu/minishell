@@ -15,6 +15,7 @@
 static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node);
 static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node);
 static int	wait_all(t_list *exec_list);
+static void	error(char *cmd);
 
 int	execute(t_god *god_struct, t_list *parser_list)
 {
@@ -77,22 +78,34 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 static int	wait_all(t_list *exec_list)
 {
 	int		status;
-	int		error;
+	int		error_code;
 	t_exec	*node;
 
 	status = 0;
-	error = 0;
+	error_code = 0;
 	while (exec_list)
 	{
 		node = (t_exec *)exec_list->content;
 		waitpid(node->pid, &status, 0);
 		if (WIFEXITED(status))
-			error = WEXITSTATUS(status);
-		if (error == 126 || error == 127)
-			command_not_found(node->cmd);
+			error_code = WEXITSTATUS(status);
+		if (error_code == 126 || error_code == 127)
+			error(node->cmd);
 		exec_list = exec_list->next;
 	}
-	return (error);
+	return (error_code);
+}
+
+void	error(char *cmd)
+{
+	write(2, "minishelf: ", 11);
+	write(2, cmd, ft_strlen(cmd));
+	if (*cmd == '/' && access(cmd, X_OK) == 0)
+		write (2, ": is a directory\n", 17);
+	else if (*cmd == '/')
+		write (2, ": no such file or directory\n", 28);
+	else
+		write(2, ": command not found\n", 20);
 }
 
 /*
