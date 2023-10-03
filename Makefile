@@ -6,7 +6,11 @@
 #    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/10/01 16:36:50 by Kekuhne          ###   ########.fr        #
+=======
+#    Updated: 2023/10/02 18:28:32 by yiwong           ###   ########.fr        #
+>>>>>>> exec
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +75,7 @@ SRC	=	main.c \
 		executer/execute_list.c \
 		executer/execute_utils.c \
 		executer/execute_builtins.c \
+		executer/error.c \
 		file_managers/files.c \
 		file_managers/heredoc.c \
 		file_managers/file_list.c \

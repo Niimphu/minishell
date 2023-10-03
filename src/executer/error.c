@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 19:37:25 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/02 18:25:22 by yiwong           ###   ########.fr       */
+/*   Created: 2023/10/02 18:24:14 by yiwong            #+#    #+#             */
+/*   Updated: 2023/10/02 18:26:27 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
+#include "execution.h"
 
-# include "../file_managers/files.h"
-
-t_list	*create_execution_list(t_list *parser_list);
-
-int		pipe_up(t_list *exec_list);
-char	*find_exec(t_exec *node, char **env);
-int		close_all_pipes(t_list *exec_list);
-
-void	command_not_found(char *cmd);
-
-void	print_exec_list(t_list *exec_list);
-
-#endif
+void	command_not_found(char *cmd)
+{
+	write(2, "minishelf: ", 11);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": command not found\n", 20);
+}
