@@ -68,7 +68,7 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 	if (exec_node->builtin > 10 && exec_node->builtin < 15)
 		exit (execute_builtins(exec_node->cmd_array, god_struct));
 	if (execve(exec_node->path, exec_node->cmd_array, god_struct->env) == -1)
-		exit(2);
+		exit(1);
 	exit(0);
 }
 
