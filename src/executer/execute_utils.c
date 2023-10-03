@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include <sys/stat.h>
 
 static char	*create_path(char *cmd, char *path);
 
@@ -28,7 +29,7 @@ int	pipe_up(t_list *exec_list)
 		if (exec_node->fd_in == -1 && previous_pipe_read != -1)
 			exec_node->fd_in = previous_pipe_read;
 		else
-			previous_pipe_read = close_fd(previous_pipe_read);
+			close_fd(previous_pipe_read);
 		previous_pipe_read = exec_node->pipe_fd[READ];
 		if (!exec_list->next)
 			break ;
@@ -43,10 +44,13 @@ int	pipe_up(t_list *exec_list)
 
 char	*find_exec(t_exec *node, char **env)
 {
-	char	*path;
-	char	**env_paths;
-	int		i;
+	char		*path;
+	char		**env_paths;
+	struct stat	st;
+	int			i;
 
+	if (stat(node->cmd, &st) == 0 && S_ISDIR(st.st_mode))
+		return (NULL);
 	if (access(node->cmd, X_OK) == 0)
 		return (ft_strdup(node->cmd));
 	i = 0;
