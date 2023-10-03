@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/01 16:59:38 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/03 16:50:45 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,8 @@ char	*join_split(char **split, t_god *god_struct)
 		return (free(str), NULL);
 	while (split[i])
 	{
-		if (split[i] && !ft_strcmp(split[i], "$"))
-		{
-			i++;
+		if (split[i] && !ft_strcmp(split[i++], "$"))
 			split[i] = get_var(split[i], god_struct);
-		}
 		if (split[i])
 		{
 			tmp = ft_strjoin(str, split[i]);

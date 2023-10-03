@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:51:18 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/03 12:32:23 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/03 16:48:16 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,29 @@ char	*get_var(char *var, t_god *god_struct)
 	if (!god_struct->env[i])
 		return (free_string(&new_var), free_string(&var), NULL);
 	return (free_string(&var), new_var);
+}
+
+int	verify_identifier(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (cmd[0] != '_' && !ft_isalpha(cmd[0]))
+	{
+		ft_putstr_fd("unset: `", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd("': is not a valid identifier\n", 2);
+		return (0);
+	}
+	while (cmd[i++])
+	{
+		if (cmd[i] && (!ft_isalnum(cmd[i]) && cmd[i] != '_'))
+		{
+			ft_putstr_fd("unset: `", 2);
+			ft_putstr_fd(cmd, 2);
+			ft_putstr_fd("': is not a valid identifier\n", 2);
+			return (0);
+		}
+	}
+	return (1);
 }

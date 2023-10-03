@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/03 11:33:35 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/03 16:38:19 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,13 @@ char	**expander(char **split_str, t_god *god_struct);
 int		execute(t_god *god_struct, t_list *parser_list);
 
 char	*get_env_var(char *var, char **env, int trim);
+int		verify_identifier(char *cmd);
 int		count_operators(const char *str, char c);
+char	*get_var(char *var, t_god *tools);
 int		count_char(char *str, char c);
 
 int		execute_builtins(char **cmd, t_god *god_struct);
 
-char	*get_var(char *var, t_god *tools);
 int		env(t_god *god_struct);
 int		export(char **cmd,t_god *god_struct);
 int		echo(char **cmd);

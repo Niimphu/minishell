@@ -74,9 +74,8 @@ static char	**new_env(t_god *god_struct, char *cmd)
 	new_env[i] = ft_strdup(cmd);
 	if (!new_env[i])
 		return (NULL);
-	free_string_array(&god_struct->env);
 	new_env[++i] = NULL;
-	return (new_env);
+	return (free_string_array(&god_struct->env), new_env);
 }
 
 int	export(char **cmd, t_god *god_struct)
@@ -86,6 +85,8 @@ int	export(char **cmd, t_god *god_struct)
 		print_sorted_envp(god_struct);
 		return (0);
 	}
+	if (!verify_identifier(cmd[1]))
+		return (1);
 	god_struct->env = new_env(god_struct, cmd[1]);
 	if (!god_struct->env)
 		return (1);

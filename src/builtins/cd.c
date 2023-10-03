@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/11 17:23:51 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/03 17:07:04 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	cd_home(t_god *god_struct)
 
 	old_dir = getcwd(NULL, 1024);
 	home_dir = get_var(ft_strdup("$HOME"), god_struct);
+	printf("%s\n", home_dir);
 	if (!home_dir || !old_dir || chdir(home_dir) == -1
 		|| update_pwd(god_struct) || update_old_pwd(god_struct, old_dir))
 	{

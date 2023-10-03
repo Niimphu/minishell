@@ -6,13 +6,14 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 13:30:06 by kekuhne           #+#    #+#             */
-/*   Updated: 2023/09/13 19:22:01 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/03 16:49:21 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(char c)
+int	ft_isalnum(int c)
 {
-	if ((c < 65 || c > 90) && (c < 97 || c > 122))
-		return (0);
-	return (1);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+		|| (c >= '0' && c <= '9'))
+		return (1);
+	return (0);
 }
