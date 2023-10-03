@@ -35,6 +35,7 @@ static char	*read_user_input(void)
 	char	*input;
 
 	input = readline("minishelf > ");
-	add_history(input);
+	if (input && *input && *input != ' ')
+		add_history(input);
 	return (input);
 }
