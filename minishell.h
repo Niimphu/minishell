@@ -92,7 +92,7 @@ typedef struct s_god
 	t_list	*parser_list;
 	t_list	*exec_list;
 	int		block_count;
-	int		exit;
+	int		exit_status;
 }				t_god;
 
 t_god	*create_god_struct(char **envp);

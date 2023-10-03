@@ -32,7 +32,7 @@ int	main(int argument_count, char **arguments, char **envp)
 		await_signals();
 		await_input(god_struct);
 	}
-	ret = god_struct->exit;
+	ret = god_struct->exit_status;
 	free_god_struct(&god_struct);
 	clear_history();
 	return (ret);
