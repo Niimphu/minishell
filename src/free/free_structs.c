@@ -19,6 +19,7 @@ void	free_god_struct(t_god **ptr)
 	god_struct = *(ptr);
 	free_string_array(&god_struct->env);
 	ft_lstclear(&god_struct->parser_list, free_parser_node);
+	ft_lstclear(&god_struct->exec_list, free_exec_node);
 	free(god_struct);
 	god_struct = NULL;
 	*ptr = NULL;
