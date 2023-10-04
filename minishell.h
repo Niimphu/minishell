@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/03 16:38:19 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 00:00:38 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,11 @@ int		execute(t_god *god_struct, t_list *parser_list);
 
 char	*get_env_var(char *var, char **env, int trim);
 int		verify_identifier(char *cmd);
-int		count_operators(const char *str, char c);
 char	*get_var(char *var, t_god *tools);
+
+int		count_operators(const char *str, char c);
 int		count_char(char *str, char c);
+bool	is_valid_int(char *string);
 
 int		execute_builtins(char **cmd, t_god *god_struct);
 
@@ -121,7 +123,7 @@ int		echo(char **cmd);
 int		unset(char **cmd, t_god *god_struct);
 int		pwd(t_god *god_struct);
 int		cd(char *dir, t_god *god_struct);
-void	exit_minishell(t_god *god_struct);
+void	exit_minishell(char **cmd, t_god *god_struct);
 
 void	free_string(char **string);
 void	free_string_array(char ***array);

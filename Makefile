@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/10/03 14:54:31 by yiwong           ###   ########.fr        #
+#    Updated: 2023/10/05 00:11:21 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ SRC	=	main.c \
 		expander/expander.c \
 		expander/expander_utils.c \
 		keybinds/keypress.c \
+		utils/checkers.c \
 		utils/counters.c \
 		utils/env_utils.c \
 		free/free.c \

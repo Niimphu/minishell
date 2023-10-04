@@ -17,6 +17,9 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node);
 static int	wait_all(t_list *exec_list);
 static void	error(char *cmd);
 
+//bug: ./minishell ./minishell <invalid command> Ctrl + D
+//builtin exits child process with code, causes parent process to print error
+
 int	execute(t_god *god_struct, t_list *parser_list)
 {
 	t_list		*exec_list;
@@ -35,7 +38,7 @@ int	execute(t_god *god_struct, t_list *parser_list)
 	{
 		exec_node = exec_list->content;
 		if (exec_node->builtin > 10 && i
-			== god_struct->block_count && exec_node->fd_out == -1)
+			== god_struct->block_count && exec_node->fd_out == 0)
 			execute_builtins(exec_node->cmd_array, god_struct);
 		else
 			fork_this_shit_im_out(god_struct, exec_node);
@@ -73,7 +76,7 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 	exec_node->pipe_fd[WRITE] = close_fd(exec_node->pipe_fd[WRITE]);
 	close_all_pipes(god_struct->exec_list);
 	if (exec_node->builtin > 10)
-		exit (execute_builtins(exec_node->cmd_array, god_struct));
+		exit(execute_builtins(exec_node->cmd_array, god_struct));
 	if (execve(exec_node->path, exec_node->cmd_array, god_struct->env) == -1)
 		exit(1);
 	exit(0);

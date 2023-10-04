@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 14:49:16 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/01 18:13:19 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 00:03:17 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@ static char	*read_user_input(void);
 void	await_input(t_god *god_struct)
 {
 	char	*input;
+	int		error;
 
 	if (!god_struct)
 		return ;
 	input = read_user_input();
 	if (!input)
-		exit_minishell(god_struct);
+	{
+		error = god_struct->exit_status;
+		free_god_struct(&god_struct);
+		clear_history();
+		exit(error);
+	}
 	if (parse(input, god_struct) == -1)
 		return ;
 	god_struct->exit_status = execute(god_struct, god_struct->parser_list);
