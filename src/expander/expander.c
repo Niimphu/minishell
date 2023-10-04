@@ -45,7 +45,7 @@ static char	*expand_var(char *str, t_god *god_struct)
 	str = tmp;
 	while (str[i])
 	{
-		if (str[i] && str[i] == '$')
+		if (str[i] == '$')
 		{
 			var_count = count_operators(str + i, str[i]);
 			tmp = insert_sub(str, i);

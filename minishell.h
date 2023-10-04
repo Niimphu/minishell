@@ -92,7 +92,7 @@ typedef struct s_god
 	t_list	*parser_list;
 	t_list	*exec_list;
 	int		block_count;
-	int		exit;
+	int		exit_status;
 }				t_god;
 
 t_god	*create_god_struct(char **envp);
@@ -116,7 +116,7 @@ int		count_char(char *str, char c);
 int		execute_builtins(char **cmd, t_god *god_struct);
 
 int		env(t_god *god_struct);
-int		export(char **cmd,t_god *god_struct);
+int		export(char **cmd, t_god *god_struct);
 int		echo(char **cmd);
 int		unset(char **cmd, t_god *god_struct);
 int		pwd(t_god *god_struct);

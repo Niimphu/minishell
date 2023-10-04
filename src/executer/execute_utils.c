@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:38:42 by yiwong            #+#    #+#             */
 /*   Updated: 2023/10/03 15:40:25 by Kekuhne          ###   ########.fr       */
@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include <sys/stat.h>
 
 static char	*create_path(char *cmd, char *path);
 
@@ -28,7 +29,7 @@ int	pipe_up(t_list *exec_list)
 		if (exec_node->fd_in == -1 && previous_pipe_read != -1)
 			exec_node->fd_in = previous_pipe_read;
 		else
-			previous_pipe_read = close_fd(previous_pipe_read);
+			close_fd(previous_pipe_read);
 		previous_pipe_read = exec_node->pipe_fd[READ];
 		if (!exec_list->next)
 			break ;
@@ -43,9 +44,9 @@ int	pipe_up(t_list *exec_list)
 
 char	*find_exec(t_exec *node, char **env)
 {
-	char	*path;
-	char	**env_paths;
-	int		i;
+	char		*path;
+	char		**env_paths;
+	int			i;
 
 	if (access(node->cmd, X_OK) == 0)
 		return (ft_strdup(node->cmd));
@@ -65,6 +66,15 @@ char	*find_exec(t_exec *node, char **env)
 	return (NULL);
 }
 
+bool	is_dir(t_exec *node)
+{
+	struct stat	st;
+
+	if (stat(node->cmd, &st) == 0 && S_ISDIR(st.st_mode))
+		return (true);
+	return (false);
+}
+
 static char	*create_path(char *cmd, char *path)
 {
 	char	*slash;
@@ -76,9 +86,9 @@ static char	*create_path(char *cmd, char *path)
 	if (!temp)
 		return (NULL);
 	ret = ft_strjoin(temp, cmd);
+	free_string(&temp);
 	if (!ret)
 		return (NULL);
-	free(temp);
 	return (ret);
 }
 

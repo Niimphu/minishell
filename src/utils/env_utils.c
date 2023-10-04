@@ -38,6 +38,8 @@ char	*get_var(char *var, t_god *god_struct)
 	if (!var)
 		return ("\n");
 	new_var = ft_strtrim(var, "\"\'$");
+	if (!ft_strncmp(new_var, "?", 2))
+		return (ft_strdup(ft_itoa(god_struct->exit_status)));
 	while (god_struct->env[i])
 	{
 		if (!ft_strncmp(new_var, god_struct->env[i],

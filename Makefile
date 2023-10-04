@@ -71,7 +71,6 @@ SRC	=	main.c \
 		executer/execute_list.c \
 		executer/execute_utils.c \
 		executer/execute_builtins.c \
-		executer/error.c \
 		file_managers/files.c \
 		file_managers/heredoc.c \
 		file_managers/file_list.c \

@@ -15,6 +15,7 @@
 static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node);
 static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node);
 static int	wait_all(t_list *exec_list);
+static void	error(char *cmd);
 
 int	execute(t_god *god_struct, t_list *parser_list)
 {
@@ -33,7 +34,8 @@ int	execute(t_god *god_struct, t_list *parser_list)
 	while (++i <= god_struct->block_count)
 	{
 		exec_node = exec_list->content;
-		if (exec_node->builtin > 10 && i == god_struct->block_count && exec_node->fd_out == -1)
+		if (exec_node->builtin > 10 && i
+			== god_struct->block_count && exec_node->fd_out == -1)
 			execute_builtins(exec_node->cmd_array, god_struct);
 		else
 			fork_this_shit_im_out(god_struct, exec_node);
@@ -57,6 +59,8 @@ static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node)
 static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 {
 	exec_node->path = find_exec(exec_node, god_struct->env);
+	if (is_dir(exec_node))
+		exit(126);
 	if (!exec_node->path && exec_node->builtin == 0)
 		exit(127);
 	if (exec_node->fd_in != -1)
@@ -69,31 +73,44 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 	if (exec_node->builtin > 10)
 		exit (execute_builtins(exec_node->cmd_array, god_struct));
 	if (execve(exec_node->path, exec_node->cmd_array, god_struct->env) == -1)
-		exit(2);
+		exit(1);
 	exit(0);
 }
 
 static int	wait_all(t_list *exec_list)
 {
 	int		status;
-	int		error;
+	int		error_code;
 	t_exec	*node;
 
 	status = 0;
-	error = 0;
+	error_code = 0;
 	while (exec_list)
 	{
 		node = (t_exec *)exec_list->content;
 		waitpid(node->pid, &status, 0);
 		if (WIFEXITED(status))
-			error = WEXITSTATUS(status);
-		if (error == 127)
-			command_not_found(node->cmd);
+			error_code = WEXITSTATUS(status);
+		if (error_code == 126 || error_code == 127)
+			error(node->cmd);
 		exec_list = exec_list->next;
 	}
-	return (error);
+	return (error_code);
 }
-/* 
+
+void	error(char *cmd)
+{
+	write(2, "minishelf: ", 11);
+	write(2, cmd, ft_strlen(cmd));
+	if (*cmd == '/' && access(cmd, X_OK) == 0)
+		write (2, ": is a directory\n", 17);
+	else if (*cmd == '/')
+		write (2, ": no such file or directory\n", 28);
+	else
+		write(2, ": command not found\n", 20);
+}
+
+/*
 void	print_exec_list(t_list *exec_list)
 {
 	t_exec	*node;
