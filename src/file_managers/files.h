@@ -16,6 +16,6 @@
 # include "../../minishell.h"
 
 void	open_heredocs(t_list *parsed_list);
-void	open_files(t_list *parsed_list);
+int		open_files(t_list *parsed_list);
 
 #endif

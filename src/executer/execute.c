@@ -63,10 +63,12 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 		exit(126);
 	if (!exec_node->path && exec_node->builtin == 0)
 		exit(127);
-	if (exec_node->fd_in != -1)
+	if (exec_node->fd_in == -1 || exec_node->fd_out == -1)
+		exit(1);
+	if (exec_node->fd_in > 0)
 		dup2(exec_node->fd_in, STDIN_FILENO);
 	exec_node->pipe_fd[READ] = close_fd(exec_node->pipe_fd[READ]);
-	if (exec_node->fd_out != -1)
+	if (exec_node->fd_out > 0)
 		dup2(exec_node->fd_out, STDOUT_FILENO);
 	exec_node->pipe_fd[WRITE] = close_fd(exec_node->pipe_fd[WRITE]);
 	close_all_pipes(god_struct->exec_list);

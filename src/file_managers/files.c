@@ -13,16 +13,14 @@
 #include "files.h"
 
 static int	open_file(char *filename, int operator);
-static bool	error(char *filename);
+static int	error(char *filename);
 
-void	open_files(t_list *parsed_list)
+int	open_files(t_list *parsed_list)
 {
 	t_parser	*node;
 	t_list		*file_list;
 	t_file		*file_node;
-	bool		open_error;
 
-	open_error = false;
 	while (parsed_list)
 	{
 		node = (t_parser *)parsed_list->content;
@@ -33,12 +31,13 @@ void	open_files(t_list *parsed_list)
 			if (file_node->operator != HEREDOC)
 				file_node->fd
 					= open_file(file_node->filename, file_node->operator);
-			if (file_node->fd == -1 && !open_error)
-				open_error = error(file_node->filename);
+			if (file_node->fd == -1)
+				return (error(file_node->filename));
 			file_list = file_list->next;
 		}
 		parsed_list = parsed_list->next;
 	}
+	return (0);
 }
 
 static int	open_file(char *filename, int operator)
@@ -56,10 +55,10 @@ static int	open_file(char *filename, int operator)
 	return (fd);
 }
 
-static bool	error(char *filename)
+static int	error(char *filename)
 {
-	ft_putstr_fd("open error: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(filename, 2);
-	ft_putchar_fd('\n', 2);
-	return (true);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	return (-1);
 }

@@ -36,5 +36,5 @@ int	close_fd(int fd)
 {
 	if (fd > 0)
 		close(fd);
-	return (-1);
+	return (0);
 }

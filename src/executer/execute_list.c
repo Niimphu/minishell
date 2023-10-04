@@ -43,10 +43,10 @@ static t_exec	*new_node(t_parser *parser_node)
 	exec_node->cmd_array = parser_node->cmd_array;
 	exec_node->cmd = exec_node->cmd_array[0];
 	exec_node->builtin = parser_node->builtin;
-	exec_node->fd_in = -1;
-	exec_node->fd_out = -1;
-	exec_node->pipe_fd[0] = -1;
-	exec_node->pipe_fd[1] = -1;
+	exec_node->fd_in = 0;
+	exec_node->fd_out = 0;
+	exec_node->pipe_fd[0] = 0;
+	exec_node->pipe_fd[1] = 0;
 	exec_node->path = NULL;
 	get_redirection_fds(exec_node, parser_node->files);
 	return (exec_node);
