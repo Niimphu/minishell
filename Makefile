@@ -49,7 +49,7 @@ HEADERS = -I ~/.brew/Cellar/readline/8.2.1/include
 #
 #HEADERS = -I /usr/local/Cellar/readline/8.2.1/include
 
-LIBFT = libft.a
+LIBFT = build/libft.a
 
 SRC_DIR = src
 
@@ -99,7 +99,7 @@ RESET = \033[0m
 
 all: $(NAME)
 	@if [ -e "$(NAME)" ]; then \
-		echo "$(GREEN)Compilation successful!$(RESET)"; \
+		echo "$(GREEN)Done!$(RESET)"; \
 	else \
 		echo "$(RED)Compilation failed :($(RESET)"; \
 	fi
@@ -108,7 +108,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	clear
 	@echo "$$SHELF"
 	@echo "$(PURPLE)Compiling minishelf...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) $(OBJ_DIR)/$(LIBFT) -o $(NAME) $(LIBS)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) $(LIBS)
 	@chmod a+x $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
