@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/10/05 00:11:21 by yiwong           ###   ########.fr        #
+#    Updated: 2023/10/05 11:39:46 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ SRC	=	main.c \
 		builtins/export.c \
 		builtins/pwd.c \
 		builtins/unset.c \
-		builtins/exit.c \
+		builtins/exit.c
 
 OBJ =	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
