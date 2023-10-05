@@ -17,6 +17,8 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node);
 static int	wait_all(t_list *exec_list);
 static void	error_exit(char *cmd, int status);
 
+// global error number when cd <invalid dir>
+// exit +"100" thinks + and 100 are separate but they should be together??
 // valgrind --track-fds=yes --leak-check=full --trace-children=yes --show-leak-kinds=all  ./minishell
 
 int	execute(t_god *god_struct, t_list *parser_list)
