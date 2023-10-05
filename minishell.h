@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/05 00:00:38 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/05 11:33:57 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define READ 0
 # define WRITE 1
 
-int	g_signal_received;
+extern int	g_signal_received;
 
 typedef struct s_lexer
 {

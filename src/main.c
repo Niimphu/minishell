@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/01 18:14:13 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 11:34:06 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	g_signal_received;
+int	g_signal_received = 0;
 
 int	main(int argument_count, char **arguments, char **envp)
 {
@@ -25,7 +25,6 @@ int	main(int argument_count, char **arguments, char **envp)
 		perror("This program does not accept arguments\n");
 		exit(1);
 	}
-	g_signal_received = 0;
 	god_struct = create_god_struct(envp);
 	while (g_signal_received != SIGQUIT)
 	{
