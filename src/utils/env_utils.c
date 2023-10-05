@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:51:18 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/03 16:48:16 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:52:30 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*get_var(char *var, t_god *god_struct)
 		{
 			tmp = ft_strdup(god_struct->env[i] + (ft_strlen(new_var) + 1));
 			if (!tmp)
-				return (free(new_var), NULL);
+				return (free(new_var), ft_strdup(""));
 			free_string(&new_var);
 			new_var = tmp;
 			break ;
