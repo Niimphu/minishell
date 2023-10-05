@@ -15,14 +15,12 @@
 static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node);
 static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node);
 static int	wait_all(t_list *exec_list);
-static void	error(char *cmd);
+static void	error_exit(char *cmd, int status);
 
-//bug: ./minishell ./minishell <invalid command> Ctrl + D
-//builtin exits child process with code, causes parent process to print error
-//cd | cd is working when it shouldn't
-//bug: cat in | grep there HANGS??!?, also when piping into cat
+// builtin exits child process with code, causes parent process to print error
+// bug: cat in | grep there HANGS??!?, also when piping into cat
 
-//valgrind --track-fds=yes --leak-check=full --trace-children=yes --show-leak-kinds=all  ./minishell
+// valgrind --track-fds=yes --leak-check=full --trace-children=yes --show-leak-kinds=all  ./minishell
 
 int	execute(t_god *god_struct, t_list *parser_list)
 {
@@ -70,9 +68,9 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 	error = 0;
 	exec_node->path = find_exec(exec_node, god_struct->env);
 	if (is_dir(exec_node))
-		exit(126);
+		error_exit(exec_node->cmd, 126);
 	if (!exec_node->path && exec_node->builtin == 0)
-		exit(127);
+		error_exit(exec_node->cmd, 127);
 	if (exec_node->fd_in == -1 || exec_node->fd_out == -1)
 		exit(1);
 	if (exec_node->fd_in > 0)
@@ -105,14 +103,12 @@ static int	wait_all(t_list *exec_list)
 		waitpid(node->pid, &status, 0);
 		if (WIFEXITED(status))
 			error_code = WEXITSTATUS(status);
-		if (error_code == 126 || error_code == 127)
-			error(node->cmd);
 		exec_list = exec_list->next;
 	}
 	return (error_code);
 }
 
-void	error(char *cmd)
+static void	error_exit(char *cmd, int status)
 {
 	write(2, "minishelf: ", 11);
 	write(2, cmd, ft_strlen(cmd));
@@ -122,6 +118,7 @@ void	error(char *cmd)
 		write (2, ": no such file or directory\n", 28);
 	else
 		write(2, ": command not found\n", 20);
+	exit(status);
 }
 
 /*
