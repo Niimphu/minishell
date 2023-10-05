@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:38:42 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/03 15:40:25 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 19:19:20 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	pipe_up(t_list *exec_list)
 	t_exec	*exec_node;
 	int		previous_pipe_read;
 
-	previous_pipe_read = -1;
+	previous_pipe_read = 0;
 	while (exec_list)
 	{
 		exec_node = (t_exec *)exec_list->content;
 		if (exec_list->next && pipe(exec_node->pipe_fd) == -1)
 			return (1);
-		if (exec_node->fd_in == -1 && previous_pipe_read != -1)
+		if (exec_node->fd_in == 0 && previous_pipe_read != 0)
 			exec_node->fd_in = previous_pipe_read;
 		else
 			close_fd(previous_pipe_read);

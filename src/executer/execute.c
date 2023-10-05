@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/05 11:32:54 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/05 19:19:40 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node);
 static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node);
 static int	wait_all(t_list *exec_list);
 static void	error_exit(char *cmd, int status);
-
-// builtin exits child process with code, causes parent process to print error
-// bug: cat in | grep there HANGS??!?, also when piping into cat
 
 // valgrind --track-fds=yes --leak-check=full --trace-children=yes --show-leak-kinds=all  ./minishell
 
