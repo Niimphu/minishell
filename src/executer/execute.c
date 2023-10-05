@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/03 17:11:00 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 11:14:27 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	error(char *cmd);
 //builtin exits child process with code, causes parent process to print error
 
 //bug: cat in | grep there HANGS??!?
+
+//valgrind --track-fds=yes --leak-check=full --trace-children=yes --show-leak-kinds=all  ./minishell
 
 int	execute(t_god *god_struct, t_list *parser_list)
 {
