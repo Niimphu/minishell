@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/05 11:14:27 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/05 11:31:45 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	error(char *cmd);
 
 //bug: ./minishell ./minishell <invalid command> Ctrl + D
 //builtin exits child process with code, causes parent process to print error
-
-//bug: cat in | grep there HANGS??!?
+//cd | cd is working when it shouldn't
+//bug: cat in | grep there HANGS??!?, also when piping into cat
 
 //valgrind --track-fds=yes --leak-check=full --trace-children=yes --show-leak-kinds=all  ./minishell
 
@@ -41,8 +41,8 @@ int	execute(t_god *god_struct, t_list *parser_list)
 	while (++i <= god_struct->block_count)
 	{
 		exec_node = exec_list->content;
-		if (exec_node->builtin > 10 && i
-			== god_struct->block_count && exec_node->fd_out == 0)
+		if (exec_node->builtin > 10 && god_struct->block_count == 1 &&
+			exec_node->fd_out == 0)
 			execute_builtins(exec_node->cmd_array, god_struct);
 		else
 			fork_this_shit_im_out(god_struct, exec_node);
