@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/05 11:31:45 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/05 11:32:54 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	execute(t_god *god_struct, t_list *parser_list)
 	while (++i <= god_struct->block_count)
 	{
 		exec_node = exec_list->content;
-		if (exec_node->builtin > 10 && god_struct->block_count == 1 &&
-			exec_node->fd_out == 0)
+		if (exec_node->builtin > 10 && god_struct->block_count == 1
+			&& exec_node->fd_out == 0)
 			execute_builtins(exec_node->cmd_array, god_struct);
 		else
 			fork_this_shit_im_out(god_struct, exec_node);
