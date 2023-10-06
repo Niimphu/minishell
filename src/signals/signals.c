@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "signals.h"
 
 static void	clear_input(int signal_number);
 
@@ -24,9 +24,21 @@ static void	clear_input(int signal_number)
 {
 	if (!signal_number)
 		return ;
+//	printf("number: %i\n", g_signal_received);
 	g_signal_received = signal_number;
 	rl_replace_line("", 0);
-	printf("\n");
+	write(STDIN_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_redisplay();
+}
+
+void	set_signal_error(t_god *god_struct)
+{
+	if (g_signal_received == 258)
+		god_struct->exit_status = g_signal_received;
+	else if (g_signal_received > 0)
+//		god_struct->exit_status = 128 + g_signal_received;
+//	else if (g_signal_received == -1)
+		god_struct->exit_status = 1;
+	g_signal_received = 0;
 }

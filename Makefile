@@ -6,7 +6,7 @@
 #    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/10/05 11:39:46 by yiwong           ###   ########.fr        #
+#    Updated: 2023/10/06 15:09:11 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,8 @@ SRC	=	main.c \
 		get_input.c \
 		init/create_struct.c \
 		init/shell_level.c \
+		signals/signals.c \
+		signals/child_signals.c \
 		parser/lexer.c \
 		parser/lexer_utils.c \
 		parser/lexer_list.c \
@@ -76,7 +78,6 @@ SRC	=	main.c \
 		file_managers/file_list.c \
 		expander/expander.c \
 		expander/expander_utils.c \
-		keybinds/keypress.c \
 		utils/checkers.c \
 		utils/counters.c \
 		utils/env_utils.c \

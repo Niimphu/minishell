@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/05 11:33:57 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/06 14:59:57 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct s_god
 t_god	*create_god_struct(char **envp);
 int		increment_shell_level(char **env);
 
-void	await_signals(void);
 void	await_input(t_god *tools);
 
 int		parse(char *input_string, t_god *god_struct);

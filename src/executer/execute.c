@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/05 19:19:40 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:03:53 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	execute(t_god *god_struct, t_list *parser_list)
 
 static int	fork_this_shit_im_out(t_god *god_struct, t_exec *exec_node)
 {
+	await_child_signals();
 	exec_node->pid = fork();
 	if (exec_node->pid < 0)
 		return (perror("fork 🍴:"), 0);

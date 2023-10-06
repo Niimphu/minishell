@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 19:37:25 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/06 15:03:12 by yiwong           ###   ########.fr       */
+/*   Created: 2023/10/06 14:59:29 by yiwong            #+#    #+#             */
+/*   Updated: 2023/10/06 15:05:50 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
+#ifndef SIGNALS_H
+# define SIGNALS_H
 
-# include "../file_managers/files.h"
-# include "../signals/signals.h"
+# include "../../minishell.h"
 
-t_list	*create_execution_list(t_list *parser_list);
-
-int		pipe_up(t_list *exec_list);
-char	*find_exec(t_exec *node, char **env);
-int		close_all_pipes(t_list *exec_list);
-bool	is_dir(t_exec *node);
-
-void	print_exec_list(t_list *exec_list);
+void	await_signals(void);
+void	await_child_signals(void);
+void	set_signal_error(t_god *god_struct);
 
 #endif

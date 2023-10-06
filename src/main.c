@@ -6,11 +6,11 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/05 11:34:06 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/06 15:08:46 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "signals/signals.h"
 
 int	g_signal_received = 0;
 
@@ -29,6 +29,7 @@ int	main(int argument_count, char **arguments, char **envp)
 	while (g_signal_received != SIGQUIT)
 	{
 		await_signals();
+		set_signal_error(god_struct);
 		await_input(god_struct);
 	}
 	ret = god_struct->exit_status;
