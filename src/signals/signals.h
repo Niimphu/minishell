@@ -18,5 +18,7 @@
 void	await_signals(void);
 void	await_child_signals(void);
 void	set_signal_error(t_god *god_struct);
+void	silence(t_god *god_struct);
+void	unsilence(t_god *god_struct);
 
 #endif

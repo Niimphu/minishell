@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/06 15:08:46 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/07 12:17:54 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argument_count, char **arguments, char **envp)
 		exit(1);
 	}
 	god_struct = create_god_struct(envp);
+	silence(god_struct);
 	while (g_signal_received != SIGQUIT)
 	{
 		await_signals();

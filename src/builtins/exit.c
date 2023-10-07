@@ -6,11 +6,11 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:16:24 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/05 00:14:56 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/07 12:17:56 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../signals/signals.h"
 
 static void	type_error(char *arg);
 static void	count_error(void);
@@ -26,6 +26,7 @@ void	exit_minishell(char **cmd, t_god *god_struct)
 		return (count_error());
 	if (cmd[1])
 		error = ft_atoi(cmd[1]);
+	unsilence(god_struct);
 	free_god_struct(&god_struct);
 	clear_history();
 	exit (error);

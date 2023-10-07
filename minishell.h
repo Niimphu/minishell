@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/06 14:59:57 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/07 12:13:56 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,13 @@ typedef struct s_exec
 
 typedef struct s_god
 {
-	char	**env;
-	t_list	*lexer_list;
-	t_list	*parser_list;
-	t_list	*exec_list;
-	int		block_count;
-	int		exit_status;
+	struct termios	*og_termios;
+	char			**env;
+	t_list			*lexer_list;
+	t_list			*parser_list;
+	t_list			*exec_list;
+	int				block_count;
+	int				exit_status;
 }				t_god;
 
 t_god	*create_god_struct(char **envp);
