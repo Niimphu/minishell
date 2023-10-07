@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <termios.h>
 
 t_god	*create_god_struct(char **envp)
 {
@@ -24,7 +25,8 @@ t_god	*create_god_struct(char **envp)
 	if (!god_struct)
 		return (NULL);
 	god_struct->env = malloc(sizeof(char *) * (i + 1));
-	if (!god_struct->env)
+	god_struct->og_termios = ft_calloc(1, sizeof(struct termios));
+	if (!god_struct->env || !god_struct->og_termios)
 		return (NULL);
 	i = 0;
 	while (envp[i])
