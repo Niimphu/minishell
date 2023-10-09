@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:27:54 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/03 10:48:41 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/09 19:14:14 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	pwd(t_god *god_struct)
 	if (!path)
 		return (1);
 	ft_putstr_fd(path, STDOUT_FILENO);
+	ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }
