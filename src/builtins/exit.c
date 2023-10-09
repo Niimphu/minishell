@@ -12,8 +12,8 @@
 
 #include "../signals/signals.h"
 
-static void	type_error(char *arg);
-static void	count_error(void);
+static void	type_error(char *arg, t_god *god_struct);
+static void	count_error(t_god *god_struct);
 
 void	exit_minishell(char **cmd, t_god *god_struct)
 {
@@ -32,14 +32,16 @@ void	exit_minishell(char **cmd, t_god *god_struct)
 	exit (error);
 }
 
-static void	type_error(char *arg)
+static void	type_error(char *arg, t_god *god_struct)
 {
 	ft_putstr_fd("minishelf: exit: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
+	god_struct->exit_status = 255;
 }
 
-static void	count_error(void)
+static void	count_error(t_god *god_struct)
 {
 	ft_putstr_fd("exit: too many arguments\n", 2);
+	god_struct->exit_status = 1;
 }
