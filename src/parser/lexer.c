@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/05 17:03:57 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 21:28:55 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static char	**split_input(char *input, t_god *god_struct)
 	{
 		if (trim == true || next_is_operator(split_str, i))
 		{
+			printf("triming spaces from :%s\n", split_str[i]);
 			tmp = ft_strtrim(split_str[i], " ");
 			free_string(&split_str[i]);
 			split_str[i] = tmp;

@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/05 17:53:38 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 21:30:51 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,31 @@
 static char	*expand_var(char *str, t_god *god_struct);
 /* static char	**handle_qoutes(char **split_str, int size); */
 char **cleanup_split(char **split);
+char *catonate_whitespace(char **new_split, int index);
 
 char	**expander(char **split_str, t_god *god_struct)
 {
 	int		i;
+	int		single_qoute;
 	char	*tmp;
 
 	i = 0;
+	single_qoute = -1;
 	while (split_str[i])
 		printf("split_str at start of expander = %s\n", split_str[i++]);
 	i = 0;
 	while (split_str[i])
 	{
 		if (split_str[i][0] == '\'')
-		{
-			trim_quotes(&split_str[i++]);
-			while (split_str[i][0] != '\'')
-				i++;
-			trim_quotes(&split_str[i]);
-		}
-		if (ft_strchr(split_str[i], '$'))
+			single_qoute *= -1;
+		if (ft_strchr(split_str[i], '$') && single_qoute < 0)
 		{
 			tmp = expand_var(split_str[i], god_struct);
 			split_str[i] = tmp;
 		}
-		trim_quotes(&split_str[i]);
 		i++;
 	}
+	trim_quotes(&split_str);
 	i = 0;
 	while (split_str[i])
 		printf("split_str at end of lexer = %s\n", split_str[i++]);
@@ -92,11 +90,13 @@ char **cleanup_split(char **split)
 	j = 0;
 	while (split[i])
 	{
-		if (split[i][0] != '\0' || split[i][0] != ' ')
+		if (split[i][0] != '\0' && split[i][0] != ' ')
 		{
 			new_split[j] = ft_strdup(split[i]);
 			if (!new_split[j])
 				return (free_string_array(&split), NULL);
+			if (split[i + 1] && split[i + 1][0] == ' ')
+				new_split[j] = catonate_whitespace(split, i + 1);
 			j++;
 		}
 		i++;
@@ -107,4 +107,19 @@ char **cleanup_split(char **split)
 		printf("cleanuo array : %s\n", new_split[i++]);
 	
 	return (free_string_array(&split), new_split);
+}
+
+char *catonate_whitespace(char **new_split, int index)
+{
+	char *tmp;
+
+	tmp = NULL;
+	if (!new_split[index])
+		return (NULL);
+	if (new_split[index][0] == ' ')
+	{
+		tmp = ft_strjoin(new_split[index - 1], " ");
+		free_string(&new_split[index - 1]);
+	}
+	return (tmp);
 }

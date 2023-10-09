@@ -6,13 +6,13 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/05 17:50:08 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 21:36:00 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-char	*trim_quotes(char **str);
+char	**trim_quotes(char ***str);
 
 char	*join_split(char **split, t_god *god_struct)
 {
@@ -42,7 +42,12 @@ char	*join_split(char **split, t_god *god_struct)
 	return (free_string_array(&split), str);
 }
 
-char	*trim_quotes(char **str)
+//write a function that steps throught the array checks for qoutes and removes outerqoutes from array;
+//should return error when no closing qoutes are found;
+//possible swap closing with whitespace if one follows it
+//maybe join left over qoutes with str;
+
+char	**trim_quotes(char ***str)
 {
 	char	*c;
 	char	*tmp;
