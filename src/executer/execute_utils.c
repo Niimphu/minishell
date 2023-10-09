@@ -33,7 +33,7 @@ int	pipe_up(t_list *exec_list)
 		previous_pipe_read = exec_node->pipe_fd[READ];
 		if (!exec_list->next)
 			break ;
-		if (exec_node->fd_out == -1)
+		if (exec_node->fd_out == 0)
 			exec_node->fd_out = exec_node->pipe_fd[WRITE];
 		else
 			exec_node->pipe_fd[WRITE] = close_fd(exec_node->pipe_fd[WRITE]);
