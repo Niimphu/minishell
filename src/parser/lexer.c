@@ -29,7 +29,8 @@ char	**lex(char *input, t_god *god_struct)
 			tmp = insert_sub1(input, i++);
 			input = tmp;
 		}
-		if (input[i] == '\'' || input[i] == '"' || input[i] == '|' || input[i] == '<' || input[i] == '>')
+		if (input[i] == '\'' || input[i] == '"' || input[i] == '|'
+			|| input[i] == '<' || input[i] == '>')
 		{
 			tmp = insert_sub2(input, i++);
 			input = tmp;
@@ -62,10 +63,7 @@ static char	**split_input(char *input)
 			tmp = ft_strtrim(split_str[i], " ");
 			free_string(&split_str[i]);
 			split_str[i] = tmp;
-			if (trim == true || next_is_operator(split_str, i))
-				trim = false;
-			else
-				trim = true;
+			trim = set_trim(split_str, i, trim);
 		}
 		i++;
 	}
@@ -121,19 +119,4 @@ char	*insert_sub1(char *input, int pos)
 		ft_strlcpy(&str[i], &input[i - 1], ft_strlen(&input[i - 1]) + 1);
 	}
 	return (free_string(&input), str);
-}
-
-static int	next_is_operator(char **split_str, int index)
-{
-	int	next_index;
-
-	next_index = index + 1;
-
-	if (!split_str[next_index])
-		return (0);
-	if (split_str[next_index][0] == '|' || split_str[next_index][0] == '<'
-		|| split_str[next_index][0] == '>')
-		return (1);
-	else
-		return (0);
 }
