@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/09/25 17:23:56 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:50:22 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_parser	*file_away(t_parser *parser_node, t_lexer *current, t_lexer *next);
 int			get_operator_id(char *operator_string);
 
 int			skip_quotes(const char *str);
-char		*insert_sub(char *input, int pos);
+char		**cleanup_split(char **split);
+char		*insert_sub1(char *input, int pos);
+char		*insert_sub2(char *input, int pos);
 
 #endif
