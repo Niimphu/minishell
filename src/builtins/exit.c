@@ -21,9 +21,9 @@ void	exit_minishell(char **cmd, t_god *god_struct)
 
 	error = god_struct->exit_status;
 	if (cmd[1] && !is_valid_int(cmd[1]))
-		return (type_error(cmd[1]));
+		return (type_error(cmd[1], god_struct));
 	if (cmd[1] && cmd[2])
-		return (count_error());
+		return (count_error(god_struct));
 	if (cmd[1])
 		error = ft_atoi(cmd[1]);
 	unsilence(god_struct);
