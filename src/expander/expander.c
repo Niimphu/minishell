@@ -19,11 +19,9 @@ char *catonate_whitespace(char **new_split, int index);
 char	**expander(char **split_str, t_god *god_struct)
 {
 	int		i;
-	int		single_qoute;
 	char	*tmp;
 
 	i = 0;
-	single_qoute = -1;
 	while (split_str[i])
 	{
 		if (expansion_needed(split_str, i))
