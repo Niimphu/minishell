@@ -67,10 +67,10 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 
 	error = 0;
 	exec_node->path = find_exec(exec_node, god_struct->env);
-	if (is_dir(exec_node))
+    if (!exec_node->path && exec_node->builtin == 0)
+        error_exit(exec_node->cmd, 127);
+    if (is_dir(exec_node))
 		error_exit(exec_node->cmd, 126);
-	if (!exec_node->path && exec_node->builtin == 0)
-		error_exit(exec_node->cmd, 127);
 	if (exec_node->fd_in == -1 || exec_node->fd_out == -1)
 		exit(1);
 	if (exec_node->fd_in > 0)
@@ -113,11 +113,13 @@ static void	error_exit(char *cmd, int status)
 	write(2, "minishelf: ", 11);
 	write(2, cmd, ft_strlen(cmd));
 	if (*cmd == '/' && access(cmd, X_OK) == 0)
-		write (2, ": is a directory\n", 17);
+		ft_putstr_fd(": Is a directory", 2);
+	else if (*cmd == '/' && access(cmd, F_OK) == 0)
+		ft_putstr_fd(": Permission denied", 2);
 	else if (*cmd == '/')
-		write (2, ": no such file or directory\n", 28);
+		ft_putstr_fd(": No such file or directory", 2);
 	else
-		write(2, ": command not found\n", 20);
+		ft_putstr_fd(": Command not found", 2);
 	exit(status);
 }
 
