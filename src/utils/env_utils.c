@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:51:18 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/11 20:35:19 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/11 20:43:29 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_var(char *var, t_god *god_struct)
 		if (!ft_strncmp(var, god_struct->env[i], first_index_of(god_struct->env[i], '='))
 			&& !ft_strncmp(var, god_struct->env[i], ft_strlen(var)))
 		{
-			tmp = ft_strdup(god_struct->env[i] + ft_strlen(var));
+			tmp = ft_strdup(god_struct->env[i] + ft_strlen(var) + 1);
 			if (!tmp)
 				return (free(var), NULL);
 			free_string(&var);
