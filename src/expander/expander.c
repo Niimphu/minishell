@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/11 12:49:52 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:35:41 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ char **cleanup_split(char **split)
 			new_split[j] = ft_strdup(split[i]);
 			if (!new_split[j])
 				return (free_string_array(&split), NULL);
-			if (split[i + 1] && split[i + 1][0] == ' ')
-				new_split[j] = catonate_whitespace(split, i + 1);
+			/* if (split[i] && split[i + 1][0] == ' ')
+				new_split[j] = catonate_whitespace(split, i + 1); */
 			j++;
 		}
 		i++;
