@@ -6,11 +6,29 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/11 14:40:33 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/11 17:48:36 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static int	is_just_n(char *str)
+{
+	int	i;
+	char *tmp;
+
+	i = 1;
+	tmp = ft_strtrim(str, " ");
+	if (!tmp)
+		return (0);
+	while (tmp[i])
+	{
+		if (tmp[i] != 'n')
+			return (free_string(&tmp), 0);
+		i++;
+	}
+	return (free_string(&tmp), 1);
+}
 
 int	echo(char **cmd)
 {
@@ -24,11 +42,12 @@ int	echo(char **cmd)
 		write(1, "\n", STDOUT_FILENO);
 		return (0);
 	}
-	if (!ft_strncmp(cmd[i], "-n", 2))
+	while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
+		if (!is_just_n(cmd[i]))
+			break ;
 		new_line_flag = 1;
-		while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
-			i++;	
+		i++;
 	}
 	while (cmd[i])
 		ft_putstr_fd(cmd[i++], STDOUT_FILENO);

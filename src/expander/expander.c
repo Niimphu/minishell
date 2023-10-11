@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/11 14:35:41 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:28:46 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static char	*expand_var(char *str, t_god *god_struct)
 	{
 		if (str[i] == '$')
 		{
-			tmp = insert_sub2(str, i++);
+			tmp = insert_sub2(str, i);
+			i++;
 			str = tmp;
 		}
 		i++;
@@ -58,6 +59,9 @@ static char	*expand_var(char *str, t_god *god_struct)
 	split_str = ft_split(str, 26);
 	if (!split_str)
 		return (free_string(&str), NULL);
+	i = 0;
+	while (split_str[i])
+		printf("split_str = %s\n", split_str[i++]);
 	return (free_string(&str), join_split(split_str, god_struct));
 }
 
@@ -80,13 +84,11 @@ char **cleanup_split(char **split)
 	j = 0;
 	while (split[i])
 	{
-		if (*split[i] != '\0' && *split[i] != ' ')
+		if (*split[i] != '\0')
 		{
 			new_split[j] = ft_strdup(split[i]);
 			if (!new_split[j])
 				return (free_string_array(&split), NULL);
-			/* if (split[i] && split[i + 1][0] == ' ')
-				new_split[j] = catonate_whitespace(split, i + 1); */
 			j++;
 		}
 		i++;

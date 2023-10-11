@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:51:18 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/09 19:19:06 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/11 20:35:19 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,26 @@ char	*get_env_var(char *var, char **env, int trim)
 char	*get_var(char *var, t_god *god_struct)
 {
 	int		i;
-	char	*new_var;
 	char	*tmp;
 
 	i = 0;
-	if (!var)
-		return ("");
-	new_var = ft_strtrim(var, "\"\'$");
-	if (!ft_strncmp(new_var, "?", 2))
+	if (!ft_strncmp(var, "?", 2))
 		return (ft_strdup(ft_itoa(god_struct->exit_status)));
 	while (god_struct->env[i])
 	{
-		if (!ft_strncmp(new_var, god_struct->env[i],
-				first_index_of(god_struct->env[i], '=')))
+		if (!ft_strncmp(var, god_struct->env[i], first_index_of(god_struct->env[i], '='))
+			&& !ft_strncmp(var, god_struct->env[i], ft_strlen(var)))
 		{
-			tmp = ft_strdup(god_struct->env[i] + (ft_strlen(new_var) + 1));
+			tmp = ft_strdup(god_struct->env[i] + ft_strlen(var));
 			if (!tmp)
-				return (free(new_var), NULL);
-			free_string(&new_var);
-			new_var = tmp;
-			break ;
+				return (free(var), NULL);
+			free_string(&var);
+			var = tmp;
+			return (var);
 		}
 		i++;
 	}
-	if (!god_struct->env[i])
-		return (free_string(&new_var), free_string(&var), ft_strdup(""));
-	return (free_string(&var), new_var);
+	return (free_string(&var) , NULL);
 }
 
 int	verify_identifier(char *cmd)

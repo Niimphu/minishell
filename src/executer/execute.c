@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/06 15:03:53 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/11 17:28:03 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,13 @@ static void	error_exit(char *cmd, int status)
 	write(2, "minishelf: ", 11);
 	write(2, cmd, ft_strlen(cmd));
 	if (*cmd == '/' && access(cmd, X_OK) == 0)
-		ft_putstr_fd(": Is a directory", 2);
+		ft_putstr_fd(": Is a directory\n", 2);
 	else if (*cmd == '/' && access(cmd, F_OK) == 0)
-		ft_putstr_fd(": Permission denied", 2);
+		ft_putstr_fd(": Permission denied\n", 2);
 	else if (*cmd == '/')
-		ft_putstr_fd(": No such file or directory", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 	else
-		ft_putstr_fd(": Command not found", 2);
+		ft_putstr_fd(": Command not found\n", 2);
 	exit(status);
 }
 
