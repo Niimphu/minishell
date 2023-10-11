@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/09 19:05:50 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/11 12:49:52 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	**expander(char **split_str, t_god *god_struct)
 		i++;
 	}
 	trim_quotes(&split_str);
+	if (!split_str)
+		return (NULL);
 	return (cleanup_split(split_str));
 }
 

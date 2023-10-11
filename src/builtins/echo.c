@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/05 15:26:53 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:13:12 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ int	echo(char **cmd)
 
 	i = 1;
 	new_line_flag = 0;
-	while (cmd[i] && !ft_strncmp(cmd[i], "-n", ft_strlen(cmd[i])))
+	if (!ft_strncmp(cmd[i], "-n", 2))
 	{
 		new_line_flag = 1;
-		i++;
+		while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
+			i++;	
 	}
 	while (cmd[i])
 		ft_putstr_fd(cmd[i++], STDOUT_FILENO);

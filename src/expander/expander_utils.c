@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/09 19:06:45 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:34:36 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*join_split(char **split, t_god *god_struct)
 		return (free(str), NULL);
 	while (split[i])
 	{
-		if (split[i] && !ft_strcmp(split[i++], "$"))
+		if (split[i] && split[i + 1] && !ft_strcmp(split[i++], "$"))
 			split[i]= insert_var_to_str(split[i], god_struct);
 		if (split[i] && *split[i] != ' ')
 		{
@@ -100,18 +100,16 @@ char	*join_split(char **split, t_god *god_struct)
 int	verify_closing_qoutes(char **split, int i, char qoute_found)
 {
 	i++;
-	while (split[i] && split[i][0] != qoute_found)
+	while (split[i])
 	{
-		if (!split[i + 1])
-		{
-			ft_putstr_fd("Missing Closing qoute :`", 2);
-			ft_putchar_fd(qoute_found, 2);
-			ft_putstr_fd(";\n", 2);
-			return (0);
-		}
+		if (*split[i] == qoute_found)
+			return (i);
 		i++;
 	}
-	return (i);
+	ft_putstr_fd("Missing Closing qoute :`", 2);
+	ft_putchar_fd(qoute_found, 2);
+	ft_putstr_fd(";\n", 2);
+	return (0);
 }
 
 void	trim_quotes(char ***str)
