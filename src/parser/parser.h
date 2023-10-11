@@ -24,9 +24,7 @@ t_parser	*file_away(t_parser *parser_node, t_lexer *current, t_lexer *next);
 
 int			get_operator_id(char *operator_string);
 
-int			skip_quotes(const char *str);
+//int			skip_quotes(const char *str);
 char		**cleanup_split(char **split);
-char		*insert_sub1(char *input, int pos);
-char		*insert_sub2(char *input, int pos);
 
 #endif

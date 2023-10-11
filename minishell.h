@@ -111,9 +111,10 @@ int		execute(t_god *god_struct, t_list *parser_list);
 char	*get_env_var(char *var, char **env, int trim);
 int		verify_identifier(char *cmd);
 char	*get_var(char *var, t_god *tools);
+int		first_index_of(char *str, char c);
 
-int		count_operators(const char *str, char c);
-int		count_char(char *str, char c);
+//int		count_operators(const char *str, char c);
+//int		count_char(char *str, char c);
 bool	is_valid_int(char *string);
 
 int		execute_builtins(char **cmd, t_god *god_struct);
@@ -140,7 +141,6 @@ int		close_fd(int fd);
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
 // void	print_heredoc_list(t_list *heredocs);
-int		first_index_of(char *str, char c);
-int		second_index_of(char *str, char c);
+//int		second_index_of(char *str, char c);
 
 #endif

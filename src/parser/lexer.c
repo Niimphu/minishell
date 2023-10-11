@@ -10,15 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "lexer.h"
 
-static char	**split_input(char *input, t_god *god_struct);
-int	next_is_operator(char **split_str, int index);
+static char	**split_input(char *input);
+static int	next_is_operator(char **split_str, int index);
 
 char	**lex(char *input, t_god *god_struct)
 {
 	int		i;
 	char	*tmp;
+	char	**output;
 
 	i = 0;
 	while (input[i])
@@ -35,41 +36,40 @@ char	**lex(char *input, t_god *god_struct)
 		}
 		i++;
 	}
-	return (split_input(input, god_struct));
+	output = split_input(input);
+	output = expander(output, god_struct);
+	return (output);
 }
 
-static char	**split_input(char *input, t_god *god_struct)
+static char	**split_input(char *input)
 {
 	int		i;
 	bool	trim;
-	char **split_str;
+	char	**split_str;
 	char	*tmp;
 
 	i = 0;
 	trim = true;
-	
 	split_str = ft_split(input, 26);
 	if (!split_str)
 		return (NULL);
 	while (split_str[i])
 	{
-		if (trim == true || next_is_operator(split_str, i))
+		if (trim == true || next_is_operator(split_str, i)
+			|| split_str[i][0] == '|' || split_str[i][0] == '<'
+			|| split_str[i][0] == '>')
 		{
 			tmp = ft_strtrim(split_str[i], " ");
 			free_string(&split_str[i]);
 			split_str[i] = tmp;
-			trim = false;
-		}	
-		if (split_str[i][0] == '|' || split_str[i][0] == '<' || split_str[i][0] == '>')
-		{
-			tmp = ft_strtrim(split_str[i], " ");
-			free_string(&split_str[i]);
-			split_str[i] = tmp;
-			trim = true;
+			if (trim == true || next_is_operator(split_str, i))
+				trim = false;
+			else
+				trim = true;
 		}
 		i++;
 	}
-	return (free(input), expander(split_str, god_struct));
+	return (free(input), split_str);
 }
 
 char	*insert_sub2(char *input, int pos)
@@ -123,7 +123,7 @@ char	*insert_sub1(char *input, int pos)
 	return (free_string(&input), str);
 }
 
-int	next_is_operator(char **split_str, int index)
+static int	next_is_operator(char **split_str, int index)
 {
 	int	next_index;
 
@@ -131,7 +131,8 @@ int	next_is_operator(char **split_str, int index)
 
 	if (!split_str[next_index])
 		return (0);
-	if (split_str[next_index][0] == '|' || split_str[next_index][0] == '<' || split_str[next_index][0] == '>')
+	if (split_str[next_index][0] == '|' || split_str[next_index][0] == '<'
+		|| split_str[next_index][0] == '>')
 		return (1);
 	else
 		return (0);

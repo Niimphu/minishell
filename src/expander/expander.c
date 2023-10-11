@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "expander.h"
+#include "../parser/lexer.h"
 
 static char	*expand_var(char *str, t_god *god_struct);
-char **cleanup_split(char **split);
-char *catonate_whitespace(char **new_split, int index);
+char		**cleanup_split(char **split);
+//char *catonate_whitespace(char **new_split, int index);
 
 char	**expander(char **split_str, t_god *god_struct)
 {

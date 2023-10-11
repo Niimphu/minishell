@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "lexer.h"
 
-int	skip_quotes(const char *str)
-{
-	int		i;
-	char	c;
-
-	i = 1;
-	c = str[0];
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (i);
-		else
-			i++;
-	}
-	write(2, "Unclosed quotes found: ", 23);
-	write(2, &c, 1);
-	write(2, "\n", 1);
-	return (-1);
-}
+//int	skip_quotes(const char *str)
+//{
+//	int		i;
+//	char	c;
+//
+//	i = 1;
+//	c = str[0];
+//	while (str[i])
+//	{
+//		if (str[i] == c)
+//			return (i);
+//		else
+//			i++;
+//	}
+//	write(2, "Unclosed quotes found: ", 23);
+//	write(2, &c, 1);
+//	write(2, "\n", 1);
+//	return (-1);
+//}
 
 int	first_index_of(char *str, char c)
 {
@@ -46,20 +46,20 @@ int	first_index_of(char *str, char c)
 	return (-1);
 }
 
-int	second_index_of(char *str, char c)
-{
-	int	i;
-	int	found;
-
-	i = 0;
-	found = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			found++;
-		if (found == 2)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
+//int	second_index_of(char *str, char c)
+//{
+//	int	i;
+//	int	found;
+//
+//	i = 0;
+//	found = 0;
+//	while (str[i])
+//	{
+//		if (str[i] == c)
+//			found++;
+//		if (found == 2)
+//			return (i);
+//		i++;
+//	}
+//	return (-1);
+//}
