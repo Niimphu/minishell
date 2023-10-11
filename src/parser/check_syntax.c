@@ -16,6 +16,19 @@ static bool	is_bad_operator(char *string);
 static bool	bad(char *node_string, bool word_expected, int operator_count);
 static bool	starts_or_ends_with_pipe(t_list *lexer_list);
 
+//error code 258
+char	*check_syntax(char *input_string)
+{
+	int	i;
+
+	i = 0;
+	while (input_string[i])
+	{
+		if (input_string[i] == )
+	}
+}
+
+
 char	*invalid_syntax(t_list *lexer_list)
 {
 	t_lexer	*node;
