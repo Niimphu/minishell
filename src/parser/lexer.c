@@ -13,7 +13,6 @@
 #include "lexer.h"
 
 static char	**split_input(char *input);
-static int	next_is_operator(char **split_str, int index);
 
 char	**lex(char *input, t_god *god_struct)
 {
