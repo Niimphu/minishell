@@ -14,7 +14,6 @@
 #include "../parser/lexer.h"
 
 static char	*expand_var(char *str, t_god *god_struct);
-char		**cleanup_split(char **split);
 //char *catonate_whitespace(char **new_split, int index);
 
 char	**expander(char **split_str, t_god *god_struct)
@@ -60,15 +59,15 @@ static char	*expand_var(char *str, t_god *god_struct)
 	return (free_string(&str), join_split(split_str, god_struct));
 }
 
-char **cleanup_split(char **split)
+char	**cleanup_split(char **split)
 {
-	int	i;
-	int j;
-	char **new_split;
+	int		i;
+	int		j;
+	char	**new_split;
 
 	i = 0;
 	j = 0;
-	while(split[i])
+	while (split[i])
 	{
 		if (*split[i] != '\0')
 			j++;
@@ -94,17 +93,18 @@ char **cleanup_split(char **split)
 	return (free_string_array(&split), new_split);
 }
 
-char *catonate_whitespace(char **new_split, int index)
-{
-	char *tmp;
-
-	tmp = NULL;
-	if (!new_split[index])
-		return (NULL);
-	if (*new_split[index] == ' ')
-	{
-		tmp = ft_strjoin(new_split[index - 1], " ");
-		free_string(&new_split[index - 1]);
-	}
-	return (tmp);
-}
+//char *catonate_whitespace(char **new_split, int index)
+//{
+//	char *tmp;
+//
+//	tmp = NULL;
+//	if (!new_split[index])
+//		return (NULL);
+//	if (*new_split[index] == ' ')
+//	{
+//		tmp = ft_strjoin(new_split[index - 1], " ");
+//		free_string(&new_split[index - 1]);
+//	}
+//	return (tmp);
+//}
+//
