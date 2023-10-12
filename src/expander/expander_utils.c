@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/12 15:03:12 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/12 16:47:37 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*create_clean_var_string(char *split, char *tmp, int var_len, t_god *god_st
 	char	*var;
 
 	split_len = ft_strlen(split);
-	printf("here %s\n", split);
 	var = get_var(tmp, god_struct);
 	if (var && var_len < split_len)
 	{
