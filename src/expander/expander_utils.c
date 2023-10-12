@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/11 19:37:50 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/12 15:03:12 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,22 +143,17 @@ int	expansion_needed(char **split_str, int index)
 		return (0);
 	while (split_str[i])
 	{
-		if (*split_str[i] == '\'' || *split_str[i] == '"')
+		if (i < index && (*split_str[i] == '\'' || *split_str[i] == '"'))
 		{
-			if (i > index)
-			{
-				i++;
-				continue ;
-			}
 			quote_close = verify_closing_qoutes(split_str, i, *split_str[i]);
 			if (quote_close < index)
 			{
 				i = quote_close + 1;
 				continue ;
 			}
-			else if (*split_str[quote_close] == '\'' && i < index)
+			else if (*split_str[quote_close] == '\'')
 				return (0);
-			else if (i < index && *split_str[quote_close] == '"')
+			else if (*split_str[quote_close] == '"')
 				return (1);
 			i = quote_close;
 		}

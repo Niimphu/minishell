@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/11 19:28:46 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/12 15:43:16 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,49 @@ char	**expander(char **split_str, t_god *god_struct)
 	return (cleanup_split(split_str));
 }
 
+char	*insert_sub_varlen(char *var)
+{
+	int		i;
+	char	*new_var;
+	
+	i = 0;
+	while (var[i])
+	{
+		if (var[i] == '$')
+		{
+			new_var = insert_sub2(var, i);
+			var = new_var;
+			i += 3;
+			if (var[i] && (var[i] == '_' || ft_isalpha(var[i])))
+			{
+				i++;
+				while (var[i] && ft_isalnum(var[i]))
+					i++;
+				new_var = insert_sub1(var, i - 1);
+				var = new_var;
+			}
+			else
+			{
+				new_var = insert_sub1(var, i);
+				var = new_var;
+			}
+		}
+		i++;
+	}
+	i = 0;
+	printf("varsting = ");
+	while(var[i])
+	{
+		if (var[i] == 26)
+			printf("|SUB|");
+		else
+			printf("%c", var[i]);
+		i++;
+	}
+	printf("\n");
+	return (var);
+}
+
 static char	*expand_var(char *str, t_god *god_struct)
 {
 	int		i;
@@ -46,23 +89,15 @@ static char	*expand_var(char *str, t_god *god_struct)
 	char	**split_str;
 
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
-			tmp = insert_sub2(str, i);
-			i++;
-			str = tmp;
-		}
-		i++;
-	}
+	tmp = insert_sub_varlen(str);
+	str = tmp;
 	split_str = ft_split(str, 26);
 	if (!split_str)
 		return (free_string(&str), NULL);
 	i = 0;
 	while (split_str[i])
 		printf("split_str = %s\n", split_str[i++]);
-	return (free_string(&str), join_split(split_str, god_struct));
+	return (join_split(split_str, god_struct));
 }
 
 char **cleanup_split(char **split)
