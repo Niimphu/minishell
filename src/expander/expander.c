@@ -6,24 +6,30 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/12 16:47:42 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/12 22:23:10 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
 static char	*expand_var(char *str, t_god *god_struct);
-char **cleanup_split(char **split);
-char *catonate_whitespace(char **new_split, int index);
+static int	expansion_needed(char **split_str, int index);
+char	**cleanup_split(char **split);
 
+/**
+ * @brief Iterates throught string array and attemps
+ * to substitute Variables with their Value in god_struct->env. 
+ * If no Value is found the string array index is deleted.
+ * Then removes the outer-quotes.
+ * @return joined string from split_str with expanded variables
+ * and trimed outer qoutes;
+ */
 char	**expander(char **split_str, t_god *god_struct)
 {
 	int		i;
-	int		single_qoute;
 	char	*tmp;
 
 	i = 0;
-	single_qoute = -1;
 	while (split_str[i])
 	{
 		if (expansion_needed(split_str, i))
@@ -39,37 +45,47 @@ char	**expander(char **split_str, t_god *god_struct)
 	return (cleanup_split(split_str));
 }
 
-char	*insert_sub_varlen(char *var)
+/**
+ * @brief checks if index of split_str contains a Variable.
+ * If so checks position of opening and closing quotes.
+ * Based on the position of index to opening and closing quotes return 1 or 0;
+ * @return 0 if no var is found or if the var is inside single quotes;
+ * 1 if var is not inside quotes or inside double quotes;
+*/
+static int	expansion_needed(char **split_str, int index)
 {
-	int		i;
-	char	*new_var;
-	
+	int	i;
+	int	quote_close;
+
 	i = 0;
-	while (var[i])
+	if (!ft_strchr(split_str[index], '$'))
+		return (0);
+	while (split_str[i])
 	{
-		if (var[i] == '$')
+		if (i < index && (*split_str[i] == '\'' || *split_str[i] == '"'))
 		{
-			new_var = insert_sub2(var, i);
-			var = new_var;
-			i += 3;
-			if (var[i] && (var[i] == '_' || ft_isalpha(var[i])))
+			quote_close = verify_closing_qoutes(split_str, i, *split_str[i]);
+			if (quote_close < index)
 			{
-				while (var[i] && ft_isalnum(var[++i]))
-					;
-				new_var = insert_sub1(var, i - 1);
-				var = new_var;
+				i = quote_close + 1;
+				continue ;
 			}
-			else
-			{
-				new_var = insert_sub1(var, i);
-				var = new_var;
-			}
+			else if (*split_str[quote_close] == '\'')
+				return (0);
+			else if (*split_str[quote_close] == '"')
+				return (1);
+			i = quote_close;
 		}
 		i++;
 	}
-	return (var);
+	return (1);
 }
 
+/**
+ * @brief Inserts substitute character around $ and at the end of var name.
+ * Splits str on those characers, expands var`s and joines string togethaaaa.
+ * @return expanded variable string
+*/
 static char	*expand_var(char *str, t_god *god_struct)
 {
 	int		i;
@@ -77,7 +93,7 @@ static char	*expand_var(char *str, t_god *god_struct)
 	char	**split_str;
 
 	i = 0;
-	tmp = insert_sub_varlen(str);
+	tmp = insert_sub_varlen(str, 0);
 	str = tmp;
 	split_str = ft_split(str, 26);
 	if (!split_str)
@@ -85,23 +101,37 @@ static char	*expand_var(char *str, t_god *god_struct)
 	return (free_string(&str), join_split(split_str, god_struct));
 }
 
-char **cleanup_split(char **split)
+/**
+ *@brief Counts string array index, excluding empty ones;
+*/
+int	new_split_size(char **split)
 {
 	int	i;
-	int j;
-	char **new_split;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while(split[i])
+	while (split[i])
 	{
 		if (*split[i] != '\0')
 			j++;
 		i++;
 	}
-	new_split = ft_calloc(sizeof(char *), j + 1);
+	return (j);
+}
+
+/**
+ * @brief creates new string array, skipping empty entrys of split;
+*/
+char	**cleanup_split(char **split)
+{
+	int		i;
+	int		j;
+	char	**new_split;
+
 	i = 0;
 	j = 0;
+	new_split = ft_calloc(sizeof(char *), new_split_size(split) + 1);
 	while (split[i])
 	{
 		if (*split[i] != '\0')
@@ -115,19 +145,4 @@ char **cleanup_split(char **split)
 	}
 	new_split[j] = NULL;
 	return (free_string_array(&split), new_split);
-}
-
-char *catonate_whitespace(char **new_split, int index)
-{
-	char *tmp;
-
-	tmp = NULL;
-	if (!new_split[index])
-		return (NULL);
-	if (*new_split[index] == ' ')
-	{
-		tmp = ft_strjoin(new_split[index - 1], " ");
-		free_string(&new_split[index - 1]);
-	}
-	return (tmp);
 }
