@@ -32,6 +32,8 @@ char	**lex(char *input, t_god *god_struct)
 			|| input[i] == '<' || input[i] == '>')
 		{
 			tmp = insert_sub2(input, i++);
+			if (input[i] == input[i - 1])
+				i++;
 			input = tmp;
 		}
 		i++;
@@ -84,7 +86,7 @@ char	*insert_sub2(char *input, int pos)
 			i++;
 		}
 		str[i++] = 26;
-		while (input[i - 1] == input[pos] || input[i - 1] == ' ')
+		while (input[i - 1] == input[pos])
 		{
 			str[i] = input[i - 1];
 			i++;
@@ -92,6 +94,8 @@ char	*insert_sub2(char *input, int pos)
 		str[i++] = 26;
 		ft_strlcpy(&str[i], &input[i - 2], ft_strlen(&input[i - 2]) + 1);
 	}
+	else
+		return (NULL);
 	return (free_string(&input), str);
 }
 
