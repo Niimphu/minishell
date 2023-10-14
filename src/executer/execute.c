@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/14 17:25:56 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/14 20:39:34 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	error_exit(char *cmd, int status);
 // global error number when cd <invalid dir>
 // exit +"100" thinks + and 100 are separate but they should be together??
 // valgrind --track-fds=yes --leak-check=full --trace-children=yes --show-leak-kinds=all  ./minishell
-
+// overwrites builtin return value from line 43
 int	execute(t_god *god_struct, t_list *parser_list)
 {
 	t_list		*exec_list;
