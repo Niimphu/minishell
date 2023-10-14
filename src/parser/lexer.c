@@ -18,18 +18,19 @@ char	**lex(char *input, t_god *god_struct)
 {
 	int		i;
 	char	*tmp;
-	char	**output;
 
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == ' ')
+		if (input[i] == '\'' || input[i] == '"')
 		{
-			tmp = insert_sub1(input, i++);
-			input = tmp;
+			i = skip_quotes(input, i);
+			if (i == FAIL)
+				return (NULL);
 		}
-		if (input[i] == '\'' || input[i] == '"' || input[i] == '|'
-			|| input[i] == '<' || input[i] == '>')
+		if (input[i] == ' ')
+			input = insert_sub1(input, i++);
+		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			tmp = insert_sub2(input, i++);
 			if (input[i] == input[i - 1])
@@ -38,9 +39,7 @@ char	**lex(char *input, t_god *god_struct)
 		}
 		i++;
 	}
-	output = split_input(input);
-	output = expander(output, god_struct);
-	return (output);
+	return (expander(split_input(input), god_struct));
 }
 
 static char	**split_input(char *input)

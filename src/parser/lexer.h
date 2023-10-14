@@ -20,6 +20,8 @@ int		next_is_operator(char **split_str, int index);
 char	*insert_sub1(char *input, int pos);
 char	*insert_sub2(char *input, int pos);
 
+int		skip_quotes(const char *str, int i);
+
 bool	set_trim(char **split_string, int i, bool trim);
 
 #endif

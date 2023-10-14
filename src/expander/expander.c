@@ -31,7 +31,7 @@ char	**expander(char **split_str, t_god *god_struct)
 		}
 		i++;
 	}
-	trim_quotes(&split_str);
+//	trim_quotes(&split_str);
 	if (!split_str)
 		return (NULL);
 	return (cleanup_split(split_str));

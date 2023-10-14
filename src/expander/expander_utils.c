@@ -143,6 +143,11 @@ int	expansion_needed(char **split_str, int index)
 	i = 0;
 	if (!ft_strchr(split_str[index], '$'))
 		return (0);
+	else
+	{
+		ft_putstr_fd("expand here you donut\n", 2);
+		return (0);
+	}
 	//printf("index at %d\n", index);
 	while (split_str[i])
 	{

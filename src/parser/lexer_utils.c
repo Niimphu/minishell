@@ -49,26 +49,19 @@ bool	set_trim(char **split_string, int i, bool trim)
 		return (true);
 }
 
-//int	skip_quotes(const char *str)
-//{
-//	int		i;
-//	char	c;
-//
-//	i = 1;
-//	c = str[0];
-//	while (str[i])
-//	{
-//		if (str[i] == c)
-//			return (i);
-//		else
-//			i++;
-//	}
-//	write(2, "Unclosed quotes found: ", 23);
-//	write(2, &c, 1);
-//	write(2, "\n", 1);
-//	return (-1);
-//}
-//
+int	skip_quotes(const char *str, int i)
+{
+	char	c;
+
+	c = str[i];
+	while (str[i] && str[i] != c)
+		i++;
+	if (str[i] && str[i] == c)
+		return (i);
+	ft_putstr_fd("minishelf: unclosed quote found\n", 2);
+	return (FAIL);
+}
+
 //int	second_index_of(char *str, char c)
 //{
 //	int	i;
