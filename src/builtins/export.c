@@ -25,14 +25,14 @@ static void	print_sorted_env(char **env)
 	}
 }
 
-static void	sort_env(t_god *god_struct, int size, int i, int j)
+static int	sort_env(t_god *god_struct, int size, int i, int j)
 {
 	char	*tmp;
 	char	**env_array;
 
 	env_array = cpy_env(god_struct->env, size);
 	if (!env_array)
-		return ;
+		return (1);
 	while (i < size)
 	{
 		j = 0;
@@ -50,7 +50,7 @@ static void	sort_env(t_god *god_struct, int size, int i, int j)
 		i++;
 	}
 	print_sorted_env(env_array);
-	free_string_array(&env_array);
+	return (free_string_array(&env_array), 0);
 }
 
 static char	**new_env(t_god *god_struct, char *cmd)
@@ -59,12 +59,9 @@ static char	**new_env(t_god *god_struct, char *cmd)
 	char	**new_env;
 
 	i = 0;
-	while (god_struct->env[i])
-		i++;
-	new_env = malloc(sizeof(char *) * (i + 2));
+	new_env = ft_calloc(sizeof(char *), new_split_size(god_struct->env) + 2);
 	if (!new_env)
 		return (NULL);
-	i = 0;
 	while (god_struct->env[i])
 	{
 		new_env[i] = ft_strdup(god_struct->env[i]);
@@ -81,18 +78,28 @@ static char	**new_env(t_god *god_struct, char *cmd)
 
 int	export(char **cmd, t_god *god_struct)
 {
-	if (!cmd[1])
+	int		i;
+	char	*tmp;
+	char	*full_cmd;
+
+	i = 1;
+	full_cmd = ft_strdup("");
+	if (!cmd[i])
+		return (sort_env(god_struct, new_split_size(god_struct->env), 0, 0));
+	while (cmd[i])
 	{
-		sort_env(god_struct, new_split_size(god_struct->env), 0, 0);
-		return (0);
+		tmp = full_cmd;
+		full_cmd = ft_strjoin(tmp, cmd[i]);
+		free_string(&tmp);
+		i++;
 	}
-	if (!verify_identifier("export", cmd[1]))
-		return (1);
 	if (ft_strchr(cmd[1], '='))
 	{
-		god_struct->env = new_env(god_struct, cmd[1]);
+		if (!verify_identifier("export", full_cmd))
+			return (1);
+		god_struct->env = new_env(god_struct, full_cmd);
 		if (!god_struct->env)
 			return (1);
 	}
-	return (0);
+	return (free_string(&full_cmd), 0);
 }
