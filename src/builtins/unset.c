@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:06:05 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/03 16:39:05 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/14 17:42:56 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	unset(char **cmd, t_god *god_struct)
 	i = 0;
 	if (!cmd[1])
 		return (1);
-	if (!verify_identifier(cmd[1]))
+	if (!verify_identifier("unset", cmd[1]))
 		return (1);
 	while (god_struct->env[i] && ft_strncmp(cmd[1], god_struct->env[i]
 			, ft_strlen(cmd[1])))

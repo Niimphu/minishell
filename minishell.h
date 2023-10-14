@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/07 12:13:56 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/14 17:44:21 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	**expander(char **split_str, t_god *god_struct);
 int		execute(t_god *god_struct, t_list *parser_list);
 
 char	*get_env_var(char *var, char **env, int trim);
-int		verify_identifier(char *cmd);
+int		verify_identifier(char *func, char *cmd);
 char	*get_var(char *var, t_god *tools);
 
 int		count_operators(const char *str, char c);
@@ -118,7 +118,7 @@ bool	is_valid_int(char *string);
 
 int		execute_builtins(char **cmd, t_god *god_struct);
 
-int		env(t_god *god_struct);
+int		env(char **cmd, t_god *god_struct);
 int		export(char **cmd, t_god *god_struct);
 int		echo(char **cmd);
 int		unset(char **cmd, t_god *god_struct);
@@ -137,6 +137,8 @@ void	free_exec_node(void *node);
 
 int		close_fd(int fd);
 
+int		new_split_size(char **split);
+char	**cpy_env(char **env, int size);
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
 // void	print_heredoc_list(t_list *heredocs);

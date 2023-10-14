@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/12 22:22:35 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/14 12:15:51 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*join_split(char **split, t_god *god_struct)
 	str = ft_strdup("");
 	while (split[i])
 	{
-		if (split[i] && !ft_strcmp(split[i], "$"))
+		if (split[i] && split[i + 1] && !ft_strcmp(split[i], "$"))
 		{
 			i++;
 			split[i] = get_var(split[i], god_struct);
@@ -55,7 +55,7 @@ char	*insert_sub_varlen(char *var, int i)
 
 	while (var[i])
 	{
-		if (var[i] == '$')
+		if (var[i] == '$' && var[i + 1])
 		{
 			new_var = insert_sub2(var, i);
 			var = new_var;

@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/12 22:23:10 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/14 14:27:32 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*expand_var(char *str, t_god *god_struct);
 static int	expansion_needed(char **split_str, int index);
-char	**cleanup_split(char **split);
+char		**cleanup_split(char **split);
 
 /**
  * @brief Iterates throught string array and attemps
@@ -102,22 +102,23 @@ static char	*expand_var(char *str, t_god *god_struct)
 }
 
 /**
- *@brief Counts string array index, excluding empty ones;
+ *@brief Counts string array index, excluding empty ones. 
+ *returns -1 if size = 0 to only allocate memory for NULL pointer;
 */
 int	new_split_size(char **split)
 {
 	int	i;
-	int	j;
+	int	size;
 
 	i = 0;
-	j = 0;
+	size = 0;
 	while (split[i])
 	{
 		if (*split[i] != '\0')
-			j++;
+			size++;
 		i++;
 	}
-	return (j);
+	return (size);
 }
 
 /**
@@ -126,12 +127,16 @@ int	new_split_size(char **split)
 char	**cleanup_split(char **split)
 {
 	int		i;
+	int		size;
 	int		j;
 	char	**new_split;
 
 	i = 0;
 	j = 0;
-	new_split = ft_calloc(sizeof(char *), new_split_size(split) + 1);
+	size = new_split_size(split);
+	if (size == 0)
+		return (free_string_array(&split), NULL);
+	new_split = ft_calloc(sizeof(char *), size + 1);
 	while (split[i])
 	{
 		if (*split[i] != '\0')

@@ -12,44 +12,45 @@
 
 #include "../../minishell.h"
 
-int	env(t_god *god_struct)
+static void	print_sorted_env(char **env)
 {
-	int		i;
-	t_god	*ptr;
+	int	i;
 
 	i = 0;
-	if (!god_struct->env)
-		return (1);
-	ptr = god_struct;
-	while (ptr->env[i])
+	while (env[i])
 	{
-		ft_putstr_fd(ptr->env[i++], STDOUT_FILENO);
+		ft_putstr_fd(env[i], STDOUT_FILENO);
 		ft_putstr_fd("\n", STDOUT_FILENO);
+		i++;
 	}
-	return (0);
 }
 
-static void	print_sorted_envp(t_god *god_struct)
+static void	sort_env(t_god *god_struct, int size, int i, int j)
 {
-	int		i;
-	int		j;
-	t_god	*ptr;
+	char	*tmp;
+	char	**env_array;
 
-	i = 0;
-	ptr = god_struct;
-	while (i <= 255)
+	env_array = cpy_env(god_struct->env, size);
+	if (!env_array)
+		return ;
+	while (i < size)
 	{
-		j = -1;
-		while (ptr->env[++j])
+		j = 0;
+		while (env_array[j + 1] && j < size - i)
 		{
-			if (i == ptr->env[j][0])
+			tmp = NULL;
+			if (ft_strcmp(env_array[j], env_array[j + 1]) > 0)
 			{
-				ft_putstr_fd(ptr->env[j], STDOUT_FILENO);
-				ft_putstr_fd("\n", STDOUT_FILENO);
+				tmp = env_array[j];
+				env_array[j] = env_array[j + 1];
+				env_array[j + 1] = tmp;
 			}
+			j++;
 		}
 		i++;
 	}
+	print_sorted_env(env_array);
+	free_string_array(&env_array);
 }
 
 static char	**new_env(t_god *god_struct, char *cmd)
@@ -82,13 +83,16 @@ int	export(char **cmd, t_god *god_struct)
 {
 	if (!cmd[1])
 	{
-		print_sorted_envp(god_struct);
+		sort_env(god_struct, new_split_size(god_struct->env), 0, 0);
 		return (0);
 	}
-	if (!verify_identifier(cmd[1]))
+	if (!verify_identifier("export", cmd[1]))
 		return (1);
-	god_struct->env = new_env(god_struct, cmd[1]);
-	if (!god_struct->env)
-		return (1);
+	if (ft_strchr(cmd[1], '='))
+	{
+		god_struct->env = new_env(god_struct, cmd[1]);
+		if (!god_struct->env)
+			return (1);
+	}
 	return (0);
 }
