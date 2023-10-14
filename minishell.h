@@ -25,6 +25,8 @@
 # include <readline/history.h>
 # include <stdbool.h>
 
+# define FAIL -1
+
 # define BAD_OPERATOR -1
 # define CMD 1
 # define ARG 2
