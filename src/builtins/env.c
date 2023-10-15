@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:39:16 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/14 15:40:20 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 20:17:48 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	env(char **cmd, t_god *god_struct)
 		ptr = god_struct;
 		while (ptr->env[i])
 		{
-			ft_putstr_fd(ptr->env[i++], STDOUT_FILENO);
+			ft_putstr_fd(ptr->env[i], STDOUT_FILENO);
 			ft_putstr_fd("\n", STDOUT_FILENO);
+			i++;
 		}
 	}
 	return (0);

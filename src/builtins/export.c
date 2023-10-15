@@ -62,18 +62,20 @@ static char	**new_env(t_god *god_struct, char *cmd)
 	found = 0;
 	while (god_struct->env[i])
 	{
-		if (!ft_strncmp(cmd, god_struct->env[i], first_index_of(god_struct->env[i], '=') - 1))
+		if (!ft_strncmp(cmd, god_struct->env[i], first_index_of(god_struct->env[i], '='))
+			&& !ft_strncmp(cmd, god_struct->env[i], ft_strlen(cmd)))
 		{
+			printf("%c\n", god_struct->env[i][first_index_of(god_struct->env[i], '=')]);
 			free_string(&god_struct->env[i]);
-			god_struct->env[i] = cmd;
+			god_struct->env[i] = ft_strdup(cmd);
 			found = 1;
 		}
 		i++;
 	}
 	if (found == 0)
 	{
-		god_struct->env = realloc(god_struct->env, sizeof(char *) * (new_split_size(god_struct->env) + 1));
-		god_struct->env[i++] = cmd;
+		god_struct->env = realloc(god_struct->env, sizeof(char *) * (new_split_size(god_struct->env) + 2));
+		god_struct->env[i++] = ft_strdup(cmd);
 		god_struct->env[i] = NULL;
 
 	}
@@ -83,25 +85,15 @@ static char	**new_env(t_god *god_struct, char *cmd)
 int	export(char **cmd, t_god *god_struct)
 {
 	int		i;
-	char	*tmp;
-	char	*full_cmd;
 
 	i = 1;
 	if (!cmd[i])
 		return (sort_env(god_struct, new_split_size(god_struct->env), 0, 0));
-	full_cmd = ft_strdup("");
-	while (cmd[i])
+	if (!verify_identifier("export", cmd[i]))
+		return (1);
+	if (ft_strchr(cmd[i], '='))
 	{
-		tmp = full_cmd;
-		full_cmd = ft_strjoin(tmp, cmd[i]);
-		free_string(&tmp);
-		i++;
-	}
-	if (!verify_identifier("export", full_cmd))
-		return (free_string(&full_cmd) ,1);
-	if (ft_strchr(full_cmd, '='))
-	{
-		god_struct->env = new_env(god_struct, full_cmd);
+		god_struct->env = new_env(god_struct,cmd[i]);
 		if (!god_struct->env)
 			return (1);
 	}
