@@ -31,9 +31,8 @@ char	**lex(char *input, t_god *god_struct)
 			input[i] = 26;
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
-			input = insert_sub2(input, i++);
-			if (i > 0 && input[i] == input[i - 1])
-				i++;
+			if (i > 0 && input[i] != input[i - 1])
+				input = insert_sub2(input, i++);
 		}
 		i++;
 	}
