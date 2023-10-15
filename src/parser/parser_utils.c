@@ -13,6 +13,7 @@
 #include "parser.h"
 
 static char	*remove_quotes(char *string);
+static bool	do_it(char *string, int i, char quote);
 
 int	get_operator_id(char *operator_string)
 {
@@ -60,11 +61,11 @@ static char	*remove_quotes(char *string)
 	quote = 0;
 	while (string[i])
 	{
-		if (string[i] == '\'' || string[i] == '"')
+		if (do_it(string, i, quote))
 		{
 			if (quote == 0)
 				quote = string[i];
-			else
+			else if (string[i] == quote)
 				quote = 0;
 			i++;
 		}
@@ -72,4 +73,10 @@ static char	*remove_quotes(char *string)
 			trimmed[j++] = string[i++];
 	}
 	return (trimmed);
+}
+
+static bool	do_it(char *string, int i, char quote)
+{
+	return ((string[i] == '\'' || string[i] == '"')
+		&& (string[i] == quote || quote == 0));
 }
