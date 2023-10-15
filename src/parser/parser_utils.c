@@ -39,7 +39,7 @@ void	trim_quotes(t_list *lexer_list)
 	while (lexer_list)
 	{
 		node = (t_lexer *)lexer_list->content;
-		if (ft_strchr(node->string, '\'') && ft_strchr(node->string, '"'))
+		if (ft_strchr(node->string, '\'') || ft_strchr(node->string, '"'))
 		{
 			trimmed = remove_quotes(node->string);
 			free_string(&node->string);
