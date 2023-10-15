@@ -40,22 +40,19 @@ int	heredoc(char *file_name, char *delimiter)
 	int		fd;
 	char	*input;
 
+	input = NULL;
 	fd = open(file_name, O_WRONLY | O_CREAT, 0222);
-	if (fd == -1)
+	while (fd != -1)
 	{
-		perror("we need to write an error function\n");
-		return (fd);
-	}
-	input = readline("> ");
-	while (ft_strncmp(input, delimiter, ft_strlen(delimiter) + 1))
-	{
-		if (ft_strncmp(input, delimiter, ft_strlen(delimiter) + 1))
-			write(fd, input, ft_strlen(input));
-		free_string(&input);
 		input = readline("> ");
+		if (!ft_strncmp(input, delimiter, ft_strlen(delimiter) + 1))
+			break ;
+		write(fd, input, ft_strlen(input));
+		write(fd, "\n", 1);
+		free_string(&input);
 	}
 	free_string(&input);
 	close_fd(fd);
-	fd = open(file_name, O_RDONLY, 0444);
+	fd = open(file_name, O_RDONLY, 0644);
 	return (fd);
 }
