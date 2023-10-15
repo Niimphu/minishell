@@ -97,10 +97,10 @@ int	export(char **cmd, t_god *god_struct)
 		free_string(&tmp);
 		i++;
 	}
-	if (ft_strchr(cmd[1], '='))
+	if (!verify_identifier("export", full_cmd))
+		return (free_string(&full_cmd) ,1);
+	if (ft_strchr(full_cmd, '='))
 	{
-		if (!verify_identifier("export", full_cmd))
-			return (1);
 		god_struct->env = new_env(god_struct, full_cmd);
 		if (!god_struct->env)
 			return (1);
