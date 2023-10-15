@@ -112,28 +112,28 @@ int	verify_closing_qoutes(char **split, int i, char qoute_found)
 	return (0);
 }
 
-void	trim_quotes(char ***str)
-{
-	int		i;
-	int		qoute_close;
-	char	**split;
-	
-	i = 0;
-	split = *str;
-	while (split[i])
-	{
-		if (*split[i] == '\'' || *split[i] == '"')
-		{
-			qoute_close = verify_closing_qoutes(split, i, *split[i]);
-			if (qoute_close == 0)
-				return(free_string_array(str));
-			*split[i] = '\0';
-			*split[qoute_close] = '\0';
-			i = qoute_close;
-		}
-		i++;
-	}
-}
+//void	trim_quotes(char ***str)
+//{
+//	int		i;
+//	int		qoute_close;
+//	char	**split;
+//
+//	i = 0;
+//	split = *str;
+//	while (split[i])
+//	{
+//		if (*split[i] == '\'' || *split[i] == '"')
+//		{
+//			qoute_close = verify_closing_qoutes(split, i, *split[i]);
+//			if (qoute_close == 0)
+//				return(free_string_array(str));
+//			*split[i] = '\0';
+//			*split[qoute_close] = '\0';
+//			i = qoute_close;
+//		}
+//		i++;
+//	}
+//}
 
 int	expansion_needed(char **split_str, int index)
 {

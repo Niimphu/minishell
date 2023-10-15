@@ -19,7 +19,6 @@
 char	*join_split(char **split, t_god *god_struct);
 char	*wow_much_function_name(char *str);
 int		expansion_needed(char **str, int index);
-void	trim_quotes(char ***str);
 int		verify_closing_qoutes(char **split, int i, char qoute_found);
 
 #endif

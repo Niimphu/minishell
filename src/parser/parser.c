@@ -28,6 +28,7 @@ int	parse(char *input, t_god *god_struct)
 		ft_lstclear(&god_struct->lexer_list, free_lexer_node);
 		return (-1);
 	}
+	trim_quotes(god_struct->lexer_list);
 	god_struct->parser_list
 		= create_parser_list(god_struct->parser_list, god_struct->lexer_list);
 	ft_lstclear(&god_struct->lexer_list, free_lexer_node);

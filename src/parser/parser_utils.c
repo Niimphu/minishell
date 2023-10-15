@@ -12,6 +12,8 @@
 
 #include "parser.h"
 
+static char	*remove_quotes(char *string);
+
 int	get_operator_id(char *operator_string)
 {
 	if (!ft_strncmp("|", operator_string, 2))
@@ -26,4 +28,48 @@ int	get_operator_id(char *operator_string)
 		return (APPEND);
 	else
 		return (BAD_OPERATOR);
+}
+
+void	trim_quotes(t_list *lexer_list)
+{
+	t_lexer	*node;
+	char	*trimmed;
+
+	while (lexer_list)
+	{
+		node = (t_lexer *)lexer_list->content;
+		trimmed = remove_quotes(node->string);
+		free_string(&node->string);
+		node->string = trimmed;
+		lexer_list = lexer_list->next;
+	}
+}
+
+static char	*remove_quotes(char *string)
+{
+	int		i;
+	int		j;
+	char	*trimmed;
+	char	quote;
+
+	trimmed = ft_calloc(ft_strlen(string), sizeof(char));
+	if (!trimmed)
+		return (NULL);
+	i = 0;
+	j = 0;
+	quote = 0;
+	while (string[i])
+	{
+		if (string[i] == '\'' || string[i] == '"')
+		{
+			if (quote == 0)
+				quote = string[i];
+			else
+				quote = 0;
+			i++;
+		}
+		else
+			trimmed[j++] = string[i++];
+	}
+	return (trimmed);
 }
