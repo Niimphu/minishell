@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/15 18:23:49 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 18:32:56 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,12 @@ char	**lex(char *input, t_god *god_struct)
 static char	**split_input(char *input)
 {
 	int		i;
-	bool	trim;
 	char	**split_str;
-	/* char	*tmp;  */
 
 	i = 0;
-	trim = true;
 	split_str = ft_split(input, 26);
 	if (!split_str)
 		return (free_string(&input), NULL);
-	/* while (split_str[i])
-	{
-		 if (trim == true || next_is_operator(split_str, i)
-			|| split_str[i][0] == '|' || split_str[i][0] == '<'
-			|| split_str[i][0] == '>')
-		{
-			tmp = ft_strtrim(split_str[i], " ");
-			free_string(&split_str[i]);
-			split_str[i] = tmp;
-			trim = set_trim(split_str, i, trim);
-		} 
-		i++;
-	} */
 	return (free_string(&input), split_str);
 }
 
