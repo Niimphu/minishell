@@ -86,9 +86,6 @@ int	cd(char *dir, t_god *god_struct)
 	old_dir = getcwd(NULL, 1024);
 	if (!old_dir || update_old_pwd(god_struct, old_dir)
 		|| chdir(dir) == -1 || update_pwd(god_struct))
-	{
-		printf("returning 1\n");
 		return (1);
-	}
 	return (0);
 }
