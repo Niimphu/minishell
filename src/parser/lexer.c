@@ -33,7 +33,7 @@ char	**lex(char *input, t_god *god_struct)
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			tmp = insert_sub2(input, i++);
-			if (input[i] == input[i - 1])
+			if (input[i] == input[i - 1] && i > 0)
 				i++;
 			input = tmp;
 		}
