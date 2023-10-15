@@ -90,7 +90,7 @@ int	export(char **cmd, t_god *god_struct)
 	if (!cmd[i])
 		return (sort_env(god_struct, new_split_size(god_struct->env), 0, 0));
 	if (!verify_identifier("export", cmd[i]))
-		return (1);
+		return (2);
 	if (ft_strchr(cmd[i], '='))
 	{
 		god_struct->env = new_env(god_struct,cmd[i]);
