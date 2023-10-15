@@ -37,9 +37,11 @@ export SHELF
 
 NAME = minishell
 
-CC = gcc -Wall -Wextra -Werror
+CC = gcc
 CC += -g -O0
 #CC += -fsanitize=address
+
+CFLAGS = -Wall -Wextra -Werror
 
 LIBS = -L ~/.brew/Cellar/readline/8.2.1/lib -lreadline -lncurses
 
