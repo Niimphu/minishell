@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/09 19:05:17 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:51:24 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char	**lex(char *input, t_god *god_struct)
 		{
 			i = skip_quotes(input, i);
 			if (i == FAIL)
-				return (NULL);
+				return (free_string(&input), NULL);
 		}
 		if (input[i] == ' ')
-			input = insert_sub1(input, i++);
+			input[i] = 26;
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			tmp = insert_sub2(input, i++);
@@ -122,3 +122,18 @@ char	*insert_sub1(char *input, int pos)
 	}
 	return (free_string(&input), str);
 }
+/* 
+int	next_is_operator(char **split_str, int index)
+{
+	int	next_index;
+
+	next_index = index + 1;
+
+	if (!split_str[next_index])
+		return (0);
+	if (split_str[next_index][0] == '|' || split_str[next_index][0] == '<' || split_str[next_index][0] == '>')
+		return (1);
+	else
+		return (0);
+}
+ */

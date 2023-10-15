@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/03 17:07:04 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/14 17:18:49 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	update_pwd(t_god *god_struct)
 	if (!dir)
 		return (perror("cd"), 1);
 	temp = ft_strjoin("PWD=", dir);
-	free(dir);
+	free_string(&dir);
 	dir = temp;
 	if (!dir)
 		return (1);
@@ -67,17 +67,11 @@ void	cd_home(t_god *god_struct)
 	char	*old_dir;
 
 	old_dir = getcwd(NULL, 1024);
-	home_dir = get_var(ft_strdup("$HOME"), god_struct);
-	printf("%s\n", home_dir);
+	home_dir = get_var(ft_strdup("HOME"), god_struct);
 	if (!home_dir || !old_dir || chdir(home_dir) == -1
 		|| update_pwd(god_struct) || update_old_pwd(god_struct, old_dir))
-	{
-		if (home_dir)
-			free(home_dir);
 		perror("cd");
-	}
-	else
-		free(home_dir);
+	free_string(&home_dir);
 }
 
 int	cd(char *dir, t_god *god_struct)
@@ -93,7 +87,7 @@ int	cd(char *dir, t_god *god_struct)
 	if (!old_dir || update_old_pwd(god_struct, old_dir)
 		|| chdir(dir) == -1 || update_pwd(god_struct))
 	{
-		perror("cd");
+		printf("returning 1\n");
 		return (1);
 	}
 	return (0);

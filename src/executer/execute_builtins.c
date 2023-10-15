@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:25:50 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/03 11:31:29 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/14 12:30:49 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	execute_builtins(char **cmd, t_god *god_struct)
 	if (!ft_strncmp(cmd[0], "exit", 4))
 		exit_minishell(cmd, god_struct);
 	if (!ft_strncmp(cmd[0], "env", 3))
-		return (env(god_struct));
+		return (env(cmd, god_struct));
 	return (-1);
 }

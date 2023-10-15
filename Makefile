@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
+#    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/10/06 15:09:11 by yiwong           ###   ########.fr        #
+#    Updated: 2023/10/14 15:43:46 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,7 @@ SRC	=	main.c \
 		free/free_structs.c \
 		builtins/cd.c \
 		builtins/echo.c \
+		builtins/env.c \
 		builtins/export.c \
 		builtins/pwd.c \
 		builtins/unset.c \

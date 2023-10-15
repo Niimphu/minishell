@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/11 14:35:41 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:53:42 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../parser/lexer.h"
 
 static char	*expand_var(char *str, t_god *god_struct);
-//char *catonate_whitespace(char **new_split, int index);
+static int	expansion_needed(char *split_str);
 
 char	**expander(char **split_str, t_god *god_struct)
 {
@@ -24,17 +24,32 @@ char	**expander(char **split_str, t_god *god_struct)
 	i = 0;
 	while (split_str[i])
 	{
-		if (expansion_needed(split_str, i))
+		if (expansion_needed(split_str[i]))
 		{
 			tmp = expand_var(split_str[i], god_struct);
 			split_str[i] = tmp;
 		}
 		i++;
 	}
-//	trim_quotes(&split_str);
-	if (!split_str)
-		return (NULL);
-	return (cleanup_split(split_str));
+	return (split_str);
+}
+
+static int	expansion_needed(char *split_str)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_strchr(split_str, '$'))
+		return (0);
+	while (split_str[i])
+	{
+		if (split_str[i] == '\'')
+			i = skip_quotes(split_str, i);
+		if (split_str[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 static char	*expand_var(char *str, t_god *god_struct)
@@ -44,67 +59,10 @@ static char	*expand_var(char *str, t_god *god_struct)
 	char	**split_str;
 
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
-			tmp = insert_sub2(str, i++);
-			str = tmp;
-		}
-		i++;
-	}
+	tmp = insert_sub_varlen(str, 0);
+	str = tmp;
 	split_str = ft_split(str, 26);
 	if (!split_str)
 		return (free_string(&str), NULL);
 	return (free_string(&str), join_split(split_str, god_struct));
 }
-
-char	**cleanup_split(char **split)
-{
-	int		i;
-	int		j;
-	char	**new_split;
-
-	i = 0;
-	j = 0;
-	while (split[i])
-	{
-		if (*split[i] != '\0')
-			j++;
-		i++;
-	}
-	new_split = ft_calloc(sizeof(char *), j + 1);
-	i = 0;
-	j = 0;
-	while (split[i])
-	{
-		if (*split[i] != '\0' && *split[i] != ' ')
-		{
-			new_split[j] = ft_strdup(split[i]);
-			if (!new_split[j])
-				return (free_string_array(&split), NULL);
-			/* if (split[i] && split[i + 1][0] == ' ')
-				new_split[j] = catonate_whitespace(split, i + 1); */
-			j++;
-		}
-		i++;
-	}
-	new_split[j] = NULL;
-	return (free_string_array(&split), new_split);
-}
-
-//char *catonate_whitespace(char **new_split, int index)
-//{
-//	char *tmp;
-//
-//	tmp = NULL;
-//	if (!new_split[index])
-//		return (NULL);
-//	if (*new_split[index] == ' ')
-//	{
-//		tmp = ft_strjoin(new_split[index - 1], " ");
-//		free_string(&new_split[index - 1]);
-//	}
-//	return (tmp);
-//}
-//

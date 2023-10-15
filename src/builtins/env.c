@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 16:13:55 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/15 13:14:15 by Kekuhne          ###   ########.fr       */
+/*   Created: 2023/10/14 15:39:16 by Kekuhne           #+#    #+#             */
+/*   Updated: 2023/10/14 15:40:20 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#include "../../minishell.h"
 
-# include "../../minishell.h"
+int	env(char **cmd, t_god *god_struct)
+{
+	int		i;
+	t_god	*ptr;
 
-int		next_is_operator(char **split_str, int index);
-
-
-
-int		skip_quotes(const char *str, int i);
-
-bool	set_trim(char **split_string, int i, bool trim);
-
-#endif
+	i = 0;
+	if (!cmd[1])
+	{
+		if (!god_struct->env)
+			return (0);
+		ptr = god_struct;
+		while (ptr->env[i])
+		{
+			ft_putstr_fd(ptr->env[i++], STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+		}
+	}
+	return (0);
+}
