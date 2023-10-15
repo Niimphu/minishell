@@ -54,6 +54,7 @@ int	heredoc(char *file_name, char *delimiter)
 		free_string(&input);
 		input = readline("> ");
 	}
+	free_string(&input);
 	close_fd(fd);
 	fd = open(file_name, O_RDONLY, 0444);
 	return (fd);

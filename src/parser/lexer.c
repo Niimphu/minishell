@@ -17,7 +17,6 @@ static char	**split_input(char *input);
 char	**lex(char *input, t_god *god_struct)
 {
 	int		i;
-	char	*tmp;
 
 	i = 0;
 	while (input[i])
@@ -32,11 +31,8 @@ char	**lex(char *input, t_god *god_struct)
 			input[i] = 26;
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
-			tmp = insert_sub2(input, i++);
-			if (i > 0 && input[i] == input[i - 1])
-				i++;
-			free_string(&input);
-			input = tmp;
+			if (i > 0 && input[i] != input[i - 1])
+				input = insert_sub2(input, i++);
 		}
 		i++;
 	}
@@ -77,7 +73,7 @@ char	*insert_sub2(char *input, int pos)
 	}
 	str[i++] = 26;
 	ft_strlcpy(&str[i], &input[i - 2], ft_strlen(&input[i - 2]) + 1);
-	return (str);
+	return (free_string(&input), str);
 }
 
 char	*insert_sub1(char *input, int pos)
@@ -102,7 +98,7 @@ char	*insert_sub1(char *input, int pos)
 		str[i++] = 26;
 		ft_strlcpy(&str[i], &input[i - 1], ft_strlen(&input[i - 1]) + 1);
 	}
-	return (str);
+	return (free_string(&input), str);
 }
 /* 
 int	next_is_operator(char **split_str, int index)
