@@ -77,24 +77,21 @@ char	*insert_sub2(char *input, int pos)
 
 	i = 0;
 	str = ft_calloc(sizeof(char), (ft_strlen(input) + 3));
-	if (str)
-	{
-		while (i < pos)
-		{
-			str[i] = input[i];
-			i++;
-		}
-		str[i++] = 26;
-		while (input[i - 1] == input[pos])
-		{
-			str[i] = input[i - 1];
-			i++;
-		}
-		str[i++] = 26;
-		ft_strlcpy(&str[i], &input[i - 2], ft_strlen(&input[i - 2]) + 1);
-	}
-	else
+	if (!str)
 		return (NULL);
+	while (i < pos)
+	{
+		str[i] = input[i];
+		i++;
+	}
+	str[i++] = 26;
+	while (input[i - 1] == input[pos])
+	{
+		str[i] = input[i - 1];
+		i++;
+	}
+	str[i++] = 26;
+	ft_strlcpy(&str[i], &input[i - 2], ft_strlen(&input[i - 2]) + 1);
 	return (free_string(&input), str);
 }
 

@@ -36,14 +36,18 @@ char	**expander(char **split_str, t_god *god_struct)
 
 static int	expansion_needed(char *split_str)
 {
-	int	i;
+	int		i;
+	bool	expand;
 
 	i = 0;
+	expand = false;
 	if (!ft_strchr(split_str, '$'))
 		return (0);
 	while (split_str[i])
 	{
-		if (split_str[i] == '\'')
+		if (split_str[i] == '"')
+			expand = !expand;
+		if (split_str[i] == '\'' && !expand)
 			i = skip_quotes(split_str, i);
 		if (split_str[i] == '$')
 			return (1);
@@ -54,11 +58,9 @@ static int	expansion_needed(char *split_str)
 
 static char	*expand_var(char *str, t_god *god_struct)
 {
-	int		i;
 	char	*tmp;
 	char	**split_str;
 
-	i = 0;
 	tmp = insert_sub_varlen(str, 0);
 	str = tmp;
 	split_str = ft_split(str, 26);

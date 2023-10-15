@@ -49,35 +49,42 @@ char	*join_split(char **split, t_god *god_struct)
 *The End of Varible is a non-alphanumerical char.
 *@return Cpy of var with inserted substitute characters.
 */
+static char	get_quote(char *var, int i, char quote);
+
 char	*insert_sub_varlen(char *var, int i)
 {
-	char	*new_var;
+	char	quote;
 
+	quote = 0;
 	while (var[i])
 	{
-		if (var[i] == '\'')
-			i = skip_quotes(var, i);
-		if (var[i] == '$' && var[i + 1])
+		if (var[i] == '\'' || var[i] == '"')
+			quote = get_quote(var, i, quote);
+		if (var[i] == '$' && var[i + 1] && quote != '\'')
 		{
-			new_var = insert_sub2(var, i);
-			var = new_var;
+			var = insert_sub2(var, i);
 			i += 3;
 			if (var[i] && (var[i] == '_' || ft_isalpha(var[i])))
 			{
 				while (var[i] && ft_isalnum(var[++i]))
 					;
-				new_var = insert_sub1(var, i - 1);
-				var = new_var;
+				var = insert_sub1(var, i - 1);
 			}
 			else
-			{
-				new_var = insert_sub1(var, i);
-				var = new_var;
-			}
+				var = insert_sub1(var, i);
 		}
 		i++;
 	}
 	return (var);
+}
+
+static char	get_quote(char *var, int i, char quote)
+{
+	if (quote == 0)
+		return (var[i]);
+	else if (quote == var[i])
+		return (0);
+	return (quote);
 }
 
 /**
