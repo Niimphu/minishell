@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:48:27 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/15 14:54:30 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:57:56 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	next_is_operator(char **split_str, int index)
 	int	next_index;
 
 	next_index = index + 1;
-
 	if (!split_str[next_index])
 		return (0);
 	if (split_str[next_index][0] == '|' || split_str[next_index][0] == '<'
