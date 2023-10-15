@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:38:42 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/05 19:19:20 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/15 21:03:06 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	pipe_up(t_list *exec_list)
 char	*find_exec(t_exec *node, char **env)
 {
 	char		*path;
+	char		*path_var;
 	char		**env_paths;
 	int			i;
 
@@ -52,7 +53,10 @@ char	*find_exec(t_exec *node, char **env)
         && (*node->cmd == '/' || !ft_strncmp(node->cmd, "./", 2)))
 		return (ft_strdup(node->cmd));
 	i = 0;
-	env_paths = ft_split(get_env_var("PATH=", env, TRIM), ':');
+	path_var = get_env_var("PATH=", env, TRIM);
+	if (!path_var)
+		return (NULL);
+	env_paths = ft_split(path_var, ':');
 	while (env_paths[i])
 	{
 		path = create_path(node->cmd, env_paths[i++]);

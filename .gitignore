@@ -6,6 +6,6 @@ minishell.dSYM/
 .vscode/
 test
 in
-out
+out*
 minishell_tester/
 testcases.txt
