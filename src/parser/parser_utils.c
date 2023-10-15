@@ -13,7 +13,7 @@
 #include "parser.h"
 
 static char	*remove_quotes(char *string);
-static bool	do_it(char *string, int i, char quote);
+static bool	do_it(const char *string, int i, char quote);
 
 int	get_operator_id(char *operator_string)
 {
@@ -75,7 +75,7 @@ static char	*remove_quotes(char *string)
 	return (trimmed);
 }
 
-static bool	do_it(char *string, int i, char quote)
+static bool	do_it(const char *string, int i, char quote)
 {
 	return ((string[i] == '\'' || string[i] == '"')
 		&& (string[i] == quote || quote == 0));
