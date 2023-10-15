@@ -25,7 +25,7 @@ static void	error_exit(char *cmd, int status);
 int	execute(t_god *god_struct, t_list *parser_list)
 {
 	t_list		*exec_list;
-	t_exec		*exec_node;
+	t_exec		*node;
 	int			i;
 	int			error;
 
@@ -36,18 +36,18 @@ int	execute(t_god *god_struct, t_list *parser_list)
 		perror("sad\n");
 	exec_list = god_struct->exec_list;
 	i = 0;
-	while (++i <= god_struct->block_count)
+	while (++i <= god_struct->blocks)
 	{
-		exec_node = exec_list->content;
-		if (exec_node->builtin > 10 && god_struct->block_count == 1
-			&& exec_node->fd_out == 0)
-			execute_builtins(exec_node->cmd_array, god_struct);
+		node = exec_list->content;
+		if (node->builtin > 10 && god_struct->blocks == 1 && node->fd_out == 0)
+			error = execute_builtins(node->cmd_array, god_struct);
 		else
-			fork_this_shit_im_out(god_struct, exec_node);
+			fork_this_shit_im_out(god_struct, node);
 		exec_list = exec_list->next;
 	}
 	close_all_pipes(god_struct->exec_list);
-	error = wait_all(god_struct->exec_list);
+	if (!(node->builtin > 10 && god_struct->blocks == 1 && node->fd_out == 0))
+		error = wait_all(god_struct->exec_list);
 	return (error);
 }
 
