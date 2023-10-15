@@ -10,27 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
-
-int	skip_quotes(const char *str)
-{
-	int		i;
-	char	c;
-
-	i = 1;
-	c = str[0];
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (i);
-		else
-			i++;
-	}
-	write(2, "Unclosed quotes found: ", 23);
-	write(2, &c, 1);
-	write(2, "\n", 1);
-	return (-1);
-}
+#include "lexer.h"
 
 int	first_index_of(char *str, char c)
 {
@@ -46,20 +26,56 @@ int	first_index_of(char *str, char c)
 	return (-1);
 }
 
-int	second_index_of(char *str, char c)
+int	next_is_operator(char **split_str, int index)
 {
-	int	i;
-	int	found;
+	int	next_index;
 
-	i = 0;
-	found = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			found++;
-		if (found == 2)
-			return (i);
-		i++;
-	}
-	return (-1);
+	next_index = index + 1;
+
+	if (!split_str[next_index])
+		return (0);
+	if (split_str[next_index][0] == '|' || split_str[next_index][0] == '<'
+		|| split_str[next_index][0] == '>')
+		return (1);
+	else
+		return (0);
 }
+
+bool	set_trim(char **split_string, int i, bool trim)
+{
+	if (trim == true || next_is_operator(split_string, i))
+		return (false);
+	else
+		return (true);
+}
+
+int	skip_quotes(const char *str, int i)
+{
+	char	c;
+
+	c = str[i];
+	while (str[i] && str[i] != c)
+		i++;
+	if (str[i] && str[i] == c)
+		return (i);
+	ft_putstr_fd("minishelf: unclosed quote found\n", 2);
+	return (FAIL);
+}
+
+//int	second_index_of(char *str, char c)
+//{
+//	int	i;
+//	int	found;
+//
+//	i = 0;
+//	found = 0;
+//	while (str[i])
+//	{
+//		if (str[i] == c)
+//			found++;
+//		if (found == 2)
+//			return (i);
+//		i++;
+//	}
+//	return (-1);
+//}

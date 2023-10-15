@@ -6,14 +6,13 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/14 20:43:09 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:10:29 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "lexer.h"
 
-static char	**split_input(char *input, t_god *god_struct);
-int	next_is_operator(char **split_str, int index);
+static char	**split_input(char *input);
 
 char	**lex(char *input, t_god *god_struct)
 {
@@ -23,53 +22,52 @@ char	**lex(char *input, t_god *god_struct)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == ' ')
+		if (input[i] == '\'' || input[i] == '"')
 		{
-			tmp = insert_sub1(input, i++);
-			input = tmp;
+			i = skip_quotes(input, i);
+			if (i == FAIL)
+				return (NULL);
 		}
-		if (input[i] == '\'' || input[i] == '"' || input[i] == '|' || input[i] == '<' || input[i] == '>')
+		if (input[i] == ' ')
+			input = insert_sub1(input, i++);
+		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			tmp = insert_sub2(input, i++);
+			if (input[i] == input[i - 1])
+				i++;
 			input = tmp;
 		}
 		i++;
 	}
-	return (split_input(input, god_struct));
+	return (expander(split_input(input), god_struct));
 }
 
-static char	**split_input(char *input, t_god *god_struct)
+static char	**split_input(char *input)
 {
 	int		i;
 	bool	trim;
-	char **split_str;
+	char	**split_str;
 	char	*tmp;
 
 	i = 0;
 	trim = true;
-	
 	split_str = ft_split(input, 26);
 	if (!split_str)
 		return (NULL);
 	while (split_str[i])
 	{
-		if (trim == true || next_is_operator(split_str, i))
+		if (trim == true || next_is_operator(split_str, i)
+			|| split_str[i][0] == '|' || split_str[i][0] == '<'
+			|| split_str[i][0] == '>')
 		{
 			tmp = ft_strtrim(split_str[i], " ");
 			free_string(&split_str[i]);
 			split_str[i] = tmp;
-			trim = false;
-		}	
-		if (split_str[i][0] == '|' || split_str[i][0] == '<' || split_str[i][0] == '>')
-		{
-			tmp = ft_strtrim(split_str[i], " ");
-			free_string(&split_str[i]);
-			split_str[i] = tmp;
-			trim = true;
+			trim = set_trim(split_str, i, trim);
 		}
 		i++;
 	}
-	return (free(input), expander(split_str, god_struct));
+	return (free(input), split_str);
 }
 
 char	*insert_sub2(char *input, int pos)
@@ -87,7 +85,7 @@ char	*insert_sub2(char *input, int pos)
 			i++;
 		}
 		str[i++] = 26;
-		while (input[i - 1] == input[pos] || input[i - 1] == ' ')
+		while (input[i - 1] == input[pos])
 		{
 			str[i] = input[i - 1];
 			i++;
@@ -95,6 +93,8 @@ char	*insert_sub2(char *input, int pos)
 		str[i++] = 26;
 		ft_strlcpy(&str[i], &input[i - 2], ft_strlen(&input[i - 2]) + 1);
 	}
+	else
+		return (NULL);
 	return (free_string(&input), str);
 }
 
@@ -122,7 +122,7 @@ char	*insert_sub1(char *input, int pos)
 	}
 	return (free_string(&input), str);
 }
-
+/* 
 int	next_is_operator(char **split_str, int index)
 {
 	int	next_index;
@@ -136,3 +136,4 @@ int	next_is_operator(char **split_str, int index)
 	else
 		return (0);
 }
+ */

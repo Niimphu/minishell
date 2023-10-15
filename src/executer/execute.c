@@ -68,9 +68,9 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 
 	error = 0;
 	exec_node->path = find_exec(exec_node, god_struct->env);
-    if (!exec_node->path && exec_node->builtin == 0)
-        error_exit(exec_node->cmd, 127);
-    if (is_dir(exec_node))
+	if (!exec_node->path && exec_node->builtin == 0)
+		error_exit(exec_node->cmd, 127);
+	if (is_dir(exec_node))
 		error_exit(exec_node->cmd, 126);
 	if (exec_node->fd_in == -1 || exec_node->fd_out == -1)
 		exit(1);

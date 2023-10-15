@@ -6,11 +6,12 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/14 19:01:34 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:16:22 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+#include "../parser/lexer.h"
 
 static char	*expand_var(char *str, t_god *god_struct);
 static int	expansion_needed(char **split_str, int index);
@@ -32,6 +33,7 @@ char	**expander(char **split_str, t_god *god_struct)
 	i = 0;
 	while (split_str[i])
 	{
+		printf("split_str[i] %s\n", split_str[i]);
 		if (expansion_needed(split_str, i))
 		{
 			tmp = expand_var(split_str[i], god_struct);
@@ -39,7 +41,7 @@ char	**expander(char **split_str, t_god *god_struct)
 		}
 		i++;
 	}
-	trim_quotes(&split_str);
+//	trim_quotes(&split_str);
 	if (!split_str)
 		return (NULL);
 	return (cleanup_split(split_str));

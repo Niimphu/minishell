@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/14 17:44:21 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:14:26 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+
+# define FAIL -1
 
 # define BAD_OPERATOR -1
 # define CMD 1
@@ -111,9 +113,10 @@ int		execute(t_god *god_struct, t_list *parser_list);
 char	*get_env_var(char *var, char **env, int trim);
 int		verify_identifier(char *func, char *cmd);
 char	*get_var(char *var, t_god *tools);
+int		first_index_of(char *str, char c);
 
-int		count_operators(const char *str, char c);
-int		count_char(char *str, char c);
+//int		count_operators(const char *str, char c);
+//int		count_char(char *str, char c);
 bool	is_valid_int(char *string);
 
 int		execute_builtins(char **cmd, t_god *god_struct);
@@ -142,7 +145,9 @@ char	**cpy_env(char **env, int size);
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
 // void	print_heredoc_list(t_list *heredocs);
-int		first_index_of(char *str, char c);
-int		second_index_of(char *str, char c);
+//int		second_index_of(char *str, char c);
+
+char	*insert_sub1(char *input, int pos);
+char	*insert_sub2(char *input, int pos);
 
 #endif

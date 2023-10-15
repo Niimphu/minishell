@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/14 12:15:51 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:08:48 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,3 +116,55 @@ void	trim_quotes(char ***str)
 		i++;
 	}
 }
+
+int	expansion_needed(char **split_str, int index)
+{
+	int i;
+	int quote_close;
+	
+	i = 0;
+	if (!ft_strchr(split_str[index], '$'))
+		return (0);
+	else
+	{
+		ft_putstr_fd("expand here you donut\n", 2);
+		return (0);
+	}
+	//printf("index at %d\n", index);
+	while (split_str[i])
+	{
+		if (*split_str[i] == '\'' || *split_str[i] == '"')
+		{
+			//printf("found qoute %c %d\n", *split_str[i], i);
+			if (i > index)
+			{
+				//printf("i[%d] greater than index[%d]\n", i, index);
+				i++;
+				continue ;
+			}
+			quote_close = verify_closing_qoutes(split_str, i, *split_str[i]);
+			//printf("closing qoute %c %d\n", *split_str[quote_close], quote_close);
+			if (quote_close < index)
+			{
+				//printf("closing qoute *%c*[%d] before var at %d\n", *split_str[quote_close], quote_close, index);
+				i = quote_close + 1;
+				continue ;
+			}
+			else if (*split_str[quote_close] == '\'' && i < index)
+			{
+				//printf("var inside single qoutes(closing qoute at %d),var at %d no expansion needed\n", quote_close, index);
+				return (0);
+			}
+			else if (i < index && *split_str[quote_close] == '"')
+			{
+				//printf("var inside double qoutes(closing qoute at %d), var at %d\n", quote_close, index);
+				return (1);
+			}
+			i = quote_close;
+		}
+		i++;
+	}
+	//printf("var not inside qoutes, expanding\n");
+	return (1);
+}
+

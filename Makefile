@@ -56,7 +56,7 @@ SRC_DIR = src
 OBJ_DIR = build
 
 SRC	=	main.c \
-		get_input.c \
+		await_input.c \
 		init/create_struct.c \
 		init/shell_level.c \
 		signals/signals.c \
