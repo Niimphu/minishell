@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/15 13:08:48 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:53:27 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,93 +78,23 @@ char	*insert_sub_varlen(char *var, int i)
 	return (var);
 }
 
-int	verify_closing_qoutes(char **split, int i, char qoute_found)
-{
-	i++;
-	while (split[i])
-	{
-		if (*split[i] == qoute_found)
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
 /**
-* @brief Interates throught array of strings and sets outer qoutes to '\0';
-* @return none;
+ *@brief Counts string array index, excluding empty ones. 
+ *returns -1 if size = 0 to only allocate memory for NULL pointer;
 */
-void	trim_quotes(char ***str)
+int	new_split_size(char **split)
 {
-	int		i;
-	int		qoute_close;
-	char	**split;
+	int	i;
+	int	size;
 
 	i = 0;
-	split = *str;
+	size = 0;
 	while (split[i])
 	{
-		if (*split[i] == '\'' || *split[i] == '"')
-		{
-			qoute_close = verify_closing_qoutes(split, i, *split[i]);
-			if (qoute_close == 0)
-				return (free_string_array(str));
-			*split[i] = '\0';
-			*split[qoute_close] = '\0';
-			i = qoute_close;
-		}
+		if (*split[i] != '\0')
+			size++;
 		i++;
 	}
-}
-
-int	expansion_needed(char **split_str, int index)
-{
-	int i;
-	int quote_close;
-	
-	i = 0;
-	if (!ft_strchr(split_str[index], '$'))
-		return (0);
-	else
-	{
-		ft_putstr_fd("expand here you donut\n", 2);
-		return (0);
-	}
-	//printf("index at %d\n", index);
-	while (split_str[i])
-	{
-		if (*split_str[i] == '\'' || *split_str[i] == '"')
-		{
-			//printf("found qoute %c %d\n", *split_str[i], i);
-			if (i > index)
-			{
-				//printf("i[%d] greater than index[%d]\n", i, index);
-				i++;
-				continue ;
-			}
-			quote_close = verify_closing_qoutes(split_str, i, *split_str[i]);
-			//printf("closing qoute %c %d\n", *split_str[quote_close], quote_close);
-			if (quote_close < index)
-			{
-				//printf("closing qoute *%c*[%d] before var at %d\n", *split_str[quote_close], quote_close, index);
-				i = quote_close + 1;
-				continue ;
-			}
-			else if (*split_str[quote_close] == '\'' && i < index)
-			{
-				//printf("var inside single qoutes(closing qoute at %d),var at %d no expansion needed\n", quote_close, index);
-				return (0);
-			}
-			else if (i < index && *split_str[quote_close] == '"')
-			{
-				//printf("var inside double qoutes(closing qoute at %d), var at %d\n", quote_close, index);
-				return (1);
-			}
-			i = quote_close;
-		}
-		i++;
-	}
-	//printf("var not inside qoutes, expanding\n");
-	return (1);
+	return (size);
 }
 

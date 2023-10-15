@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:48:27 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/04 18:10:14 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:54:30 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	skip_quotes(const char *str, int i)
 {
 	char	c;
 
-	c = str[i];
+	c = str[i++];
 	while (str[i] && str[i] != c)
 		i++;
 	if (str[i] && str[i] == c)
@@ -62,20 +62,3 @@ int	skip_quotes(const char *str, int i)
 	return (FAIL);
 }
 
-//int	second_index_of(char *str, char c)
-//{
-//	int	i;
-//	int	found;
-//
-//	i = 0;
-//	found = 0;
-//	while (str[i])
-//	{
-//		if (str[i] == c)
-//			found++;
-//		if (found == 2)
-//			return (i);
-//		i++;
-//	}
-//	return (-1);
-//}
