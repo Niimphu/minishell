@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/15 14:53:27 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 15:25:02 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*insert_sub_varlen(char *var, int i)
 
 	while (var[i])
 	{
+		if (var[i] == '\'')
+			i = skip_quotes(var, i);
 		if (var[i] == '$' && var[i + 1])
 		{
 			new_var = insert_sub2(var, i);
