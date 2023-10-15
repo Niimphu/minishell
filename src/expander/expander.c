@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:13:10 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/15 14:53:42 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/15 18:25:07 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	**expander(char **split_str, t_god *god_struct)
 	char	*tmp;
 
 	i = 0;
+	if (!split_str)
+		return (NULL);
 	while (split_str[i])
 	{
 		if (expansion_needed(split_str[i]))
