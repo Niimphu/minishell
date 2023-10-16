@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/14 17:18:49 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/16 15:09:48 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ int	cd(char *dir, t_god *god_struct)
 	old_dir = getcwd(NULL, 1024);
 	if (!old_dir || update_old_pwd(god_struct, old_dir)
 		|| chdir(dir) == -1 || update_pwd(god_struct))
+	{
+		ft_putstr_fd("cd: ", 2);
+		ft_putstr_fd(dir, 2);
+		ft_putstr_fd(" :No such file or directory\n", 2);
 		return (1);
+	}
 	return (0);
 }
