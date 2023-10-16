@@ -18,7 +18,7 @@ static int	expansion_needed(char *split_str);
 char	**expander(char **split_str, t_god *god_struct)
 {
 	int		i;
-	char	*tmp;
+	char	*temp;
 
 	i = 0;
 	if (!split_str)
@@ -27,8 +27,8 @@ char	**expander(char **split_str, t_god *god_struct)
 	{
 		if (expansion_needed(split_str[i]))
 		{
-			tmp = expand_var(split_str[i], god_struct);
-			split_str[i] = tmp;
+			temp = expand_var(split_str[i], god_struct);
+			split_str[i] = temp;
 		}
 		i++;
 	}
