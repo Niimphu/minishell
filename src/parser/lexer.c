@@ -16,7 +16,7 @@ static char	**split_input(char *input);
 
 char	**lex(char *input, t_god *god_struct)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (input[i])
@@ -41,10 +41,8 @@ char	**lex(char *input, t_god *god_struct)
 
 static char	**split_input(char *input)
 {
-	int		i;
 	char	**split_str;
 
-	i = 0;
 	split_str = ft_split(input, 26);
 	if (!split_str)
 		return (free_string(&input), NULL);
@@ -100,18 +98,3 @@ char	*insert_sub1(char *input, int pos)
 	}
 	return (free_string(&input), str);
 }
-/* 
-int	next_is_operator(char **split_str, int index)
-{
-	int	next_index;
-
-	next_index = index + 1;
-
-	if (!split_str[next_index])
-		return (0);
-	if (split_str[next_index][0] == '|' || split_str[next_index][0] == '<' || split_str[next_index][0] == '>')
-		return (1);
-	else
-		return (0);
-}
- */

@@ -23,29 +23,7 @@ int	first_index_of(char *str, char c)
 			return (i);
 		i++;
 	}
-	return (-1);
-}
-
-int	next_is_operator(char **split_str, int index)
-{
-	int	next_index;
-
-	next_index = index + 1;
-	if (!split_str[next_index])
-		return (0);
-	if (split_str[next_index][0] == '|' || split_str[next_index][0] == '<'
-		|| split_str[next_index][0] == '>')
-		return (1);
-	else
-		return (0);
-}
-
-bool	set_trim(char **split_string, int i, bool trim)
-{
-	if (trim == true || next_is_operator(split_string, i))
-		return (false);
-	else
-		return (true);
+	return (FAIL);
 }
 
 int	skip_quotes(const char *str, int i)
@@ -60,4 +38,3 @@ int	skip_quotes(const char *str, int i)
 	ft_putstr_fd("minishelf: unclosed quote found\n", 2);
 	return (FAIL);
 }
-
