@@ -13,32 +13,51 @@
 #include "../../minishell.h"
 #include <termios.h>
 
-t_god	*create_god_struct(char **envp)
+static char	**clone_env(char **original_env);
+static int	count_env(char **original_env);
+
+t_god	*create_god_struct(char **original_env)
 {
-	int		i;
 	t_god	*god_struct;
 
-	i = 0;
-	while (envp[i])
-		i++;
 	god_struct = malloc(sizeof(t_god));
 	if (!god_struct)
 		return (NULL);
-	god_struct->env = malloc(sizeof(char *) * (i + 1));
+	god_struct->env = clone_env(original_env);
 	god_struct->og_termios = ft_calloc(1, sizeof(struct termios));
 	if (!god_struct->env || !god_struct->og_termios)
 		return (NULL);
-	i = 0;
-	while (envp[i])
-	{
-		god_struct->env[i] = ft_strdup(envp[i]);
-		if (!god_struct->env[i])
-			perror("upsi no envp!");
-		i++;
-	}
 	increment_shell_level(god_struct->env);
-	god_struct->env[i] = NULL;
 	god_struct->parser_list = NULL;
+	god_struct->blocks = 0;
 	god_struct->exit_status = 0;
 	return (god_struct);
+}
+
+static char	**clone_env(char **original_env)
+{
+	char	**env;
+	int		i;
+
+	env = ft_calloc(count_env(original_env) + 1, sizeof(char *));
+	i = 0;
+	while (original_env[i])
+	{
+		env[i] = ft_strdup(original_env[i]);
+		if (!env[i])
+			perror("rip");
+		i++;
+	}
+	env[i] = NULL;
+	return (env);
+}
+
+static int	count_env(char **original_env)
+{
+	int	i;
+
+	i = 0;
+	while (original_env[i])
+		i++;
+	return (i);
 }
