@@ -30,5 +30,5 @@ int	execute_builtins(char **cmd, t_god *god_struct)
 		exit_minishell(cmd, god_struct);
 	if (!ft_strncmp(cmd[0], "env", 3))
 		return (env(cmd, god_struct));
-	return (-1);
+	return (FAIL);
 }

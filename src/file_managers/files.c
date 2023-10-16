@@ -60,5 +60,5 @@ static int	error(char *filename)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(filename, 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
-	return (-1);
+	return (FAIL);
 }
