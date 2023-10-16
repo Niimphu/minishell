@@ -15,7 +15,7 @@
 int	unset(char **cmd, t_god *god_struct)
 {
 	int	i;
-	
+
 	i = 1;
 	if (!cmd[i])
 		return (1);

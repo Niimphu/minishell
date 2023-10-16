@@ -24,7 +24,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+
 # include "src/parser/lexer.h"
+
 # define FAIL -1
 
 # define BAD_OPERATOR -1
@@ -120,14 +122,6 @@ int		first_index_of(char *str, char c);
 bool	is_valid_int(char *string);
 
 int		execute_builtins(char **cmd, t_god *god_struct);
-
-int		env(char **cmd, t_god *god_struct);
-int		export(char **cmd, t_god *god_struct);
-int		echo(char **cmd);
-int		unset(char **cmd, t_god *god_struct);
-int		pwd(t_god *god_struct);
-int		cd(char *dir, t_god *god_struct);
-void	exit_minishell(char **cmd, t_god *god_struct);
 
 void	free_string(char **string);
 void	free_string_array(char ***array);

@@ -30,5 +30,10 @@ int	env(char **cmd, t_god *god_struct)
 			i++;
 		}
 	}
+	else
+	{
+		ft_putstr_fd("minishelf: env: too many arguments\n", 2);
+		return (1);
+	}
 	return (0);
 }

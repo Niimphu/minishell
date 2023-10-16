@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../builtins/builtins.h"
 
 int	execute_builtins(char **cmd, t_god *god_struct)
 {

@@ -12,67 +12,9 @@
 
 #include "../../minishell.h"
 
-static int	update_old_pwd(t_god *god_struct, char *old_dir)
-{
-	char	*dir;
-	int		i;
-
-	i = 0;
-	dir = ft_strjoin("OLDPWD=", old_dir);
-	if (!dir)
-		return (1);
-	free_string(&old_dir);
-	while (god_struct->env[i])
-	{
-		if (!ft_strncmp(god_struct->env[i], "OLDPWD=", 7))
-		{
-			free_string(&god_struct->env[i]);
-			god_struct->env[i] = dir;
-		}
-		i++;
-	}
-	return (0);
-}
-
-static int	update_pwd(t_god *god_struct)
-{
-	int		i;
-	char	*dir;
-	char	*temp;
-
-	i = 0;
-	dir = getcwd(NULL, 1024);
-	if (!dir)
-		return (perror("cd"), 1);
-	temp = ft_strjoin("PWD=", dir);
-	free_string(&dir);
-	dir = temp;
-	if (!dir)
-		return (1);
-	while (god_struct->env[i])
-	{
-		if (!ft_strncmp(god_struct->env[i], "PWD=", 4))
-		{
-			free_string(&god_struct->env[i]);
-			god_struct->env[i] = dir;
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	cd_home(t_god *god_struct)
-{
-	char	*home_dir;
-	char	*old_dir;
-
-	old_dir = getcwd(NULL, 1024);
-	home_dir = get_var(ft_strdup("HOME"), god_struct);
-	if (!home_dir || !old_dir || chdir(home_dir) == -1
-		|| update_pwd(god_struct) || update_old_pwd(god_struct, old_dir))
-		perror("cd");
-	free_string(&home_dir);
-}
+static void	cd_home(t_god *god_struct);
+static int	update_pwd(t_god *god_struct);
+static int	update_old_pwd(t_god *god_struct, char *old_dir);
 
 int	cd(char *dir, t_god *god_struct)
 {
@@ -91,6 +33,68 @@ int	cd(char *dir, t_god *god_struct)
 		ft_putstr_fd(dir, 2);
 		ft_putstr_fd(" :No such file or directory\n", 2);
 		return (1);
+	}
+	return (0);
+}
+
+void	cd_home(t_god *god_struct)
+{
+	char	*home_directory;
+	char	*old_directory;
+
+	old_directory = getcwd(NULL, 1024);
+	home_directory = get_var(ft_strdup("HOME"), god_struct);
+	if (!home_directory || !old_directory || chdir(home_directory) == -1
+		|| update_pwd(god_struct) || update_old_pwd(god_struct, old_directory))
+		perror("cd");
+	free_string(&home_directory);
+}
+
+static int	update_pwd(t_god *god_struct)
+{
+	int		i;
+	char	*directory;
+	char	*temp;
+
+	i = 0;
+	directory = getcwd(NULL, 1024);
+	if (!directory)
+		return (perror("cd"), 1);
+	temp = ft_strjoin("PWD=", directory);
+	free_string(&directory);
+	directory = temp;
+	if (!directory)
+		return (1);
+	while (god_struct->env[i])
+	{
+		if (!ft_strncmp(god_struct->env[i], "PWD=", 4))
+		{
+			free_string(&god_struct->env[i]);
+			god_struct->env[i] = directory;
+		}
+		i++;
+	}
+	return (0);
+}
+
+static int	update_old_pwd(t_god *god_struct, char *old_directory)
+{
+	char	*directory;
+	int		i;
+
+	i = 0;
+	directory = ft_strjoin("OLDPWD=", old_directory);
+	if (!directory)
+		return (1);
+	free_string(&old_directory);
+	while (god_struct->env[i])
+	{
+		if (!ft_strncmp(god_struct->env[i], "OLDPWD=", 7))
+		{
+			free_string(&god_struct->env[i]);
+			god_struct->env[i] = directory;
+		}
+		i++;
 	}
 	return (0);
 }
