@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "expander.h"
-#include "../parser/lexer.h"
 
 static char	*expand_var(char *str, t_god *god_struct);
 static int	expansion_needed(char *split_str);

@@ -106,4 +106,3 @@ int	new_split_size(char **split)
 	}
 	return (size);
 }
-

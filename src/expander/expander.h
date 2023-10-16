@@ -17,11 +17,11 @@
 # include "../parser/parser.h"
 
 char	*join_split(char **split, t_god *god_struct);
-char	*wow_much_function_name(char *str);
-int		verify_closing_qoutes(char **split, int i, char qoute_found);
+//char	*wow_much_function_name(char *str);
+//int		verify_closing_qoutes(char **split, int i, char qoute_found);
 char	*insert_sub_varlen(char *var, int i);
-char	*create_clean_var_string(char *split, char *tmp,
-			int var_len, t_god *god_struct);
-char	**cleanup_split(char **split);
+//char	*create_clean_var_string(char *split, char *tmp,
+//			int var_len, t_god *god_struct);
+//char	**cleanup_split(char **split);
 
 #endif
