@@ -38,7 +38,8 @@ char	*get_var(char *var, t_god *god_struct)
 		return (free_string(&var), ft_itoa(god_struct->exit_status));
 	while (god_struct->env[i])
 	{
-		if (!ft_strncmp(var, god_struct->env[i], first_index_of(god_struct->env[i], '='))
+		if (!ft_strncmp(var, god_struct->env[i],
+				first_index_of(god_struct->env[i], '='))
 			&& !ft_strncmp(var, god_struct->env[i], ft_strlen(var)))
 		{
 			tmp = ft_strdup(god_struct->env[i] + ft_strlen(var) + 1);
@@ -82,8 +83,8 @@ int	verify_identifier(char *func, char *cmd)
 
 char	**cpy_env(char **env, int size)
 {
-	int i;
-	char **new_env;
+	int		i;
+	char	**new_env;
 
 	i = 0;
 	new_env = ft_calloc(sizeof(char *), size + 1);

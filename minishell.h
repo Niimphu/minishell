@@ -138,10 +138,5 @@ int		new_split_size(char **split);
 char	**cpy_env(char **env, int size);
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
-// void	print_heredoc_list(t_list *heredocs);
-//int		second_index_of(char *str, char c);
-
-char	*insert_sub1(char *input, int pos);
-char	*insert_sub2(char *input, int pos);
 
 #endif
