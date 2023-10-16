@@ -50,7 +50,7 @@ char	*find_exec(t_exec *node, char **env)
 	int			i;
 
 	if (access(node->cmd, X_OK) == 0
-        && (*node->cmd == '/' || !ft_strncmp(node->cmd, "./", 2)))
+		&& (*node->cmd == '/' || !ft_strncmp(node->cmd, "./", 2)))
 		return (ft_strdup(node->cmd));
 	i = 0;
 	path_var = get_env_var("PATH=", env, TRIM);
