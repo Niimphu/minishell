@@ -6,30 +6,28 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:54:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/17 20:34:27 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/17 23:03:00 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <termios.h>
 
-char	**init_env(char **original_env, int size);
-/* static char	**clone_env(char **original_env);
-static int	count_env(char **original_env); */
+/* char	**init_env(char **original_env, int size); */
+static char	**clone_env(char **original_env);
+static int	count_env(char **original_env);
 
 t_god	*create_god_struct(char **original_env)
 {
-	int		i;
 	t_god	*god_struct;
 
-	i = new_split_size(original_env);
 	god_struct = malloc(sizeof(t_god));
 	if (!god_struct)
 		return (NULL);
 	god_struct->og_termios = ft_calloc(1, sizeof(struct termios));
 	if (!god_struct->og_termios)
 		return (NULL);
-	god_struct->env = init_env(original_env, i);
+	god_struct->env = clone_env(original_env);
 	if (!god_struct->env)
 		return (NULL);
 	god_struct->parser_list = NULL;
@@ -39,7 +37,7 @@ t_god	*create_god_struct(char **original_env)
 	return (god_struct);
 }
 
-/* static char	**clone_env(char **original_env)
+static char	**clone_env(char **original_env)
 {
 	char	**env;
 	int		i;
@@ -65,9 +63,9 @@ static int	count_env(char **original_env)
 	while (original_env[i])
 		i++;
 	return (i);
-} */
+}
 
-char	**init_env(char **original_env, int size)
+/* char	**init_env(char **original_env, int size)
 {
 	int		i;
 	int		j;
@@ -75,7 +73,7 @@ char	**init_env(char **original_env, int size)
 
 	i = 0;
 	j = 0;
-	new_env = malloc(sizeof(char *) * size);
+	new_env = ft_calloc(sizeof(char *), size);
 	if (!new_env)
 		return (NULL);
 	while (original_env[i + j])
@@ -89,4 +87,4 @@ char	**init_env(char **original_env, int size)
 	}
 	new_env[i] = NULL;
 	return (new_env);
-}
+} */
