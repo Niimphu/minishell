@@ -15,7 +15,6 @@
 static int	sort_env(t_god *god_struct, int size, int i, int j);
 static char	**new_env(t_god *god_struct, char *cmd);
 static void	print_sorted_env(char **env);
-/* static bool	some_condition(char *cmd, t_god *god_struct, int i); */
 
 int	export(char **cmd, t_god *god_struct)
 {
@@ -72,7 +71,8 @@ static char	**new_env(t_god *god_struct, char *cmd)
 	found = false;
 	while (god_struct->env[i])
 	{
-		if (!ft_strncmp(cmd, god_struct->env[i], first_index_of(god_struct->env[i], '=') - 1))
+		if (!ft_strncmp(cmd, god_struct->env[i],
+				first_index_of(god_struct->env[i], '=') - 1))
 		{
 			free_string(&god_struct->env[i]);
 			god_struct->env[i] = ft_strdup(cmd);
@@ -82,20 +82,11 @@ static char	**new_env(t_god *god_struct, char *cmd)
 	}
 	if (!found)
 	{
-		god_struct->env = realloc(god_struct->env,
-				sizeof(char *) * (new_split_size(god_struct->env) + 2));
 		god_struct->env[i++] = ft_strdup(cmd);
 		god_struct->env[i] = NULL;
 	}
 	return (god_struct->env);
 }
-/* 
-static bool	some_condition(char *cmd, t_god *god_struct, int i)
-{
-	return (!ft_strncmp(cmd, god_struct->env[i],
-			first_index_of(god_struct->env[i], '='))
-		&& !ft_strncmp(cmd, god_struct->env[i], ft_strlen(cmd)));
-} */
 
 static void	print_sorted_env(char **env)
 {

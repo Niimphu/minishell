@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/17 20:54:29 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/17 21:54:19 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	set_new_oldpwd(t_god *god_struct, char *dir)
 	int		j;
 	int		size;
 	char	**new_env;
-	
+
 	i = 0;
 	j = 0;
 	size = new_split_size(god_struct->env);
@@ -36,7 +36,7 @@ void	set_new_oldpwd(t_god *god_struct, char *dir)
 			new_env[j++] = ft_strdup(god_struct->env[i++]);
 	}
 	if (j == i)
-			new_env[j++] = dir;
+		new_env[j++] = dir;
 	new_env[j] = NULL;
 	god_struct->env = new_env;
 }
