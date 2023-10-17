@@ -15,7 +15,7 @@
 static int	sort_env(t_god *god_struct, int size, int i, int j);
 static char	**new_env(t_god *god_struct, char *cmd);
 static void	print_sorted_env(char **env);
-static bool	some_condition(char *cmd, t_god *god_struct, int i);
+/* static bool	some_condition(char *cmd, t_god *god_struct, int i); */
 
 int	export(char **cmd, t_god *god_struct)
 {
