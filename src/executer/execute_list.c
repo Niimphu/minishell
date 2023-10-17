@@ -41,6 +41,8 @@ static t_exec	*new_node(t_parser *parser_node)
 	if (!exec_node)
 		return (NULL);
 	exec_node->cmd_array = parser_node->cmd_array;
+	while (exec_node->cmd_array[0] && !ft_strlen(exec_node->cmd_array[0]))
+		exec_node->cmd_array++;
 	exec_node->cmd = exec_node->cmd_array[0];
 	exec_node->builtin = parser_node->builtin;
 	exec_node->fd_in = 0;
