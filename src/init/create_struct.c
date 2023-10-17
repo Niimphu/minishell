@@ -31,6 +31,7 @@ t_god	*create_god_struct(char **original_env)
 	if (!god_struct->env)
 		return (NULL);
 	god_struct->parser_list = NULL;
+	god_struct->exec_list = NULL;
 	god_struct->blocks = 0;
 	god_struct->exit_status = 0;
 	increment_shell_level(god_struct, god_struct->env);
