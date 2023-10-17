@@ -16,6 +16,7 @@ static void	new_shell_lvl(t_god *god_struct)
 {
 	int		i;
 	char	*tmp;
+
 	i = 0;
 	while (god_struct->env[i])
 	{

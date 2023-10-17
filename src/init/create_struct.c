@@ -13,7 +13,7 @@
 #include "../../minishell.h"
 #include <termios.h>
 
-char	**init_env(char **envp , int size);
+char	**init_env(char **original_env, int size);
 /* static char	**clone_env(char **original_env);
 static int	count_env(char **original_env); */
 
@@ -67,13 +67,12 @@ static int	count_env(char **original_env)
 	return (i);
 } */
 
-
 char	**init_env(char **original_env, int size)
 {
 	int		i;
 	int		j;
 	char	**new_env;
-	
+
 	i = 0;
 	j = 0;
 	new_env = malloc(sizeof(char *) * size);

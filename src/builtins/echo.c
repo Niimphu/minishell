@@ -22,16 +22,12 @@ int	echo(char **cmd)
 	i = 1;
 	new_line_flag = 0;
 	if (!cmd[i])
-	{
-		write(1, "\n", STDOUT_FILENO);
-		return (0);
-	}
+		return (ft_putstr_fd("\n", STDOUT_FILENO), 0);
 	while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
-		if (!is_just_n(cmd[i]))
+		if (!is_just_n(cmd[i++]))
 			break ;
 		new_line_flag = 1;
-		i++;
 	}
 	while (cmd[i])
 	{
@@ -41,7 +37,7 @@ int	echo(char **cmd)
 		i++;
 	}
 	if (new_line_flag == 0)
-		write(1, "\n", STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }
 

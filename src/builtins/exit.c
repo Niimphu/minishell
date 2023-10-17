@@ -12,7 +12,7 @@
 
 #include "../signals/signals.h"
 
-static int type_error(char *arg, t_god *god_struct);
+static int	type_error(char *arg, t_god *god_struct);
 static int	count_error(t_god *god_struct);
 
 void	exit_minishell(char **cmd, t_god *god_struct)
