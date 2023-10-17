@@ -6,18 +6,48 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/16 15:09:48 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:10:23 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+void	set_new_oldpwd(t_god *god_struct, char *dir, int size)
+{
+	int		i;
+	int		j;
+	char	**new_env;
+	
+	i = 0;
+	j = 0;
+	new_env = ft_calloc(sizeof(char *), size + 2);
+	if (!new_env)
+		return ;
+	while (god_struct->env[i])
+	{
+		if (!ft_strncmp(god_struct->env[i], "PWD=", 4))
+		{
+			new_env[j++] = ft_strdup(god_struct->env[i++]);
+			new_env[j++] = dir;
+		}
+		else
+			new_env[j++] = ft_strdup(god_struct->env[i++]);
+	}
+	if (j == i)
+		new_env[j++] = dir;
+	new_env[j] = NULL;
+	free_string_array(&god_struct->env);
+	god_struct->env = new_env;
+}
+
 static int	update_old_pwd(t_god *god_struct, char *old_dir)
 {
-	char	*dir;
 	int		i;
+	int		found;
+	char	*dir;
 
 	i = 0;
+	found = 0;
 	dir = ft_strjoin("OLDPWD=", old_dir);
 	if (!dir)
 		return (1);
@@ -25,12 +55,16 @@ static int	update_old_pwd(t_god *god_struct, char *old_dir)
 	while (god_struct->env[i])
 	{
 		if (!ft_strncmp(god_struct->env[i], "OLDPWD=", 7))
-		{
-			free_string(&god_struct->env[i]);
-			god_struct->env[i] = dir;
-		}
+			found = i;
 		i++;
 	}
+	if (found != 0)
+	{
+		free_string(&god_struct->env[found]);
+		god_struct->env[found] = dir;
+	}
+	else
+		set_new_oldpwd(god_struct, dir, new_split_size(god_struct->env));
 	return (0);
 }
 

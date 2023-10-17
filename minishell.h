@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/15 15:26:27 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/16 16:59:49 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_god
 }				t_god;
 
 t_god	*create_god_struct(char **envp);
-int		increment_shell_level(char **env);
+int		increment_shell_level(t_god *god_struct, char **env);
 
 void	await_input(t_god *tools);
 

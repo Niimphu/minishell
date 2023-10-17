@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/15 14:49:10 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:05:05 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int	echo(char **cmd)
 	}
 	while (cmd[i])
 	{
-		ft_putstr_fd(cmd[i++], STDOUT_FILENO);
-		ft_putstr_fd(" ", STDOUT_FILENO);
+		ft_putstr_fd(cmd[i], STDOUT_FILENO);
+		if (cmd[i + 1])
+			ft_putstr_fd(" ", STDOUT_FILENO);
+		i++;
 	}
 	if (new_line_flag == 0)
 		write(1, "\n", STDOUT_FILENO);

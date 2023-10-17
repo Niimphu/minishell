@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:51:18 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/15 18:43:29 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:20:47 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	verify_identifier(char *func, char *cmd)
 		ft_putstr_fd(func, 2);
 		ft_putstr_fd(": `", 2);
 		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd("': is not a valid identifier\n", 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (0);
 	}
 	while (cmd[i++] && cmd[i] != '=')
@@ -73,7 +73,7 @@ int	verify_identifier(char *func, char *cmd)
 			ft_putstr_fd(func, 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": `", 2);
-			ft_putstr_fd("': is not a valid identifier\n", 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
 			return (0);
 		}
 	}

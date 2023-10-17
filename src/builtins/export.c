@@ -65,7 +65,6 @@ static char	**new_env(t_god *god_struct, char *cmd)
 		if (!ft_strncmp(cmd, god_struct->env[i], first_index_of(god_struct->env[i], '='))
 			&& !ft_strncmp(cmd, god_struct->env[i], ft_strlen(cmd)))
 		{
-			printf("%c\n", god_struct->env[i][first_index_of(god_struct->env[i], '=')]);
 			free_string(&god_struct->env[i]);
 			god_struct->env[i] = ft_strdup(cmd);
 			found = 1;
@@ -90,12 +89,9 @@ int	export(char **cmd, t_god *god_struct)
 	if (!cmd[i])
 		return (sort_env(god_struct, new_split_size(god_struct->env), 0, 0));
 	if (!verify_identifier("export", cmd[i]))
-		return (2);
-	if (ft_strchr(cmd[i], '='))
-	{
-		god_struct->env = new_env(god_struct,cmd[i]);
-		if (!god_struct->env)
-			return (1);
-	}
+		return (1);
+	god_struct->env = new_env(god_struct,cmd[i]);
+	if (!god_struct->env)
+		return (1);
 	return (0);
 }
