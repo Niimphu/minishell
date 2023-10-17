@@ -81,7 +81,6 @@ SRC	=	main.c \
 		expander/expander.c \
 		expander/expander_utils.c \
 		utils/checkers.c \
-		utils/counters.c \
 		utils/env_utils.c \
 		free/free.c \
 		free/free_structs.c \

@@ -6,20 +6,22 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/17 18:10:23 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/17 20:37:05 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	set_new_oldpwd(t_god *god_struct, char *dir, int size)
+void	set_new_oldpwd(t_god *god_struct, char *dir)
 {
 	int		i;
 	int		j;
+	int		size;
 	char	**new_env;
 	
 	i = 0;
 	j = 0;
+	size = new_split_size(god_struct->env);
 	new_env = ft_calloc(sizeof(char *), size + 2);
 	if (!new_env)
 		return ;
@@ -33,10 +35,7 @@ void	set_new_oldpwd(t_god *god_struct, char *dir, int size)
 		else
 			new_env[j++] = ft_strdup(god_struct->env[i++]);
 	}
-	if (j == i)
-		new_env[j++] = dir;
 	new_env[j] = NULL;
-	free_string_array(&god_struct->env);
 	god_struct->env = new_env;
 }
 
@@ -64,7 +63,7 @@ static int	update_old_pwd(t_god *god_struct, char *old_dir)
 		god_struct->env[found] = dir;
 	}
 	else
-		set_new_oldpwd(god_struct, dir, new_split_size(god_struct->env));
+		set_new_oldpwd(god_struct, dir);
 	return (0);
 }
 

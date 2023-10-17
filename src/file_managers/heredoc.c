@@ -28,7 +28,8 @@ void	open_heredocs(t_list *parsed_list)
 		{
 			file_node = (t_file *)(file_list->content);
 			if (file_node->operator == HEREDOC)
-				heredoc(file_node->filename, file_node->delimiter);
+				file_node->fd
+					= heredoc(file_node->filename, file_node->delimiter);
 			file_list = file_list->next;
 		}
 		parsed_list = parsed_list->next;
@@ -41,7 +42,7 @@ int	heredoc(char *file_name, char *delimiter)
 	char	*input;
 
 	input = NULL;
-	fd = open(file_name, O_WRONLY | O_CREAT, 0222);
+	fd = open(file_name, O_WRONLY | O_CREAT, 0644);
 	while (fd != -1)
 	{
 		input = readline("> ");

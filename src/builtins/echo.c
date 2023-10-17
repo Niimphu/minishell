@@ -12,23 +12,7 @@
 
 #include "../../minishell.h"
 
-static int	is_just_n(char *str)
-{
-	int	i;
-	char *tmp;
-
-	i = 1;
-	tmp = ft_strtrim(str, " ");
-	if (!tmp)
-		return (0);
-	while (tmp[i])
-	{
-		if (tmp[i] != 'n')
-			return (free_string(&tmp), 0);
-		i++;
-	}
-	return (free_string(&tmp), 1);
-}
+static int	is_just_n(char *str);
 
 int	echo(char **cmd)
 {
@@ -59,4 +43,22 @@ int	echo(char **cmd)
 	if (new_line_flag == 0)
 		write(1, "\n", STDOUT_FILENO);
 	return (0);
+}
+
+static int	is_just_n(char *str)
+{
+	int		i;
+	char	*temp;
+
+	i = 1;
+	temp = ft_strtrim(str, " ");
+	if (!temp)
+		return (0);
+	while (temp[i])
+	{
+		if (temp[i] != 'n')
+			return (free_string(&temp), 0);
+		i++;
+	}
+	return (free_string(&temp), 1);
 }

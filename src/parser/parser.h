@@ -25,7 +25,6 @@ t_parser	*file_away(t_parser *parser_node, t_lexer *current, t_lexer *next);
 int			get_operator_id(char *operator_string);
 void		trim_quotes(t_list *lexer_list);
 
-//int			skip_quotes(const char *str);
 char		**cleanup_split(char **split);
 
 #endif

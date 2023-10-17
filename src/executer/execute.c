@@ -17,10 +17,7 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node);
 static int	wait_all(t_list *exec_list);
 static void	error_exit(char *cmd, int status);
 
-// global error number when cd <invalid dir>
-// exit +"100" thinks + and 100 are separate but they should be together??
-// valgrind --track-fds=yes --leak-check=full --trace-children=yes --show-leak-kinds=all  ./minishell
-// overwrites builtin return value from line 43
+// valgrind --track-fds=yes --leak-check=full --trace-children=yes ./minishell
 
 int	execute(t_god *god_struct, t_list *parser_list)
 {
@@ -111,11 +108,11 @@ static int	wait_all(t_list *exec_list)
 
 static void	error_exit(char *cmd, int status)
 {
-	write(2, "minishelf: ", 11);
-	write(2, cmd, ft_strlen(cmd));
+	ft_putstr_fd("minishelf: ", 2);
+	ft_putstr_fd(cmd, 2);
 	if (*cmd == '/' && access(cmd, X_OK) == 0)
 		ft_putstr_fd(": Is a directory\n", 2);
-	else if (*cmd == '/' && access(cmd, F_OK) == 0)
+	else if (!ft_strncmp("./", cmd, 2) && access(cmd, F_OK) == 0)
 		ft_putstr_fd(": Permission denied\n", 2);
 	else if (*cmd == '/')
 		ft_putstr_fd(": No such file or directory\n", 2);
@@ -124,29 +121,29 @@ static void	error_exit(char *cmd, int status)
 	exit(status);
 }
 
-/*
-void	print_exec_list(t_list *exec_list)
-{
-	t_exec	*node;
-	int		i;
-
-	printf("\n\n=== Executor linked list ===\n\n");
-	while (exec_list)
-	{
-		i = 0;
-		node = (t_exec *)exec_list->content;
-		printf("Executable commands: ");
-		while (node->cmd_array[i])
-			printf("%s ", node->cmd_array[i++]);
-		printf("\nPath: %s\n", node->path);
-		printf("\n\n====       FDs       ====\n");
-		printf("FD in: %i\n", node->fd_in);
-		printf("FD out: %i (%spipe)\n", node->fd_out, (node->fd_out == node->pipe_fd[WRITE]) ? "" : "not ");
-		printf("====    End of FDs   ====\n");
-		printf("\n\n");
-		if (!exec_list->next)
-			printf("===    End of list     ===\n\n\n");
-		exec_list = exec_list->next;
-	}
-}
- */
+//
+//void	print_exec_list(t_list *exec_list)
+//{
+//	t_exec	*node;
+//	int		i;
+//
+//	printf("\n\n=== Executor linked list ===\n\n");
+//	while (exec_list)
+//	{
+//		i = 0;
+//		node = (t_exec *)exec_list->content;
+//		printf("Executable commands: ");
+//		while (node->cmd_array[i])
+//			printf("%s ", node->cmd_array[i++]);
+//		printf("\nPath: %s\n", node->path);
+//		printf("\n\n====       FDs       ====\n");
+//		printf("FD in: %i\n", node->fd_in);
+//		printf("FD out: %i (%spipe)\n", node->fd_out,
+//			(node->fd_out == node->pipe_fd[WRITE]) ? "" : "not ");
+//		printf("====    End of FDs   ====\n");
+//		printf("\n\n");
+//		if (!exec_list->next)
+//			printf("===    End of list     ===\n\n\n");
+//		exec_list = exec_list->next;
+//	}
+//}
