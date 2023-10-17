@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:36:44 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/15 15:25:02 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/17 22:07:13 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*insert_sub_varlen(char *var, int i)
 	{
 		if (var[i] == '\'' || var[i] == '"')
 			quote = get_quote(var, i, quote);
-		if (var[i] == '$' && var[i + 1] && quote != '\'')
+		if (var[i] == '$' && (var[i + 1] == '_' || ft_isalpha(var[i + 1])) && quote != '\'')
 		{
 			var = insert_sub2(var, i);
 			i += 3;
