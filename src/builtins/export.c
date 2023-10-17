@@ -62,10 +62,8 @@ static char	**new_env(t_god *god_struct, char *cmd)
 	found = 0;
 	while (god_struct->env[i])
 	{
-		if (!ft_strncmp(cmd, god_struct->env[i], first_index_of(god_struct->env[i], '='))
-			&& !ft_strncmp(cmd, god_struct->env[i], ft_strlen(cmd)))
+		if (!ft_strncmp(cmd, god_struct->env[i], first_index_of(god_struct->env[i], '=') - 1))
 		{
-			printf("%c\n", god_struct->env[i][first_index_of(god_struct->env[i], '=')]);
 			free_string(&god_struct->env[i]);
 			god_struct->env[i] = ft_strdup(cmd);
 			found = 1;
