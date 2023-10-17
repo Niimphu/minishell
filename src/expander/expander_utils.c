@@ -61,7 +61,8 @@ char	*insert_sub_varlen(char *var, int i)
 		if (var[i] == '\'' || var[i] == '"')
 			quote = get_quote(var, i, quote);
 		if (var[i] == '$' && (var[i + 1] == '_'
-				|| ft_isalpha(var[i + 1]) || var[i] == '?') && quote != '\'')
+				|| ft_isalpha(var[i + 1])
+				|| var[i + 1] == '?') && quote != '\'')
 		{
 			var = insert_sub2(var, i);
 			i += 3;

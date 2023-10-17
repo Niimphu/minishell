@@ -44,6 +44,8 @@ static char	**clone_env(char **original_env)
 	int		i;
 
 	env = ft_calloc(count_env(original_env) + 1, sizeof(char *));
+	if (!env)
+		return (NULL);
 	i = 0;
 	while (original_env[i])
 	{
