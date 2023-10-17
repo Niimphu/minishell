@@ -108,11 +108,11 @@ static int	wait_all(t_list *exec_list)
 
 static void	error_exit(char *cmd, int status)
 {
-	write(2, "minishelf: ", 11);
-	write(2, cmd, ft_strlen(cmd));
+	ft_putstr_fd("minishelf: ", 2);
+	ft_putstr_fd(cmd, 2);
 	if (*cmd == '/' && access(cmd, X_OK) == 0)
 		ft_putstr_fd(": Is a directory\n", 2);
-	else if (*cmd == '/' && access(cmd, F_OK) == 0)
+	else if (!ft_strncmp("./", cmd, 2) && access(cmd, F_OK) == 0)
 		ft_putstr_fd(": Permission denied\n", 2);
 	else if (*cmd == '/')
 		ft_putstr_fd(": No such file or directory\n", 2);
