@@ -48,10 +48,12 @@ void	find_exec(t_exec *node, char **env)
 	char		**env_paths;
 	int			i;
 
-	if ((!access(node->cmd, X_OK) && (*node->cmd == '/'
-				|| !ft_strncmp(node->cmd, "./", 2)))
+	if ((!access(node->cmd, X_OK) && is_path(node->cmd))
 		|| (!access(node->cmd, F_OK) && access(node->cmd, X_OK) == -1))
+	{
 		node->path = (ft_strdup(node->cmd));
+		return ;
+	}
 	i = 0;
 	path_var = get_env_var("PATH=", env, TRIM);
 	if (!path_var)
@@ -61,10 +63,7 @@ void	find_exec(t_exec *node, char **env)
 	{
 		node->path = create_path(node->cmd, env_paths[i++]);
 		if (access(node->path, X_OK) == 0)
-		{
-			free_string_array(&env_paths);
-			return ;
-		}
+			return (free_string_array(&env_paths));
 		free_string(&node->path);
 	}
 	free_string_array(&env_paths);
