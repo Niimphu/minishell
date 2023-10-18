@@ -32,7 +32,10 @@ int	open_files(t_list *parsed_list)
 				file_node->fd
 					= open_file(file_node->filename, file_node->operator);
 			if (file_node->fd == -1)
-				return (error(file_node->filename));
+			{
+				error(file_node->filename);
+				file_list = ft_lstlast(file_list);
+			}
 			file_list = file_list->next;
 		}
 		parsed_list = parsed_list->next;
