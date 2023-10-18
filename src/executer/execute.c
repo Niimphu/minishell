@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/14 20:42:31 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 20:11:17 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 
 	error = 0;
 	find_exec(exec_node, god_struct->env);
+	if (exec_node->fd_in == -1 || exec_node->fd_out == -1)
+		exit(1);
 	if (is_path(exec_node->cmd) && ((is_dir(exec_node->cmd))
 			|| (access(exec_node->cmd, X_OK) && !access(exec_node->cmd, F_OK))))
 		error_exit(exec_node->cmd, 126);
 	if (!exec_node->path && exec_node->builtin == 0)
 		error_exit(exec_node->cmd, 127);
-	if (exec_node->fd_in == -1 || exec_node->fd_out == -1)
-		exit(1);
 	if (exec_node->fd_in > 0)
 		dup2(exec_node->fd_in, STDIN_FILENO);
 	exec_node->pipe_fd[READ] = close_fd(exec_node->pipe_fd[READ]);
