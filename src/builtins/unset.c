@@ -3,26 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 15:06:05 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/17 19:21:06 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 22:07:46 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+static int	unset_this_rn(char *cmd, t_god *god_struct);
+
 int	unset(char **cmd, t_god *god_struct)
 {
 	int	i;
+	int	error;
 
 	i = 1;
+	error = 0;
 	if (!cmd[i])
 		return (0);
-	if (!verify_identifier("unset", cmd[i]))
-		return (1);
-	while (god_struct->env[i] && ft_strncmp(cmd[1], god_struct->env[i]
-			, first_index_of(god_struct->env[i], '=')))
+	while (cmd[i])
+	{
+		if (unset_this_rn(cmd[i], god_struct))
+			error = 1;
+		i++;
+	}
+	return (error);
+}
+
+static int	unset_this_rn(char *cmd, t_god *god_struct)
+{
+	int	i;
+
+	i = 0;
+	if (!verify_identifier("unset", cmd))
+		return (FAIL);
+	while (god_struct->env[i] && ft_strncmp(cmd, god_struct->env[i],
+			first_index_of(god_struct->env[i], '=')))
 		i++;
 	if (!god_struct->env[i])
 		return (0);
