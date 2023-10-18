@@ -32,14 +32,14 @@ static void	clear_input(int signal_number)
 	rl_redisplay();
 }
 
-void	set_signal_error(t_god *god_struct)
-{
-	if (g_signal_received == 258)
-		god_struct->exit_status = g_signal_received;
-	else if (g_signal_received > 0)
-		god_struct->exit_status = 1;
-	g_signal_received = 0;
-}
+//void	set_signal_error(t_god *god_struct)
+//{
+//	if (g_signal_received == 258)
+//		god_struct->exit_status = g_signal_received;
+//	else if (g_signal_received > 0)
+//		god_struct->exit_status = 1;
+//	g_signal_received = 0;
+//}
 
 void	silence(t_god *god_struct)
 {

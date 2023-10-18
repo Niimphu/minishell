@@ -104,6 +104,11 @@ static int	wait_all(t_list *exec_list)
 			error_code = WEXITSTATUS(status);
 		exec_list = exec_list->next;
 	}
+	if (g_signal_received)
+	{
+		error_code = g_signal_received + 128;
+		g_signal_received = 0;
+	}
 	return (error_code);
 }
 

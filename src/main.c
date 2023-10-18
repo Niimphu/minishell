@@ -30,7 +30,6 @@ int	main(int argument_count, char **arguments, char **envp)
 	while (g_signal_received != SIGQUIT)
 	{
 		await_signals();
-		set_signal_error(god_struct);
 		await_input(god_struct);
 	}
 	ret = god_struct->exit_status;

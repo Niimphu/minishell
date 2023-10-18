@@ -40,7 +40,7 @@ static char	*read_user_input(void)
 {
 	char	*input;
 
-	input = readline("\033[0;34mminishelf > \033[0m");
+	input = readline("minishelf > ");
 	if (input && *input && *input != ' ')
 		add_history(input);
 	return (input);
