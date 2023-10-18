@@ -139,5 +139,6 @@ int		new_split_size(char **split);
 char	**cpy_env(char **env, int size);
 void	print_lexer_list(t_list *lexer_list);
 void	print_parser_list(t_list *parsed_list);
+void	print_exec_list(t_list *exec_list);
 
 #endif

@@ -65,10 +65,10 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 
 	error = 0;
 	find_exec(exec_node, god_struct->env);
-	if (!exec_node->path && exec_node->builtin == 0)
-		error_exit(exec_node->cmd, 127);
 	if (is_dir(exec_node))
 		error_exit(exec_node->cmd, 126);
+	if (!exec_node->path && exec_node->builtin == 0)
+		error_exit(exec_node->cmd, 127);
 	if (exec_node->fd_in == -1 || exec_node->fd_out == -1)
 		exit(1);
 	if (exec_node->fd_in > 0)
@@ -121,29 +121,28 @@ static void	error_exit(char *cmd, int status)
 	exit(status);
 }
 
-//
-//void	print_exec_list(t_list *exec_list)
-//{
-//	t_exec	*node;
-//	int		i;
-//
-//	printf("\n\n=== Executor linked list ===\n\n");
-//	while (exec_list)
-//	{
-//		i = 0;
-//		node = (t_exec *)exec_list->content;
-//		printf("Executable commands: ");
-//		while (node->cmd_array[i])
-//			printf("%s ", node->cmd_array[i++]);
-//		printf("\nPath: %s\n", node->path);
-//		printf("\n\n====       FDs       ====\n");
-//		printf("FD in: %i\n", node->fd_in);
-//		printf("FD out: %i (%spipe)\n", node->fd_out,
-//			(node->fd_out == node->pipe_fd[WRITE]) ? "" : "not ");
-//		printf("====    End of FDs   ====\n");
-//		printf("\n\n");
-//		if (!exec_list->next)
-//			printf("===    End of list     ===\n\n\n");
-//		exec_list = exec_list->next;
-//	}
-//}
+
+void	print_exec_list(t_list *exec_list)
+{
+	t_exec	*node;
+	int		i;
+
+	printf("\n\n=== Executor linked list ===\n\n");
+	while (exec_list)
+	{
+		i = 0;
+		node = (t_exec *)exec_list->content;
+		printf("Executable commands: ");
+		while (node->cmd_array[i])
+			printf("%s ", node->cmd_array[i++]);
+		printf("\nPath: %s\n", node->path);
+		printf("\n\n====       FDs       ====\n");
+		printf("FD in: %i\n", node->fd_in);
+		printf("FD out: %i\n", node->fd_out);
+		printf("====    End of FDs   ====\n");
+		printf("\n\n");
+		if (!exec_list->next)
+			printf("===    End of list     ===\n\n\n");
+		exec_list = exec_list->next;
+	}
+}
