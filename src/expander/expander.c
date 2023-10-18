@@ -67,5 +67,6 @@ static char	*expand_var(char *str, t_god *god_struct)
 	split_str = ft_split(str, 26);
 	if (!split_str)
 		return (free_string(&str), NULL);
-	return (free_string(&str), join_split(split_str, god_struct));
+	free_string(&str);
+	return (join_split(split_str, god_struct));
 }
