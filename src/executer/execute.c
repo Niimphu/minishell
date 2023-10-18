@@ -122,27 +122,27 @@ static void	error_exit(char *cmd, int status)
 	exit(status);
 }
 
-void	print_exec_list(t_list *exec_list)
-{
-	t_exec	*node;
-	int		i;
-
-	printf("\n\n=== Executor linked list ===\n\n");
-	while (exec_list)
-	{
-		i = 0;
-		node = (t_exec *)exec_list->content;
-		printf("Executable commands: ");
-		while (node->cmd_array[i])
-			printf("%s ", node->cmd_array[i++]);
-		printf("\nPath: %s\n", node->path);
-		printf("\n\n====       FDs       ====\n");
-		printf("FD in: %i\n", node->fd_in);
-		printf("FD out: %i\n", node->fd_out);
-		printf("====    End of FDs   ====\n");
-		printf("\n\n");
-		if (!exec_list->next)
-			printf("===    End of list     ===\n\n\n");
-		exec_list = exec_list->next;
-	}
-}
+//void	print_exec_list(t_list *exec_list)
+//{
+//	t_exec	*node;
+//	int		i;
+//
+//	printf("\n\n=== Executor linked list ===\n\n");
+//	while (exec_list)
+//	{
+//		i = 0;
+//		node = (t_exec *)exec_list->content;
+//		printf("Executable commands: ");
+//		while (node->cmd_array[i])
+//			printf("%s ", node->cmd_array[i++]);
+//		printf("\nPath: %s\n", node->path);
+//		printf("\n\n====       FDs       ====\n");
+//		printf("FD in: %i\n", node->fd_in);
+//		printf("FD out: %i\n", node->fd_out);
+//		printf("====    End of FDs   ====\n");
+//		printf("\n\n");
+//		if (!exec_list->next)
+//			printf("===    End of list     ===\n\n\n");
+//		exec_list = exec_list->next;
+//	}
+//}
