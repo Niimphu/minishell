@@ -46,7 +46,7 @@ int	heredoc(char *file_name, char *delimiter)
 	while (fd != -1)
 	{
 		input = readline("> ");
-		if (!ft_strncmp(input, delimiter, ft_strlen(delimiter) + 1))
+		if (!input || !ft_strncmp(input, delimiter, ft_strlen(delimiter) + 1))
 			break ;
 		write(fd, input, ft_strlen(input));
 		write(fd, "\n", 1);
