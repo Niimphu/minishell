@@ -14,13 +14,15 @@
 
 static int	is_just_n(char *str);
 
-int	echo(char **cmd)
+int	echo(char **cmd, t_god *god_struct)
 {
 	int	i;
 	int	new_line_flag;
 
 	i = 1;
 	new_line_flag = 0;
+	if (!cmd[i] && god_struct->exit_status == 1)
+		return (1);
 	if (!cmd[i])
 		return (ft_putstr_fd("\n", STDOUT_FILENO), 0);
 	while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))

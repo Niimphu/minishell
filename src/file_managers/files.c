@@ -15,7 +15,7 @@
 static int	open_file(char *filename, int operator);
 static int	error(char *filename);
 
-int	open_files(t_list *parsed_list)
+int	open_files(t_list *parsed_list, t_god *god_struct)
 {
 	t_parser	*node;
 	t_list		*file_list;
@@ -35,6 +35,7 @@ int	open_files(t_list *parsed_list)
 			{
 				error(file_node->filename);
 				file_list = ft_lstlast(file_list);
+				god_struct->exit_status = 1;
 			}
 			file_list = file_list->next;
 		}

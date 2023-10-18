@@ -17,7 +17,7 @@ int	execute_builtins(char **cmd, t_god *god_struct)
 	if (!cmd)
 		return (1);
 	if (!ft_strncmp(cmd[0], "echo", 4))
-		return (echo(cmd));
+		return (echo(cmd, god_struct));
 	if (!ft_strncmp(cmd[0], "cd", 2))
 		return (cd(cmd[1], god_struct));
 	if (!ft_strncmp(cmd[0], "pwd", 3))

@@ -17,7 +17,7 @@
 
 int		env(char **cmd, t_god *god_struct);
 int		export(char **cmd, t_god *god_struct);
-int		echo(char **cmd);
+int		echo(char **cmd, t_god *god_struct);
 int		unset(char **cmd, t_god *god_struct);
 int		pwd(void);
 int		cd(char *dir, t_god *god_struct);

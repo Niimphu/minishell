@@ -27,7 +27,7 @@ int	execute(t_god *god_struct, t_list *parser_list)
 	int			error;
 
 	open_heredocs(parser_list);
-	open_files(parser_list);
+	open_files(parser_list, god_struct);
 	god_struct->exec_list = create_execution_list(parser_list);
 	if (pipe_up(god_struct->exec_list))
 		perror("sad\n");
