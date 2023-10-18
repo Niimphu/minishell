@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:57:14 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/15 19:28:38 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 20:04:17 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
 static char	**split_input(char *input);
+static int	skip_consecutive_operators(char *input, int i);
 
 char	**lex(char *input, t_god *god_struct)
 {
@@ -31,8 +32,8 @@ char	**lex(char *input, t_god *god_struct)
 			input[i] = 26;
 		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
-			if (i > 0 && input[i] != input[i - 1])
-				input = insert_sub2(input, i++);
+			input = insert_sub2(input, i++);
+			i += skip_consecutive_operators(input, i);
 		}
 		i++;
 	}
@@ -97,4 +98,15 @@ char	*insert_sub1(char *input, int pos)
 		ft_strlcpy(&str[i], &input[i - 1], ft_strlen(&input[i - 1]) + 1);
 	}
 	return (free_string(&input), str);
+}
+
+static int	skip_consecutive_operators(char *input, int i)
+{
+	int			count;
+	const char	operator = input[i];
+
+	count = 0;
+	while (input[++i] == operator)
+		count++;
+	return (count);
 }
