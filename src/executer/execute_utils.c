@@ -42,35 +42,32 @@ int	pipe_up(t_list *exec_list)
 	return (0);
 }
 
-char	*find_exec(t_exec *node, char **env)
+void	find_exec(t_exec *node, char **env)
 {
-	char		*path;
 	char		*path_var;
 	char		**env_paths;
 	int			i;
 
-	if (access(node->cmd, X_OK) == 0
-		&& (*node->cmd == '/' || !ft_strncmp(node->cmd, "./", 2)))
-		return (ft_strdup(node->cmd));
-	if (!access(node->cmd, F_OK) && access(node->cmd, X_OK) == -1)
-		return (ft_strdup(node->cmd));
+	if ((!access(node->cmd, X_OK) && (*node->cmd == '/'
+				|| !ft_strncmp(node->cmd, "./", 2)))
+		|| (!access(node->cmd, F_OK) && access(node->cmd, X_OK) == -1))
+		node->path = (ft_strdup(node->cmd));
 	i = 0;
 	path_var = get_env_var("PATH=", env, TRIM);
 	if (!path_var)
-		return (NULL);
+		return ;
 	env_paths = ft_split(path_var, ':');
 	while (env_paths[i])
 	{
-		path = create_path(node->cmd, env_paths[i++]);
-		if (access(path, X_OK) == 0)
+		node->path = create_path(node->cmd, env_paths[i++]);
+		if (access(node->path, X_OK) == 0)
 		{
 			free_string_array(&env_paths);
-			return (path);
+			return ;
 		}
-		free_string(&path);
+		free_string(&node->path);
 	}
 	free_string_array(&env_paths);
-	return (NULL);
 }
 
 bool	is_dir(t_exec *node)

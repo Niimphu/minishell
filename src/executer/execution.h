@@ -19,7 +19,7 @@
 t_list	*create_execution_list(t_list *parser_list);
 
 int		pipe_up(t_list *exec_list);
-char	*find_exec(t_exec *node, char **env);
+void	find_exec(t_exec *node, char **env);
 int		close_all_pipes(t_list *exec_list);
 bool	is_dir(t_exec *node);
 
