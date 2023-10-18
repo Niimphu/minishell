@@ -116,13 +116,11 @@ static void	set_new_oldpwd(t_god *god_struct, char *dir)
 {
 	int		i;
 	int		j;
-	int		size;
 	char	**new_env;
 
 	i = 0;
 	j = 0;
-	size = new_split_size(god_struct->env);
-	new_env = ft_calloc(sizeof(char *), size + 2);
+	new_env = ft_calloc(sizeof(char *), new_split_size(god_struct->env); + 2);
 	if (!new_env)
 		return ;
 	while (god_struct->env[i])
