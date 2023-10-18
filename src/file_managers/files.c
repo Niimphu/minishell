@@ -63,6 +63,9 @@ static int	error(char *filename)
 {
 	ft_putstr_fd("minishelf: ", 2);
 	ft_putstr_fd(filename, 2);
-	ft_putstr_fd(": No such file or directory\n", 2);
+	if (access(filename, F_OK) == 0)
+		ft_putstr_fd(": Permission denied\n", 2);
+	else
+		ft_putstr_fd(": No such file or directory\n", 2);
 	return (FAIL);
 }

@@ -23,3 +23,8 @@ bool	is_valid_int(char *string)
 		return (true);
 	return (false);
 }
+
+bool	is_path(char *string)
+{
+	return (*string == '/' || !ft_strncmp(string, "./", 2));
+}

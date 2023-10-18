@@ -121,6 +121,7 @@ int		first_index_of(char *str, char c);
 //int		count_operators(const char *str, char c);
 //int		count_char(char *str, char c);
 bool	is_valid_int(char *string);
+bool	is_path(char *string);
 
 int		execute_builtins(char **cmd, t_god *god_struct);
 

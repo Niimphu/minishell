@@ -70,11 +70,11 @@ void	find_exec(t_exec *node, char **env)
 	free_string_array(&env_paths);
 }
 
-bool	is_dir(t_exec *node)
+bool	is_dir(char *cmd)
 {
 	struct stat	st;
 
-	if (stat(node->cmd, &st) == 0 && S_ISDIR(st.st_mode))
+	if (stat(cmd, &st) == 0 && S_ISDIR(st.st_mode))
 		return (true);
 	return (false);
 }

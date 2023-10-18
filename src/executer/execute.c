@@ -65,7 +65,8 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 
 	error = 0;
 	find_exec(exec_node, god_struct->env);
-	if (is_dir(exec_node))
+	if (is_path(exec_node->cmd) && ((is_dir(exec_node->cmd))
+			|| (access(exec_node->cmd, X_OK) && !access(exec_node->cmd, F_OK))))
 		error_exit(exec_node->cmd, 126);
 	if (!exec_node->path && exec_node->builtin == 0)
 		error_exit(exec_node->cmd, 127);
@@ -110,17 +111,16 @@ static void	error_exit(char *cmd, int status)
 {
 	ft_putstr_fd("minishelf: ", 2);
 	ft_putstr_fd(cmd, 2);
-	if (*cmd == '/' && access(cmd, X_OK) == 0)
-		ft_putstr_fd(": Is a directory\n", 2);
-	else if (!ft_strncmp("./", cmd, 2) && access(cmd, F_OK) == 0)
+	if (is_dir(cmd) && is_path(cmd))
+		ft_putstr_fd(": is a directory\n", 2);
+	else if (access(cmd, X_OK) && access(cmd, F_OK) == 0 && is_path(cmd))
 		ft_putstr_fd(": Permission denied\n", 2);
-	else if (*cmd == '/')
+	else if (*cmd == '/' || *cmd == '.')
 		ft_putstr_fd(": No such file or directory\n", 2);
 	else
-		ft_putstr_fd(": Command not found\n", 2);
+		ft_putstr_fd(": command not found\n", 2);
 	exit(status);
 }
-
 
 void	print_exec_list(t_list *exec_list)
 {
