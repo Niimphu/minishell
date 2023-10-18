@@ -37,7 +37,7 @@ int	cd(char *dir, t_god *god_struct)
 	{
 		ft_putstr_fd("cd: ", 2);
 		ft_putstr_fd(dir, 2);
-		ft_putstr_fd(" :No such file or directory\n", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (1);
 	}
 	return (0);
