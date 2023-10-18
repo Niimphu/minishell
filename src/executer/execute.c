@@ -120,7 +120,7 @@ static void	error_exit(char *cmd, int status)
 		ft_putstr_fd(": is a directory\n", 2);
 	else if (access(cmd, X_OK) && access(cmd, F_OK) == 0 && is_path(cmd))
 		ft_putstr_fd(": Permission denied\n", 2);
-	else if (*cmd == '/' || *cmd == '.')
+	else if (is_path(cmd))
 		ft_putstr_fd(": No such file or directory\n", 2);
 	else
 		ft_putstr_fd(": command not found\n", 2);
