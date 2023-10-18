@@ -29,6 +29,8 @@ void	await_input(t_god *god_struct)
 		clear_history();
 		exit(error);
 	}
+	if (!ft_strncmp(input, "\"\"", 2) || !ft_strncmp(input, "''", 2))
+		return ;
 	if (parse(input, god_struct) == -1)
 		return ;
 	god_struct->exit_status = execute(god_struct, god_struct->parser_list);
