@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/16 16:59:49 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 13:34:15 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	await_input(t_god *tools);
 int		parse(char *input_string, t_god *god_struct);
 t_list	*create_parser_list(t_list *parser_list, t_list *lexer_list);
 char	**expander(char **split_str, t_god *god_struct);
+char	**new_env(t_god *god_struct, char *cmd);
 
 int		execute(t_god *god_struct, t_list *parser_list);
 

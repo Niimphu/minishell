@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:39:16 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/17 17:58:43 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:18:05 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@ int	env(char **cmd, t_god *god_struct)
 		if (!god_struct->env)
 			return (0);
 		ptr = god_struct;
-		while (ptr->env[i] && ft_strchr(ptr->env[i], '='))
+		while (ptr->env[i])
 		{
-			ft_putstr_fd(ptr->env[i], STDOUT_FILENO);
-			ft_putstr_fd("\n", STDOUT_FILENO);
+			if (!ft_strcmp(ptr->env[i], "###") || !ft_strchr(ptr->env[i], '='))
+				i++;
+			else
+			{
+				ft_putstr_fd(ptr->env[i], STDOUT_FILENO);
+				ft_putstr_fd("\n", STDOUT_FILENO);
+			}
 			i++;
 		}
 	}
 	else
-	{
-		ft_putstr_fd("minishelf: env: too many arguments\n", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("minishelf: env: too many arguments\n", 2), 1);
 	return (0);
 }

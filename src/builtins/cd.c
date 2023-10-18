@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/17 22:56:54 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:14:32 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	update_old_pwd(t_god *god_struct, char *old_dir)
 	return (0);
 }
 
-static int	update_pwd(t_god *god_struct)
+static int	update_pwd(t_god *god_struct, char *old_dir)
 {
 	int		i;
 	char	*dir;
@@ -94,6 +94,7 @@ static int	update_pwd(t_god *god_struct)
 		}
 		i++;
 	}
+	update_old_pwd(god_struct, old_dir);
 	return (0);
 }
 
@@ -105,7 +106,7 @@ void	cd_home(t_god *god_struct)
 	old_dir = getcwd(NULL, 1024);
 	home_dir = get_var(ft_strdup("HOME"), god_struct);
 	if (!home_dir || !old_dir || chdir(home_dir) == -1
-		|| update_pwd(god_struct) || update_old_pwd(god_struct, old_dir))
+		|| update_pwd(god_struct, old_dir))
 		perror("cd");
 	free_string(&home_dir);
 }
@@ -120,8 +121,7 @@ int	cd(char *dir, t_god *god_struct)
 		return (1);
 	}
 	old_dir = getcwd(NULL, 1024);
-	if (!old_dir || update_old_pwd(god_struct, old_dir)
-		|| chdir(dir) == -1 || update_pwd(god_struct))
+	if (!old_dir || chdir(dir) == -1 || update_pwd(god_struct, old_dir))
 	{
 		ft_putstr_fd("cd: ", 2);
 		ft_putstr_fd(dir, 2);

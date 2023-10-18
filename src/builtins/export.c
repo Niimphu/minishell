@@ -13,12 +13,12 @@
 #include "../../minishell.h"
 
 static int	sort_env(t_god *god_struct, int size, int i, int j);
-static char	**new_env(t_god *god_struct, char *cmd);
+char		**new_env(t_god *god_struct, char *cmd);
 static void	print_sorted_env(char **env);
 
 int	export(char **cmd, t_god *god_struct)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	if (!cmd[i])
@@ -62,7 +62,7 @@ static int	sort_env(t_god *god_struct, int size, int i, int j)
 	return (free_string_array(&env_array), 0);
 }
 
-static char	**new_env(t_god *god_struct, char *cmd)
+char	**new_env(t_god *god_struct, char *cmd)
 {
 	int		i;
 	bool	found;
@@ -95,8 +95,13 @@ static void	print_sorted_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		ft_putstr_fd(env[i], STDOUT_FILENO);
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		i++;
+		if (!ft_strcmp(env[i], "###"))
+			i++;
+		else
+		{
+			ft_putstr_fd(env[i], STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+			i++;
+		}
 	}
 }

@@ -6,14 +6,13 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:54:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/17 23:03:00 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:02:27 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 #include <termios.h>
 
-/* char	**init_env(char **original_env, int size); */
 static char	**clone_env(char **original_env);
 static int	count_env(char **original_env);
 
@@ -49,7 +48,10 @@ static char	**clone_env(char **original_env)
 	i = 0;
 	while (original_env[i])
 	{
-		env[i] = ft_strdup(original_env[i]);
+		if (!ft_strncmp(original_env[i], "OLDPWD=", 7))
+			env[i] = ft_strdup("###");
+		else
+			env[i] = ft_strdup(original_env[i]);
 		if (!env[i])
 			perror("rip");
 		i++;
@@ -67,27 +69,3 @@ static int	count_env(char **original_env)
 		i++;
 	return (i);
 }
-
-/* char	**init_env(char **original_env, int size)
-{
-	int		i;
-	int		j;
-	char	**new_env;
-
-	i = 0;
-	j = 0;
-	new_env = ft_calloc(sizeof(char *), size);
-	if (!new_env)
-		return (NULL);
-	while (original_env[i + j])
-	{
-		if (!ft_strncmp(original_env[i + j], "OLDPWD=", 6))
-			j++;
-		new_env[i] = ft_strdup(original_env[i + j]);
-		if (!new_env[i])
-			return (free_string_array(&new_env), NULL);
-		i++;
-	}
-	new_env[i] = NULL;
-	return (new_env);
-} */

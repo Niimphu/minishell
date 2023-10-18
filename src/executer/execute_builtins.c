@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:25:50 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/14 12:30:49 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:15:04 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	execute_builtins(char **cmd, t_god *god_struct)
 	if (!ft_strncmp(cmd[0], "cd", 2))
 		return (cd(cmd[1], god_struct));
 	if (!ft_strncmp(cmd[0], "pwd", 3))
-		return (pwd(god_struct));
+		return (pwd());
 	if (!ft_strncmp(cmd[0], "export", 6))
 		return (export(cmd, god_struct));
 	if (!ft_strncmp(cmd[0], "unset", 5))
