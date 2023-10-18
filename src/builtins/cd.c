@@ -26,13 +26,13 @@ int	cd(char *dir, t_god *god_struct)
 		cd_home(god_struct);
 		return (1);
 	}
+	old_dir = getcwd(NULL, 1024);
 	if (!get_env_var("PWD=", god_struct->env, 0))
 	{
 		chdir(dir);
-		update_old_pwd(god_struct, getcwd(NULL, 1024));
+		update_old_pwd(god_struct, old_dir);
 		return (0);
 	}
-	old_dir = getcwd(NULL, 1024);
 	if (!old_dir || chdir(dir) == -1 || update_pwd(god_struct, old_dir))
 	{
 		ft_putstr_fd("cd: ", 2);
