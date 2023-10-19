@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/18 14:14:32 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:06:47 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void		cd_home(t_god *god_struct);
+#define STOOPID "minishelf: error retrieving current directory: getcwd: \
+	cannot access parent directories: No such file or directory\n"
+
+static int	cd_home(t_god *god_struct);
 static int	update_pwd(t_god *god_struct, char *old_dir);
 static int	update_old_pwd(t_god *god_struct, char *old_dir);
 static void	set_new_oldpwd(t_god *god_struct, char *dir);
@@ -22,17 +25,18 @@ int	cd(char *dir, t_god *god_struct)
 	char	*old_dir;
 
 	if (!dir)
-	{
-		cd_home(god_struct);
-		return (1);
-	}
+		return (cd_home(god_struct));
 	old_dir = getcwd(NULL, 1024);
+	if (!old_dir && (!ft_strncmp(".", dir, 2) || !ft_strncmp("./", dir, 2)))
+		return (ft_putstr_fd(STOOPID, 2), 1);
 	if (!get_env_var("PWD=", god_struct->env, 0))
 	{
 		chdir(dir);
 		update_old_pwd(god_struct, old_dir);
 		return (0);
 	}
+	if (!old_dir)
+		old_dir = ft_strdup(get_env_var("PWD=", god_struct->env, 1));
 	if (!old_dir || chdir(dir) == -1 || update_pwd(god_struct, old_dir))
 	{
 		ft_putstr_fd("cd: ", 2);
@@ -43,17 +47,29 @@ int	cd(char *dir, t_god *god_struct)
 	return (0);
 }
 
-void	cd_home(t_god *god_struct)
+static int	cd_home(t_god *god_struct)
 {
 	char	*home_dir;
 	char	*old_dir;
 
-	old_dir = getcwd(NULL, 1024);
 	home_dir = get_var(ft_strdup("HOME"), god_struct);
-	if (!home_dir || !old_dir || chdir(home_dir) == -1
-		|| update_pwd(god_struct, old_dir))
-		perror("cd");
+	if (!ft_strlen(home_dir))
+		return (ft_putstr_fd("minishelf: cd: HOME not set\n", 2),
+				free_string(&home_dir), 1);
+	if (chdir(home_dir) == -1)
+	{
+		ft_putstr_fd("cd: ", 2);
+		ft_putstr_fd(home_dir, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (free_string(&home_dir), 1);
+	}
+	old_dir = getcwd(NULL, 1024);
+	if (!old_dir)
+		old_dir = ft_strdup(get_env_var("PWD=", god_struct->env, 1));
+	if (old_dir)
+		update_pwd(god_struct, old_dir);
 	free_string(&home_dir);
+	return (0);
 }
 
 static int	update_pwd(t_god *god_struct, char *old_dir)
@@ -65,7 +81,7 @@ static int	update_pwd(t_god *god_struct, char *old_dir)
 	i = 0;
 	dir = getcwd(NULL, 1024);
 	if (!dir)
-		return (perror("cd"), 1);
+		return (1);
 	temp = ft_strjoin("PWD=", dir);
 	free_string(&dir);
 	dir = temp;
