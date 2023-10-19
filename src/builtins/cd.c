@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/19 16:16:11 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/19 16:36:23 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	cd_home(t_god *god_struct)
 	home_dir = get_var(ft_strdup("HOME"), god_struct);
 	if (!ft_strlen(home_dir))
 		return (ft_putstr_fd("minishelf: cd: HOME not set\n", 2),
-				free_string(&home_dir), 1);
+			free_string(&home_dir), 1);
 	if (chdir(home_dir) == -1)
 	{
 		ft_putstr_fd("cd: ", 2);
