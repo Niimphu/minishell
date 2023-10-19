@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:51:18 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/19 15:38:58 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:43:58 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,25 @@ char	*get_var(char *var, t_god *god_struct)
 
 int	verify_identifier(char *func, char *cmd)
 {
-	int	i;
+	int		i;
+	bool	print_error;
 
 	i = 0;
-	if (cmd[0] != '_' && !ft_isalpha(cmd[0]))
+	print_error = false;
+	if (!ft_strcmp(func, "unset") && ft_strchr(cmd, '='))
+		print_error = true;
+	if (cmd[0] != '_' && !ft_isalpha(cmd[0]) && print_error == false)
+		print_error = true;
+	while (cmd[++i] && cmd[i] != '=')
+	{
+		if (cmd[i] && (!ft_isalnum(cmd[i]) && cmd[i] != '_')
+			&& print_error == false)
+			print_error = true;
+	}
+	if (print_error == true)
 	{
 		ft_putstr_fd(func, 2);
-		ft_putstr_fd(": `", 2);
-		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd("': not a valid identifier\n", 2);
-		return (0);
-	}
-	while (cmd[i++] && cmd[i] != '=')
-	{
-		if (cmd[i] && (!ft_isalnum(cmd[i]) && cmd[i] != '_'))
-		{
-			ft_putstr_fd(func, 2);
-			ft_putstr_fd(cmd, 2);
-			ft_putstr_fd(": `", 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
-			return (0);
-		}
-	}
-	if (!ft_strncmp(func, "unset", 5) && cmd[i] == '\0')
-	{
-		printf("here\n");
-		ft_putstr_fd(func, 2);
+		ft_putstr_fd(" ", 2);
 		ft_putstr_fd(cmd, 2);
 		ft_putstr_fd(": `", 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
