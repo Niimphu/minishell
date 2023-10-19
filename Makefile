@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
+#    By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/10/19 12:59:08 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/10/19 16:32:06 by yiwong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ NAME = minishell
 
 CC = gcc
 CC += -g -O0
-#CC += -fsanitize=address
+# CC += -fsanitize=address
 
 CFLAGS = -Wall -Wextra -Werror
 
