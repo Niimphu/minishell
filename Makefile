@@ -6,7 +6,7 @@
 #    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/10/14 15:43:46 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/10/18 21:43:03 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ NAME = minishell
 
 CC = gcc
 CC += -g -O0
-CC += -fsanitize=address
+#CC += -fsanitize=address
 
 CFLAGS = -Wall -Wextra -Werror
 

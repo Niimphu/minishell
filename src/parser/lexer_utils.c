@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:48:27 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/15 14:57:56 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/18 20:52:45 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	first_index_of(char *str, char c)
 			return (i);
 		i++;
 	}
-	return (FAIL);
+	return (0);
 }
 
 int	skip_quotes(const char *str, int i)
