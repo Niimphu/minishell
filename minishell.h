@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:20:00 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/18 13:34:15 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/19 13:02:58 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
-
-# include "src/parser/lexer.h"
 
 # define FAIL -1
 

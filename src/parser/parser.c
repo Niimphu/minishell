@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 16:16:08 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/18 19:41:06 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:15:45 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	parse(char *input, t_god *god_struct)
 	char	**split_str;
 
 	split_str = lex(input, god_struct);
-	if (!split_str || ft_strlen(*split_str) == 0)
+	if (!split_str || (new_split_size(split_str) == 0 && ft_strlen(*split_str) == 0))
 		return (-1);
 	god_struct->lexer_list = create_lexer_list(split_str);
 	if (invalid_syntax(god_struct->lexer_list))

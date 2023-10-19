@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:33:09 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/05 17:50:22 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/19 13:04:52 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "../../minishell.h"
+# include "lexer.h"
 
 char		**lex(char *input, t_god *god_struct);
 char		*invalid_syntax(t_list *lexer_list);

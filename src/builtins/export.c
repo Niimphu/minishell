@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include "builtins.h"
 
 static int	sort_env(t_god *god_struct, int size, int i, int j);
 static void	print_sorted_env(char **env);
 static char	**alloc_and_assign_new_env(char **original_env, char *cmd);
-int			set_var_condition(char *cmd, char *env);
 
 int	export(char **cmd, t_god *god_struct)
 {
@@ -24,10 +24,10 @@ int	export(char **cmd, t_god *god_struct)
 	i = 1;
 	if (!cmd[i])
 		return (sort_env(god_struct, new_split_size(god_struct->env), 0, 0));
-	if (!verify_identifier("export", cmd[i]))
-		return (1);
 	while (cmd[i])
 	{
+		if (!verify_identifier("export", cmd[i]))
+			return (1);
 		god_struct->env = new_env(god_struct, cmd[i]);
 		if (!god_struct->env)
 			return (1);
@@ -73,13 +73,13 @@ char	**new_env(t_god *god_struct, char *cmd)
 	found = false;
 	while (god_struct->env[i])
 	{
-		if (set_var_condition(cmd, god_struct->env[i]) == 1)
+		if (set_env_condition(cmd, god_struct->env[i]) == 1)
 		{
-			free_string(&god_struct->env[i]); 
+			free_string(&god_struct->env[i]);
 			god_struct->env[i] = ft_strdup(cmd);
 			found = true;
 		}
-		if (set_var_condition(cmd, god_struct->env[i]) == 2)
+		if (set_env_condition(cmd, god_struct->env[i]) == 2)
 			found = true;
 		i++;
 	}
@@ -127,30 +127,4 @@ static void	print_sorted_env(char **env)
 			i++;
 		}
 	}
-}
-
-int	set_var_condition(char *cmd, char *env)
-{
-	char *cmd_var;
-	char *env_var;
-
-	cmd_var = NULL;
-	env_var = NULL;
-	if (ft_strchr(cmd, '='))
-		cmd_var = ft_substr(cmd, 0, first_index_of(cmd, '='));
-	else
-		cmd_var = ft_strdup(cmd);
-	if (!cmd_var)
-		return (0);
-	if (ft_strchr(env, '='))
-		env_var = ft_substr(env, 0, first_index_of(env, '='));
-	else
-		env_var = ft_strdup(env);
-	if (!env_var)
-		return (0);
-	if (!ft_strcmp(cmd_var, env_var) && ft_strchr(cmd, '='))
-		return (free_string(&cmd_var), free_string(&env_var), 1);
-	if (!ft_strcmp(cmd_var, env_var) && !ft_strchr(cmd, '=') && ft_strchr(env, '='))
-		return (free_string(&cmd_var), free_string(&env_var), 2);
-	return (free_string(&cmd_var), free_string(&env_var), 0);
 }

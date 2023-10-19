@@ -6,7 +6,7 @@
 #    By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 12:22:10 by Kekuhne           #+#    #+#              #
-#    Updated: 2023/10/18 21:43:03 by Kekuhne          ###   ########.fr        #
+#    Updated: 2023/10/19 12:59:08 by Kekuhne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRC	=	main.c \
 		builtins/echo.c \
 		builtins/env.c \
 		builtins/export.c \
+		builtins/export_utils.c \
 		builtins/pwd.c \
 		builtins/unset.c \
 		builtins/exit.c
