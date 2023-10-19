@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/19 16:06:47 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/19 16:16:11 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	cd(char *dir, t_god *god_struct)
 		ft_putstr_fd("cd: ", 2);
 		ft_putstr_fd(dir, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		return (1);
+		return (free_string(&old_dir), 1);
 	}
 	return (0);
 }
