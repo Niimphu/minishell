@@ -15,7 +15,6 @@
 
 static int	sort_env(t_god *god_struct, int size, int i, int j);
 static void	print_sorted_env(char **env);
-static char	**alloc_and_assign_new_env(char **original_env, char *cmd);
 
 int	export(char **cmd, t_god *god_struct)
 {
@@ -86,28 +85,6 @@ char	**new_env(t_god *god_struct, char *cmd)
 	if (!found)
 		god_struct->env = alloc_and_assign_new_env(god_struct->env, cmd);
 	return (god_struct->env);
-}
-
-static char	**alloc_and_assign_new_env(char **original_env, char *cmd)
-{
-	char	**env;
-	int		i;
-
-	env = ft_calloc(new_split_size(original_env) + 2, sizeof(char *));
-	if (!env)
-		return (NULL);
-	i = 0;
-	while (original_env[i])
-	{
-		env[i] = ft_strdup(original_env[i]);
-		if (!env[i])
-			perror("rip");
-		i++;
-	}
-	env[i++] = ft_strdup(cmd);
-	env[i] = NULL;
-	free_string_array(&original_env);
-	return (env);
 }
 
 static void	print_sorted_env(char **env)
