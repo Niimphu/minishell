@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:39:16 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/18 14:18:05 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:26:44 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	env(char **cmd, t_god *god_struct)
 		while (ptr->env[i])
 		{
 			if (!ft_strcmp(ptr->env[i], "###") || !ft_strchr(ptr->env[i], '='))
-				i++;
+				;
 			else
 			{
 				ft_putstr_fd(ptr->env[i], STDOUT_FILENO);
