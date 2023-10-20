@@ -108,10 +108,7 @@ all: $(NAME)
 		echo "$(RED)Compilation failed :($(RESET)"; \
 	fi
 
-$(NAME): $(OBJ) $(LIBFT)
-	clear
-	@echo "$$SHELF"
-	@echo "$(PURPLE)Compiling minishelf...$(RESET)"
+$(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) $(LIBS)
 	@chmod a+x $(NAME)
 
@@ -120,6 +117,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 $(LIBFT):
+	clear
+	@echo "$$SHELF"
+	@echo "$(PURPLE)Compiling minishelf...$(RESET)"
 	@make -sC ./libft
 	@mv libft/libft.a build/libft.a
 
