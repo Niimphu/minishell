@@ -94,7 +94,7 @@ static void	print_sorted_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strcmp(env[i], "###"))
+		if (!ft_strcmp(env[i], "##="))
 			i++;
 		else
 		{

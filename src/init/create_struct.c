@@ -6,7 +6,7 @@
 /*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:54:39 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/18 14:02:27 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/21 13:50:05 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	**clone_env(char **original_env)
 	while (original_env[i])
 	{
 		if (!ft_strncmp(original_env[i], "OLDPWD=", 7))
-			env[i] = ft_strdup("###");
+			env[i] = ft_strdup("##=");
 		else
 			env[i] = ft_strdup(original_env[i]);
 		if (!env[i])

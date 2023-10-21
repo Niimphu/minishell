@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:24:56 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/19 16:36:23 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/21 13:49:03 by Kekuhne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ static int	update_old_pwd(t_god *god_struct, char *old_dir)
 	free_string(&old_dir);
 	while (god_struct->env[i])
 	{
-		if (!ft_strncmp(god_struct->env[i], "OLDPWD=", 7))
+		if (!ft_strncmp(god_struct->env[i], "OLDPWD=", 7)
+			|| !ft_strncmp(god_struct->env[i], "##=", 3))
 			found = i;
 		i++;
 	}
