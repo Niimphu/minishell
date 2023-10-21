@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:37:12 by yiwong            #+#    #+#             */
-/*   Updated: 2023/10/18 20:11:17 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/21 19:21:21 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static void	make_a_child_____process(t_god *god_struct, t_exec *exec_node)
 	int	error;
 
 	error = 0;
+	if (!exec_node->cmd)
+		exit (0);
 	find_exec(exec_node, god_struct->env);
 	if (exec_node->fd_in == -1 || exec_node->fd_out == -1)
 		exit(1);

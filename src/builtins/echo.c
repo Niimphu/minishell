@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kekuhne <kekuehne@student.42wolfsburg.d    +#+  +:+       +#+        */
+/*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 16:28:22 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/17 19:05:05 by Kekuhne          ###   ########.fr       */
+/*   Updated: 2023/10/21 17:27:50 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ int	echo(char **cmd, t_god *god_struct)
 		return (1);
 	if (!cmd[i])
 		return (ft_putstr_fd("\n", STDOUT_FILENO), 0);
-	while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
+	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
-		if (!is_just_n(cmd[i++]))
-			break ;
-		new_line_flag = 1;
+		if (is_just_n(cmd[i++]))
+			new_line_flag = 1;
 	}
 	while (cmd[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: yiwong <yiwong@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:17:49 by Kekuhne           #+#    #+#             */
-/*   Updated: 2023/10/07 12:17:54 by yiwong           ###   ########.fr       */
+/*   Updated: 2023/10/21 17:22:04 by yiwong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argument_count, char **arguments, char **envp)
 	(void)arguments;
 	if (argument_count > 1)
 	{
-		perror("This program does not accept arguments\n");
+		ft_putstr_fd("This program does not accept arguments\n", 2);
 		exit(1);
 	}
 	god_struct = create_god_struct(envp);
